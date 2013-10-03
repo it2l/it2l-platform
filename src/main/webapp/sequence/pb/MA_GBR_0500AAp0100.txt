@@ -1,0 +1,30 @@
+Topic	Level	Fixed Order (Optional)	Assessment Questions	Offline Flag	Time Limit	Generic Instruction	Explanatory swf present	Tool Tip	Colour
+Reading, Writing, Comparing and Ordering Numbers	0	FALSE	abc	0			0	Read whole numbers from 1 to 5 in figures \n(match given numbers to spoken number names)	00CCFF
+Ex Number	Online Instruction	Offline Instruction							
+MA_GBR_0500AAp0100a	Click on the parrot to hear the number. \n Click on the matching number below.	Ask an adult to say numbers from 1 to 5. \nColour in the numbers that are called out.							
+MA_GBR_0500AAp0100b	Click on the parrot to hear the number. \n Click on the matching number below.	Ask an adult to say numbers from 1 to 5. \nColour in the numbers that are called out.							
+MA_GBR_0500AAp0100c	Click on the parrot to hear the number. \n Click on the matching number below.	Ask an adult to say numbers from 1 to 5. \nColour in the numbers that are called out.							
+MA_GBR_0500AAp0100d	Click on the parrot to hear the number. \n Click on the matching number below.	Ask an adult to say numbers from 1 to 5. \nColour in the numbers that are called out.							
+MA_GBR_0500AAp0100e	Click on the parrot to hear the number. \n Click on the matching number below.	Ask an adult to say numbers from 1 to 5. \nColour in the numbers that are called out.							
+									
+									
+									
+									
+									
+									
+									
+									
+								
+								
+								
+								
+								
+								
+								
+								
+								
+	 							
+								
+								
+								
+								

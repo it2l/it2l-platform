@@ -1,0 +1,26 @@
+(function(ns) {
+
+    var Keyboard = function(document) {
+        this.initialize(document);
+    };
+    Keyboard.keys = [];
+    Keyboard.onkeydown = function(e){
+        if (Keyboard.keys.indexOf(e.keyCode)<0) Keyboard.keys.push(e.keyCode);
+    };
+    Keyboard.onkeyup = function(e){
+        var s = Keyboard.keys.indexOf(e.keyCode);
+        Keyboard.keys.splice(s,1);
+    };
+
+    var p = Keyboard.prototype;
+
+    p.initialize = function(document){
+        document.onkeydown = Keyboard.onkeydown;
+        document.onkeyup = Keyboard.onkeyup;
+    };
+
+
+    ns.Keyboard = Keyboard;
+}(window));
+
+

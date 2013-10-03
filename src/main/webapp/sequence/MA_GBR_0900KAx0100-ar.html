@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html dir="rtl">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="user-scalable=yes,width=1024,initial-scale=1.0" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+        <title>MA_GBR_0900KAx0100</title>
+
+        <script src="lib/createjs/easeljs-NEXT.min.js"></script>
+        <script src="lib/createjs/tweenjs-NEXT.min.js"></script>
+        <script src="lib/createjs/movieclip-NEXT.min.js"></script>
+        <script src="lib/createjs/preloadjs-NEXT.min.js"></script>
+        <script src="lib/createjs/soundjs-NEXT.min.js"></script>
+        <script src="lib/createjs/flashplugin-NEXT.min.js"></script>
+
+        <script src="lib/whizz/ar/whizz_lang.js"></script>
+        <script src="lib/whizz/whizz.js"></script>
+        <script src="lib/whizz/Header.js"></script>
+        <script src="lib/whizz/SystemManager.js"></script>
+
+        <script src="lessons/MA_GBR_0900KAx0100/ar/MA_GBR_0900KAx0100_lang.js"></script>
+        <script src="lessons/MA_GBR_0900KAx0100/MA_GBR_0900KAx0100_lib.js"></script>
+        <script src="lessons/MA_GBR_0900KAx0100/MA_GBR_0900KAx0100_TP.js"></script>
+        <script src="lessons/MA_GBR_0900KAx0100/MA_GBR_0900KAx0100_Main.js"></script>
+
+        <script src="lib/whizz/WhizzApp.js"></script>
+
+        <script>
+            function init(){
+                var manifest = [
+                    {src:"lessons/MA_GBR_0900KAx0100/sounds/bigapplause.mp3", id:"bigapplause"},
+                    {src:"lessons/MA_GBR_0900KAx0100/sounds/monkey1wav.mp3", id:"monkey1"},
+                    {src:"lessons/MA_GBR_0900KAx0100/sounds/MonkeyBonkerswav.mp3", id:"MonkeyBonkers"},
+                    {src:"lessons/MA_GBR_0900KAx0100/sounds/monkeylaughwav.mp3", id:"monkeylaugh"},
+                    {src:"lessons/MA_GBR_0900KAx0100/en/MA_GBR_0900KAv0100_TP1.mp3", id:"TP1"},
+                    {src:"lessons/MA_GBR_0900KAx0100/en/MA_GBR_0900KAv0100_TP2.mp3", id:"TP2"},
+                    {src:"lessons/MA_GBR_0900KAx0100/en/MA_GBR_0900KAv0100_TP3.mp3", id:"TP3"},
+                    {src:"lessons/MA_GBR_0900KAx0100/en/MA_GBR_0900KAv0100_Q1.mp3", id:"Q1"},
+                    {src:"lessons/MA_GBR_0900KAx0100/en/MA_GBR_0900KAv0100_Q2.mp3", id:"Q2"},
+                    {src:"lessons/MA_GBR_0900KAx0100/en/MA_GBR_0900KAv0100_H1.mp3", id:"H1"}
+                ];
+
+                var loader = new createjs.LoadQueue();
+                loader.installPlugin(createjs.Sound);
+                loader.addEventListener("complete", startApp);
+                loader.loadManifest(manifest);
+            }
+
+            function startApp(){
+                whizz.boot("appContainer", "MA_GBR_0900KAx0100", "ar", "MA_GBR_0800CAx0300");
+            }
+
+        </script>
+
+        <!-- iPad -->
+        <script type="text/javascript">
+            if (navigator.userAgent.match(/iPad/i) != null)
+            {
+                window.addEventListener("load",function() {
+                    // Set a timeout...
+                    setTimeout(function(){
+                        // Hide the address bar!
+                        window.scrollTo(0, 1);
+                    }, 0);
+                });
+            }
+
+        </script>
+
+        <link rel="stylesheet" href="css/whizz.css">
+        <link rel="stylesheet" href="lessons/MA_GBR_0900KAx0100/MA_GBR_0900KAx0100.css">
+    </head>
+
+    <body onload="init();" style="background-color:#333; height:auto; ">
+        <div id="globalContainer">
+            <div id="appContainer"></div>
+        </div>
+    </body>
+</html>

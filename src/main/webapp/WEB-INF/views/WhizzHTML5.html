@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:tiles="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org"
+      lang="en">
+    <head>
+        <title>WhizzHTM5 Test</title>
+        <meta name="google" value="notranslate" />         
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <!-- Include CSS to eliminate any default margins/padding and set the height of the html element and 
+             the body element to 100%, because Firefox, or any Gecko based browser, interprets percentage as 
+             the percentage of the height of its parent container, which has to be set explicitly.  Fix for
+             Firefox 3.6 focus border issues.  Initially, don't display flashContent div so it won't show 
+             if JavaScript disabled.
+        -->
+        <style type="text/css" media="screen"> 
+            html, body  { height:100%; }
+            body { margin:0; padding:0; overflow:auto; text-align:center; 
+                   background-color: #ffffff; }   
+            object:focus { outline:none; }
+            #flashContent { display:none; }
+        </style>
+        
+        <!-- Enable Browser History by replacing useBrowserHistory tokens with two hyphens -->
+        <!-- BEGIN Browser History required section -->
+        <link rel="stylesheet" type="text/css" href="/js/history/history.css" />
+        <script type="text/javascript" src="/js/history/history.js"></script>
+        <!-- END Browser History required section -->  
+            
+    </head>
+    <body tiles:fragment="content" onload="init();" style="background-color:#333; height:auto; ">
+    	<!-- createJS -->
+        <script src="lib/createjs/easeljs-NEXT.min.js"></script>
+        <script src="lib/createjs/tweenjs-NEXT.min.js"></script>
+        <script src="lib/createjs/movieclip-NEXT.min.js"></script>
+        <script src="lib/createjs/preloadjs-NEXT.min.js"></script>
+        <script src="lib/createjs/soundjs-NEXT.min.js"></script>
+        <script src="lib/createjs/flashplugin-NEXT.min.js"></script>
+
+        <!-- ui translation -->
+        <script src="lib/whizz/en/whizz_lang.js"></script>
+
+        <!-- system -->
+        <script src="lib/whizz/whizz.js"></script>
+        <script src="lib/whizz/Header.js"></script>
+        <script src="lib/whizz/SystemManager.js"></script>
+
+        <!-- lesson translation -->
+        <script src="lessons/MA_GBR_0800CAx0300/en/MA_GBR_0800CAx0300_lang.js"></script>
+
+        <!-- lesson -->
+        <script src="lessons/MA_GBR_0800CAx0300/MA_GBR_0800CAx0300_lib.js"></script>
+        <script src="lessons/MA_GBR_0800CAx0300/MA_GBR_0800CAx0300_TP.js"></script>
+        <script src="lessons/MA_GBR_0800CAx0300/MA_GBR_0800CAx0300_Main.js"></script>
+
+        <!-- app boot -->
+        <script src="lib/whizz/WhizzApp.js"></script>
+        <script>
+            function init(){
+                console.log("init")
+                var manifest = [
+                    {src: "lessons/MA_GBR_0800CAx0300/sounds/crocodile.mp3", id: "crocodile"},
+                    {src: "lessons/MA_GBR_0800CAx0300/sounds/quackFinal.mp3", id: "quackFinal"},
+                    {src: "lessons/MA_GBR_0800CAx0300/sounds/swan.mp3", id: "swan"},
+                    {src: "lessons/MA_GBR_0800CAx0300/en/MA_GBR_0800CAv0300_TP1.mp3", id: "TP1"},
+                    {src: "lessons/MA_GBR_0800CAx0300/en/MA_GBR_0800CAv0300_TP2.mp3", id: "TP2"},
+                    {src: "lessons/MA_GBR_0800CAx0300/en/MA_GBR_0800CAv0300_TP3.mp3", id: "TP3"},
+                    {src: "lessons/MA_GBR_0800CAx0300/en/MA_GBR_0800CAv0300_H1.mp3", id: "H1"}
+                ];
+
+                var loader = new createjs.LoadQueue();
+                loader.installPlugin(createjs.Sound);
+                loader.addEventListener("complete", startApp);
+                loader.loadManifest(manifest);
+            }
+
+            function startApp(){
+                console.log("boot")
+                whizz.boot("appContainer", "MA_GBR_0800CAx0300", "en", "MA_GBR_0850RAx0100");
+            }
+
+        </script>
+    	<div id="globalContainer">
+            <div id="appContainer"></div>
+        </div>  
+   </body>
+</html>

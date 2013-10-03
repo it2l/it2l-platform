@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:tiles="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org"
+      lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>	
+        <script src="../../js/jquery-1.9.1.js"></script>
+        <script src="../../js/sequence.js"></script>
+        <title>Exercise sequence</title>
+	</head>
+	<body tiles:fragment="content">
+	<div id="top" class="outsidecontent" >
+		<h1>Welcome to Italk2learn</h1>
+    <p>
+        This sample demonstrates how to use Spring MVC and Spring Web Flow together with Thymeleaf and Tiles.
+    </p>
+    <hr />
+    <p>
+        Italk2learn platform in this sample include:
+    </p>
+    <ul>
+        <li>A sequence of whizz exercises with a shell container developed by whizz</li>
+        <li>A sequence of fraction tutor exercises</li>
+    </ul>
+    <p>You can go to the next exercise just only clicking "Next Exercise" Button</p>
+    <p>The exercise sequence is retrieved of the recommender system and it depends of the user that has been logged on Italk2learn Platform</p>
+	</div>
+	</body>
+</html>

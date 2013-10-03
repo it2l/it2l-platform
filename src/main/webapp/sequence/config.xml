@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<config>
+	<flashvarMoviePath>ex/</flashvarMoviePath>
+	<flashvarPath>pb/</flashvarPath>
+	<flashvarViewAll>0</flashvarViewAll>
+	<flashvarAssessment>0</flashvarAssessment>
+	<flashvarSkipText>0</flashvarSkipText>
+	<flashvarCountry>gbr</flashvarCountry>
+</config>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd" >
+
+	<aop:aspectj-autoproxy />
+	
+	<!-- ******************** U T I L I T Y ******************** -->
+	<!--
+		JLF Add a PropertyPlaceholderConfigurer which loads properties from
+		example.properties. These properties will be used in the Spring XML
+		definitions: occurences of ${...} will be replaced with their value in
+		the properties file. If the property can not be found, an error is
+		thrown. Since this bean implements BeanFactoryPostProcessor, it will
+		be automatically picked up by Spring and executed.-->
+	<bean id="propertyPlaceholderConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:italk2learn-config.properties</value>
+			</list>
+		</property>
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+	</bean>
+	
+<!-- 	<bean id="serverServiceExporter" class="org.springframework.remoting.jaxws.SimpleJaxWsServiceExporter"> -->
+<!-- 		<property name="baseAddress" value="http://localhost:9999/" /> -->
+<!-- 	</bean> -->
+
+	<!-- Aspects -->
+	<bean id="authentificationAspect" class="com.italk2learn.aspect.AuthentificationAdvice">
+		<property name="loginUserService" ref="loginUserService" />
+	</bean>
+	<bean id="loggerAspect" class="com.italk2learn.aspect.LogAdvice"/>
+	
+	<!-- Scans for application @Components to deploy -->
+	<context:component-scan base-package="com.italk2learn.controller" />
+	<bean id="loginUserDAO" class="com.italk2learn.dao.LoginUserDAO">
+		<property name="sessionFactory" ref="italk2learnSessionFactory" />
+	</bean>
+	
+	<bean id="exerciseDAO" class="com.italk2learn.dao.ExerciseDAO">
+		<property name="sessionFactory" ref="italk2learnSessionFactory" />
+	</bean>
+	<!-- ******************** SERVICES ******************** -->
+	<bean id="loginUserService" class="com.italk2learn.bo.LoginUserService">
+		<property name="loginUserDAO" ref="loginUserDAO" />
+	</bean>
+	<bean id="exerciseSequenceBO" class="com.italk2learn.bo.ExerciseSequenceBO">
+		<property name="exerciseDAO" ref="exerciseDAO" />
+	</bean>
+	
+	<bean id="speechRecognitionBO" class="com.italk2learn.bo.SpeechRecognitionBO"/>
+
+	<!-- Imports the configurations of the different infrastructure systems of the application -->
+	<import resource="webmvc-config.xml" />
+	<import resource="webflow-config.xml" />
+	<import resource="data-access-config.xml" />
+	<import resource="security-config.xml" />
+	
+
+</beans>

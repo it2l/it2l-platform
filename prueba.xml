@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="http://www.sail-technology.com/MMI60.xsl"?>
+<episode end="11984" id="ID_20130606_182557,channel=testchannel,program=testprogram,mediaName=prueba,mediaExt=wav" xmlformat="6.0" xmltype="transcript">
+<meta>
+<absolutetime>1370539557</absolutetime>
+<channel>testchannel</channel>
+<clientAddr>127.0.0.1</clientAddr>
+<clientName>jlfg-laptop</clientName>
+<date>20130606</date>
+<epiid>testepiid</epiid>
+<indexerBuild>2</indexerBuild>
+<indexerInstance>1</indexerInstance>
+<indexerName>JLFG-LAPTOP</indexerName>
+<indexerPasses>2</indexerPasses>
+<indexerVersion>6.1</indexerVersion>
+<indexingDate>20130606</indexingDate>
+<indexingTime>17:25:57</indexingTime>
+<indexingTimeZone>UTC</indexingTimeZone>
+<language>en_ux</language>
+<languageDomain>broadcast-news</languageDomain>
+<languageSubdomain>base</languageSubdomain>
+<languageVersion>models_60_2012_05_22</languageVersion>
+<mediaDir>C:/</mediaDir>
+<mediaExt>wav</mediaExt>
+<mediaName>prueba</mediaName>
+<program>testprogram</program>
+<source>testsource</source>
+<time>1825</time>
+</meta>
+<section end="11984" id="0" start="0">
+<topic>General language</topic>
+<segment bandwidth="wide" end="693" nonSpeechRatio="0.733906" snr="-0.274183" start="0" type="speech">
+<speaker gender="male" id="1" score="0"/>
+<nbest id="0" score="1.00">
+<word conf="1.00" end="692">...</word>
+<word conf="1.0" end="693">.</word>
+</nbest>
+</segment>
+<segment bandwidth="narrow" end="772" nonSpeechRatio="0" snr="20" start="694" type="speech">
+<speaker gender="male" id="-2" score="0"/>
+<nbest id="0" score="1.00">
+<word conf="1.00" end="772">...</word>
+</nbest>
+</segment>
+<segment bandwidth="narrow" end="3227" nonSpeechRatio="0.167482" snr="3.52369" start="773" type="speech">
+<speaker gender="female" id="1" score="0"/>
+<nbest id="0" score="1.00">
+<word conf="1.00" end="793">The</word>
+<word conf="1.00" end="839">museum</word>
+<word conf="1.00" end="845">of</word>
+<word conf="1.00" end="857">the</word>
+<word conf="1.00" end="906">museum's</word>
+<word conf="1.00" end="943">changing</word>
+<word conf="1.00" end="994">anything</word>
+<word conf="1.00" end="1035">important</word>
+<word conf="1.00" end="1065">of these</word>
+<word conf="1.00" end="1081">is</word>
+<word conf="1.00" end="1099">out</word>
+<word conf="1.00" end="1113">there</word>
+<word conf="1.00" end="1132">in</word>
+<word conf="1.00" end="1169">london</word>
+<word conf="1.00" end="1216">health</word>
+<word conf="1.00" end="1342">club</word>
+<word conf="1.00" end="1429">and</word>
+<word conf="1.00" end="1444">new</word>
+<word conf="1.00" end="1498">levels</word>
+<word conf="1.00" end="1507">of</word>
+<word conf="1.00" end="1587">brutality</word>
+<word conf="1.00" end="1594">of</word>
+<word conf="1.00" end="1602">a</word>
+<word conf="1.00" end="1654">damning</word>
+<word conf="1.00" end="1719">conclusion</word>
+<word conf="1.00" end="1727">of</word>
+<word conf="1.00" end="1743">the</word>
+<word conf="1.00" end="1778">UN</word>
+<word conf="1.00" end="1835">report</word>
+<word conf="1.00" end="1864">into the</word>
+<word conf="1.00" end="1922">conflict</word>
+<word conf="1.00" end="1937">in</word>
+<word conf="1.00" end="1987">syria</word>
+<word conf="1.00" end="2007">and</word>
+<word conf="1.00" end="2029">now</word>
+<word conf="1.00" end="2078">france</word>
+<word conf="1.00" end="2105">says</word>
+<word conf="1.00" end="2113">it</word>
+<word conf="1.00" end="2137">has</word>
+<word conf="1.00" end="2176">proof</word>
+<word conf="1.00" end="2195">that</word>
+<word conf="1.00" end="2246">chemical</word>
+<word conf="1.00" end="2298">weapons</word>
+<word conf="1.00" end="2310">have</word>
+<word conf="1.00" end="2328">been</word>
+<word conf="1.00" end="2373">news</word>
+<word conf="1.00" end="2382">to</word>
+<word conf="1.00" end="2401">them</word>
+<word conf="1.00" end="2489">and</word>
+<word conf="1.00" end="2500">has</word>
+<word conf="1.00" end="2562">ignited</word>
+<word conf="1.00" end="2621">protests</word>
+<word conf="1.00" end="2638">in</word>
+<word conf="1.00" end="2681">turkey</word>
+<word conf="1.00" end="2744">despite</word>
+<word conf="1.00" end="2753">an</word>
+<word conf="1.00" end="2817">apology</word>
+<word conf="1.00" end="2839">for the</word>
+<word conf="1.00" end="2892">country's</word>
+<word conf="1.00" end="2934">deputy</word>
+<word conf="1.00" end="2963">prime</word>
+<word conf="1.00" end="3015">minister</word>
+<word conf="1.00" end="3136">and</word>
+<word conf="1.00" end="3190">with</word>
+<word conf="1.00" end="3226">nixon</word>
+<word conf="1.0" end="3227">.</word>
+</nbest>
+</segment>
+<segment bandwidth="narrow" end="4908" nonSpeechRatio="0.0986998" snr="3.5671" start="3228" type="speech">
+<speaker gender="female" id="1" score="0"/>
+<nbest id="0" score="1.00">
+<word conf="1.00" end="3255">A</word>
+<word conf="1.00" end="3322">combination</word>
+<word conf="1.00" end="3342">in</word>
+<word conf="1.00" end="3348">the</word>
+<word conf="1.00" end="3390">safety</word>
+<word conf="1.00" end="3397">of</word>
+<entity>
+<etype origin="number" value="9">cardinal</etype>
+<ewords>
+<word conf="1.00" end="3439">nine</word>
+</ewords>
+</entity>
+<word conf="1.00" end="3465">north</word>
+<word conf="1.00" end="3497">korean</word>
+<word conf="1.00" end="3574">defectors</word>
+<word conf="1.00" end="3584">and</word>
+<word conf="1.00" end="3615">sent</word>
+<word conf="1.00" end="3644">back</word>
+<word conf="1.00" end="3660">to</word>
+<word conf="1.00" end="3674">their</word>
+<word conf="1.00" end="3751">homelands</word>
+<word conf="1.00" end="3780">and the</word>
+<word conf="1.00" end="3852">and</word>
+<word conf="1.00" end="3887">and</word>
+<word conf="1.00" end="3912">queen</word>
+<word conf="1.00" end="3955">elizabeth</word>
+<word conf="1.00" end="3990">marks</word>
+<entity>
+<etype origin="number" value="60">cardinal</etype>
+<ewords>
+<word conf="1.00" end="4024">60</word>
+</ewords>
+</entity>
+<word conf="1.00" end="4066">years</word>
+<word conf="1.00" end="4076">and</word>
+<word conf="1.00" end="4088">the</word>
+<word conf="1.00" end="4163">coronation</word>
+<word conf="1.00" end="4185">at</word>
+<word conf="1.00" end="4252">westminster</word>
+<word conf="1.00" end="4388">and</word>
+<word conf="1.00" end="4446">beijing</word>
+<word conf="1.00" end="4483">and</word>
+<word conf="1.00" end="4549">singapore</word>
+<word conf="1.00" end="4572">by</word>
+<word conf="1.00" end="4601">name</word>
+<word conf="1.00" end="4623">here</word>
+<word conf="1.00" end="4631">in</word>
+<word conf="1.00" end="4680">london</word>
+<word conf="1.00" end="4743">broadcasting</word>
+<word conf="1.00" end="4753">to</word>
+<word conf="1.00" end="4793">viewers</word>
+<word conf="1.00" end="4843">around the</word>
+<word conf="1.00" end="4886">world</word>
+<word conf="1.00" end="4907">well</word>
+<word conf="1.0" end="4908">.</word>
+</nbest>
+</segment>
+<segment bandwidth="wide" end="6456" nonSpeechRatio="0.850717" snr="-10" start="4909" type="speech">
+<speaker gender="female" id="2" score="0"></speaker>
+<nbest id="0" score="1.00">
+<word conf="1.00" end="6456">...</word>
+</nbest>
+</segment>
+<segment bandwidth="wide" end="8780" nonSpeechRatio="0.068299" snr="8.06817" start="6457" type="speech">
+<speaker gender="female" id="2" score="0"/>
+<nbest id="0" score="1.00">
+<word conf="1.00" end="6487">Rea</word>
+<word conf="1.00" end="6508">is</word>
+<word conf="1.00" end="6515">a</word>
+<word conf="1.00" end="6565">country</word>
+<word conf="1.00" end="6587">in</word>
+<word conf="1.00" end="6622">free</word>
+<word conf="1.00" end="6659">fall</word>
+<word conf="1.00" end="6704">according</word>
+<word conf="1.00" end="6715">to</word>
+<word conf="1.00" end="6769">the united</word>
+<word conf="1.00" end="6833">nations</word>
+<word conf="1.00" end="6857">whose</word>
+<word conf="1.00" end="6908">latest</word>
+<word conf="1.00" end="6956">report</word>
+<word conf="1.00" end="6974">for</word>
+<word conf="1.00" end="7014">human</word>
+<word conf="1.00" end="7053">minds</word>
+<word conf="1.00" end="7138">violations</word>
+<word conf="1.00" end="7154">of</word>
+<word conf="1.00" end="7166">the</word>
+<word conf="1.00" end="7232">conflict</word>
+<word conf="1.00" end="7248">has</word>
+<word conf="1.00" end="7278">reached</word>
+<word conf="1.00" end="7311">new</word>
+<word conf="1.00" end="7369">levels</word>
+<word conf="1.00" end="7379">of</word>
+<word conf="1.00" end="7459">brutality</word>
+<word conf="1.00" end="7549">children</word>
+<word conf="1.00" end="7554">are</word>
+<word conf="1.00" end="7576">being</word>
+<word conf="1.00" end="7611">forced</word>
+<word conf="1.00" end="7622">to</word>
+<word conf="1.00" end="7651">carry</word>
+<word conf="1.00" end="7666">out</word>
+<word conf="1.00" end="7685">some</word>
+<word conf="1.00" end="7706">of the</word>
+<word conf="1.00" end="7745">worst</word>
+<word conf="1.00" end="7825">atrocities</word>
+<word conf="1.00" end="7910">hours</word>
+<word conf="1.00" end="7959">after the</word>
+<word conf="1.00" end="8001">report</word>
+<word conf="1.00" end="8019">was</word>
+<word conf="1.00" end="8081">published</word>
+<word conf="1.00" end="8116">the</word>
+<word conf="1.00" end="8144">french</word>
+<word conf="1.00" end="8185">government</word>
+<word conf="1.00" end="8216">claimed</word>
+<word conf="1.00" end="8226">it</word>
+<word conf="1.00" end="8244">had</word>
+<word conf="1.00" end="8286">proved</word>
+<word conf="1.00" end="8302">that</word>
+<word conf="1.00" end="8310">the</word>
+<word conf="1.00" end="8348">nerve</word>
+<word conf="1.00" end="8401">agents</word>
+<word conf="1.00" end="8443">baron</word>
+<word conf="1.00" end="8468">had</word>
+<word conf="1.00" end="8487">been</word>
+<word conf="1.00" end="8521">used</word>
+<word conf="1.00" end="8539">in the</word>
+<word conf="1.00" end="8601">conflict</word>
+<word conf="1.00" end="8648">to</word>
+<word conf="1.00" end="8665">an</word>
+<word conf="1.00" end="8704">amended</word>
+<word conf="1.00" end="8722">some</word>
+<word conf="1.00" end="8748">of the</word>
+<word conf="1.00" end="8779">later</word>
+<word conf="1.0" end="8780">.</word>
+</nbest>
+</segment>
+<segment bandwidth="narrow" end="8996" nonSpeechRatio="0.334559" snr="6.5451" start="8781" type="speech">
+<speaker gender="male" id="-2" score="0"/>
+<nbest id="0" score="1.00">
+<word conf="1.00" end="8971">And</word>
+<word conf="1.00" end="8995">the</word>
+<word conf="1.0" end="8996">.</word>
+</nbest>
+</segment>
+<segment bandwidth="wide" end="10873" nonSpeechRatio="0.0814653" snr="4.78528" start="8997" type="speech">
+<speaker gender="female" id="3" score="0"/>
+<nbest id="0" score="1.00">
+<word conf="1.00" end="9067">It</word>
+<word conf="1.00" end="9115">pictures</word>
+<word conf="1.00" end="9137">which</word>
+<word conf="1.00" end="9142">a</word>
+<word conf="1.00" end="9182">syrian</word>
+<word conf="1.00" end="9241">opposition</word>
+<word conf="1.00" end="9278">claimed</word>
+<word conf="1.00" end="9318">showed</word>
+<word conf="1.00" end="9352">people's</word>
+<word conf="1.00" end="9406">suffering</word>
+<word conf="1.00" end="9415">the</word>
+<word conf="1.00" end="9463">effects</word>
+<word conf="1.00" end="9476">and</word>
+<word conf="1.00" end="9481">a</word>
+<word conf="1.00" end="9529">chemical</word>
+<word conf="1.00" end="9577">attack</word>
+<word conf="1.00" end="9644">cancer</word>
+<word conf="1.00" end="9677">care</word>
+<word conf="1.00" end="9765">now</word>
+<word conf="1.00" end="9803">france</word>
+<word conf="1.00" end="9829">says</word>
+<word conf="1.00" end="9849">it</word>
+<word conf="1.00" end="9879">has</word>
+<word conf="1.00" end="9942">evidence</word>
+<word conf="1.00" end="9959">that the</word>
+<word conf="1.00" end="10002">syrian</word>
+<word conf="1.00" end="10052">government</word>
+<word conf="1.00" end="10089">has</word>
+<word conf="1.00" end="10120">used</word>
+<word conf="1.00" end="10129">to</word>
+<word conf="1.00" end="10165">nerve</word>
+<word conf="1.00" end="10222">agents</word>
+<word conf="1.00" end="10260">aaron</word>
+<word conf="1.00" end="10301">against</word>
+<word conf="1.00" end="10332">rebel</word>
+<word conf="1.00" end="10394">prices</word>
+<word conf="1.00" end="10451">after</word>
+<word conf="1.00" end="10466">it</word>
+<word conf="1.00" end="10494">carried</word>
+<word conf="1.00" end="10541">athletes</word>
+<word conf="1.00" end="10565">and</word>
+<word conf="1.00" end="10616">texas</word>
+<word conf="1.00" end="10646">and</word>
+<word conf="1.00" end="10692">atlanta</word>
+<word conf="1.00" end="10720">and</word>
+<word conf="1.00" end="10744">here</word>
+<word conf="1.00" end="10756">in</word>
+<word conf="1.00" end="10783">seoul</word>
+<word conf="1.00" end="10810">calls</word>
+<word conf="1.00" end="10816">the</word>
+<word conf="1.00" end="10872">victim</word>
+<word conf="1.0" end="10873">.</word>
+</nbest>
+</segment>
+<segment bandwidth="narrow" end="11122" nonSpeechRatio="0.208333" snr="2.58063" start="10874" type="speech">
+<speaker gender="male" id="-2" score="0"/>
+<nbest id="0" score="1.00">
+<word conf="1.00" end="11092">The</word>
+<word conf="1.00" end="11121">new</word>
+<word conf="1.0" end="11122">.</word>
+</nbest>
+</segment>
+<segment bandwidth="narrow" end="11984" nonSpeechRatio="0" snr="9.68032" start="11123" type="speech">
+<speaker gender="male" id="2" score="0"/>
+<nbest id="0" score="1.00">
+<word conf="1.00" end="11150">Due</word>
+<word conf="1.00" end="11157">to</word>
+<word conf="1.00" end="11188">undergo</word>
+<word conf="1.00" end="11209">more</word>
+<word conf="1.00" end="11250">like</word>
+<word conf="1.00" end="11258">the</word>
+<word conf="1.00" end="11312">conclusion</word>
+<word conf="1.00" end="11333">from</word>
+<word conf="1.00" end="11341">the</word>
+<word conf="1.00" end="11380">largest</word>
+<word conf="1.00" end="11411">and</word>
+<word conf="1.00" end="11443">yet</word>
+<word conf="1.00" end="11479">there</word>
+<word conf="1.00" end="11515">is</word>
+<word conf="1.00" end="11568">sirens</word>
+<word conf="1.00" end="11615">began</word>
+<word conf="1.00" end="11634">as</word>
+<word conf="1.00" end="11679">well</word>
+<word conf="1.00" end="11706">the other</word>
+<word conf="1.00" end="11746">question</word>
+<word conf="1.00" end="11770">is</word>
+<word conf="1.00" end="11800">can</word>
+<word conf="1.00" end="11813">we</word>
+<word conf="1.00" end="11866">traced</word>
+<word conf="1.00" end="11909">who has</word>
+<word conf="1.00" end="11924">been</word>
+<word conf="1.00" end="11960">using</word>
+<word conf="1.00" end="11983">it</word>
+<word conf="1.0" end="11984">.</word>
+</nbest>
+</segment>
+</section>
+</episode>

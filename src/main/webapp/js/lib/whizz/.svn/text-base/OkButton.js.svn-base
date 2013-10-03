@@ -1,0 +1,155 @@
+if (!window.whizzLib) { window.whizzLib = {}; }
+
+var p;
+
+(whizzLib.OkButton = function() {
+
+	this.initialize(new whizzLib.OkButtonNormalState(),new whizzLib.OkButtonOverState(),new whizzLib.OkButtonDownState());
+	
+	this.downState.setTransform(1.55,1.35);
+
+}).prototype = p = new SimpleButton();
+p.nominalBounds = new createjs.Rectangle(-30.8,-13.2,62.8,28);
+
+
+(whizzLib.OkButtonNormalState = function() {
+	this.initialize();
+	
+	this.shape = new createjs.Shape();
+	this.shape.graphics.f("#ffffff").p("AEzAAQAAgfgggaQgVgSglgQQhagmh/AAQh+AAhaAmQgCABgCABQgGADgGACQhJAkgBAwQAAAAAAABQACAwBIAjQAGADAGADQACAAACABQBaAmB+AAQB/AABagmQAlgPAVgSQAfgaABgfQAAgBAAAA").f();
+	this.shape.setTransform(-0.1,-0.2);
+	
+	this.outline = new whizzLib.OkButton_Outline();
+	this.outline.setTransform(-0.2,-0.2);
+	
+	this.tintBall = new whizzLib.OkButton_TintBall();
+	this.tintBall.setTransform(0.2,0,0.36,0.146);
+	
+	this.reflex = new whizzLib.OkButton_Reflex();
+	this.reflex.setTransform(0,2,1.016,1.016);
+	this.reflex.alpha = 0.4;
+	
+	this.shadow = new whizzLib.OkButton_Shadow();
+	this.shadow.setTransform(1.3,1.8,0.262,0.262);
+	this.shadow.alpha = 0.28;
+	
+	this.addChild(this.shadow,this.shape,this.tintBall,this.reflex,this.outline);
+	
+}).prototype = p = new createjs.Container();
+p.nominalBounds = new createjs.Rectangle(-30.8,-13.2,62.8,28);
+
+
+(whizzLib.OkButtonOverState = function() {
+	this.initialize();
+	
+	this.shape = new createjs.Shape();
+	this.shape.graphics.rf(["#00ffff","#0000ff"],[0,1],-13.1,-4.7,0,-13.1,-4.7,44.3).p("ADZhbQhagmh/AAQh+AAhaAmQgCABgCABQgGADgGACQhJAkgBAwQAAAAAAABQACAwBIAjQAGADAGADQACAAACABQBaAmB+AAQB/AABagmQAlgPAVgSQAfgaABgfQAAgBAAAAQAAgfgggaQgVgSglgQ").f();
+	this.shape.setTransform(-0.1,-0.2);
+	
+	this.outline = new whizzLib.OkButton_Outline();
+	this.outline.setTransform(-0.2,-0.2);
+	
+	this.tintBall = new whizzLib.OkButton_TintBall();
+	this.tintBall.setTransform(0.2,0,0.36,0.146);
+	
+	this.reflex = new whizzLib.OkButton_Reflex();
+	this.reflex.setTransform(0,2,1.016,1.016);
+	this.reflex.alpha = 0.4;
+	
+	this.shadow = new whizzLib.OkButton_Shadow();
+	this.shadow.setTransform(1.3,1.8,0.262,0.262);
+	this.shadow.alpha = 0.28;
+	
+	this.addChild(this.shadow,this.shape,this.tintBall,this.reflex,this.outline);
+	
+}).prototype = p = new createjs.Container();
+p.nominalBounds = new createjs.Rectangle(-30.8,-13.2,62.8,28);
+
+
+(whizzLib.OkButtonDownState = function() {
+	this.initialize();
+	
+	this.shape = new createjs.Shape();
+	this.shape.graphics.rf(["#ffff00","#00ff00"],[0,1],-12.5,-4.5,0,-12.5,-4.5,42).p("AEGg2QgVgRgjgPQhVgkh5AAQh4AAhVAkQgCABgCABQgFACgGADQhGAiAAAtQAAABAAAAQABAuBFAhQAGADAFACQACABACABQBVAkB4AAQB5AABVgkQAjgPAVgRQAdgYABgeQAAAAAAgBQgBgdgdgZ").f();
+	this.shape.setTransform(-0.1,-0.2);
+	
+	this.outline = new whizzLib.OkButton_Outline2();
+	this.outline.setTransform(-0.2,-0.1);
+	
+	this.tintBall = new whizzLib.OkButton_TintBall();
+	this.tintBall.setTransform(0.2,0,0.342,0.139);
+	
+	this.reflex = new whizzLib.OkButton_Reflex();
+	this.reflex.setTransform(-0.1,1.85,0.965,0.965);
+	this.reflex.alpha = 0.4;
+	
+	this.addChild(this.shape,this.tintBall,this.reflex,this.outline);
+	
+}).prototype = p = new createjs.Container();
+p.nominalBounds = new createjs.Rectangle(-29.4,-12.55,58.35,24.70);
+
+
+(whizzLib.OkButton_TintBall = function() {
+	this.initialize();
+
+	// Layer 2
+	this.shape = new createjs.Shape();
+	this.shape.graphics.f("#ffffff").p("ADViXQgRgoggAIQiEAuhpBrQhiBhgvB2QAdglAjgiQCPiODHg4QAqgbgRgo").f();
+	this.shape.setTransform(-47.5,-57.4);
+
+	// Layer 3
+	this.shine = new whizzLib.OkButton_Shine();
+	this.shine.setTransform(-1.2,-1.3);
+	this.shine.alpha = 0.68;
+
+	this.addChild(this.shine,this.shape);
+}).prototype = p = new createjs.Container();
+p.nominalBounds = new createjs.Rectangle(-86.4,-89,170.4,175.3);
+
+
+(whizzLib.OkButton_Reflex = function() {
+	this.initialize();
+
+	// Layer 1
+	this.shape_1 = new createjs.Shape();
+	this.shape_1.graphics.f("#ffffff").p("AgygKQgkgOgUgSQAOAhBAAXQAoAPAwAIQAXAEAYACIAAgYQgYgBgXgDQg9gHgxgS").f();
+	this.shape_1.setTransform(-17,4.3);
+
+	this.shape_2 = new createjs.Shape();
+	this.shape_2.graphics.f("#ffffff").p("ADpgpQAAAqhOAfQhOAehtAAQgQAAgPAAIAAAXQAeADAgAAQBzAABSgfQBSgfAAgrQAAgohHgeQAaAVAAAZ").f();
+
+	this.addChild(this.shape_2,this.shape_1);
+}).prototype = p = new createjs.Container();
+p.nominalBounds = new createjs.Rectangle(-27.6,-8.6,55.5,17.5);
+
+
+(whizzLib.OkButton_Outline = function() {
+	this.initialize();
+	
+	this.graphics.f().s("#999999").ss(1,1,1,3).p("ADZhbQAkAQAWASQAfAaAAAfQAAAAAAABQAAAfgfAZQgWATglAPQhZAmh/AAQh+AAhagmQgJgDgIgEQhIgjgBgwQAAgBAAAAQAAgwBJgkQAIgDAJgEQBagmB+AAQB/AABZAm").cp();
+}).prototype = p = new createjs.Shape();
+p.nominalBounds = new createjs.Rectangle(-30.9,-13.2,61.3,25.9);
+
+
+(whizzLib.OkButton_Outline2 = function() {
+	this.initialize();
+	
+	this.graphics.rf(["#ffff00","#00ff00"],[0,0.651],0,0.1,0,0,0.1,29.3).p("ADOBWQhVAkh5ABQh4gBhVgkQgCAAgBgBQgHgDgGgCIAAAAQhEgigCgtQABAuBFAhIAAAAQAGAEAHACQABABACABQBVAkB4AAQB5AABVgkQAjgPAVgRQAdgZAAgeQAAAdgdAZQgVARgjAO").f();
+}).prototype = p = new createjs.Shape();
+
+
+
+(whizzLib.OkButton_Shine = function() {
+	this.initialize();
+
+	this.graphics.rf(["rgba(43,64,64,0.141)","#99ffff"],[0,1],-31.3,-48.4,0,-31.3,-48.4,141.9).p("AJZptQj4j+lhgBQlfABj7D+Qj4EDgBFqQABFqD4D/QD7EDFfAAQFhAAD4kDQD7j/gBlqQABlqj7kD").f();
+}).prototype = p = new createjs.Shape();
+p.nominalBounds = new createjs.Rectangle(-85.1,-87.6,170.4,175.3);
+
+
+(whizzLib.OkButton_Shadow = function() {
+	this.initialize();
+
+	this.graphics.f("#000000").p("AQbjbQhThFiMg7QlXiRnkAAQnkAAlWCRQghANgdAOQkZCIAAC5QAAACAAADQAEC2EVCGQAdAOAhAOQFWCQHkAAQHkAAFXiQQCMg7BThFQB1hiADh2QAAgDAAgCQgBh4h3hk").f();
+}).prototype = p = new createjs.Shape();
+p.nominalBounds = new createjs.Rectangle(-116.9,-49.3,234,98.7);

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:tiles="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org"
+      lang="en">
+
+<head>
+
+    <title>Italk2learn</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    
+    <link rel="stylesheet" href="css/whizz.css"/>
+    <link rel="stylesheet" href="lessons/MA_GBR_0800CAx0300/MA_GBR_0800CAx0300.css"/>
+    
+    <link rel="stylesheet" type="text/css" media="screen, projection" 
+          href="../../styles/blueprint/screen.css" 
+          th:href="@{/resources/styles/blueprint/screen.css}" />
+    
+    <link rel="stylesheet" type="text/css" media="print" 
+          href="../../styles/blueprint/print.css" 
+          th:href="@{/resources/styles/blueprint/print.css}" />
+    
+    <!--[if lt IE 8]>
+        <link rel="stylesheet" type="text/css" media="screen, projection"
+              href="../../styles/blueprint/ie.css" 
+              th:href="@{/resources/styles/blueprint/ie.css}" />
+    <![endif]-->
+    
+    <link rel="stylesheet" type="text/css" media="screen" 
+          href="../../styles/booking.css" 
+          th:href="@{/resources/styles/booking.css}" />
+
+    <style type="text/css" media="screen"> 
+            html, body  { height:100%; }
+            body { margin:0; padding:0; overflow:auto; text-align:left; 
+                   background-color: #ffffff; }   
+            object:focus { outline:none; }
+            #flashContent { display:none; }
+    </style>
+    <!-- The following styles and scripts are served from spring-js-resources-{ver}.jar -->
+    
+    <link rel="stylesheet" type="text/css" 
+          href="#" th:href="@{/resources/dijit/themes/tundra/tundra.css}" />
+          
+        <!-- Enable Browser History by replacing useBrowserHistory tokens with two hyphens -->
+        <!-- BEGIN Browser History required section -->
+        <link rel="stylesheet" type="text/css" href="/italk2learn/js/history/history.css" />
+        <script type="text/javascript" src="/italk2learn/js/history/history.js"></script>
+        <!-- END Browser History required section -->       
+    
+    <script type="text/javascript" src="/js/jquery-1.9.1.js" th:src="@{/resources/js/jquery-1.9.1.js}"></script>
+    <script type="text/javascript" src="/js/sequence.js" th:src="@{/resources/js/sequence.js}"></script>
+    <script type="text/javascript" src="/js/swfobject.js" th:src="@{/resources/js/swfobject.js}"></script>
+    <script type="text/javascript" src="#" th:src="@{/resources/dojo/dojo.js}"></script>
+    <script type="text/javascript" src="#" th:src="@{/resources/spring/Spring.js}"></script>
+    <script type="text/javascript" src="#" th:src="@{/resources/spring/Spring-Dojo.js}"></script>
+    
+</head>
+
+
+<body class="tundra" onload="init();">
+    <div id="header">
+        <div id="topbar">
+            <p sec:authorize="hasRole('ROLE_USER')" th:if="${#authentication}">
+                Welcome, <span sec:authentication="name">Dear User</span> |
+                <a href="#" th:href="@{/auth/logout}">Logout</a>
+            </p>
+            <p sec:authorize="hasRole('ROLE_ANONYMOUS')">
+                <a href="#" th:href="@{/login}">Login</a>
+            </p>
+            <p sec:authorize="hasRole('ROLE_USER')">
+                <a href="#" th:href="@{/audioRecorder}">Audio Recorder</a>
+            </p>
+        </div>
+        <div id="logo">
+            <p>
+                <a href="#" th:href="@{/}">
+                    <img src="../../images/header2.jpg" th:src="@{/resources/images/header2.jpg}" alt="italk2learn" />
+                </a>
+            </p>
+        </div>
+    </div>
+        <div id="flashContent">
+            <p>
+                To view this page ensure that Adobe Flash Player version 
+                11.1.0 or greater is installed. 
+            </p>
+            <script type="text/javascript"> 
+                var pageHost = ((document.location.protocol == "https:") ? "https://" : "http://"); 
+                document.write("<a href="http://www.adobe.com/go/getflashplayer"><img src="&quot;                                  + pageHost + &quot;www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" /></a>" ); 
+            </script> 
+     </div>
+    <div id="content">
+        <div id="local" class="span-6">
+	        <form action="#" th:object="${messageInfo}" th:action="@{/sequence/nextsequence}"
+				method="get">
+		        <div>
+<!-- 		        	<p><input id="btn_next" type="button" value="Next Exercise 1"/></p> -->
+		            <p sec:authorize="hasRole('ROLE_USER')">
+		            	<input type="submit" value="Next Exercise" name="submit" class="submit" />
+					</p>
+		        </div>
+		        <div id="container"></div>
+		    </form>
+        </div>
+        <div id="main" class="span-18 last" tiles:include="body">
+
+          <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->      
+          <!-- At runtime, the body of this <div> will be substituted by -->
+          <!-- Tiles in order to create the final HTML page that will be -->
+          <!-- sent to the browser.                                      -->
+          <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->      
+          
+          BODY PAGE GOES HERE!
+          
+        </div>
+    </div>
+    
+    <hr />
+    
+    <div id="footer">
+        <a href="http://www.italk2learn.eu/">
+            <img src="../../images/iT2L_logo.png" th:src="@{/resources/images/iT2L_logo.png}" alt="Italk2learn" width="100" height="100" />
+        </a>
+    </div>
+    
+
+</body>
+</html>

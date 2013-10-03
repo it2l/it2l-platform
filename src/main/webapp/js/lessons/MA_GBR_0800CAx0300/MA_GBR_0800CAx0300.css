@@ -1,0 +1,12 @@
+.MA_GBR_0800CAx0300 div.messageBox {position:absolute;top:0;left:0;width:auto;height:auto;font-size:12px;}
+.MA_GBR_0800CAx0300 div.messageBox div{position:relative;width:auto;height:auto;padding:5px;border-radius:5px;border:1px solid #000;background-color:#F8FBE3;}
+.MA_GBR_0800CAx0300 div#tpMessageBox div{left:-50%;text-align:center;}
+.MA_GBR_0800CAx0300 div#appHeader{color:#000000;}
+.MA_GBR_0800CAx0300 input#answerInput{visibility:hidden;background:transparent;border:0;height:auto;position:absolute;top:0px;left:0px;padding:5px;width:30px;text-align:center;font-size:25px;z-index:100;}
+.MA_GBR_0800CAx0300 input::-webkit-outer-spin-button,
+.MA_GBR_0800CAx0300 input::-webkit-inner-spin-button {
+-webkit-appearance: none;
+margin: 0;
+}
+.MA_GBR_0800CAx0300 #lastLine{visibility:hidden;background:transparent;border:0;height:auto;position:absolute;top:0;left:0;position:absolute;}
+.MA_GBR_0800CAx0300 #lastLine div{left:-100%;text-align:right;position:relative;}

@@ -1,0 +1,12 @@
+.MA_GBR_0800KAx0100 div.messageBox {position:absolute;top:0;left:0;width:auto;height:auto;font-size:12px;line-height:15px;pointer-events: none;}
+.MA_GBR_0800KAx0100 div.messageBox div{position:relative;width:auto;height:auto;padding:2px 4px;border-radius:5px;border:1px solid #000;background-color:#F8FBE3;left:-50%;text-align:center;}
+.MA_GBR_0800KAx0100 div#appHeader{color:#000000;}
+.MA_GBR_0800KAx0100 div#appHeaderTop{font-size:13px;}
+.MA_GBR_0800KAx0100 input{visibility:hidden;background:transparent;border:0;height:auto;position:absolute;top:0;left:0;padding:2px;width:40px;text-align:center;font-size:22px;z-index:100;}
+.MA_GBR_0800KAx0100 input::-webkit-outer-spin-button,
+.MA_GBR_0800KAx0100 input::-webkit-inner-spin-button {
+-webkit-appearance: none;
+margin: 0;
+}
+.MA_GBR_0800KAx0100 #lastLine{visibility:hidden;background:transparent;border:0;height:auto;position:absolute;top:0;left:0;position:absolute;}
+.MA_GBR_0800KAx0100 #lastLine div{left:-100%;text-align:right;position:relative;}

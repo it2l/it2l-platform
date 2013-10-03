@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+
+	
+	<!-- This is where we configure Spring-Security  -->
+	<security:http auto-config="true" use-expressions="true" access-denied-page="/auth/denied" >
+	
+		<security:intercept-url pattern="/login" access="permitAll"/>
+		<security:intercept-url pattern="/sequence" access="hasRole('ROLE_ADMIN')"/>
+		
+		<!--JLF Si el login es correcto -->
+		<security:form-login
+				login-page="/login" 
+				authentication-failure-url="/auth/login?error=true"
+				default-target-url="/sequence/"/>
+			
+		<!--JLF Si el login falla -->
+		<security:logout 
+				invalidate-session="true" 
+				logout-success-url="/login" 
+				logout-url="/auth/logout"/>
+	
+	</security:http>
+	
+	<!-- 
+			For authentication:
+			user-search-filter: the attribute name that contains the user name 
+		    user-search-base: the base path where to find user information
+		    
+		    For authorization:
+		    group-search-filter: the attribute name that contains the full dn of a user
+		    group-search-base: the base path where to find role information
+		    group-role-attribute: the attribute name that contains the role type
+		    role-prefix: the prefix to be added when retrieving role values
+		    
+		    For server access:
+		    manager-dn: the full dn of the person that has access to an LDAP server
+		    manager-password: the password of the person that has access to an LDAP server
+	-->
+	<security:authentication-manager>
+	        <security:ldap-authentication-provider  
+	        		user-search-filter="(uid={0})" 
+	        		user-search-base="ou=users"
+	        		group-search-filter="(uniqueMember={0})"
+	        		group-search-base="ou=groups"
+	        		group-role-attribute="cn"
+	        		role-prefix="ROLE_">
+	        </security:ldap-authentication-provider>
+	</security:authentication-manager>
+	
+	<security:ldap-server url="ldap://localhost:10389/o=italk2learn" manager-dn="uid=admin,ou=system" manager-password="secret" />
+</beans>

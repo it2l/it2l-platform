@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html dir="rtl">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <title>Whizz.com</title>
+
+        <script src="lib/createjs/easeljs-NEXT.min.js"></script>
+        <script src="lib/createjs/tweenjs-NEXT.min.js"></script>
+        <script src="lib/createjs/movieclip-NEXT.min.js"></script>
+        <script src="lib/createjs/preloadjs-NEXT.min.js"></script>
+        <script src="lib/createjs/soundjs-NEXT.min.js"></script>
+        <script src="lib/createjs/flashplugin-NEXT.min.js"></script>
+
+        <script src="lib/whizz/ar/whizz_lang.js"></script>
+        <script src="lib/whizz/whizz.js"></script>
+        <script src="lib/whizz/Header.js"></script>
+        <script src="lib/whizz/SystemManager.js"></script>
+
+        <script src="lessons/MA_GBR_0850RAx0100/ar/MA_GBR_0850RAx0100_lang.js"></script>
+        <script src="lessons/MA_GBR_0850RAx0100/MA_GBR_0850RAx0100_lib.js"></script>
+        <script src="lessons/MA_GBR_0850RAx0100/MA_GBR_0850RAx0100_TP.js"></script>
+        <script src="lessons/MA_GBR_0850RAx0100/MA_GBR_0850RAx0100_Main.js"></script>
+
+        <script src="lib/whizz/WhizzApp.js"></script>
+
+        <script>
+            function init(){
+                var manifest = [
+                    {src:"lessons/MA_GBR_0850RAx0100/sounds/catwail.mp3", id:"catwail"},
+                    {src:"lessons/MA_GBR_0850RAx0100/sounds/kidsscream.mp3", id:"kidsscream"},
+                    {src:"lessons/MA_GBR_0850RAx0100/sounds/doorclose.mp3", id:"doorclose"},
+                    {src:"lessons/MA_GBR_0850RAx0100/sounds/munch2.mp3", id:"munch2"},
+                    {src:"lessons/MA_GBR_0850RAx0100/sounds/munch.mp3", id:"munch"},
+                    {src:"lessons/MA_GBR_0850RAx0100/ar/MA_GBR_0850RAv0100_Q1.mp3", id:"Q1"},
+                    {src:"lessons/MA_GBR_0850RAx0100/ar/MA_GBR_0850RAv0100_TP1.mp3", id:"TP1"},
+                    {src:"lessons/MA_GBR_0850RAx0100/ar/MA_GBR_0850RAv0100_TP2.mp3", id:"TP2"}
+                ];
+
+                var loader = new createjs.LoadQueue();
+                loader.installPlugin(createjs.Sound);
+                loader.addEventListener("complete", startApp);
+                loader.loadManifest(manifest);
+            }
+
+            function startApp(){
+                whizz.boot("appContainer", "MA_GBR_0850RAx0100", "ar", "MA_GBR_0900KAx0100");
+            }
+
+        </script>
+
+        <!-- iPad -->
+        <script type="text/javascript">
+            if (navigator.userAgent.match(/iPad/i) != null)
+            {
+                window.addEventListener("load",function() {
+                    // Set a timeout...
+                    setTimeout(function(){
+                        // Hide the address bar!
+                        window.scrollTo(0, 1);
+                    }, 0);
+                });
+            }
+
+        </script>
+
+        <link rel="stylesheet" href="css/whizz.css">
+        <link rel="stylesheet" href="lessons/MA_GBR_0850RAx0100/MA_GBR_0850RAx0100.css">
+    </head>
+
+    <body onload="init();" style="background-color:#333; height:auto; ">
+        <div id="globalContainer">
+            <div id="appContainer"></div>
+        </div>
+    </body>
+</html>

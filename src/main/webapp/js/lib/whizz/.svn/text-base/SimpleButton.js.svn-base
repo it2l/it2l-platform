@@ -1,0 +1,81 @@
+(function(ns) {
+
+	var SimpleButton = function(normalState,overState,downState) {
+		this.initialize(normalState,overState,downState);
+	};
+	
+	var p = SimpleButton.prototype = new createjs.Container();
+	
+	p.normalState = null;
+	p.overState = null;
+	p.downState = null;
+
+	p._isDown = false;
+	p._isOver = false;
+	
+	p.Container_initialize = p.initialize;
+	
+	p.initialize = function(normalState,overState,downState) {
+		
+		this.normalState = normalState;
+		this.overState = overState;
+		this.downState = downState;
+
+		// super();
+        this.Container_initialize();
+		
+		this.addChild(this.downState,this.overState,this.normalState);
+		
+		this.onMouseOver = function(){
+            console.log("over");
+			this._isOver = true;
+			if (this._isDown) this.setDown();
+			else this.setOver();
+		};
+
+		this.onMouseOut = function(){
+			this._isOver = false;
+			if(this._isDown) this.setDown();
+			else this.setNormal();
+		};
+
+		this.onPress = function(event){
+            console.log("press");
+			this._isDown = true;
+			this.setDown();
+            var self = this;
+			event.onMouseUp = function(){
+				self._isDown = false;
+                if (self._isOver){
+                    self.setOver();
+                } else {
+                    self.setNormal();
+                }
+
+			}
+		}
+	};
+	
+	p.setNormal = function(){
+		this.normalState.visible = true;
+		this.overState.visible = false;
+		this.downState.visible = false;
+	};
+	
+	p.setOver = function(){
+		this.normalState.visible = false;
+		this.overState.visible = true;
+		this.downState.visible = false;
+	};
+	
+	p.setDown = function(){
+		this.normalState.visible = false;
+		this.overState.visible = false;
+		this.downState.visible = true;
+	};
+	
+	ns.SimpleButton = SimpleButton;
+}(window));
+
+
+	
