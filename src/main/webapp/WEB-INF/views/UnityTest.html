@@ -1,59 +1,13 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org"
       xmlns:tiles="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org"
-      lang="en">
+      lang="en">	  
  	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="google" value="notranslate"/> 
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 		<title>Unity Web Player | WebPlayer</title>
-		<style type="text/css">
-		<!--
-		body {
-			font-family: Helvetica, Verdana, Arial, sans-serif;
-			background-color: white;
-			color: black;
-			text-align: center;
-		}
-		a:link, a:visited {
-			color: #000;
-		}
-		a:active, a:hover {
-			color: #666;
-		}
-		p.header {
-			font-size: small;
-		}
-		p.header span {
-			font-weight: bold;
-		}
-		p.footer {
-			font-size: x-small;
-		}
-		div.content {
-			margin: auto;
-			width: 800px;
-		}
-		div.missing {
-			margin: auto;
-			position: relative;
-			top: 50%;
-			width: 193px;
-		}
-		div.missing a {
-			height: 63px;
-			position: relative;
-			top: -31px;
-		}
-		div.missing img {
-			border-width: 0px;
-		}
-		div#unityPlayer {
-			cursor: default;
-			height: 600px;
-			width: 800px;
-		}
-		-->
-		</style>
 	</head>
 	<body tiles:fragment="content">
     	<div id="header">
@@ -70,37 +24,28 @@
 			</div>
 		</div>
 		<script type="text/javascript">
-		<!--
-		function GetUnity() {
-			if (typeof unityObject != "undefined") {
-				return unityObject.getObjectById("unityPlayer");
-			}
-			return null;
-		}
-		if (typeof unityObject != "undefined") {
-			unityObject.embedUnity("unityPlayer", "TheFractionsLab.unity3d?usr=usr&pwd", 800, 600);
+				function GetUnity() {
+					if (typeof unityObject != "undefined") {
+						return unityObject.getObjectById("unityPlayer");
+					}
+					return null;
+				}
+				if (typeof unityObject != "undefined") {
+					unityObject.embedUnity("unityPlayer", "TheFractionsLab.unity3d?usr=usr&pwd;", 800, 600);
 
-		}
+				}
+				function LogMessageToUnity(message)
+				{
+					GetUnity().SendMessage("ExternalInterface", "LogMessage", message);
+				}
 
-		// ------------------------------------------
-		// Communication Functions - BEGIN
-		// ------------------------------------------
-        function LogMessageToUnity(message)
-        {
-	    	GetUnity().SendMessage("ExternalInterface", "LogMessage", message);
-        }
-
-        function LogMessageFromUnity(message)
-        {
-        	document.getElementById("messageLabel").innerHTML += "<br/>" + message;
-        }
-		// ------------------------------------------
-		// Communication Functions - END
-		// ------------------------------------------
-        -->
-      </script>
+				function LogMessageFromUnity(message)
+				{
+					document.getElementById("messageLabel").innerHTML += "<br/>" + message;
+				}
+        </script>
 		<p class="footer">&laquo; created with <a href="http://unity3d.com/unity/" title="Go to unity3d.com">Unity</a> &raquo;</p>
-		<input type="button" onclick="LogMessageToUnity('String message from the brwser');" value="LogMessageToUnity"/>
+		<input type="button" onclick="LogMessageToUnity('String message from the browser');" value="LogMessageToUnity"/>
 		<div id ="messageLabel">Messages from Unity:</div>
 	</body>
 </html>
