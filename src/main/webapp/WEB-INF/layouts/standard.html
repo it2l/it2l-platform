@@ -1,54 +1,58 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" 
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:tiles="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org"
-      lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org" lang="en">
 
 <head>
-
     <title>Italk2learn</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    
-    <link rel="stylesheet" href="css/whizz.css"/>
-    <link rel="stylesheet" href="lessons/MA_GBR_0800CAx0300/MA_GBR_0800CAx0300.css"/>
-    
-    <link rel="stylesheet" type="text/css" media="screen, projection" 
-          href="../../styles/blueprint/screen.css" 
-          th:href="@{/resources/styles/blueprint/screen.css}" />
-    
-    <link rel="stylesheet" type="text/css" media="print" 
-          href="../../styles/blueprint/print.css" 
-          th:href="@{/resources/styles/blueprint/print.css}" />
-    
-    <!--[if lt IE 8]>
-        <link rel="stylesheet" type="text/css" media="screen, projection"
-              href="../../styles/blueprint/ie.css" 
-              th:href="@{/resources/styles/blueprint/ie.css}" />
-    <![endif]-->
-    
-    <link rel="stylesheet" type="text/css" media="screen" 
-          href="../../styles/booking.css" 
-          th:href="@{/resources/styles/booking.css}" />
+	<style type="text/css">
+			.submit {
+				-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+				-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+				box-shadow:inset 0px 1px 0px 0px #ffffff;
+				background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
+				background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
+				filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
+				background-color:#ededed;
+				-webkit-border-top-left-radius:6px;
+				-moz-border-radius-topleft:6px;
+				border-top-left-radius:6px;
+				-webkit-border-top-right-radius:6px;
+				-moz-border-radius-topright:6px;
+				border-top-right-radius:6px;
+				-webkit-border-bottom-right-radius:6px;
+				-moz-border-radius-bottomright:6px;
+				border-bottom-right-radius:6px;
+				-webkit-border-bottom-left-radius:6px;
+				-moz-border-radius-bottomleft:6px;
+				border-bottom-left-radius:6px;
+				text-indent:0;
+				border:1px solid #dcdcdc;
+				display:inline-block;
+				color:#777777;
+				font-family:Comic Sans MS;
+				font-size:18px;
+				font-weight:bold;
+				font-style:normal;
+				height:50px;
+				line-height:50px;
+				width:100px;
+				text-decoration:none;
+				text-align:center;
+				text-shadow:1px 1px 0px #ffffff;
+			}
+			.submit:hover {
+				background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed) );
+				background:-moz-linear-gradient( center top, #dfdfdf 5%, #ededed 100% );
+				filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed');
+				background-color:#dfdfdf;
+			}.submit:active {
+				position:relative;
+				top:1px;
+			}</style>
 
-    <style type="text/css" media="screen"> 
-            html, body  { height:100%; }
-            body { margin:0; padding:0; overflow:auto; text-align:left; 
-                   background-color: #ffffff; }   
-            object:focus { outline:none; }
-            #flashContent { display:none; }
-    </style>
-    <!-- The following styles and scripts are served from spring-js-resources-{ver}.jar -->
-    
-    <link rel="stylesheet" type="text/css" 
-          href="#" th:href="@{/resources/dijit/themes/tundra/tundra.css}" />
-          
-        <!-- Enable Browser History by replacing useBrowserHistory tokens with two hyphens -->
-        <!-- BEGIN Browser History required section -->
-        <link rel="stylesheet" type="text/css" href="/italk2learn/js/history/history.css" />
-        <script type="text/javascript" src="/italk2learn/js/history/history.js"></script>
-        <!-- END Browser History required section -->       
-    
+    <script type="text/javascript" src="/italk2learn/js/history/history.js"></script>
+    <!-- END Browser History required section -->
+
     <script type="text/javascript" src="/js/jquery-1.9.1.js" th:src="@{/resources/js/jquery-1.9.1.js}"></script>
     <script type="text/javascript" src="/js/sequence.js" th:src="@{/resources/js/sequence.js}"></script>
     <script type="text/javascript" src="/js/swfobject.js" th:src="@{/resources/js/swfobject.js}"></script>
@@ -56,76 +60,129 @@
     <script type="text/javascript" src="#" th:src="@{/resources/dojo/dojo.js}"></script>
     <script type="text/javascript" src="#" th:src="@{/resources/spring/Spring.js}"></script>
     <script type="text/javascript" src="#" th:src="@{/resources/spring/Spring-Dojo.js}"></script>
-    
+
 </head>
 
 
-<body class="tundra" onload="init();">
-    <div id="header">
-        <div id="topbar">
-            <p sec:authorize="hasRole('ROLE_USER')" th:if="${#authentication}">
-                Welcome, <span sec:authentication="name">Dear User</span> |
-                <a href="#" th:href="@{/auth/logout}">Logout</a>
-            </p>
-            <p sec:authorize="hasRole('ROLE_ANONYMOUS')">
-                <a href="#" th:href="@{/login}">Login</a>
-            </p>
-            <p sec:authorize="hasRole('ROLE_USER')">
-                <a href="#" th:href="@{/audioRecorder}">Audio Recorder</a>
-            </p>
-        </div>
-        <div id="logo">
-            <p>
-                <a href="#" th:href="@{/}">
-                    <img src="../../images/header2.jpg" th:src="@{/resources/images/header2.jpg}" alt="italk2learn" />
-                </a>
-            </p>
-        </div>
-    </div>
-        <div id="flashContent">
-            <p>
-                To view this page ensure that Adobe Flash Player version 
-                11.1.0 or greater is installed. 
-            </p>
-            <script type="text/javascript"> 
-                var pageHost = ((document.location.protocol == "https:") ? "https://" : "http://"); 
-                document.write("<a href="http://www.adobe.com/go/getflashplayer"><img src="&quot;                                  + pageHost + &quot;www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" /></a>" ); 
-            </script> 
-     </div>
-    <div id="content">
-        <div id="local" class="span-6">
-	        <form action="#" th:object="${messageInfo}" th:action="@{/sequence/nextsequence}"
-				method="get">
-		        <div>
-<!-- 		        	<p><input id="btn_next" type="button" value="Next Exercise 1"/></p> -->
-		            <p sec:authorize="hasRole('ROLE_USER')">
-		            	<input type="submit" value="Next Exercise" name="submit" class="submit" />
-					</p>
-		        </div>
-		        <div id="container"></div>
-		    </form>
-        </div>
-        <div id="main" class="span-18 last" tiles:include="body">
+<body class="tundra" onload="init();" style="margin: 50; padding: 50">
+    <table align="center">
+        <tr>
+            <td>
+                <table id="header" class="header">
+                    <tr align="left">
+                        <td id="topbar" align="left">
+                            <div sec:authorize="hasRole('ROLE_USER')" th:if="${#authentication}">
+                                <a href="#" th:href="@{/auth/logout}">Logout</a>
+                            </div>
+                            <div sec:authorize="hasRole('ROLE_ADMIN')">
+                                <a href="#" th:href="@{/monitorWOZ/}">Wizard</a>
+                            </div>
+							<div id="connect" style="color:red;">
+                            </div>
+                        </td>
+                        <td id="logo" align="left">
+                            <div>
+                                <a href="#" th:href="@{/}">
+                                    <img src="../../images/iLearnFraction_banner_05.jpg" th:src="@{/resources/images/iLearnFraction_banner_05.jpg}" alt="italk2learn" />
+                                </a>
+                            </div>
+                        </td>
+                        <td align="right">
+                            <div id="speechRecognition" align="right">
+                                <p>To view this page ensure that Adobe Flash Player version 11.1.0 or greater is installed.</p>
+                                <script type="text/javascript">
+                                    var pageHost = ((document.location.protocol == "https:") ? "https://" : "http://");
+                                    document.write("<a href='http://www.adobe.com/go/getflashplayer'><img src='" + pageHost + "www.adobe.com/images/shared/download_buttons/get_flash_player.gif' alt='Get Adobe Flash player' /></a>");
+                                </script>
+                            </div>
+                            <script type="text/javascript">
+                                // For version detection, set to min. required Flash Player version, or 0 (or 0.0.0), for no version detection. 
+                                var swfVersionStr = "11.1.0";
+                                 // To use express install, set to playerProductInstall.swf, otherwise the empty string. 
+                                var xiSwfUrlStr = "playerProductInstall.swf";
+                                var flashvars = {};
+                                var params = {};
+                                params.quality = "high";
+                                params.bgcolor = "#ffffff";
+                                params.allowscriptaccess = "sameDomain";
+                                params.allowfullscreen = "true";
+                                var attributes = {};
+                                attributes.id = "Italk2learnSpeechRecognizer";
+                                attributes.name = "Italk2learnSpeechRecognizer";
+                                attributes.align = "middle";
+                                swfobject.embedSWF(
+                                    "Italk2learnSpeechRecognizer.swf", "speechRecognition",
+                                    "250", "250",
+                                    swfVersionStr, xiSwfUrlStr,
+                                    flashvars, params, attributes);
+                                 // JavaScript enabled so display the flashContent div in case it is not replaced with a swf object.
+                                swfobject.createCSS("#speechRecognition", "display:block;text-align:right;");
+                            </script>
+                            <noscript>
+                                <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="250" height="250" id="Italk2learnSpeechRecognizer">
+                                    <param name="movie" value="Italk2learnSpeechRecognizer.swf" />
+                                    <param name="quality" value="high" />
+                                    <param name="bgcolor" value="#ffffff" />
+                                    <param name="allowScriptAccess" value="sameDomain" />
+                                    <param name="allowFullScreen" value="true" />
+                                    <!--[if !IE]>-->
+                                    <object type="application/x-shockwave-flash" data="Italk2learnSpeechRecognizer.swf" width="250" height="250">
+                                        <param name="quality" value="high" />
+                                        <param name="bgcolor" value="#ffffff" />
+                                        <param name="allowScriptAccess" value="sameDomain" />
+                                        <param name="allowFullScreen" value="true" />
+                                        <!--<![endif]-->
+                                        <!--[if gte IE 6]>-->
+                                        <p>Either scripts and active content are not permitted to run or Adobe Flash Player version 11.1.0 or greater is not installed.
+                                        </p>
+                                        <!--<![endif]-->
+                                        <a href="http://www.adobe.com/go/getflashplayer">
+                                            <img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash Player" />
+                                        </a>
+                                        <!--[if !IE]>-->
+                                    </object>
+                                    <!--<![endif]-->
+                                </object>
+                            </noscript>
+                        </td>
+                    </tr>
+                </table>
 
-          <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->      
-          <!-- At runtime, the body of this <div> will be substituted by -->
-          <!-- Tiles in order to create the final HTML page that will be -->
-          <!-- sent to the browser.                                      -->
-          <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->      
-          
-          BODY PAGE GOES HERE!
-          
-        </div>
-    </div>
-    
-    <hr />
-    
-    <div id="footer">
-        <a href="http://www.italk2learn.eu/">
-            <img src="../../images/iT2L_logo.png" th:src="@{/resources/images/iT2L_logo.png}" alt="Italk2learn" width="100" height="100" />
-        </a>
-    </div>
-    
+            </td>
+        </tr>
+        <tr align="center">
+            <td align="center">
+                <table align="center">
+                    <tr align="center">
+                        <td align="center">
+                            <div id="content" align="center">
+                                <div id="main" class="span-18 last" tiles:include="body" align="center">
 
+                                    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+                                    <!-- At runtime, the body of this <div> will be substituted by -->
+                                    <!-- Tiles in order to create the final HTML page that will be -->
+                                    <!-- sent to the browser.                                      -->
+                                    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+                                    BODY PAGE GOES HERE!
+
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr align="center">
+                        <td align="right">
+                            <form action="#" th:object="${messageInfo}" th:action="@{/sequence/nextexercise}" method="get" sec:authorize="hasRole('ROLE_USER')" align="right">
+                                <p align="right">
+                                    <input type="submit" value="next" name="submit" class="submit" />
+                                </p>
+                            </form>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
 </body>
+
 </html>

@@ -53,10 +53,40 @@ public class LoginUserService implements ILoginUserService {
 		return false;
 	}
 	
-	public Integer getIdUserInfoUserInfo(HeaderVO header)
+	public Integer getIdUserInfo(HeaderVO header)
 			throws ITalk2LearnException {
 		try {
-			return loginUserDAO.getIdUserInfo(header).getIdUser();
+			return loginUserDAO.getIdUserInfo(header.getLoginUser()).getIdUser();
+		} catch (Exception nfe) {
+			System.out.println(nfe);
+		}
+		return null;
+	}
+	
+	public Integer getIdExersiceUser(HeaderVO header)
+			throws ITalk2LearnException {
+		try {
+			return loginUserDAO.getIdUserInfo(header.getLoginUser()).getIdView();
+		} catch (Exception nfe) {
+			System.out.println(nfe);
+		}
+		return null;
+	}
+	
+	public Integer getIdUser(String user)
+			throws ITalk2LearnException {
+		try {
+			return loginUserDAO.getIdUserInfo(user).getIdUser();
+		} catch (Exception nfe) {
+			System.out.println(nfe);
+		}
+		return null;
+	}
+	
+	public Integer getSimpleIdExersiceUser(String user)
+			throws ITalk2LearnException {
+		try {
+			return loginUserDAO.getIdUserInfo(user).getIdView();
 		} catch (Exception nfe) {
 			System.out.println(nfe);
 		}

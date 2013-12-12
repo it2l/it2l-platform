@@ -8,16 +8,14 @@ public class SpeechRecognitionRequestVO extends RequestVO {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private String data;
+	private byte[] data;
 
-	public String getData() {
+	public byte[] getData() {
 		return data;
 	}
 
-	public void setData(String data) {
+	public void setData(byte[] data) {
 		this.data = data;
 	}
-
-
 
 }

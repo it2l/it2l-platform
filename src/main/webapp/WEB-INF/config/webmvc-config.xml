@@ -23,6 +23,7 @@
 	<mvc:view-controller path="/login" />
 	<mvc:view-controller path="/logoutSuccess" />
 	<mvc:view-controller path="/audioRecorder"/>
+	<mvc:view-controller path="/audioRecorderFlash"/>
 
 	<!-- Dispatches requests mapped to flows to FlowHandler implementations -->
 	<bean class="org.springframework.webflow.mvc.servlet.FlowHandlerAdapter">

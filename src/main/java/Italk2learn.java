@@ -1,23 +1,21 @@
-
-
+import com.italk2learn.vo.SpeechRecognitionRequestVO;
 
 public class Italk2learn {
-
+	
 	public native String hello(byte[] buf);
 	
-	//public native void hello();
-	
-	public static void main(String[] args) {
+	public static String sendDataToSails(SpeechRecognitionRequestVO request) {
 		System.out.println("Hello World Java!");
+		String result="";
 		try {
-			byte[] buf= new byte[1024];
-			String result=new Italk2learn().hello(buf);
-			//new Italk2learn().hello();
+			result=new Italk2learn().hello(request.getData());
 			System.out.println(result);
+			return result;
 		} catch (Exception e) {
 			System.err.println(e);
 			System.exit(1);
-		}
+		} 
+		return result;
 	}
 	static {
 		try {
@@ -27,4 +25,5 @@ public class Italk2learn {
 			System.exit(1);
 		}
 	}
+
 }

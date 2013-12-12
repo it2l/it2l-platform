@@ -46,6 +46,30 @@ public class Italk2learnTest {
 		Assert.assertTrue(testOk);
 		//Assert.assertTrue(true);
 	}
+	
+	@Test
+	@Transactional
+	public void testGetNextExercise() throws Exception{
+		LOGGER.info("TESTING testGetNextExercise");
+		ExerciseSequenceRequestVO request= new ExerciseSequenceRequestVO();
+		request.setIdUser(1);
+		//request.setHeaderVO(CheckConstants.HEADER_ES);
+		boolean testOk = false;
+		request.setHeaderVO(new HeaderVO());
+		request.getHeaderVO().setLoginUser("jkeats");
+		request.setIdExercise(1);
+		try {
+			final ExerciseSequenceResponseVO response = this.exerciseSequenceService.getNextExercise(request);
+			if (response.getResponse().size() > 0) {
+				testOk = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			LOGGER.error(e);
+		}
+		Assert.assertTrue(testOk);
+		//Assert.assertTrue(true);
+	}
 
 	public IExerciseSequenceBO getExerciseSequenceService() {
 		return exerciseSequenceService;

@@ -4,6 +4,6 @@
 	<flashvarPath>pb/</flashvarPath>
 	<flashvarViewAll>0</flashvarViewAll>
 	<flashvarAssessment>0</flashvarAssessment>
-	<flashvarSkipText>0</flashvarSkipText>
+	<flashvarSkipText>1</flashvarSkipText>
 	<flashvarCountry>gbr</flashvarCountry>
 </config>

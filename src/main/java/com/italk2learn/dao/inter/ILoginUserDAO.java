@@ -11,7 +11,7 @@ import com.italk2learn.vo.UserDetailsVO;
 public interface ILoginUserDAO {
 
 	boolean getLoginUserInfo(HeaderVO header) throws Exception;
-	User getIdUserInfo(HeaderVO header) throws Exception;
+	User getIdUserInfo(String loginUser) throws Exception;
 	void setUserData(UserDetailsVO messageForm) throws Exception;
 	List<Userdetails> getUserData() throws Exception;
 }

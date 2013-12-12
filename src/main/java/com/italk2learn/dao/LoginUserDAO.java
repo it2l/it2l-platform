@@ -42,18 +42,18 @@ public class LoginUserDAO extends HibernateDaoSupport implements ILoginUserDAO {
 	 */
 	public boolean getLoginUserInfo(HeaderVO header) throws Exception {
 		try {
-			return (getIdUserInfo(header)!=null);
+			return (getIdUserInfo(header.getLoginUser())!=null);
 		} catch (Exception e){
 			System.out.println(e);
 		}
 		return false;
 	}
 	
-	public User getIdUserInfo(HeaderVO header) throws Exception {
+	public User getIdUserInfo(String loginUser) throws Exception {
 		try {
 			final Criteria criteria = getITalk2LearnSession().createCriteria(User.class);
 			criteria.setMaxResults(1);
-			criteria.add(Restrictions.eq("user", header.getLoginUser()));
+			criteria.add(Restrictions.eq("user", loginUser));
 			criteria.setResultTransformer(Criteria.ROOT_ENTITY);
 			return (User)criteria.uniqueResult();
 		} catch (Exception e){

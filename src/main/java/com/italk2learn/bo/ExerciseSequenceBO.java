@@ -7,10 +7,10 @@ import org.springframework.transaction.annotation.Transactional;
 import com.italk2learn.bo.inter.IExerciseSequenceBO;
 import com.italk2learn.dao.inter.IExerciseDAO;
 import com.italk2learn.exception.ITalk2LearnException;
+import com.italk2learn.repositories.ExercisesRepository;
 import com.italk2learn.util.ExerciseAssembler;
 import com.italk2learn.vo.ExerciseSequenceRequestVO;
 import com.italk2learn.vo.ExerciseSequenceResponseVO;
-import com.italk2learn.vo.ExerciseVO;
 
 @Service("exerciseSequenceBO")
 @Transactional(rollbackFor = { ITalk2LearnException.class, ITalk2LearnException.class })
@@ -19,11 +19,20 @@ public class ExerciseSequenceBO implements IExerciseSequenceBO  {
 
 	public IExerciseDAO exerciseDAO;
 	
+    @Autowired
+    private ExercisesRepository exercisesRepository; 
+	
 	@Autowired
 	public ExerciseSequenceBO(IExerciseDAO exerciseDAO) {
 		this.exerciseDAO = exerciseDAO;
 	}
 	
+    public ExerciseSequenceResponseVO findAllExercises(ExerciseSequenceRequestVO request) {
+    	ExerciseSequenceResponseVO response= new ExerciseSequenceResponseVO();
+    	response.setResponse(this.exercisesRepository.findAll());
+    	return response;
+    }
+
 	public ExerciseSequenceResponseVO getExerciseSequence(ExerciseSequenceRequestVO request) throws ITalk2LearnException{
 		try {
 			
@@ -37,12 +46,51 @@ public class ExerciseSequenceBO implements IExerciseSequenceBO  {
 		return null;
 	}
 	
-	public ExerciseVO getFirstExercise(ExerciseSequenceRequestVO request) throws ITalk2LearnException{
+	public ExerciseSequenceResponseVO getNextExercise(ExerciseSequenceRequestVO request) throws ITalk2LearnException{
 		try {
-			return ExerciseAssembler.toExerciseVOs(getExerciseDAO().getFirstExercise(request.getIdUser()));
+			
+			ExerciseSequenceResponseVO response= new ExerciseSequenceResponseVO();
+			response.setExercise(getExerciseDAO().getNextExercise(request.getIdUser(), request.getIdExercise()));
+			return response;
 		}
 		catch (Exception e){
-			
+			System.out.println(e);
+		}
+		return null;
+	}
+	
+	public ExerciseSequenceResponseVO insertNextIDExercise(ExerciseSequenceRequestVO request) throws ITalk2LearnException{
+		try {			
+			getExerciseDAO().setNextExercise(request.getIdUser(), request.getIdExercise(), request.getIdNextexercise(),request.getFeedback());
+			return new ExerciseSequenceResponseVO();
+		}
+		catch (Exception e){
+			System.out.println(e);
+		}
+		return null;
+	}
+	
+	public ExerciseSequenceResponseVO insertActualExercise(ExerciseSequenceRequestVO request) throws ITalk2LearnException{
+		try {
+			ExerciseSequenceResponseVO response= new ExerciseSequenceResponseVO();
+			getExerciseDAO().insertActualExercise(request.getIdUser(), request.getIdExercise());
+			return response;
+		}
+		catch (Exception e){
+			System.out.println(e);
+		}
+		return null;
+		
+	}
+	
+	public ExerciseSequenceResponseVO getFirstExercise(ExerciseSequenceRequestVO request) throws ITalk2LearnException{
+		try {
+			ExerciseSequenceResponseVO response= new ExerciseSequenceResponseVO();
+			response.setExercise(ExerciseAssembler.toExerciseVOs(getExerciseDAO().getFirstExercise(request.getIdExercise())));
+			return response;
+		}
+		catch (Exception e){
+			System.out.println(e);
 		}
 		return null;
 	}

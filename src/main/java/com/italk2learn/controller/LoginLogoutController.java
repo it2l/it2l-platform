@@ -9,22 +9,23 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Handles and retrieves the login or denied page depending on the URI template
  */
 @Controller
-@RequestMapping("/auth")
+@RequestMapping("/login")
 public class LoginLogoutController {
         
 
 	/**
-	 * Handles and retrieves the login JSP page
+	 * Handles and retrieves the login page
 	 * 
-	 * @return the name of the JSP page
+	 * @return the name of the page
 	 */
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String getLoginPage(@RequestParam(value="error", required=false) boolean error, 
+	@RequestMapping(value = "", method = RequestMethod.GET)
+	public ModelAndView getLoginPage(@RequestParam(value="error", required=false) boolean error, 
 			ModelMap model) {
 
 		// Add an error message to the model if login is unsuccessful
@@ -36,15 +37,19 @@ public class LoginLogoutController {
 				authentication-failure-url="/krams/auth/login?error=true" 
 				default-target-url="/krams/main/common"/>
 		 */
+		ModelAndView mod=new ModelAndView();
+		mod.setViewName("login");
+		String err="You have entered an invalid username or password!";
 		if (error == true) {
 			// Assign an error message
-			model.put("error", "You have entered an invalid username or password!");
+			model.put("err", "You have entered an invalid username or password!");
+			model.addAttribute(err);
 		} else {
-			model.put("error", "");
+			model.put("err", "");
 		}
 		
 		// This will resolve to /WEB-INF/jsp/loginpage.jsp
-		return "login";
+		return mod;
 	}
 	
 	/**

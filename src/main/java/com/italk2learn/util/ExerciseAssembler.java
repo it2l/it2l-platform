@@ -8,6 +8,14 @@ import com.italk2learn.vo.ExerciseVO;
 
 public class ExerciseAssembler {
 	
+	public static ExerciseVO toExerciseFeedbackVOs(Exercises uExercise,String feedback) {
+		final ExerciseVO exerciseVO = new ExerciseVO();
+		exerciseVO.setIdExercise(uExercise.getIdExercise());
+		exerciseVO.setExercise(uExercise.getExercise());
+		exerciseVO.setFeedback(feedback);
+		return exerciseVO;
+	}
+	
 	public static ExerciseVO toExerciseVOs(Exercises uExercise) {
 		final ExerciseVO exerciseVO = new ExerciseVO();
 		exerciseVO.setIdExercise(uExercise.getIdExercise());

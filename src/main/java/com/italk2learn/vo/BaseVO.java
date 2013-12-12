@@ -16,7 +16,7 @@ public class BaseVO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Sobreescribe el método toString para los VO's.
+	 * Overrides toString method for VO's.
 	 * 
 	 * @author Jose Luis Fernandez
 	 * @return String

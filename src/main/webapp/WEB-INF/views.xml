@@ -5,19 +5,27 @@
 	
 <tiles-definitions>
 	
-	<definition name="intro" extends="standardLayout">
+	<definition name="intro" extends="standardLayout2">
 		<put-attribute name="body" value="/intro.html :: content" type="thymeleaf"/>
 	</definition>
 	
-	<definition name="audioRecorder" extends="standardLayout">
+	<definition name="audioRecorder" extends="standardLayout2">
 		<put-attribute name="body" value="/AudioRecorder.html :: content" type="thymeleaf"/>
 	</definition>
 	
-	<definition name="login" extends="standardLayout">
+	<definition name="audioRecorderFlash" extends="standardLayout2">
+		<put-attribute name="body" value="/AudioRecorderFlash.html :: content" type="thymeleaf"/>
+	</definition>
+	
+	<definition name="monitorWOZ" extends="standardLayout2">
+		<put-attribute name="body" value="/monitorWOZ.html :: content" type="thymeleaf"/>
+	</definition>
+	
+	<definition name="login" extends="standardLayout2">
 		<put-attribute name="body" value="/login.html :: content" type="thymeleaf"/>
 	</definition>
 	
-	<definition name="logoutSuccess" extends="standardLayout">
+	<definition name="logoutSuccess" extends="standardLayout2">
 		<put-attribute name="body" value="/logoutSuccess.html :: content" type="thymeleaf"/>
 	</definition>
 	

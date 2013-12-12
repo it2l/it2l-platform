@@ -1,6 +1,6 @@
 package com.hibernate.dto;
 
-// Generated 08-Mar-2013 17:55:24 by Hibernate Tools 3.4.0.CR1
+// Generated 08-Nov-2013 17:48:29 by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,26 +19,31 @@ import javax.persistence.Table;
 @Table(name = "sequence", catalog = "italk2learn")
 public class Sequence implements java.io.Serializable {
 
-	private int idSequence;
+	private Integer idSequence;
 	private Exercises exercises;
 	private User user;
+	private Integer idNextexercise;
+	private String feedback;
 
 	public Sequence() {
 	}
 
-	public Sequence(Exercises exercises, User user) {
+	public Sequence(Exercises exercises, User user, Integer idNextexercise,
+			String feedback) {
 		this.exercises = exercises;
 		this.user = user;
+		this.idNextexercise = idNextexercise;
+		this.feedback = feedback;
 	}
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "id_sequence", unique = true, nullable = false)
-	public int getIdSequence() {
+	public Integer getIdSequence() {
 		return this.idSequence;
 	}
 
-	public void setIdSequence(int idSequence) {
+	public void setIdSequence(Integer idSequence) {
 		this.idSequence = idSequence;
 	}
 
@@ -60,6 +65,24 @@ public class Sequence implements java.io.Serializable {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	@Column(name = "id_nextexercise")
+	public Integer getIdNextexercise() {
+		return this.idNextexercise;
+	}
+
+	public void setIdNextexercise(Integer idNextexercise) {
+		this.idNextexercise = idNextexercise;
+	}
+
+	@Column(name = "feedback", length = 500)
+	public String getFeedback() {
+		return this.feedback;
+	}
+
+	public void setFeedback(String feedback) {
+		this.feedback = feedback;
 	}
 
 }
