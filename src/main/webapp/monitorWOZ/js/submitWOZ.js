@@ -11,7 +11,7 @@ function submitWOZ(){
         };
     $.ajax({
         type: 'POST',
-        contentType: "application/json; charset=utf-8",
+        contentType: "application/json",
         dataType : 'json',
         url: "insertNextID",
         //data: JSON.stringfy(sub),

@@ -26,11 +26,11 @@
 							 	<select id="exList" th:field="*{exercise}">
              						 <option th:each="exercise : ${allExercises}" th:value="${exercise.idExercise}" th:text="${exercise.exercise}">Option</option>
            					 	</select>		
-								<input id="submit" name="submit" type="button" value="Update" />
 							</p>
 						</div>
 					</div>
 				</form>
+				<input id="submit" name="submit" type="button" value="Update" />
 			</td>
 		</tr>
 		<tr align="left">
