@@ -7,6 +7,10 @@
 	
     <definition name="standardLayout" template="/layouts/standard.html" templateType="thymeleaf"/>
     <definition name="standardLayout2" template="/layouts/standard2.html" templateType="thymeleaf"/>
+    <definition name="standardFractionsLab" template="/layouts/standardFractionsLab.html" templateType="thymeleaf"/>
+    <definition name="standardWhizz" template="/layouts/standardWhizz.html" templateType="thymeleaf"/>
+    <definition name="standardCTAT" template="/layouts/standardCTAT.html" templateType="thymeleaf"/>
+    
 <!--     <definition name="standardLayoutJSP" template="/WEB-INF/layouts/standard.jsp" templateType="jsp"/> -->
     	
 </tiles-definitions>

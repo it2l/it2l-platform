@@ -1,6 +1,6 @@
 package com.hibernate.dto;
 
-// Generated 08-Mar-2013 17:55:24 by Hibernate Tools 3.4.0.CR1
+// Generated 29-Jan-2014 17:21:23 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -20,6 +20,7 @@ public class Exercises implements java.io.Serializable {
 
 	private int idExercise;
 	private String exercise;
+	private String view;
 	private Set<Sequence> sequences = new HashSet<Sequence>(0);
 
 	public Exercises() {
@@ -29,9 +30,11 @@ public class Exercises implements java.io.Serializable {
 		this.idExercise = idExercise;
 	}
 
-	public Exercises(int idExercise, String exercise, Set<Sequence> sequences) {
+	public Exercises(int idExercise, String exercise, String view,
+			Set<Sequence> sequences) {
 		this.idExercise = idExercise;
 		this.exercise = exercise;
+		this.view = view;
 		this.sequences = sequences;
 	}
 
@@ -52,6 +55,15 @@ public class Exercises implements java.io.Serializable {
 
 	public void setExercise(String exercise) {
 		this.exercise = exercise;
+	}
+
+	@Column(name = "view", length = 50)
+	public String getView() {
+		return this.view;
+	}
+
+	public void setView(String view) {
+		this.view = view;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "exercises")

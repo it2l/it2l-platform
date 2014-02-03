@@ -59,6 +59,19 @@ public class ExerciseSequenceBO implements IExerciseSequenceBO  {
 		return null;
 	}
 	
+	public ExerciseSequenceResponseVO getBackExercise(ExerciseSequenceRequestVO request) throws ITalk2LearnException{
+		try {
+			
+			ExerciseSequenceResponseVO response= new ExerciseSequenceResponseVO();
+			response.setExercise(getExerciseDAO().getBackExercise(request.getIdUser(), request.getIdExercise()));
+			return response;
+		}
+		catch (Exception e){
+			System.out.println(e);
+		}
+		return null;
+	}
+	
 	public ExerciseSequenceResponseVO insertNextIDExercise(ExerciseSequenceRequestVO request) throws ITalk2LearnException{
 		try {			
 			getExerciseDAO().setNextExercise(request.getIdUser(), request.getIdExercise(), request.getIdNextexercise(),request.getFeedback());

@@ -72,39 +72,6 @@ var Gab = {
         return true;
     },
 
-    on_roster_changed: function (iq) {
-        $(iq).find('item').each(function () {
-            var sub = $(this).attr('subscription');
-            var jid = $(this).attr('jid');
-            var name = $(this).attr('name') || jid;
-            var jid_id = Gab.jid_to_id(jid);
-
-            if (sub === 'remove') {
-                // contact is being removed
-                $('#' + jid_id).remove();
-            } else {
-                // contact is being added or modified
-                var contact_html = "<li id='" + jid_id + "'>" +
-                    "<div class='" + 
-                    ($('#' + jid_id).attr('class') || "roster-contact offline") +
-                    "'>" +
-                    "<div class='roster-name'>" +
-                    name +
-                    "</div><div class='roster-jid'>" +
-                    jid +
-                    "</div></div></li>";
-
-                if ($('#' + jid_id).length > 0) {
-                    $('#' + jid_id).replaceWith(contact_html);
-                } else {
-                    Gab.insert_contact($(contact_html));
-                }
-            }
-        });
-
-        return true;
-    },
-
     on_message: function (message) {
 	    
         var body = $(message).find("html > body");
@@ -113,7 +80,7 @@ var Gab = {
             body = $(message).find('body');
             if (body.length > 0) {
                 body = body.text();
-				if (body.charAt(0)==='h'){
+				if (body.charAt(0)==='h'){ 
 				   var s=body.substring(1,body.lenght);
 				   readFestival(s);
 				   SendHighMessage(s);
@@ -388,9 +355,6 @@ $(document).bind('connected', function () {
     var iq = $iq({type: 'get'}).c('query', {xmlns: 'jabber:iq:roster'});
     Gab.connection.sendIQ(iq, Gab.on_roster);
 
-    Gab.connection.addHandler(Gab.on_roster_changed,
-                              "jabber:iq:roster", "iq", "set");
-
     Gab.connection.addHandler(Gab.on_message,
                               null, "message", "chat");
 });
@@ -400,12 +364,6 @@ $(document).bind('disconnected', function () {
     Gab.connection = null;
     Gab.pending_subscriber = null;
 
-    $('#roster-area ul').empty();
-    $('#chat-area ul').empty();
-    $('#chat-area div').remove();
-
-    $('#login_dialog').dialog('open');
-    
     //JLF:Reconnect when it's not connected
     var conn = new Strophe.Connection(
     'http://193.61.29.72/http-bind/');

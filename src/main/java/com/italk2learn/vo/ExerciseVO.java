@@ -12,6 +12,7 @@ public class ExerciseVO extends ResponseVO {
 	private int idNextexercise;
 	private String exercise;
 	private String feedback;
+	private String view;
 	
 	
 	public int getIdExercise() {
@@ -49,5 +50,11 @@ public class ExerciseVO extends ResponseVO {
 	}
 	public void setIdUser(int idUser) {
 		this.idUser = idUser;
+	}
+	public String getView() {
+		return view;
+	}
+	public void setView(String view) {
+		this.view = view;
 	}
 }

@@ -12,6 +12,7 @@ public class ExerciseAssembler {
 		final ExerciseVO exerciseVO = new ExerciseVO();
 		exerciseVO.setIdExercise(uExercise.getIdExercise());
 		exerciseVO.setExercise(uExercise.getExercise());
+		exerciseVO.setView(uExercise.getView());
 		exerciseVO.setFeedback(feedback);
 		return exerciseVO;
 	}
@@ -20,6 +21,7 @@ public class ExerciseAssembler {
 		final ExerciseVO exerciseVO = new ExerciseVO();
 		exerciseVO.setIdExercise(uExercise.getIdExercise());
 		exerciseVO.setExercise(uExercise.getExercise());
+		exerciseVO.setView(uExercise.getView());
 		return exerciseVO;
 	}
 

@@ -54,7 +54,7 @@ public class ExercisesSequenceController {
     }
 	
 	/**
-	 * 
+	 * Initial method to get first exercise of sequence
 	 */
 	@RequestMapping(value = "/",method = RequestMethod.GET)
 	public String initSequence(Model model) {
@@ -74,10 +74,66 @@ public class ExercisesSequenceController {
 		ex.setIdExercise(0);
 		model.addAttribute("messageInfo", ex);
 		model.addAttribute(response);
-		return "views/"+ response.getExercise().getExercise();
+		return  response.getExercise().getView()+"/"+ response.getExercise().getExercise();
 	}
 
 	
+	/**
+	 * Get next exercise of a given sequence
+	 */
+	@RequestMapping(value = "/nextexercise", method = RequestMethod.GET)
+    public ModelAndView getNextExercise(@Valid @ModelAttribute("messageInfo") ExerciseVO messageForm){
+		logger.info("JLF --- getNextExercise()");
+		ModelAndView modelAndView = new ModelAndView();
+		ExerciseSequenceRequestVO request= new ExerciseSequenceRequestVO();
+		try{
+			request.setHeaderVO(new HeaderVO());
+			request.getHeaderVO().setLoginUser(user.getUsername());
+			request.setIdExercise(getLoginUserService().getIdExersiceUser(request.getHeaderVO()));
+			request.setIdUser(getLoginUserService().getIdUserInfo(request.getHeaderVO()));
+			ExerciseVO response=getExerciseSequenceService().getNextExercise(request).getExercise();
+			request.setIdExercise(response.getIdExercise());
+			getExerciseSequenceService().insertActualExercise(request);
+			modelAndView.setViewName(response.getView()+"/"+ response.getExercise());
+			modelAndView.addObject("messageInfo", response);
+			return modelAndView;
+		}
+		catch (Exception e){
+			return new ModelAndView();
+		}
+	}
+	
+	/**
+	 * Get back exercise of a given sequence
+	 */
+	@RequestMapping(value = "/backexercise", method = RequestMethod.GET)
+    public ModelAndView getBackExercise(@Valid @ModelAttribute("messageInfo") ExerciseVO messageForm){
+		logger.info("JLF --- getBackExercise()");
+		ModelAndView modelAndView = new ModelAndView();
+		ExerciseSequenceRequestVO request= new ExerciseSequenceRequestVO();
+		try{
+			request.setHeaderVO(new HeaderVO());
+			request.getHeaderVO().setLoginUser(user.getUsername());
+			request.setIdExercise(getLoginUserService().getIdExersiceUser(request.getHeaderVO()));
+			request.setIdUser(getLoginUserService().getIdUserInfo(request.getHeaderVO()));
+			//Obtenemos el ejercio actual de user
+			ExerciseVO response=getExerciseSequenceService().getBackExercise(request).getExercise();
+			request.setIdExercise(response.getIdExercise());
+			//Seteamos user con el nuevo ejercicio obtenido
+			getExerciseSequenceService().insertActualExercise(request);
+			modelAndView.setViewName(response.getView()+"/"+ response.getExercise());
+			modelAndView.addObject("messageInfo", response);
+			return modelAndView;
+		}
+		catch (Exception e){
+			return new ModelAndView();
+		}
+	}
+	
+	
+	/**
+	 * Old method used to get the whole sequence
+	 */
 	@RequestMapping(value = "/nextsequence", method = RequestMethod.POST)
     public ModelAndView getNextSequence(@Valid @ModelAttribute("messageInfo") ExerciseVO messageForm){
 		logger.info("JLF --- getNextSequence()");
@@ -109,31 +165,6 @@ public class ExercisesSequenceController {
 			return new ModelAndView();
 		}
     }
-	
-	@RequestMapping(value = "/nextexercise", method = RequestMethod.GET)
-    public ModelAndView getNextExercise(@Valid @ModelAttribute("messageInfo") ExerciseVO messageForm){
-		
-		logger.info("JLF --- getNextExercise()");
-		ModelAndView modelAndView = new ModelAndView();
-		ExerciseSequenceRequestVO request= new ExerciseSequenceRequestVO();
-		try{
-			request.setHeaderVO(new HeaderVO());
-			request.getHeaderVO().setLoginUser(user.getUsername());
-			request.setIdExercise(getLoginUserService().getIdExersiceUser(request.getHeaderVO()));
-			request.setIdUser(getLoginUserService().getIdUserInfo(request.getHeaderVO()));
-			ExerciseVO response=getExerciseSequenceService().getNextExercise(request).getExercise();
-			request.setIdExercise(response.getIdExercise());
-			getExerciseSequenceService().insertActualExercise(request);
-			//if messageForm
-			modelAndView.setViewName("views/"+ response.getExercise());
-			modelAndView.addObject("messageInfo", response);
-			return modelAndView;
-		}
-		catch (Exception e){
-			return new ModelAndView();
-		}
-		
-	}
 
 	public IExerciseSequenceBO getExerciseSequenceService() {
 		return exerciseSequenceService;

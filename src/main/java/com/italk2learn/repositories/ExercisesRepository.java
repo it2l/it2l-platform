@@ -48,38 +48,38 @@ public class ExercisesRepository {
 	        this.exercisesById.put(var5.getIdExercise(), var5);
 	        
 	        final ExerciseVO var6 = new ExerciseVO();
-	        var5.setIdExercise(Integer.valueOf(5));
-	        var5.setExercise("WhizzFlash3");
+	        var6.setIdExercise(Integer.valueOf(5));
+	        var6.setExercise("WhizzFlash3");
 	        this.exercisesById.put(var6.getIdExercise(), var6);
 	        
 	        final ExerciseVO var7 = new ExerciseVO();
-	        var5.setIdExercise(Integer.valueOf(6));
-	        var5.setExercise("WhizzFlash4");
+	        var7.setIdExercise(Integer.valueOf(6));
+	        var7.setExercise("WhizzFlash4");
 	        this.exercisesById.put(var7.getIdExercise(), var7);
 	        
 	        final ExerciseVO var8 = new ExerciseVO();
-	        var5.setIdExercise(Integer.valueOf(7));
-	        var5.setExercise("WhizzFlash5");
+	        var8.setIdExercise(Integer.valueOf(7));
+	        var8.setExercise("WhizzFlash5");
 	        this.exercisesById.put(var8.getIdExercise(), var8);
 	        
 	        final ExerciseVO var9 = new ExerciseVO();
-	        var5.setIdExercise(Integer.valueOf(8));
-	        var5.setExercise("WhizzFlash6");
+	        var9.setIdExercise(Integer.valueOf(8));
+	        var9.setExercise("WhizzFlash6");
 	        this.exercisesById.put(var9.getIdExercise(), var9);
 	        
 	        final ExerciseVO var10 = new ExerciseVO();
-	        var4.setIdExercise(Integer.valueOf(9));
-	        var4.setExercise("FractionsLab2");
+	        var10.setIdExercise(Integer.valueOf(9));
+	        var10.setExercise("FractionsLab2");
 	        this.exercisesById.put(var10.getIdExercise(), var10);
 	        
 	        final ExerciseVO var11 = new ExerciseVO();
-	        var4.setIdExercise(Integer.valueOf(10));
-	        var4.setExercise("FractionsLab3");
+	        var11.setIdExercise(Integer.valueOf(10));
+	        var11.setExercise("FractionsLab3");
 	        this.exercisesById.put(var11.getIdExercise(), var11);
 	        
 	        final ExerciseVO var12 = new ExerciseVO();
-	        var4.setIdExercise(Integer.valueOf(11));
-	        var4.setExercise("FractionsLab4");
+	        var12.setIdExercise(Integer.valueOf(11));
+	        var12.setExercise("FractionsLab4");
 	        this.exercisesById.put(var12.getIdExercise(), var12);
 	        
 	    }

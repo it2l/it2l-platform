@@ -326,6 +326,11 @@
 			<artifactId>apparat-playerglobal</artifactId>
 			<version>1.0-RC9</version>
 		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.13</version>
+		</dependency>
 	</dependencies>
 
 	<build>

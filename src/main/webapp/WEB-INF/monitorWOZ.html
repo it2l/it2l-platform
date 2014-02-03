@@ -5,32 +5,28 @@
 	xmlns:tiles="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org" lang="en">
 <head>
-<title>monitorWOZ</title>
-<meta content="text/html;charset=ISO-8859-1" http-equiv="Content-Type" />
+	<title>monitorWOZ</title>
+	<meta content="text/html;charset=ISO-8859-1" http-equiv="Content-Type" />
 </head>
-<body tiles:fragment="content" bgcolor="#ffffff" pbzloc="23">
-	<h1 align="center" pbzloc="28">Wizard of Oz-Monitor</h1>
+<body tiles:fragment="content" bgcolor="#ffffff">
+	<h1 align="center">Wizard of Oz-Monitor</h1>
 	<table align="left">
 		<tr align="left">
 			<td align="left">
-				<form action="#" th:object="${messageInfo}"
-					th:action="@{/monitorWOZ/insertNextID}" method="post"
-					sec:authorize="hasRole('ROLE_USER')">
+				<form th:object="${messageInfo}"
+					  sec:authorize="hasRole('ROLE_USER')">
 					<div>
-						<p pbzloc="41">
-							User <input name="user" type="text" th:value="*{user}" />
+						<p>
+							User <input id="user" name="user" type="text" th:value="*{user}" />
 						</p>
 						<div>
-							<p pbzloc="19">
+							<p>
 								Write here the ID for the next activity (if you want to change the
 								current one)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-							<input
-									name="idNextexercise" size="1" style="height: 22px; width: 110px"
-									type="text" th:value="*{idNextexercise}" />
-<!-- 							<select th:field="*{var}"> -->
-<!--              					 <option th:each="var : ${allExercises}" th:value="${var.idExercise}" th:text="var.exercise">Option</option> -->
-<!--            					 </select>		 -->
-							<input name="submit" type="submit" value="Update" />
+							 	<select id="exList" th:field="*{exercise}">
+             						 <option th:each="exercise : ${allExercises}" th:value="${exercise.idExercise}" th:text="${exercise.exercise}">Option</option>
+           					 	</select>		
+								<input id="submit" name="submit" type="button" value="Update" />
 							</p>
 						</div>
 					</div>
@@ -56,6 +52,7 @@
     <script src='js/scripts/flXHR.js'></script>
     <script src='js/scripts/strophe.flxhr.js'></script>
     <script src='js/monitorWOZ.js'></script>
+    <script src='js/submitWOZ.js'></script>
     <link rel='stylesheet' href='../css/gab.css'/>
 </body>
 </html>

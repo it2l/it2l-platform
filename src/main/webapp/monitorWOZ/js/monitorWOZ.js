@@ -1,3 +1,4 @@
+var internetTime=new Date().toUTCString();
 var Woz = {
     connection: null,
 
@@ -120,9 +121,8 @@ $(document).ready(function() {
 
             if (ev.which === 13) {
                 ev.preventDefault();
-
-                var body = $(this).val();
-
+							
+				var body = $(this).val();
                 var message = $msg({to: jid,
                                     "type": "chat"})
                     .c('body').t(body).up()
@@ -134,6 +134,7 @@ $(document).ready(function() {
                     "<span class='chat-name me'>" + 
                     Strophe.getNodeFromJid(Woz.connection.jid) +
                     "</span>&gt;<span class='chat-text'>" +
+                    "&lt"+internetTime+"&gt;" +
                     body +
                     "</span></div>");
                 Woz.scroll_chat(Woz.jid_to_id(jid));
@@ -141,6 +142,19 @@ $(document).ready(function() {
                 $(this).val('');
                 $(this).parent().data('composing', false);
             } else {
+            	//JLF: Special functionality to get Internet Time
+				$.ajax({
+						async: false,
+						dataType: 'jsonp',
+						type: 'GET',
+						url: "http://www.timeapi.org/utc/now.json",
+						success: function (data) {
+							internetTime = data.dateString;
+						},
+						error: function (data) {
+							console.log("ko");
+						}
+				});
                 var composing = $(this).parent().data('composing');
                 if (!composing) {
                     var notify = $msg({to: jid, "type": "chat"})
@@ -188,8 +202,6 @@ $(document).bind('connected', function () {
 
 $(document).bind('disconnected', function () {
     Woz.connection = null;
-    $('#chat-area ul').empty();
-    $('#chat-area div').remove();
     
     //JLF:Reconnect when it's not connected
     var conn = new Strophe.Connection(

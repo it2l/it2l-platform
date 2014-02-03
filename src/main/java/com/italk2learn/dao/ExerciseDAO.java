@@ -91,6 +91,32 @@ public class ExerciseDAO extends HibernateDaoSupport implements IExerciseDAO {
 		}
 	}
 	
+	public ExerciseVO getBackExercise(int idUser, int idExercise) throws Exception {
+		try {
+			final Criteria seqCriteria = getITalk2LearnSession().createCriteria(Sequence.class);
+			seqCriteria.setMaxResults(1);
+			seqCriteria.createCriteria("user", "u");
+			seqCriteria.createCriteria("exercises", "e");
+			seqCriteria.add(Restrictions.eq("u.idUser", idUser));
+			seqCriteria.add(Restrictions.eq("idNextexercise", idExercise));
+			seqCriteria.setResultTransformer(Criteria.ROOT_ENTITY);
+			Sequence resultSeq =(Sequence)seqCriteria.uniqueResult();
+			//JLF New criteria
+			final Criteria exCriteria = getITalk2LearnSession().createCriteria(Exercises.class);
+			exCriteria.setMaxResults(1);
+			exCriteria.createCriteria("sequences.user", "u");
+			exCriteria.createCriteria("sequences", "s");
+			exCriteria.add(Restrictions.eq("u.idUser", idUser));
+			exCriteria.add(Restrictions.eq("idExercise", resultSeq.getExercises().getIdExercise()));
+			exCriteria.setResultTransformer(Criteria.ROOT_ENTITY);
+			Exercises resultEx =(Exercises)exCriteria.uniqueResult();
+			return ExerciseAssembler.toExerciseFeedbackVOs(resultEx, resultSeq.getFeedback());
+		} catch (Exception e){
+			e.printStackTrace();
+			throw new ITalk2LearnException(e);
+		}
+	}
+	
 	public void setNextExercise(int idUser, int idExercise, int idNextexercise, String feedback) throws Exception{
 		final Session session = this.getITalk2LearnSession();
 		

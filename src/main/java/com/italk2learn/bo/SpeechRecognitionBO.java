@@ -1,6 +1,5 @@
 package com.italk2learn.bo;
 
-import java.io.File;
 import java.io.StringReader;
 import java.lang.reflect.Method;
 
@@ -24,6 +23,10 @@ import com.italk2learn.vo.SpeechRecognitionResponseVO;
 @Transactional(rollbackFor = { ITalk2LearnException.class, ITalk2LearnException.class })
 public class SpeechRecognitionBO implements ISpeechRecognitionBO {
 
+	/*
+	 * Calling directly ASREngine without JNI 
+	 * 
+	 */
 	public SpeechRecognitionResponseVO getSpeechRecognition(SpeechRecognitionRequestVO request) throws ITalk2LearnException{
 		try {
 			String[] cmd = { "C:\\MMIndexer\\bin\\ASRSample.exe","en_ux","broadcast-news","base","C:\\prueba2.wav" };
@@ -37,6 +40,28 @@ public class SpeechRecognitionBO implements ISpeechRecognitionBO {
 		return null;
 	}
 	
+	/*
+	 * Calling ASREngine through JNI 
+	 * Only is possible call JNI in default java package for that reason I use reflection 
+	 */
+	public SpeechRecognitionResponseVO sendDataToSails(SpeechRecognitionRequestVO request) throws ITalk2LearnException{
+		try {
+			Class asrClass = Class.forName("Italk2learn");
+			Method asrMethod = asrClass.getMethod("sendDataToSails", new Class[] { SpeechRecognitionRequestVO.class });
+			String asrReturned = asrMethod.invoke(asrClass.newInstance(),new SpeechRecognitionRequestVO[] { request}).toString();
+			String value=parseTranscription(convertStringToDocument(asrReturned));
+			return new SpeechRecognitionResponseVO(value);
+		} catch (Exception e) {
+			System.err.println(e);
+			System.exit(1);
+		}
+		return null;
+	}
+	
+	/*
+	 * Return parsed transcription
+	 * 
+	 */
 	public String parseTranscription(Document doc) throws ITalk2LearnException{
 		try {
 			StringBuffer text = new StringBuffer();
@@ -63,22 +88,6 @@ public class SpeechRecognitionBO implements ISpeechRecognitionBO {
 		}
 		catch (Exception e){
 			System.out.println(e);
-		}
-		return null;
-	}
-	
-	//JLF:Alternative function
-	public SpeechRecognitionResponseVO sendDataToSails(SpeechRecognitionRequestVO request) throws ITalk2LearnException{
-		try {
-			Class fooClass = Class.forName("Italk2learn");
-			Method fooMethod = fooClass.getMethod("sendDataToSails", new Class[] { SpeechRecognitionRequestVO.class });
-			String fooReturned = fooMethod.invoke(fooClass.newInstance(),new SpeechRecognitionRequestVO[] { request}).toString();
-			//ASREngine.sendDataToSails(request.getData());
-			String value=parseTranscription(convertStringToDocument(fooReturned));
-			return new SpeechRecognitionResponseVO(value);
-		} catch (Exception e) {
-			System.err.println(e);
-			System.exit(1);
 		}
 		return null;
 	}

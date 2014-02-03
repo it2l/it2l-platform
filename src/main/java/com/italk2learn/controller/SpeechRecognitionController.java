@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.italk2learn.bo.inter.ILoginUserService;
 import com.italk2learn.bo.inter.ISpeechRecognitionBO;
@@ -19,17 +18,19 @@ import com.italk2learn.vo.SpeechRecognitionRequestVO;
 import com.italk2learn.vo.SpeechRecognitionResponseVO;
 
 /**
- * Handles requests for the application speech recognition.
+ * JLF: Handles requests for the application speech recognition.
  */
 @Controller
 @RequestMapping("/speechRecognition")
 public class SpeechRecognitionController {
 	
-	private SpeechRecognitionRequestVO request;
-	
 	private static final Logger logger = LoggerFactory
 			.getLogger(SpeechRecognitionController.class);
-
+	
+	//Request petition
+	private SpeechRecognitionRequestVO request;
+    
+	//Response petition
 	private SpeechRecognitionResponseVO response= new SpeechRecognitionResponseVO();
 	
 	
@@ -49,9 +50,6 @@ public class SpeechRecognitionController {
 	@RequestMapping(value = "/",method = RequestMethod.POST)
 	public String getSpeechRecognition(@RequestBody byte[] body) {
 		logger.info("JLF --- Speech Recognition Main Controller");
-		//String filename = req.getParameter("filename");
-	    //byte[] contents = req.getParameter("contents").getBytes();
-		//byte[] bytes = Hex.decode(data);
 		//user = (LdapUserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		request= new SpeechRecognitionRequestVO();
 		request.setHeaderVO(new HeaderVO());
@@ -64,32 +62,29 @@ public class SpeechRecognitionController {
 		} catch (Exception e){
 			logger.error(e.toString());
 		}
-		//model.addAttribute(response);
 		return response.getResponse();
 	}
 	
 	/**
-	 * Main method to get a transcription of Sails Software
+	 * Backup plan to get transcription for Gemma recordings
+	 * Only shows the result in console
 	 */
 	@RequestMapping(value = "/speechRecognitionBackup",method = RequestMethod.POST)
 	public void getSpeechRecognitionBackup() {
-		logger.info("TESTING getSpeechRecognition");
+		logger.info("TESTING speechRecognitionBackupGemma");
 		try {
 			File f=new File("C:\\recordings\\gemma2.wav");
 			long l=f.length();
 			System.out.println("the file is " + l + " bytes long");
-			
 			FileInputStream finp=new FileInputStream(f);
 			byte[] b=new byte[(int)l];
-			
 			int i;
 			i=finp.read(b);
 			SpeechRecognitionRequestVO request= new SpeechRecognitionRequestVO();
 			request.setData(b);
-			//request.setHeaderVO(CheckConstants.HEADER_ES);
 			request.setHeaderVO(new HeaderVO());
 			request.getHeaderVO().setLoginUser("tludmetal");
-			final SpeechRecognitionResponseVO response = this.speechRecognitionService.sendDataToSails(request);
+			getSpeechRecognitionService().sendDataToSails(request);
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.error(e.toString());
@@ -97,45 +92,30 @@ public class SpeechRecognitionController {
 	}
 	
 	/**
-	 * Main method to get a transcription of Sails Software
+	 * Backup plan to get transcription for Gemma recordings
+	 * Only shows the result in console
 	 */
 	@RequestMapping(value = "/speechRecognitionBackupAlice",method = RequestMethod.POST)
 	public void getSpeechRecognitionBackupAlice() {
-		logger.info("TESTING getSpeechRecognition");
+		logger.info("TESTING speechRecognitionBackupAlice");
 		try {
 			File f=new File("C:\\recordings\\alice2.wav");
 			long l=f.length();
 			System.out.println("the file is " + l + " bytes long");
-			
 			FileInputStream finp=new FileInputStream(f);
 			byte[] b=new byte[(int)l];
-			
 			int i;
 			i=finp.read(b);
 			SpeechRecognitionRequestVO request= new SpeechRecognitionRequestVO();
 			request.setData(b);
-			//request.setHeaderVO(CheckConstants.HEADER_ES);
 			request.setHeaderVO(new HeaderVO());
 			request.getHeaderVO().setLoginUser("tludmetal");
-			final SpeechRecognitionResponseVO response = this.speechRecognitionService.sendDataToSails(request);
+			getSpeechRecognitionService().sendDataToSails(request);
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.error(e.toString());
 		}
 	}
-
-	
-	@RequestMapping(value = "/parseTranscription", method = RequestMethod.GET)
-    public ModelAndView getParsedTranscription(){
-		logger.info("JLF --- parseTranscription()");
-		ModelAndView modelAndView = new ModelAndView();
-		try {
-			return modelAndView;
-		}
-		catch (Exception e){
-			return new ModelAndView();
-		}
-    }
 
 	public ILoginUserService getLoginUserService() {
 		return loginUserService;

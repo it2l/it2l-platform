@@ -12,6 +12,8 @@ public interface IExerciseDAO {
 	
 	public ExerciseVO getNextExercise(int idUser, int idExercise) throws Exception;
 	
+	public ExerciseVO getBackExercise(int idUser, int idExercise) throws Exception;
+	
 	public void setNextExercise(int idUser, int idExercise, int idNextexercise, String feedback) throws Exception;
 	
 	public void insertActualExercise(int idUser, int idView) throws ITalk2LearnException;

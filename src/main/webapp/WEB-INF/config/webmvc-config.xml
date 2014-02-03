@@ -31,9 +31,6 @@
 		<property name="saveOutputToFlashScopeOnRedirect" value="true"/>
 	</bean>
 
-	<!-- Custom FlowHandler for the hotel booking flow -->
-	<bean name="hotels/booking" class="org.springframework.webflow.samples.booking.BookingFlowHandler" />	
-		
 	<!-- Thymeleaf template resolver -->
 	<bean id="templateResolver"
 		  class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
@@ -68,5 +65,34 @@
 			</list>
 		</property>
 	</bean>
-  	
+	
+	<bean id="jsonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+    	<property name="prefixJson" value="false" />
+    	<property name="supportedMediaTypes" value="application/json" />
+	</bean>
+	
+    <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+	    <property name="mediaTypes">
+	        <map>
+	            <entry key="json" value="application/json" />
+	        </map>
+	    </property>
+	
+	    <property name="defaultViews">
+	        <list>
+	            <bean
+	                class="org.springframework.web.servlet.view.json.MappingJacksonJsonView">
+	                <property name="objectMapper">
+	                    <ref bean="JacksonObjectMapper" />
+	                </property>
+	            </bean>
+	        </list>
+	    </property>
+	    <property name="favorPathExtension" value="false" />
+	    <property name="favorParameter" value="true" />
+	    <property name="useNotAcceptableStatusCode" value="true" />
+	</bean>
+
+	<bean id="JacksonObjectMapper" class="org.codehaus.jackson.map.ObjectMapper" />
+	
 </beans>
