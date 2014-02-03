@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Italk2learn Readme</title>
+	<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+	<style type="text/css">
+			
+		body		{
+					font-family: "Times New Roman", sans-serif;
+					/*color: #010d1a;*/
+					font-size: 12pt;
+					margin: 3em;
+					}
+
+		hr			{
+					color: #010d1a;
+					}
+
+		h1			{
+					font-size: 22pt;
+					color: #010d1a;
+					}
+
+		h2			{
+					color: #010d1a;
+					font-size: 16pt;
+					line-height: 16pt;
+					margin-top: 1.5em;
+					margin-bottom: 0.4em;
+					}
+
+		h3			{
+					font-size: 12pt;
+					line-height: 12pt;
+					margin-top: 1em;
+					margin-bottom: 0.2em;
+					}
+
+		p			{
+					margin-top: 0.2em;
+					}
+
+		p.normal	{
+					margin-top: 0em;
+					margin-bottom: 1em;
+					}
+
+		p.close	{
+					margin-top: 0em;
+					margin-bottom: 0em;
+					}
+
+		p.logo	{
+					margin-top: 0.5em;
+					}
+
+		ul,ol		{
+					margin-top: 0.5em;
+					margin-bottom: 1em;
+					}
+
+		li			{
+					margin-left: -1em;
+					}
+
+		ol li		{
+					margin-bottom: 0.5em;
+					}
+
+		ul.morespace li {
+					margin-bottom: 0.5em;
+					}
+
+		a			{
+					color: #043064;
+					font-weight: 600;
+					}
+
+		b			{ font-weight: 600; }
+
+		pre      {
+					margin-top: 0.7em;
+					margin-bottom: 0.7em;
+					}
+
+	</style>
+</head>
+
+<body>
+
+<h1>Italk2learn platform 2.0</h1>
+
+<ul>
+	<li><a href="#Installation">Installation</a></li>
+	<ul>
+		<li><a href="#hardware">Required hardware</a></li>
+		<li><a href="#software">Required software</a></li>
+		<li><a href="#steps">Installation steps</a></li>
+	</ul>
+	<li><a href="#comp">Compilation steps</a></li>
+	<li><a href="#running">Running the platform</a></li>
+</ul>
+
+
+<h2>Installation</h2>
+
+<a name="hardware"></a>
+<h3>Required hardware (minimum) </h3>
+<ul>
+  <li>INTEL compatible CPU, 2 cores, 1.6GHz, SSE2</li>
+  <li>3 GB DDR3 RAM</li>
+  <li>Disk space: 60   GB </li>
+</ul>
+<a name="software"></a>
+<h3>Required software</h3>
+<ul>
+	<li>Supported: Windows 8 (64 bit), Windows 7 (64 bit), Windows Vista (64 bit), Windows XP (64 bit), Windows 2008 R2 Server</li>
+	<li>Java Runtime Environment (32 bits). For the LMT feature, Java Runtime Environment (JRE) 1.7 or superior is required. Please verify that it is installed by executing the following command in a Command Window:
+	<pre>java -version</pre>
+	and that the environment variable that points to the JRE installation is correctly set:
+	<pre>echo %JAVA_HOME%</pre>
+	or
+	<pre>echo %JRE_HOME%</pre>
+	Remember use 32 bit version to compile<br/>
+	To download JRE for Windows, please download it from: <a href="http://www.java.com/en/download/manual.jsp">Java Downloads for All Operating Systems</a><br/>
+	To install Java please refer to the official documentation in: <a href="http://www.java.com/en/download/help/windows_offline_download.xml">How do I install Java?</a>	</li>
+	<li>Maven 3.0.
+	To install Maven please refer to the official documentation in: <a href="http://maven.apache.org/download.cgi">How do I install Maven?</a>
+	</li>
+	<li>Apache Tomcat 7(32 bits).
+	To install Apache Tomcat please refer to the official documentation in: <a href="http://tomcat.apache.org/download-70.cgi">How do I install Apache Tomcat?</a><br/>
+	Choose 32 bits version and unzip in folder where you want to deploy the project
+	</li>
+</ul>
+
+<a name="steps"></a>
+<h3>Installation steps</h3>
+<ul>
+	<li>
+		Configuring Tomcat 7.<br/>
+		Default Tomcat port is 8080<br/>
+		To start Tomcat go to <b>/bin/startup.bat</b><br/>
+		Add following users to your tomcat in <b>/conf/tomcat-users.html</b>
+		<pre>
+		  &lt;role rolename="admin-gui"/&gt;
+		  &lt;role rolename="manager-gui"/&gt;
+		  &lt;role rolename="manager"/&gt;
+		  &lt;role rolename="admin"/&gt;
+		  &lt;role rolename="manager-script"/&gt;
+		  &lt;user password="script" roles="manager-script" username="script"/&gt;
+		  &lt;user username="admin" password="admin" roles="admin,manager,admin-gui,manager-gui"/&gt;
+		</pre>
+	</li>
+	<li>Configuring Maven 3.<br/>
+		To set Maven go to official documentation in: <a href="http://maven.apache.org/guides/mini/guide-configuring-maven.html">How do I configure Maven?</a>		
+	</li>
+	<li>Downloading the project.<br/>
+		Go to Italk2learn official github on: <a href="https://github.com/italk2learnlbl/italk2learn">https://github.com/italk2learnlbl/italk2learn</a>
+		Download zip file or add project to your git repository.		
+	</li>
+	<li>Access to Birkbeck VPN.<br/>
+		In order to have access to our database and LDAP you will need to connect to Birkbeck VPN<br/>
+		Send an email to: <a href="mailto:jlfg@dcs.bbk.ac.uk">jlfg@dcs.bbk.ac.uk</a>
+	</li>
+</ul>
+
+<a name="comp"></a>
+<h3>Compilation steps</h3>
+<ul>
+	<li>Go to project root folder and execute (remember starts Tomcat first):
+		<pre> mvn clean compile package tomcat:deploy</pre>
+		To undeploy project in Tomcat execute:<br/>
+		<pre> mvn tomcat:undeploy</pre>
+	</li>
+</ul>	
+
+
+<a name="running"></a>
+<h3>Running the platform</h3>
+<ul>
+	<li>To access to Italk2learn platform click
+		<a href="http://localhost:8080/italk2learn/">http://localhost:8080/italk2learn/</a><br/>
+		At this moment we are using two different users with different privileges (Teacher and student)<br/>
+		<pre>
+			 user:manolis
+			 pass:12345
+			 user:alice
+			 pass:12345		
+		</pre>
+	</li>
+</ul>	
+
+	
+<hr align="left" width="30%">
+<b>London Knowledge Laboratory</b><br/>
+Birkbeck University, London<br/>
+<p>
+<a href="http://italk2learn.eu/">italk2learn.eu</a><br/>
+<a href="mailto:jlfg@dcs.bbk.ac.uk">jlfg@dcs.bbk.ac.uk</a>
+
+</body>
+</html>
