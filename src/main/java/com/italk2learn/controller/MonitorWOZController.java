@@ -74,7 +74,7 @@ public class MonitorWOZController {
 	 * JLF: Insert next exercise in a sequence of exercise by a given user
 	 */
 	@RequestMapping(value = "/insertNextID", method = RequestMethod.POST)
-    public @ResponseBody String insertNextExercise(@RequestBody ExerciseVO messageForm, HttpServletRequest req){
+    public @ResponseBody String insertNextExercise(@Valid @RequestBody ExerciseVO messageForm, HttpServletRequest req){
 		logger.info("JLF --- insertNextExercise()");
 		ExerciseSequenceRequestVO request= new ExerciseSequenceRequestVO();
 		ModelAndView modelAndView=new ModelAndView();

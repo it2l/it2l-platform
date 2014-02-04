@@ -11,12 +11,17 @@ import javax.servlet.ServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.ldap.userdetails.LdapUserDetailsImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.italk2learn.bo.inter.ICTATExerciseBO;
+import com.italk2learn.bo.inter.IExerciseSequenceBO;
 import com.italk2learn.bo.inter.ILoginUserService;
+import com.italk2learn.vo.CTATRequestVO;
+import com.italk2learn.vo.HeaderVO;
 
 /**
  * Handles requests for the application speech recognition.
@@ -32,27 +37,39 @@ public class CTATLoggerController {
 
 	
 	/*Services*/
+	private ICTATExerciseBO exerciseCTATService;
 	private ILoginUserService loginUserService;
 
     @Autowired
-    public CTATLoggerController(ILoginUserService loginUserService) {
+    public CTATLoggerController(ILoginUserService loginUserService, ICTATExerciseBO exerciseCTATService ) {
+    	this.exerciseCTATService=exerciseCTATService;
     	this.loginUserService=loginUserService;
     }
+    
+    
 	
 	/**
 	 * Main method to get the log of CTAT exercises
 	 */
 	@RequestMapping(value = "/",method = RequestMethod.POST)
-	public String getLog(ServletRequest req) {
-		logger.info("JLF --- CTAT Exercises log");
+	public String setLogCTAT(ServletRequest req) {
+		logger.info("JLF --- CTAT setLogCTAT log");
+		user = (LdapUserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		CTATRequestVO request=new CTATRequestVO();
 		StringWriter outStr = new StringWriter();
         PrintWriter out = null;
         ByteArrayOutputStream baos = null;
         try {
+        	request.setHeaderVO(new HeaderVO());
+			request.getHeaderVO().setLoginUser(user.getUsername());
+			request.setIdExercise(getLoginUserService().getIdExersiceUser(request.getHeaderVO()));
+			request.setIdUser(getLoginUserService().getIdUserInfo(request.getHeaderVO()));
         	ServletInputStream input=req.getInputStream();
             out = new PrintWriter(outStr);
             logger.info(req.getInputStream().toString());
             baos = readContent(req);
+            request.setLog(baos.toString());
+            getExerciseCTATService().storageLog(request);
         } catch (Exception ex) {
         	logger.error(ex.toString());
             return "";
@@ -110,6 +127,18 @@ public class CTATLoggerController {
 
 	public void setLoginUserService(ILoginUserService loginUserService) {
 		this.loginUserService = loginUserService;
+	}
+
+
+
+	public ICTATExerciseBO getExerciseCTATService() {
+		return exerciseCTATService;
+	}
+
+
+
+	public void setExerciseCTATService(ICTATExerciseBO exerciseCTATService) {
+		this.exerciseCTATService = exerciseCTATService;
 	}
 
 }
