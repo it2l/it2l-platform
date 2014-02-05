@@ -6,24 +6,23 @@ $(document).ready(function() {
 
 function submitWOZ(){
 	var sub = {
-       	 "idNextexercise": parseInt($('#exList').val()), 
+       	 "idNextexercise": $('#exList').val(), 
     	 "user": $('#user').val() 	
         };
     $.ajax({
         type: 'POST',
-        contentType: "application/json",
+        contentType : 'application/json; charset=utf-8',
         dataType : 'json',
         url: "insertNextID",
-        //data: JSON.stringfy(sub),
-        data: sub,
+        data: JSON.stringify(sub),
         success: function(data){
-        	alert('Great!');
+        	alert('Change submitted!');
         },
         error : function(jqXHR, status, error) {
            alert('Sorry!, there was a problem');
         },
-        complete : function(jqXHR, status) {
-           alert('Done!');
-        }
+//        complete : function(jqXHR, status) {
+//           alert('Done!');
+//        }
     });
 }

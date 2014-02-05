@@ -7,6 +7,7 @@ import java.io.StringWriter;
 
 import javax.servlet.ServletInputStream;
 import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,11 +15,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.ldap.userdetails.LdapUserDetailsImpl;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.italk2learn.bo.inter.ICTATExerciseBO;
-import com.italk2learn.bo.inter.IExerciseSequenceBO;
 import com.italk2learn.bo.inter.ILoginUserService;
 import com.italk2learn.vo.CTATRequestVO;
 import com.italk2learn.vo.HeaderVO;
@@ -45,14 +46,12 @@ public class CTATLoggerController {
     	this.exerciseCTATService=exerciseCTATService;
     	this.loginUserService=loginUserService;
     }
-    
-    
 	
 	/**
 	 * Main method to get the log of CTAT exercises
 	 */
-	@RequestMapping(value = "/",method = RequestMethod.POST)
-	public String setLogCTAT(ServletRequest req) {
+	@RequestMapping(value = "/",method = RequestMethod.POST,  headers = "Accept=application/xml, application/json")
+	public String setLogCTAT(@RequestBody String body, HttpServletRequest req) {
 		logger.info("JLF --- CTAT setLogCTAT log");
 		user = (LdapUserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		CTATRequestVO request=new CTATRequestVO();
@@ -68,7 +67,7 @@ public class CTATLoggerController {
             out = new PrintWriter(outStr);
             logger.info(req.getInputStream().toString());
             baos = readContent(req);
-            request.setLog(baos.toString());
+            request.setLog(body);
             getExerciseCTATService().storageLog(request);
         } catch (Exception ex) {
         	logger.error(ex.toString());

@@ -25,6 +25,7 @@ import com.italk2learn.vo.ExerciseSequenceRequestVO;
 import com.italk2learn.vo.ExerciseSequenceResponseVO;
 import com.italk2learn.vo.ExerciseVO;
 import com.italk2learn.vo.HeaderVO;
+import com.italk2learn.vo.TestJSONVO;
 
 /**
  * Handles requests for the application exercise sequence.
@@ -74,7 +75,7 @@ public class MonitorWOZController {
 	 * JLF: Insert next exercise in a sequence of exercise by a given user
 	 */
 	@RequestMapping(value = "/insertNextID", method = RequestMethod.POST)
-    public @ResponseBody String insertNextExercise(@Valid @RequestBody ExerciseVO messageForm, HttpServletRequest req){
+    public @ResponseBody String insertNextExercise(@RequestBody TestJSONVO messageForm, HttpServletRequest req){
 		logger.info("JLF --- insertNextExercise()");
 		ExerciseSequenceRequestVO request= new ExerciseSequenceRequestVO();
 		ModelAndView modelAndView=new ModelAndView();
@@ -84,8 +85,8 @@ public class MonitorWOZController {
 			request.getHeaderVO().setLoginUser(user.getUsername());
 			request.setIdUser(getLoginUserService().getIdUser(messageForm.getUser()));
 			request.setIdExercise(getLoginUserService().getSimpleIdExersiceUser(messageForm.getUser()));
-			request.setIdNextexercise(messageForm.getIdNextexercise());
-			request.setFeedback(messageForm.getFeedback());
+			request.setIdNextexercise(Integer.parseInt(messageForm.getIdNextexercise()));
+			//request.setFeedback(messageForm.getFeedback());
 			ExerciseSequenceResponseVO response=getExerciseSequenceService().insertNextIDExercise(request);
 			return "success";
 		}

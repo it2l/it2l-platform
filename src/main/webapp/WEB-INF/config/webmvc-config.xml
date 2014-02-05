@@ -66,34 +66,4 @@
 		</property>
 	</bean>
 	
-	<bean id="jsonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-    	<property name="prefixJson" value="false" />
-    	<property name="supportedMediaTypes" value="application/json" />
-	</bean>
-	
-    <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
-	    <property name="mediaTypes">
-	        <map>
-	        	<entry key="html" value="text/html"/> 
-	            <entry key="json" value="application/json" />
-	        </map>
-	    </property>
-	
-	    <property name="defaultViews">
-	        <list>
-	            <bean
-	                class="org.springframework.web.servlet.view.json.MappingJacksonJsonView">
-	                <property name="objectMapper">
-	                    <ref bean="JacksonObjectMapper" />
-	                </property>
-	            </bean>
-	        </list>
-	    </property>
-	    <property name="favorPathExtension" value="false" />
-	    <property name="favorParameter" value="true" />
-	    <property name="useNotAcceptableStatusCode" value="true" />
-	</bean>
-
-	<bean id="JacksonObjectMapper" class="org.codehaus.jackson.map.ObjectMapper" />
-	
 </beans>

@@ -14,11 +14,11 @@ import com.italk2learn.vo.CTATResponseVO;
 @Transactional(rollbackFor = { ITalk2LearnException.class, ITalk2LearnException.class })
 public class CTATExerciseBO implements ICTATExerciseBO{
 	
-	private ICTATExerciseDAO exerciseDAO;
+	private ICTATExerciseDAO exerciseCTATDAO;
 	
 	@Autowired
 	public CTATExerciseBO(ICTATExerciseDAO exerciseDAO) {
-		this.exerciseDAO = exerciseDAO;
+		this.exerciseCTATDAO = exerciseDAO;
 	}
 	
 	
@@ -26,7 +26,7 @@ public class CTATExerciseBO implements ICTATExerciseBO{
 		try {
 			
 			CTATResponseVO response= new CTATResponseVO();
-			response.setResponse(getExerciseDAO().storageLog(request.getIdUser(), request.getIdExercise(),request.getLog()));
+			response.setResponse(getExerciseCTATDAO().storageLog(request.getIdUser(), request.getIdExercise(),request.getLog()));
 			return response;
 		}
 		catch (Exception e){
@@ -36,13 +36,13 @@ public class CTATExerciseBO implements ICTATExerciseBO{
 	}
 
 
-	public ICTATExerciseDAO getExerciseDAO() {
-		return exerciseDAO;
+	public ICTATExerciseDAO getExerciseCTATDAO() {
+		return exerciseCTATDAO;
 	}
 
 
-	public void setExerciseDAO(ICTATExerciseDAO exerciseDAO) {
-		this.exerciseDAO = exerciseDAO;
+	public void setExerciseCTATDAO(ICTATExerciseDAO exerciseDAO) {
+		this.exerciseCTATDAO = exerciseDAO;
 	}
 
 }

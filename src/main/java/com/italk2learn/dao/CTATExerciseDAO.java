@@ -34,7 +34,7 @@ public class CTATExerciseDAO extends HibernateDaoSupport implements ICTATExercis
 			ctat.setUser(us);
 			ctat.setLoganswer(log);
 			ctat.setDate(new Date());
-			session.saveOrUpdate(us);
+			session.saveOrUpdate(ctat);
 			return true;
 		}catch (Exception e){
 			e.printStackTrace();
