@@ -1,5 +1,11 @@
 package com.italk2learn.controller;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+
+import javax.servlet.ServletInputStream;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -10,16 +16,22 @@ import org.springframework.security.ldap.userdetails.LdapUserDetailsImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.italk2learn.bo.inter.IExerciseSequenceBO;
 import com.italk2learn.bo.inter.ILoginUserService;
+import com.italk2learn.bo.inter.IWhizzExerciseBO;
+import com.italk2learn.vo.CTATRequestVO;
 import com.italk2learn.vo.ExerciseSequenceRequestVO;
 import com.italk2learn.vo.ExerciseSequenceResponseVO;
 import com.italk2learn.vo.ExerciseVO;
 import com.italk2learn.vo.HeaderVO;
+import com.italk2learn.vo.WhizzExerciseVO;
+import com.italk2learn.vo.WhizzRequestVO;
 
 /**
  * Handles requests for the application exercise sequence.
@@ -33,10 +45,6 @@ public class ExercisesSequenceController {
 	
 	private ExerciseSequenceRequestVO request;
 	
-	private int exerciseCounter=0;
-	
-	private int idView=0;
-
 	private static final Logger logger = LoggerFactory
 			.getLogger(ExercisesSequenceController.class);
 
@@ -46,11 +54,13 @@ public class ExercisesSequenceController {
 	/*Services*/
 	private IExerciseSequenceBO exerciseSequenceService;
 	private ILoginUserService loginUserService;
+	private IWhizzExerciseBO whizzExerciseBO;
 
     @Autowired
-    public ExercisesSequenceController(IExerciseSequenceBO exerciseSequence, ILoginUserService loginUserService) {
+    public ExercisesSequenceController(IExerciseSequenceBO exerciseSequence, ILoginUserService loginUserService, IWhizzExerciseBO whizzExerciseBO) {
     	this.exerciseSequenceService = exerciseSequence;
     	this.loginUserService=loginUserService;
+    	this.setWhizzExerciseBO(whizzExerciseBO);
     }
 	
 	/**
@@ -130,42 +140,27 @@ public class ExercisesSequenceController {
 		}
 	}
 	
-	
 	/**
-	 * Old method used to get the whole sequence
+	 * JLF: Controller to store Whizz Data
 	 */
-	@RequestMapping(value = "/nextsequence", method = RequestMethod.POST)
-    public ModelAndView getNextSequence(@Valid @ModelAttribute("messageInfo") ExerciseVO messageForm){
-		logger.info("JLF --- getNextSequence()");
-		ModelAndView modelAndView = new ModelAndView();
-		try{
-			if ((messageForm.getIdExercise()!=idView) && (messageForm.getIdExercise()<=response.getResponse().size()-1)){
-				logger.info(response.getResponse().get(messageForm.getIdExercise()).getExercise());
-				modelAndView.setViewName("views/"+response.getResponse().get(messageForm.getIdExercise()).getExercise());
-				idView=response.getResponse().get(idView).getIdExercise();
-				exerciseCounter=response.getResponse().get(idView).getIdExercise();
-				modelAndView.addObject("idView", idView);
-				return modelAndView;
-			}
-			if (exerciseCounter<=response.getResponse().size()-1){
-				logger.info(response.getResponse().get(exerciseCounter).getExercise());
-				modelAndView.setViewName("views/"+response.getResponse().get(exerciseCounter).getExercise());
-				idView=response.getResponse().get(exerciseCounter).getIdExercise();
-				modelAndView.addObject("idView", idView);
-				exerciseCounter++;
-				return modelAndView;
-			// JLF: Entry at this point when is necessary to start the sequence
-			} else {
-				exerciseCounter=0;
-				modelAndView.setViewName("intro");
-				return modelAndView;
-			}
-		}
-		catch (Exception e){
-			return new ModelAndView();
-		}
-    }
+	@RequestMapping(value = "/storeWhizzData", method = RequestMethod.POST)
+    public @ResponseBody void storeWhizzData(@RequestBody WhizzExerciseVO exercise, HttpServletRequest req){
+		logger.info("JLF --- Whizz storeWhizzData log");
+		user = (LdapUserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		WhizzRequestVO request=new WhizzRequestVO();
+        try {
+        	request.setHeaderVO(new HeaderVO());
+			request.getHeaderVO().setLoginUser(user.getUsername());
+			request.setIdExercise(getLoginUserService().getIdExersiceUser(request.getHeaderVO()));
+			request.setIdUser(getLoginUserService().getIdUserInfo(request.getHeaderVO()));
+            request.setWhizz(exercise);
+            getWhizzExerciseBO().storeWhizzInfo(request);
+        } catch (Exception ex) {
+        	logger.error(ex.toString());
+        }
+	}
 
+	
 	public IExerciseSequenceBO getExerciseSequenceService() {
 		return exerciseSequenceService;
 	}
@@ -192,6 +187,14 @@ public class ExercisesSequenceController {
 
 	public void setLoginUserService(ILoginUserService loginUserService) {
 		this.loginUserService = loginUserService;
+	}
+
+	public IWhizzExerciseBO getWhizzExerciseBO() {
+		return whizzExerciseBO;
+	}
+
+	public void setWhizzExerciseBO(IWhizzExerciseBO whizzExerciseBO) {
+		this.whizzExerciseBO = whizzExerciseBO;
 	}
 
 }

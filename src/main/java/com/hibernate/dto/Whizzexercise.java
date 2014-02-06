@@ -1,6 +1,6 @@
 package com.hibernate.dto;
 
-// Generated 29-Jan-2014 17:21:23 by Hibernate Tools 3.4.0.CR1
+// Generated 06-Feb-2014 16:49:56 by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,6 +20,7 @@ import javax.persistence.Table;
 public class Whizzexercise implements java.io.Serializable {
 
 	private Integer idWhizzexercise;
+	private Exercises exercises;
 	private User user;
 	private Integer score;
 	private Integer percentage;
@@ -32,13 +33,15 @@ public class Whizzexercise implements java.io.Serializable {
 	public Whizzexercise() {
 	}
 
-	public Whizzexercise(User user) {
+	public Whizzexercise(Exercises exercises, User user) {
+		this.exercises = exercises;
 		this.user = user;
 	}
 
-	public Whizzexercise(User user, Integer score, Integer percentage,
-			String help1, String help2, String help3, String time,
-			Integer totalQuestions) {
+	public Whizzexercise(Exercises exercises, User user, Integer score,
+			Integer percentage, String help1, String help2, String help3,
+			String time, Integer totalQuestions) {
+		this.exercises = exercises;
 		this.user = user;
 		this.score = score;
 		this.percentage = percentage;
@@ -58,6 +61,16 @@ public class Whizzexercise implements java.io.Serializable {
 
 	public void setIdWhizzexercise(Integer idWhizzexercise) {
 		this.idWhizzexercise = idWhizzexercise;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_exercise", nullable = false)
+	public Exercises getExercises() {
+		return this.exercises;
+	}
+
+	public void setExercises(Exercises exercises) {
+		this.exercises = exercises;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

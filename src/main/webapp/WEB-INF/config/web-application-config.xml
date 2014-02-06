@@ -62,6 +62,10 @@
 		<property name="sessionFactory" ref="italk2learnSessionFactory" />
 	</bean>
 	
+	<bean id="exerciseWhizzDAO" class="com.italk2learn.dao.WhizzExerciseDAO">
+		<property name="sessionFactory" ref="italk2learnSessionFactory" />
+	</bean>
+	
 	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
 	    <property name="messageConverters">
 	      <util:list id="beanList">
