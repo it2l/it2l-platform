@@ -54,5 +54,5 @@
 	        </security:ldap-authentication-provider>
 	</security:authentication-manager>
 	
-	<security:ldap-server url="${ldap.url}" manager-dn="uid=admin,ou=system" manager-password="secret" />
+	<security:ldap-server url="${ldap.url}" manager-dn="uid=admin,ou=system" manager-password="${ldap.password}" />
 </beans>
