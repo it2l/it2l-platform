@@ -89,7 +89,7 @@ var Woz = {
 
 $(document).ready(function() {
 		var conn = new Strophe.Connection(
-	    'http://193.61.29.72/http-bind/');
+	    'http://it2l.dcs.bbk.ac.uk/http-bind/');
 	
 		conn.connect('woz@it2l.dcs.bbk.ac.uk', 'woz', function (status) {
 		    if (status === Strophe.Status.CONNECTED) {
@@ -194,7 +194,6 @@ $(document).ready(function() {
 	});
 
 $(document).bind('connected', function () {
-    //var iq = $iq({type: 'get'}).c('query', {xmlns: 'jabber:iq:roster'});
 
     Woz.connection.addHandler(Woz.on_message,
                               null, "message", "chat");
@@ -205,7 +204,7 @@ $(document).bind('disconnected', function () {
     
     //JLF:Reconnect when it's not connected
     var conn = new Strophe.Connection(
-    'http://193.61.29.72/http-bind/');
+    'http://it2l.dcs.bbk.ac.uk/http-bind/');
 
     conn.connect('woz@it2l.dcs.bbk.ac.uk', 'woz', function (status) {
 	    if (status === Strophe.Status.CONNECTED) {

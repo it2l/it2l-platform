@@ -1,10 +1,5 @@
 package com.italk2learn.controller;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-
-import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -25,7 +20,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.italk2learn.bo.inter.IExerciseSequenceBO;
 import com.italk2learn.bo.inter.ILoginUserService;
 import com.italk2learn.bo.inter.IWhizzExerciseBO;
-import com.italk2learn.vo.CTATRequestVO;
 import com.italk2learn.vo.ExerciseSequenceRequestVO;
 import com.italk2learn.vo.ExerciseSequenceResponseVO;
 import com.italk2learn.vo.ExerciseVO;
@@ -85,6 +79,15 @@ public class ExercisesSequenceController {
 		model.addAttribute("messageInfo", ex);
 		model.addAttribute(response);
 		return  response.getExercise().getView()+"/"+ response.getExercise().getExercise();
+	}
+	
+	/**
+	 * JLF: Get user connected
+	 */
+	@RequestMapping(value = "/getUser",method = RequestMethod.GET)
+	public String getUserConnected(Model model) {
+		logger.info("JLF --- ExercisesSequence.getUserConnected");
+		return user.getUsername();
 	}
 
 	

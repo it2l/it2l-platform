@@ -1,3 +1,4 @@
+var userWOZ;
 var Gab = {
     connection: null,
 
@@ -82,16 +83,16 @@ var Gab = {
                 body = body.text();
 				if (body.charAt(0)==='h'){ 
 				   var s=body.substring(1,body.lenght);
-				   readFestival(s);
+				   textToSpeech(s);
 				   SendHighMessage(s);
 				}
 				else if (body.charAt(0)==='l'){
 				   var s=body.substring(1,body.lenght);
-				   readFestival(s);
+				   textToSpeech(s);
 				   SendLowMessage(s);
 				}
                 else{ 
-                   readFestival(body);
+                   textToSpeech(body);
 				   alert(body);
 				}				   
             } else {
@@ -168,16 +169,33 @@ var Gab = {
     }
 };
 
-$(document).ready(function () {
+$(document).ready(function() {
+	$.ajax({
+		dataType: 'String',
+		type: 'GET',
+		url: "getUser",
+		success: function (data) {
+			connectWOZ (data);
+		},
+		error: function (data) {
+			console.log("ko");
+		}
+	});
+});
 
+function connectWOZ (user) {
+
+	userWOZ=user;
 	var conn = new Strophe.Connection(
-        'http://193.61.29.72/http-bind/');
+        'http://it2l.dcs.bbk.ac.uk/http-bind/');
 
-	conn.connect('student@it2l.dcs.bbk.ac.uk', 'student', function (status) {
-        if (status === Strophe.Status.CONNECTED) {
+	conn.connect(userWOZ+'@it2l.dcs.bbk.ac.uk', userWOZ, function (status) {
+		if (status === Strophe.Status.CONNECTED) {
             $(document).trigger('connected');
         } else if (status === Strophe.Status.DISCONNECTED) {
             $(document).trigger('disconnected');
+        } else {
+        	$('#connect').html("Status: "+status);
         }
     });
 
@@ -347,7 +365,7 @@ $(document).ready(function () {
     $('#new-chat').click(function () {
         $('#chat_dialog').dialog('open');
     });
-});
+};
 
 
 $(document).bind('connected', function () {
@@ -366,9 +384,9 @@ $(document).bind('disconnected', function () {
 
     //JLF:Reconnect when it's not connected
     var conn = new Strophe.Connection(
-    'http://193.61.29.72/http-bind/');
+    'http://it2l.dcs.bbk.ac.uk/http-bind/');
 
-	conn.connect('student@it2l.dcs.bbk.ac.uk', 'student', function (status) {
+	conn.connect(userWOZ+'@it2l.dcs.bbk.ac.uk', userWOZ, function (status) {
 	    if (status === Strophe.Status.CONNECTED) {
 	        $(document).trigger('connected');
 	    } 

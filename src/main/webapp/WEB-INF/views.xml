@@ -25,6 +25,10 @@
 		<put-attribute name="body" value="/login.html :: content" type="thymeleaf"/>
 	</definition>
 	
+	<definition name="woztest" extends="standardLayout">
+		<put-attribute name="body" value="/woztest.html :: content" type="thymeleaf"/>
+	</definition>
+	
 	<definition name="logoutSuccess" extends="standardLayout2">
 		<put-attribute name="body" value="/logoutSuccess.html :: content" type="thymeleaf"/>
 	</definition>

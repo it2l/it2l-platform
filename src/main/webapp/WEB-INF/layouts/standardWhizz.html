@@ -156,7 +156,7 @@
 			// Each time that the score or question change. Result (score=2/percentage=20/time=327868/help1=3/help2=0/help3=0)
 			function callJSInterface(value) {
 				//Shows an alert with the exercise's score
-				alert(value);
+				//alert(value);
 				//Array with the values
 				var res = value.split("/");
 				var wh = {
@@ -169,14 +169,14 @@
 				        url: "storeWhizzData",
 				        data: JSON.stringify(wh),
 				        success: function(data){
-				        	alert('Change submitted!');
+				        	//alert('Change submitted!');
 				        },
 				        error : function(jqXHR, status, error) {
-				           alert('Change doesnt submitted!');
+				           //alert('Change doesnt submitted!');
 				        },
 				    });
 			}
-		
+
 			function textToSpeech(message) {
 				play_sound("http://translate.google.com/translate_tts?ie=UTF-8&q="+encodeURIComponent(message)+"&tl=en_gb&total=1&idx=0prev=input");
 	        }
