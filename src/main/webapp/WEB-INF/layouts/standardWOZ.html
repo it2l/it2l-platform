@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <title>Italk2learn</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <link rel='stylesheet' href='../css/gab.css'/>
+    <script type="text/javascript" src="/italk2learn/js/history/history.js"></script>
+    <!-- END Browser History required section -->
+
+    <script type="text/javascript" src="/js/jquery-1.9.1.js" th:src="@{/resources/js/jquery-1.9.1.js}"></script>
+    <script type="text/javascript" src="/js/sequence.js" th:src="@{/resources/js/sequence.js}"></script>
+    <script type="text/javascript" src="/js/swfobject.js" th:src="@{/resources/js/swfobject.js}"></script>
+    <script type="text/javascript" src="http://webplayer.unity3d.com/download_webplayer-3.x/3.0/uo/UnityObject.js"></script>
+    <script type="text/javascript" src="#" th:src="@{/resources/dojo/dojo.js}"></script>
+    <script type="text/javascript" src="#" th:src="@{/resources/spring/Spring.js}"></script>
+    <script type="text/javascript" src="#" th:src="@{/resources/spring/Spring-Dojo.js}"></script>
+
+</head>
+
+
+<body class="tundra" style="margin: 50; padding: 50">
+    <table align="center">
+        <tr>
+            <td>
+                <table id="header" class="header">
+                    <tr align="left">
+                        <td id="topbar" align="left">
+                            <div sec:authorize="hasRole('ROLE_ADMIN')" th:if="${#authentication}">
+                                <a href="#" th:href="@{/auth/logout}">Logout</a>
+                            </div>
+                            <div id="connect" style="color:red;">
+                            </div>
+                        </td>
+                        <td id="logo" align="left">
+                            <div>
+                                <a href="#" th:href="@{/}">
+                                    <img src="../../images/iLearnFraction_banner_05.jpg" th:src="@{/resources/images/iLearnFraction_banner_05.jpg}" alt="italk2learn" />
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+
+            </td>
+        </tr>
+        <tr align="center">
+            <td align="center">
+                            <div id="content" align="center">
+                                <div id="main" class="span-18 last" tiles:include="body" align="center">
+
+                                    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+                                    <!-- At runtime, the body of this <div> will be substituted by -->
+                                    <!-- Tiles in order to create the final HTML page that will be -->
+                                    <!-- sent to the browser.                                      -->
+                                    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+                                    BODY PAGE GOES HERE!
+
+                                </div>
+                            </div>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
