@@ -16,6 +16,15 @@
 				<form th:object="${messageInfo}"
 					  sec:authorize="hasRole('ROLE_USER')">
 					<div>
+							<p>
+								Choose the user to connect: 
+							 	<select id="usList" th:field="*{exercise}">
+             						 <option th:each="user : ${allStudents}" th:value="${user.user}" th:text="${user.user}">Option</option>
+           					 	</select>		
+							</p>
+							<input id="submitUser" name="submitUser" type="button" value="Connect" />
+					</div>  
+					<div>
 						<p>
 							User <input id="user" name="user" type="text" th:value="*{user}" />
 						</p>
@@ -54,6 +63,5 @@
     <script src='js/scripts/strophe.flxhr.js'></script>
     <script src='js/monitorWOZ.js'></script>
     <script src='js/submitWOZ.js'></script>
-    <link rel='stylesheet' href='../css/gab.css'/>
 </body>
 </html>

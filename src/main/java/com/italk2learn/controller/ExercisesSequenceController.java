@@ -84,7 +84,8 @@ public class ExercisesSequenceController {
 	/**
 	 * JLF: Get user connected
 	 */
-	@RequestMapping(value = "/getUser",method = RequestMethod.GET)
+	@RequestMapping(value = "/getUser",method = RequestMethod.GET, produces="text/plain")
+	@ResponseBody
 	public String getUserConnected(Model model) {
 		logger.info("JLF --- ExercisesSequence.getUserConnected");
 		return user.getUsername();

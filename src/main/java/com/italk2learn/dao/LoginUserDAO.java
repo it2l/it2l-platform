@@ -69,7 +69,6 @@ public class LoginUserDAO extends HibernateDaoSupport implements ILoginUserDAO {
 			ud.setUser(messageForm.getName());
 			ud.setName(messageForm.getName());
 			ud.setEmail(messageForm.getEmail());
-			ud.setMessage(messageForm.getMessage());
 			ud.setWebsite(messageForm.getWebsite());
 			ud.setPhone(messageForm.getPhone());
 			pr.saveOrUpdate(ud);

@@ -2,6 +2,10 @@ $(document).ready(function() {
 	   $("#submit").click(function() {
 		   submitWOZ();
 	   });
+	   $("#submitUser").click(function() {
+		   connectWOZ($('#usList').val());
+	   });
+	   
 	 });
 
 function submitWOZ(){

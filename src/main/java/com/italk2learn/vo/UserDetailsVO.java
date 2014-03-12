@@ -11,14 +11,12 @@ public class UserDetailsVO extends RequestVO{
 	private static final long serialVersionUID = 1L;
 	private String user;
 	private int password;
-	private Boolean remember;
 	private String name;
 	private String email;
 	
 	@Length(min=9)
 	private String phone;
 	private String website;
-	private String message;
 	
 	public String getName() {
 		return name;
@@ -44,18 +42,6 @@ public class UserDetailsVO extends RequestVO{
 	public void setWebsite(String website) {
 		this.website = website;
 	}
-	public String getMessage() {
-		return message;
-	}
-	public void setMessage(String message) {
-		this.message = message;
-	}
-	public Boolean getRemember() {
-		return remember;
-	}
-	public void setRemember(Boolean remenber) {
-		this.remember = remenber;
-	}
 	public String getUser() {
 		return user;
 	}
@@ -74,8 +60,7 @@ public class UserDetailsVO extends RequestVO{
 		StringBuilder builder = new StringBuilder();
 		builder.append("MessageForm [name=").append(name).append(", email=")
 				.append(email).append(", phone=").append(phone)
-				.append(", website=").append(website).append(", message=")
-				.append(message).append("]");
+				.append(", website=").append(website).append("]");
 		return builder.toString();
 	}
 	@Override

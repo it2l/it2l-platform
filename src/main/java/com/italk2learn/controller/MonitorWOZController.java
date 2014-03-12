@@ -1,5 +1,6 @@
 package com.italk2learn.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +27,7 @@ import com.italk2learn.vo.ExerciseSequenceResponseVO;
 import com.italk2learn.vo.ExerciseVO;
 import com.italk2learn.vo.HeaderVO;
 import com.italk2learn.vo.TestJSONVO;
+import com.italk2learn.vo.UserDetailsVO;
 
 /**
  * Handles requests for the application exercise sequence.
@@ -59,6 +61,32 @@ public class MonitorWOZController {
 		request.getHeaderVO().setLoginUser(user.getUsername());
         return this.exerciseSequenceService.findAllExercises(request).getResponse();
     }
+    
+    
+    /**
+	 * JLF: Mock to get WOZ students
+	 */
+    @ModelAttribute("allStudents")
+    public List<UserDetailsVO> populateStudents() {
+    	logger.info("JLF --- MonitorWOZ.populateStudents");
+    	List<UserDetailsVO> res= new ArrayList<UserDetailsVO>();
+    	UserDetailsVO var= new UserDetailsVO();
+    	var.setUser("student1");
+    	res.add(var);
+    	var= new UserDetailsVO();
+    	var.setUser("student2");
+    	res.add(var);
+    	var= new UserDetailsVO();
+    	var.setUser("student3");
+    	res.add(var);
+    	var= new UserDetailsVO();
+    	var.setUser("student4");
+    	res.add(var);
+    	var= new UserDetailsVO();
+    	var.setUser("student5");
+    	res.add(var);
+        return res;
+    }
 	
 	/**
 	 * JLF: Get the main view
@@ -91,8 +119,9 @@ public class MonitorWOZController {
 			return "success";
 		}
 		catch (Exception e){
-			return "error";
+			logger.error(e.toString());
 		}
+		return "error";
 		
 	}
 

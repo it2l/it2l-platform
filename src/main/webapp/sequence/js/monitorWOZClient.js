@@ -178,7 +178,7 @@ $(document).ready(function() {
 			connectWOZ (data);
 		},
 		error: function (data) {
-			console.log("ko");
+			$(document).trigger('error');
 		}
 	});
 });

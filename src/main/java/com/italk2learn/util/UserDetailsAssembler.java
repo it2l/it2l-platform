@@ -2,7 +2,6 @@ package com.italk2learn.util;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import com.hibernate.dto.Userdetails;
 import com.italk2learn.vo.UserDetailsVO;
@@ -17,7 +16,6 @@ public class UserDetailsAssembler {
 		userDetailsVO.setEmail(uDetails.getEmail());
 		userDetailsVO.setPhone(uDetails.getPhone());
 		userDetailsVO.setWebsite(uDetails.getWebsite());
-		userDetailsVO.setMessage(uDetails.getMessage());
 		return userDetailsVO;
 	}
 

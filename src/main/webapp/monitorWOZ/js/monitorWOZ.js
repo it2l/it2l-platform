@@ -87,7 +87,9 @@ var Woz = {
 		}
 };
 
-$(document).ready(function() {
+function connectWOZ (user) {
+		$('#chat-area').empty();
+		$('#chat-area').append('<ul></ul>');
 		var conn = new Strophe.Connection(
 	    'http://it2l.dcs.bbk.ac.uk/http-bind/');
 	
@@ -96,12 +98,14 @@ $(document).ready(function() {
 		        $(document).trigger('connected');
 		    } else if (status === Strophe.Status.DISCONNECTED) {
 		        $(document).trigger('disconnected');
-		    }
+		    }else {
+	        	$('#connect').html("Status: "+status);
+	        }
 		});
 	
 		Woz.connection = conn;
 
-		var jid = 'student@it2l.dcs.bbk.ac.uk';
+		var jid = user+'@it2l.dcs.bbk.ac.uk';
         var jid_id = Woz.jid_to_id(jid);
 
         $('#chat-area').tabs('add', '#chat-' + jid_id, jid);
@@ -166,12 +170,12 @@ $(document).ready(function() {
             }
         });
 
-        $('#disconnect').click(function () {
-            Woz.connection.disconnect();
-            Woz.connection = null;
-        });
+//        $('#disconnect').click(function () {
+//            Woz.connection.disconnect();
+//            Woz.connection = null;
+//        });
 
-        var jid = 'student@it2l.dcs.bbk.ac.uk';
+        var jid = user+'@it2l.dcs.bbk.ac.uk';
         var jid_id = Woz.jid_to_id(jid);
 
         $('#chat-area').tabs('add', '#chat-' + jid_id, jid);
@@ -184,23 +188,21 @@ $(document).ready(function() {
         $('#chat-area').tabs('select', '#chat-' + jid_id);
         $('#chat-' + jid_id + ' input').focus();
     
-    
         $('#chat-jid').val('');
         
         $(this).dialog('close');
         
-        
-        
-	});
+	};
 
 $(document).bind('connected', function () {
-
+	$('#connect').html("connected");
     Woz.connection.addHandler(Woz.on_message,
                               null, "message", "chat");
 });
 
 $(document).bind('disconnected', function () {
-    Woz.connection = null;
+	$('#connect').html("disconnected");
+	Woz.connection = null;
     
     //JLF:Reconnect when it's not connected
     var conn = new Strophe.Connection(

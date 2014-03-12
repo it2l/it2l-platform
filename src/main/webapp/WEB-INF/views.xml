@@ -17,7 +17,7 @@
 		<put-attribute name="body" value="/AudioRecorderFlash.html :: content" type="thymeleaf"/>
 	</definition>
 	
-	<definition name="monitorWOZ" extends="standardLayout2">
+	<definition name="monitorWOZ" extends="standardWOZ">
 		<put-attribute name="body" value="/monitorWOZ.html :: content" type="thymeleaf"/>
 	</definition>
 	
