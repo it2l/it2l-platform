@@ -125,26 +125,27 @@ function connectWOZ (user) {
 
             if (ev.which === 13) {
                 ev.preventDefault();
-							
-				var body = $(this).val();
-                var message = $msg({to: jid,
-                                    "type": "chat"})
-                    .c('body').t(body).up()
-                    .c('active', {xmlns: "http://jabber.org/protocol/chatstates"});
-                Woz.connection.send(message);
-
-                $(this).parent().find('.chat-messages').append(
-                    "<div class='chat-message'>&lt;" +
-                    "<span class='chat-name me'>" + 
-                    Strophe.getNodeFromJid(Woz.connection.jid) +
-                    "</span>&gt;<span class='chat-text'>" +
-                    "&lt"+internetTime+"&gt;" +
-                    body +
-                    "</span></div>");
-                Woz.scroll_chat(Woz.jid_to_id(jid));
-
-                $(this).val('');
-                $(this).parent().data('composing', false);
+                var body = $(this).val();
+                if (body != "") {			
+	                var message = $msg({to: jid,
+	                                    "type": "chat"})
+	                    .c('body').t(body).up()
+	                    .c('active', {xmlns: "http://jabber.org/protocol/chatstates"});
+	                Woz.connection.send(message);
+	
+	                $(this).parent().find('.chat-messages').append(
+	                    "<div class='chat-message'>&lt;" +
+	                    "<span class='chat-name me'>" + 
+	                    Strophe.getNodeFromJid(Woz.connection.jid) +
+	                    "</span>&gt;<span class='chat-text'>" +
+	                    "&lt"+internetTime+"&gt;" +
+	                    body +
+	                    "</span></div>");
+	                Woz.scroll_chat(Woz.jid_to_id(jid));
+	
+	                $(this).val('');
+	                $(this).parent().data('composing', false);
+                }    
             } else {
             	//JLF: Special functionality to get Internet Time
 				$.ajax({
