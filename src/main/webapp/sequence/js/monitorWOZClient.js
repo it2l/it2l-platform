@@ -91,7 +91,7 @@ var Gab = {
 				   textToSpeech(s);
 				   SendLowMessage(s);
 				}
-                else{ 
+                else if (body.charAt(0)!='0'){ 
                    textToSpeech(body);
 				   alert(body);
 				}				   
