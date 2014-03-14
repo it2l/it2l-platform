@@ -1,0 +1,138 @@
+<html>
+<head>
+<script language = "JavaScript" src="trivantis.js"></script>
+<script language = "JavaScript" src="trivantis-cookie.js"></script>
+<script language = "JavaScript" src="trivantis-strings.js"></script>
+<script language = "JavaScript">
+
+var titleMgr;
+var debugOpener;
+
+function load(){
+	updateVars();
+}
+
+function updateVars(){
+	debugOpener = window.opener.opener;
+	if( debugOpener.frames && debugOpener.frames[0] && debugOpener.frames[0].document.title.toString().indexOf("Title Manager") == 0 ){	
+		titleMgr = debugOpener.frames[1].getTitleMgrHandle();
+		if( debugOpener.frames && debugOpener.frames[1] && debugOpener.frames[1].frames )
+			debugOpener = debugOpener.frames[1];
+	}
+	
+	var numVars = 0;
+	if(titleMgr)
+		numVars = titleMgr.getNumVariables()
+	else//no titlemanager
+		numVars = getNumVars();
+		
+	var div = document.getElementById('varView');
+	var html = '<div id="varView" align="center"><br />';
+	html += '<table cellpadding="5px">';
+	for(var i = 0; i < numVars ; i++)
+	{	
+		var v1;
+		v1 = findVariableInOpener(i);
+		
+		if(!v1)
+		{
+			html += '<tr><td>' + titleMgr.getVariableNameAt(i) + '</td><td><input type="text" disabled="true" name="e  ' + titleMgr.getVariableNameAt(i) + '" id="e' + titleMgr.getVariableNameAt(i)+ '" value="' + titleMgr.getVariableValueAt(i) + '" size="20"';
+			html += '></td><td>';
+			html += '</td></tr>';
+		}
+		else 
+		{
+			html += '<tr><td>' + v1.name + '</td><td><input type="text" name="e' + v1.name + '" id="e' + v1.name + '" value="' + v1.getValue() + '" size="20"';
+			html += '></td><td>';
+			html += '<input type="button" name="b'+ v1.name +'" id="b' + v1.name + '" value='+trivstrUpdate+' onClick=javascript:findVariableInOpener('+i+').set(document.getElementById(\'e'+ v1.name +'\').value);></td></tr>';
+		}
+	}
+	html += '</table></div>';
+	div.innerHTML = html;
+}
+
+function getNumVars( )
+{
+	numVars = 0;
+	if( debugOpener.frames && debugOpener.frames.length ){
+		for(currFrame = 0 ; currFrame < debugOpener.frames.length; currFrame++)
+		{
+			theFrame = debugOpener.frames[currFrame];
+			if( theFrame.arrOfVars )
+	    		numVars += theFrame.arrOfVars.length;
+	    	if( theFrame.newWnd && !theFrame.newWnd.closed && theFrame.newWnd.arrOfVars)
+				numVars += theFrame.newWnd.arrOfVars.length;
+    	}
+	}
+	else{
+		if(debugOpener.arrOfVars)
+			numVars += debugOpener.arrOfVars.length;		
+		if( debugOpener.newWnd && !debugOpener.newWnd.closed && debugOpener.newWnd.arrOfVars)
+			numVars += debugOpener.newWnd.arrOfVars.length;
+	}
+	return numVars;
+}
+
+function findVariableInPage(page, varIndex ) {
+	try{
+		if( titleMgr )
+			return eval( page + titleMgr.getVariableNameAt(varIndex) );
+		else if( eval(page + 'arrOfVars') && varIndex < eval(page + 'arrOfVars.length'))
+			return eval( page +  eval(page + 'arrOfVars[' + varIndex + ']'));
+		else
+			return null;
+	}
+	catch(err){
+		return null;
+	}
+}
+
+function findVariableInOpener(varIndex){	
+	v = null;
+	if( debugOpener.frames && debugOpener.frames.length ){
+		for(var frameIndex = 0; frameIndex < debugOpener.frames.length && !v; frameIndex++){	
+			v = null;
+			var page = 'debugOpener.frames['+ frameIndex + '].';
+			v = findVariableInPage(page, varIndex);
+			if( eval(page+'arrOfVars') )
+				varIndex -= eval(page+'arrOfVars.length')
+			
+			while(!v && eval(page+'newWnd')){
+				page += 'newWnd.';
+				v = findVariableInPage(page, varIndex);
+				if( eval(page+'arrOfVars') )
+					varIndex -= eval(page+'arrOfVars.length')
+			}
+		}
+	}
+	else{
+		v = null;
+		var page = 'debugOpener.';	
+		v = findVariableInPage(page, varIndex);
+		if( eval(page+'arrOfVars') )
+			varIndex -= eval(page+'arrOfVars.length')
+		
+		while(!v && eval(page+'newWnd')){
+			page += 'newWnd.';
+			v = findVariableInPage(page, varIndex);
+			if( eval(page+'arrOfVars') )
+					varIndex -= eval(page+'arrOfVars.length')
+		}
+	}
+	return v;
+}
+
+</script>
+</head>
+
+<body onload='load()'>
+<div id="btn" align="center">
+<script>
+	document.write('<input type="button" name="Refresh" id="Refresh" value="'+trivstrRefresh+'" onClick="javascript:updateVars();" />')
+	document.write('&nbsp;&nbsp;&nbsp;&nbsp;')
+	document.write('<input type="button" name="Close" id="Close" value="'+trivstrClose+'" onClick="javascript:window.close();" />')
+</script>
+</div>
+<div id="varView" align="center"></div>
+</body>
+</html>
