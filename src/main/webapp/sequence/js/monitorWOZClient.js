@@ -91,9 +91,9 @@ var Gab = {
 				   textToSpeech(s);
 				   SendLowMessage(s);
 				}
-                else if (body.charAt(0)!='0'){ 
+                else if (body.charAt(0)!=''){ 
                    textToSpeech(body);
-				   alert(body);
+                   setTimeout(function(){alert(body)},5000);
 				}				   
             } else {
                 body = null;

@@ -31,10 +31,11 @@
 						<div>
 							<p>
 								Write here the ID for the next activity (if you want to change the
-								current one)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-							 	<select id="exList" th:field="*{exercise}">
-             						 <option th:each="exercise : ${allExercises}" th:value="${exercise.idExercise}" th:text="${exercise.exercise}">Option</option>
-           					 	</select>		
+								current one)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<input id="exList" name="exList" type="text" th:value="*{idUser}" /> 
+<!-- 							 	<select id="exList" th:field="*{exercise}"> -->
+<!--              						 <option th:each="exercise : ${allExercises}" th:value="${exercise.idExercise}" th:text="${exercise.exercise}">Option</option> -->
+<!--            					 	</select>		 -->
 							</p>
 						</div>
 					</div>
