@@ -10,8 +10,8 @@
 	<title>Fractions 1</title>
 </head>
 <body tiles:fragment="content">
-	<iframe title="Fraction 1" name="titlemgrframe" src="a001titlemgr.html" resize="no" scrolling='no' marginwidth='0' marginheight='0'></iframe>
-	<iframe title="Fraction 1" name="contentframe" src="a001content.html" resize="no"></iframe>
+	<iframe style="display:none" title="Fraction 1" name="titlemgrframe" src="a001titlemgr.html" resize="no" scrolling='no' marginwidth='0' marginheight='0'></iframe> 
+	<iframe title="Fraction 1" name="contentframe" src="a001content.html" resize="no" onLoad="resize(this)" frameborder="0"></iframe> 
 	<script language = "JavaScript" src="trivantis.js"></script>
 	<script language = "JavaScript" src="trivantis-cookie.js"></script>
 	<script language = "JavaScript">
@@ -39,6 +39,10 @@
 			
 			function ReFlow() {
 				alert("working");
+			}
+
+			function resize(frame) { 
+				frame.style.width=1100+'px'; frame.style.height=700+'px'; 
 			}
 			
 			onload = init

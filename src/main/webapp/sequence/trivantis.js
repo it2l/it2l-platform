@@ -43,7 +43,7 @@ function trivLogMsg( msg, level ) {
     }
     else {
       topWnd.trivSaveMsg    = msg;
-      topWnd.trivDebugWnd   = topWnd.open( 'trivantisdebug.html', 'TrivantisDebug', 'width=400,height=400,scrollbars=0,resizable=1,menubar=0,toolbar=0,location=0,status=0' )
+      //topWnd.trivDebugWnd   = topWnd.open( 'trivantisdebug.html', 'TrivantisDebug', 'width=400,height=400,scrollbars=0,resizable=1,menubar=0,toolbar=0,location=0,status=0' )
       if( topWnd.trivDebugWnd ) {
         topWnd.trivDebugWnd.focus()
         setTimeout( "trivLogMsg()", 1000 );
