@@ -175,7 +175,7 @@
 				$missingScreen.hide();
 				$brokenScreen.hide();
 
-                textToSpeech($('#task').text());
+                textToSpeech($('#task').text().substring(0,110));
 
 				u.observeProgress(function (progress) {
 					switch(progress.pluginStatus) {
@@ -233,6 +233,9 @@
         	 
         	function play_sound(url){
         	    if(play_html5_audio){
+//         	    	var snd = new Audio(url);
+//         			snd.load();
+//         			snd.play();
         	    	var sound = $("<embed id='sound' type='audio/mpeg' />");
         	        sound.attr('src', url);
         	        sound.attr('loop', false);
