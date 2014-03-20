@@ -6,6 +6,7 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.ldap.userdetails.LdapUserDetailsImpl;
 import org.springframework.stereotype.Controller;
@@ -31,11 +32,14 @@ import com.italk2learn.vo.WhizzRequestVO;
  * Handles requests for the application exercise sequence.
  */
 @Controller
+@Scope("session")
 @RequestMapping("/sequence")
 public class ExercisesSequenceController {
 	
 	
 	private LdapUserDetailsImpl user;
+	
+	private String username;
 	
 	private ExerciseSequenceRequestVO request;
 	
@@ -64,9 +68,10 @@ public class ExercisesSequenceController {
 	public String initSequence(Model model) {
 		logger.info("JLF --- ExerciseSequence Main Controller");
 		user = (LdapUserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		setUsername(user.getUsername());
 		request= new ExerciseSequenceRequestVO();
 		request.setHeaderVO(new HeaderVO());
-		request.getHeaderVO().setLoginUser(user.getUsername());
+		request.getHeaderVO().setLoginUser(this.getUsername());
 		try {
 			request.setIdExercise(getLoginUserService().getIdExersiceUser(request.getHeaderVO()));
 			request.setIdUser(getLoginUserService().getIdUserInfo(request.getHeaderVO()));
@@ -97,12 +102,12 @@ public class ExercisesSequenceController {
 	 */
 	@RequestMapping(value = "/nextexercise", method = RequestMethod.GET)
     public ModelAndView getNextExercise(@Valid @ModelAttribute("messageInfo") ExerciseVO messageForm){
-		logger.info("JLF --- getNextExercise()");
+		logger.info("JLF --- getNextExercise()"+"User: "+this.getUsername());
 		ModelAndView modelAndView = new ModelAndView();
 		ExerciseSequenceRequestVO request= new ExerciseSequenceRequestVO();
 		try{
 			request.setHeaderVO(new HeaderVO());
-			request.getHeaderVO().setLoginUser(user.getUsername());
+			request.getHeaderVO().setLoginUser(this.getUsername());
 			request.setIdExercise(getLoginUserService().getIdExersiceUser(request.getHeaderVO()));
 			request.setIdUser(getLoginUserService().getIdUserInfo(request.getHeaderVO()));
 			ExerciseVO response=getExerciseSequenceService().getNextExercise(request).getExercise();
@@ -122,12 +127,12 @@ public class ExercisesSequenceController {
 	 */
 	@RequestMapping(value = "/backexercise", method = RequestMethod.GET)
     public ModelAndView getBackExercise(@Valid @ModelAttribute("messageInfo") ExerciseVO messageForm){
-		logger.info("JLF --- getBackExercise()");
+		logger.info("JLF --- getBackExercise()"+"User: "+this.getUsername());
 		ModelAndView modelAndView = new ModelAndView();
 		ExerciseSequenceRequestVO request= new ExerciseSequenceRequestVO();
 		try{
 			request.setHeaderVO(new HeaderVO());
-			request.getHeaderVO().setLoginUser(user.getUsername());
+			request.getHeaderVO().setLoginUser(this.getUsername());
 			request.setIdExercise(getLoginUserService().getIdExersiceUser(request.getHeaderVO()));
 			request.setIdUser(getLoginUserService().getIdUserInfo(request.getHeaderVO()));
 			//Obtenemos el ejercio actual de user
@@ -149,12 +154,11 @@ public class ExercisesSequenceController {
 	 */
 	@RequestMapping(value = "/storeWhizzData", method = RequestMethod.POST)
     public @ResponseBody void storeWhizzData(@RequestBody WhizzExerciseVO exercise, HttpServletRequest req){
-		logger.info("JLF --- Whizz storeWhizzData log");
-		user = (LdapUserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		logger.info("JLF --- Whizz storeWhizzData log"+"User: "+this.getUsername());
 		WhizzRequestVO request=new WhizzRequestVO();
         try {
         	request.setHeaderVO(new HeaderVO());
-			request.getHeaderVO().setLoginUser(user.getUsername());
+			request.getHeaderVO().setLoginUser(this.getUsername());
 			request.setIdExercise(getLoginUserService().getIdExersiceUser(request.getHeaderVO()));
 			request.setIdUser(getLoginUserService().getIdUserInfo(request.getHeaderVO()));
             request.setWhizz(exercise);
@@ -199,6 +203,14 @@ public class ExercisesSequenceController {
 
 	public void setWhizzExerciseBO(IWhizzExerciseBO whizzExerciseBO) {
 		this.whizzExerciseBO = whizzExerciseBO;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 }

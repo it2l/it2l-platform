@@ -14,13 +14,13 @@
 		<security:intercept-url pattern="/login" access="permitAll"/>
 		<security:intercept-url pattern="/sequence" access="hasRole('ROLE_ADMIN')"/>
 		
-		<!--JLF Si el login es correcto -->
+		<!--JLF If login is right -->
 		<security:form-login
 				login-page="/login" 
-				authentication-failure-url="/auth/login?error=true"
+				authentication-failure-url="/login?error=true"
 				default-target-url="/sequence/"/>
 			
-		<!--JLF Si el login falla -->
+		<!--JLF If login fails -->
 		<security:logout 
 				invalidate-session="true" 
 				logout-success-url="/login" 
@@ -54,5 +54,5 @@
 	        </security:ldap-authentication-provider>
 	</security:authentication-manager>
 	
-	<security:ldap-server url="ldap://localhost:10389/o=italk2learn" manager-dn="uid=admin,ou=system" manager-password="secret" />
+	<security:ldap-server url="${ldap.url}" manager-dn="uid=admin,ou=system" manager-password="${ldap.password}" />
 </beans>
