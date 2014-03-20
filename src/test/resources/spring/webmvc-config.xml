@@ -21,7 +21,10 @@
 	<!-- Map paths directly to view names without controller processing. Use the view-name attribute if necessary: by convention the view name equals the path without the leading slash -->
 	<mvc:view-controller path="/" view-name="intro" />
 	<mvc:view-controller path="/login" />
+	<mvc:view-controller path="/woztest" />
 	<mvc:view-controller path="/logoutSuccess" />
+	<mvc:view-controller path="/audioRecorder"/>
+	<mvc:view-controller path="/audioRecorderFlash"/>
 
 	<!-- Dispatches requests mapped to flows to FlowHandler implementations -->
 	<bean class="org.springframework.webflow.mvc.servlet.FlowHandlerAdapter">
@@ -29,9 +32,6 @@
 		<property name="saveOutputToFlashScopeOnRedirect" value="true"/>
 	</bean>
 
-	<!-- Custom FlowHandler for the hotel booking flow -->
-	<bean name="hotels/booking" class="org.springframework.webflow.samples.booking.BookingFlowHandler" />	
-		
 	<!-- Thymeleaf template resolver -->
 	<bean id="templateResolver"
 		  class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
@@ -58,6 +58,13 @@
 		<property name="templateEngine" ref="templateEngine"/>
 	</bean>
   
-
-  	
+	<!-- Configures the Tiles layout system using a specific thymeleaf-enabled Tiles Configurer -->
+<!-- 	<bean id="tilesConfigurer" class="org.thymeleaf.extras.tiles2.spring.web.configurer.ThymeleafTilesConfigurer"> -->
+<!-- 		<property name="definitions"> -->
+<!-- 			<list> -->
+<!-- 				<value>/WEB-INF/**/views.xml</value> -->
+<!-- 			</list> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+	
 </beans>

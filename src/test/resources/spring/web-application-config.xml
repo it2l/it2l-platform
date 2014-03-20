@@ -58,16 +58,61 @@
 		<property name="sessionFactory" ref="italk2learnSessionFactory" />
 	</bean>
 	
+	<bean id="exerciseCTATDAO" class="com.italk2learn.dao.CTATExerciseDAO">
+		<property name="sessionFactory" ref="italk2learnSessionFactory" />
+	</bean>
+	
+	<bean id="exerciseWhizzDAO" class="com.italk2learn.dao.WhizzExerciseDAO">
+		<property name="sessionFactory" ref="italk2learnSessionFactory" />
+	</bean>
+	
 	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
 	    <property name="messageConverters">
 	      <util:list id="beanList">
 	        <ref bean="byteArrayHttpMessageConverter"/>
+	        <ref bean="jsonHttpMessageConverter"/>
+	        <ref bean="stringHttpMessageConverter"/>
 	      </util:list>
 	    </property>
 	</bean>
 
+	<!-- Custom bean to accept ByteArray -->
 	<bean id="byteArrayHttpMessageConverter" class="org.springframework.http.converter.ByteArrayHttpMessageConverter "/>
 	
+	
+	<!-- JSON Settings -->
+	<bean id="jsonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+    	<property name="prefixJson" value="false" />
+    	<property name="supportedMediaTypes" value="application/json" />
+	</bean>
+	
+    <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+	    <property name="mediaTypes">
+	        <map>
+	        	<entry key="html" value="text/html"/> 
+	            <entry key="json" value="application/json" />
+	        </map>
+	    </property>
+	    <property name="defaultViews">
+	        <list>
+	            <bean
+	                class="org.springframework.web.servlet.view.json.MappingJacksonJsonView">
+	                <property name="objectMapper">
+	                    <ref bean="JacksonObjectMapper" />
+	                </property>
+	            </bean>
+	        </list>
+	    </property>
+	    <property name="favorPathExtension" value="false" />
+	    <property name="favorParameter" value="true" />
+	    <property name="useNotAcceptableStatusCode" value="true" />
+	</bean>
+
+	<bean id="JacksonObjectMapper" class="org.codehaus.jackson.map.ObjectMapper" />
+	
+	<!-- 	CTAT -->
+	
+	<bean id="stringHttpMessageConverter" class="org.springframework.http.converter.StringHttpMessageConverter"/>
 
 	<!-- Imports the configurations of the different infrastructure systems of the application -->
 	<import resource="webmvc-config.xml" />
