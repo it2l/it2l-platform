@@ -2,13 +2,13 @@ import com.italk2learn.vo.SpeechRecognitionRequestVO;
 
 public class Italk2learn {
 	
-	public native String hello(byte[] buf);
+	public native String speechrecognition(byte[] buf);
 	
 	public static String sendDataToSails(SpeechRecognitionRequestVO request) {
-		System.out.println("Hello World Java!");
+		System.out.println("Print from Java!");
 		String result="";
 		try {
-			result=new Italk2learn().hello(request.getData());
+			result=new Italk2learn().speechrecognition(request.getData());
 			System.out.println(result);
 			return result;
 		} catch (Exception e) {
