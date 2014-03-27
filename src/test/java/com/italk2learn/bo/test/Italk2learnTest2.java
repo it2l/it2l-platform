@@ -30,7 +30,7 @@ public class Italk2learnTest2 {
 			@Transactional
 			public void getSpeechRecognitionTest() throws Exception{
 				LOGGER.info("TESTING getSpeechRecognition");
-				File f=new File("C:\\recordings\\gemma2.wav");
+				File f=new File("C:\\recordings\\bbc1.wav");
 				long l=f.length();
 				System.out.println("the file is " + l + " bytes long");
 				
