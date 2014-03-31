@@ -159,8 +159,19 @@
 				//alert(value);
 				//Array with the values
 				var res = value.split("/");
+				var score=res[0].split("=");
+				var percentage=res[1].split("=");
+				var time=res[2].split("=");
+				var help1=res[3].split("=");
+				var help2=res[4].split("=");
+				var help3=res[5].split("=");
 				var wh = {
-				       	 "value": res 
+				       	 "score": score[1],
+				       	 "percentage" : percentage[1],
+				       	 "time" : time[1],
+				       	 "help1" : help1[1],
+				       	 "help2" : help2[1],
+				       	 "help3" : help3[1]
 				        };
 				    $.ajax({
 				        type: 'POST',
@@ -172,7 +183,7 @@
 				        	//alert('Change submitted!');
 				        },
 				        error : function(jqXHR, status, error) {
-				           //alert('Change doesnt submitted!');
+				            //alert('Change doesnt submitted!');
 				        },
 				    });
 			}
