@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.springframework.webflow.samples</groupId>
+  <groupId>com.platform.main</groupId>
   <artifactId>italk2learn</artifactId>
   <packaging>war</packaging>
   <name>Italk2learn Platform</name>
@@ -320,11 +320,6 @@
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
 			<version>1.6.8</version>
-		</dependency>
-		<dependency>
-			<groupId>com.googlecode.apparat</groupId>
-			<artifactId>apparat-playerglobal</artifactId>
-			<version>1.0-RC9</version>
 		</dependency>
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
