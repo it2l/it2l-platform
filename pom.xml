@@ -5,7 +5,7 @@
   <groupId>com.platform.main</groupId>
   <artifactId>italk2learn</artifactId>
   <packaging>war</packaging>
-  <name>Italk2learn Platform</name>
+  <name>iTalk2Learn Platform</name>
   <version>1.0.0.BUILD-SNAPSHOT</version>
 
 	<properties>
