@@ -1,6 +1,6 @@
 package com.italk2learn.vo;
 
-public class TestJSONVO {
+public class WozVO {
 	
 	private String user;
 	private String idNextexercise;

@@ -1,5 +1,7 @@
 package com.italk2learn.dao;
 
+import java.util.Date;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +39,7 @@ public class WhizzExerciseDAO extends HibernateDaoSupport implements IWhizzExerc
 			wh.setHelp1(whizz.getHelp1());
 			wh.setHelp2(whizz.getHelp2());
 			wh.setHelp3(whizz.getHelp3());
+			wh.setDate(new Date());
 			session.saveOrUpdate(wh);
 			return true;
 		}catch (Exception e){

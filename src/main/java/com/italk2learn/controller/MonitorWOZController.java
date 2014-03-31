@@ -26,7 +26,7 @@ import com.italk2learn.vo.ExerciseSequenceRequestVO;
 import com.italk2learn.vo.ExerciseSequenceResponseVO;
 import com.italk2learn.vo.ExerciseVO;
 import com.italk2learn.vo.HeaderVO;
-import com.italk2learn.vo.TestJSONVO;
+import com.italk2learn.vo.WozVO;
 import com.italk2learn.vo.UserDetailsVO;
 
 /**
@@ -103,7 +103,7 @@ public class MonitorWOZController {
 	 * JLF: Insert next exercise in a sequence of exercise by a given user
 	 */
 	@RequestMapping(value = "/insertNextID", method = RequestMethod.POST)
-    public @ResponseBody String insertNextExercise(@RequestBody TestJSONVO messageForm, HttpServletRequest req){
+    public @ResponseBody String insertNextExercise(@RequestBody WozVO messageForm, HttpServletRequest req){
 		logger.info("JLF --- insertNextExercise()");
 		ExerciseSequenceRequestVO request= new ExerciseSequenceRequestVO();
 		ModelAndView modelAndView=new ModelAndView();
