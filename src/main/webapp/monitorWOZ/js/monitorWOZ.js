@@ -93,7 +93,7 @@ function connectWOZ (user) {
 		var conn = new Strophe.Connection(
 	    'http://it2l.dcs.bbk.ac.uk/http-bind/');
 	
-		conn.connect('woz@it2l.dcs.bbk.ac.uk', 'woz', function (status) {
+		conn.connect('woz@it2l-32', 'woz', function (status) {
 		    if (status === Strophe.Status.CONNECTED) {
 		        $(document).trigger('connected');
 		    } else if (status === Strophe.Status.DISCONNECTED) {
@@ -105,7 +105,7 @@ function connectWOZ (user) {
 	
 		Woz.connection = conn;
 
-		var jid = user+'@it2l.dcs.bbk.ac.uk';
+		var jid = user+'@it2l-32';
         var jid_id = Woz.jid_to_id(jid);
 
         $('#chat-area').tabs('add', '#chat-' + jid_id, jid);
@@ -176,7 +176,7 @@ function connectWOZ (user) {
 //            Woz.connection = null;
 //        });
 
-        var jid = user+'@it2l.dcs.bbk.ac.uk';
+        var jid = user+'@it2l-32';
         var jid_id = Woz.jid_to_id(jid);
 
         $('#chat-area').tabs('add', '#chat-' + jid_id, jid);
@@ -209,7 +209,7 @@ $(document).bind('disconnected', function () {
     var conn = new Strophe.Connection(
     'http://it2l.dcs.bbk.ac.uk/http-bind/');
 
-    conn.connect('woz@it2l.dcs.bbk.ac.uk', 'woz', function (status) {
+    conn.connect('woz@it2l-32', 'woz', function (status) {
 	    if (status === Strophe.Status.CONNECTED) {
 	        $(document).trigger('connected');
 	    } 

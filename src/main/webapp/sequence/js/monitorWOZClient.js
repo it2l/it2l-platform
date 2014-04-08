@@ -189,7 +189,7 @@ function connectWOZ (user) {
 	var conn = new Strophe.Connection(
         'http://it2l.dcs.bbk.ac.uk/http-bind/');
 
-	conn.connect(userWOZ+'@it2l.dcs.bbk.ac.uk', userWOZ, function (status) {
+	conn.connect(userWOZ+'@it2l-32', userWOZ, function (status) {
 		if (status === Strophe.Status.CONNECTED) {
             $(document).trigger('connected');
         } else if (status === Strophe.Status.DISCONNECTED) {
@@ -386,7 +386,7 @@ $(document).bind('disconnected', function () {
     var conn = new Strophe.Connection(
     'http://it2l.dcs.bbk.ac.uk/http-bind/');
 
-	conn.connect(userWOZ+'@it2l.dcs.bbk.ac.uk', userWOZ, function (status) {
+	conn.connect(userWOZ+'@it2l-32', userWOZ, function (status) {
 	    if (status === Strophe.Status.CONNECTED) {
 	        $(document).trigger('connected');
 	    } 
