@@ -46,7 +46,7 @@ public class Italk2learnTest2 {
 				request.setHeaderVO(new HeaderVO());
 				request.getHeaderVO().setLoginUser("tludmetal");
 				try {
-					final SpeechRecognitionResponseVO response = this.speechRecognitionService.sendDataToSails(request);
+					final SpeechRecognitionResponseVO response = this.speechRecognitionService.sendNewAudioChunk(request);
 					testOk = true;
 				} catch (Exception e) {
 					e.printStackTrace();

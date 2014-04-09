@@ -45,11 +45,11 @@ public class SpeechRecognitionBO implements ISpeechRecognitionBO {
 	 * Only is possible call JNI in default java package for that reason I use reflection
 	 * Open a new connection with ASREngine 
 	 */
-	public SpeechRecognitionResponseVO openListener(SpeechRecognitionRequestVO request) throws ITalk2LearnException{
+	public SpeechRecognitionResponseVO initASREngine(SpeechRecognitionRequestVO request) throws ITalk2LearnException{
 		SpeechRecognitionResponseVO res=new SpeechRecognitionResponseVO();
 		try {
 			Class asrClass = Class.forName("Italk2learn");
-			Method asrMethod = asrClass.getMethod("openListener", new Class[] { SpeechRecognitionRequestVO.class });
+			Method asrMethod = asrClass.getMethod("initSpeechRecognition", new Class[] { SpeechRecognitionRequestVO.class });
 			boolean asrReturned = (Boolean)asrMethod.invoke(asrClass.newInstance());
 			//String value=parseTranscription(convertStringToDocument(asrReturned));
 			res.setOpen(asrReturned);
@@ -67,11 +67,11 @@ public class SpeechRecognitionBO implements ISpeechRecognitionBO {
 	 * Only is possible call JNI in default java package for that reason I use reflection
 	 * Close connection with ASREngine and retrieves the whole transcription 
 	 */
-	public SpeechRecognitionResponseVO closeListener(SpeechRecognitionRequestVO request) throws ITalk2LearnException{
+	public SpeechRecognitionResponseVO closeASREngine(SpeechRecognitionRequestVO request) throws ITalk2LearnException{
 		SpeechRecognitionResponseVO res=new SpeechRecognitionResponseVO();
 		try {
 			Class asrClass = Class.forName("Italk2learn");
-			Method asrMethod = asrClass.getMethod("closeListener", new Class[] { SpeechRecognitionRequestVO.class });
+			Method asrMethod = asrClass.getMethod("closeEngine", new Class[] { SpeechRecognitionRequestVO.class });
 			String asrReturned = asrMethod.invoke(asrClass.newInstance(),new SpeechRecognitionRequestVO[] { request}).toString();
 			String value=parseTranscription(convertStringToDocument(asrReturned));
 			res.setResponse(value);
@@ -87,11 +87,11 @@ public class SpeechRecognitionBO implements ISpeechRecognitionBO {
 	 * Calling ASREngine through JNI 
 	 * Only is possible call JNI in default java package for that reason I use reflection 
 	 */
-	public SpeechRecognitionResponseVO sendDataToSails(SpeechRecognitionRequestVO request) throws ITalk2LearnException{
+	public SpeechRecognitionResponseVO sendNewAudioChunk(SpeechRecognitionRequestVO request) throws ITalk2LearnException{
 		SpeechRecognitionResponseVO res=new SpeechRecognitionResponseVO();
 		try {
 			Class asrClass = Class.forName("Italk2learn");
-			Method asrMethod = asrClass.getMethod("sendDataToSails", new Class[] { SpeechRecognitionRequestVO.class });
+			Method asrMethod = asrClass.getMethod("sendNewChunk", new Class[] { SpeechRecognitionRequestVO.class });
 			String asrReturned = asrMethod.invoke(asrClass.newInstance(),new SpeechRecognitionRequestVO[] { request}).toString();
 			res.setLiveResponse(asrReturned);
 			return res;
