@@ -1,10 +1,6 @@
-import org.apache.log4j.Logger;
-
 import com.italk2learn.vo.SpeechRecognitionRequestVO;
 
 public class Italk2learn {
-	
-	private static final Logger LOGGER = Logger.getLogger(Italk2learn.class);
 	
 	//JLF: Send chunks of audio to Speech Recognition engine each 5 seconds
     public native void sendNewAudioChunk(byte[] buf);
@@ -16,7 +12,6 @@ public class Italk2learn {
 	//JLF: Send chunks of audio to Speech Recognition engine
 	public void sendNewChunk(SpeechRecognitionRequestVO request) {
 		System.out.println("Sending data from Java!");
-		LOGGER.info("Sending data from Java!");
 		try {
 			this.sendNewAudioChunk(request.getData());
 		} catch (Exception e) {
@@ -28,7 +23,6 @@ public class Italk2learn {
 	//JLF:Open the listener and retrieves true if the operation was right
 	public boolean initSpeechRecognition() {
 		System.out.println("Open Listener from Java!");
-		LOGGER.info("Open Listener from Java!");
 		boolean result=false;
 		try {
 			result=this.initSpeechRecognitionEngine();
@@ -44,7 +38,6 @@ public class Italk2learn {
 	//JLF:Close the listener and retrieves the whole transcription
 	public String closeEngine() {
 		System.out.println("Close Listener from Java!");
-		LOGGER.info("Close Listener from Java!");
 		String result="";
 		try {
 			result=this.close();

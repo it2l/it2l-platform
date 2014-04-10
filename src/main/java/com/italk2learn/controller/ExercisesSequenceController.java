@@ -67,17 +67,18 @@ public class ExercisesSequenceController {
 	@RequestMapping(value = "/",method = RequestMethod.GET)
 	public String initSequence(Model model) {
 		logger.info("JLF --- ExerciseSequence Main Controller");
-		user = (LdapUserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		setUsername(user.getUsername());
-		request= new ExerciseSequenceRequestVO();
-		request.setHeaderVO(new HeaderVO());
-		request.getHeaderVO().setLoginUser(this.getUsername());
 		try {
+			user = (LdapUserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			setUsername(user.getUsername());
+			request= new ExerciseSequenceRequestVO();
+			request.setHeaderVO(new HeaderVO());
+			request.getHeaderVO().setLoginUser(this.getUsername());
 			request.setIdExercise(getLoginUserService().getIdExersiceUser(request.getHeaderVO()));
 			request.setIdUser(getLoginUserService().getIdUserInfo(request.getHeaderVO()));
 			response=((ExerciseSequenceResponseVO) getExerciseSequenceService().getFirstExercise(request));
 		} catch (Exception e){
 			logger.error(e.toString());
+			return "redirect:/login";
 		}
 		ExerciseVO ex=new ExerciseVO();
 		ex.setIdExercise(0);
