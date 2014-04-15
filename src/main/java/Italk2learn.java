@@ -8,6 +8,8 @@ public class Italk2learn {
     public native boolean initSpeechRecognitionEngine();
     //JLF: Close the listener and retrieves the whole transcription. It is executed each time the exercise change to another
     public native String close();
+    //JLF Indicates if ASREngine is initialised or no
+    private boolean isInit=false;
 	
 	//JLF: Send chunks of audio to Speech Recognition engine
 	public void sendNewChunk(SpeechRecognitionRequestVO request) {
@@ -27,6 +29,7 @@ public class Italk2learn {
 		try {
 			result=this.initSpeechRecognitionEngine();
 			System.out.println(result);
+			isInit=result;
 			return result;
 		} catch (Exception e) {
 			System.err.println(e);
@@ -40,7 +43,10 @@ public class Italk2learn {
 		System.out.println("Close Listener from Java!");
 		String result="";
 		try {
-			result=this.close();
+			//JLF: Close the engine in case of engine is opened
+			if (isInit==true){
+				result=this.close();
+			}
 			System.out.println(result);
 			return result;
 		} catch (Exception e) {

@@ -49,7 +49,7 @@ public class SpeechRecognitionController {
 	 */
 	@RequestMapping(value = "/sendData",method = RequestMethod.POST)
 	@ResponseBody
-	public String getSpeechRecognition(@RequestBody byte[] body) {
+	public void getSpeechRecognition(@RequestBody byte[] body) {
 		logger.info("JLF --- Speech Recognition Main Controller");
 		//user = (LdapUserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		request= new SpeechRecognitionRequestVO();
@@ -59,20 +59,18 @@ public class SpeechRecognitionController {
 		request.setData(body);
 		try {
 			response=((SpeechRecognitionResponseVO) getSpeechRecognitionService().getSpeechRecognition(request));
-			return response.getResponse();
 		} catch (Exception e){
 			logger.error(e.toString());
 		}
-		return response.getResponse();
 	}
 	
 	
 	/**
-	 * Main method to get a transcription of Sails Software
+	 * Method that initialises ASREngine to be prepared to accept chunks of audio
 	 */
 	@RequestMapping(value = "/initEngine",method = RequestMethod.POST)
 	@ResponseBody
-	public String initASREngine() {
+	public Boolean initASREngine() {
 		logger.info("JLF --- Speech Recognition Main Controller");
 		//user = (LdapUserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		request= new SpeechRecognitionRequestVO();
@@ -81,11 +79,11 @@ public class SpeechRecognitionController {
 		request.getHeaderVO().setLoginUser("tludmetal");
 		try {
 			response=((SpeechRecognitionResponseVO) getSpeechRecognitionService().initASREngine(request));
-			return response.getResponse();
+			return response.isOpen();
 		} catch (Exception e){
 			logger.error(e.toString());
 		}
-		return response.getResponse();
+		return response.isOpen();
 	}
 	
 	/**

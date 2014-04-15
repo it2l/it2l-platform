@@ -49,9 +49,8 @@ public class SpeechRecognitionBO implements ISpeechRecognitionBO {
 		SpeechRecognitionResponseVO res=new SpeechRecognitionResponseVO();
 		try {
 			Class asrClass = Class.forName("Italk2learn");
-			Method asrMethod = asrClass.getMethod("initSpeechRecognition", new Class[] { SpeechRecognitionRequestVO.class });
+			Method asrMethod = asrClass.getMethod("initSpeechRecognition");
 			boolean asrReturned = (Boolean)asrMethod.invoke(asrClass.newInstance());
-			//String value=parseTranscription(convertStringToDocument(asrReturned));
 			res.setOpen(asrReturned);
 			return res;
 		} catch (Exception e) {
@@ -71,8 +70,8 @@ public class SpeechRecognitionBO implements ISpeechRecognitionBO {
 		SpeechRecognitionResponseVO res=new SpeechRecognitionResponseVO();
 		try {
 			Class asrClass = Class.forName("Italk2learn");
-			Method asrMethod = asrClass.getMethod("closeEngine", new Class[] { SpeechRecognitionRequestVO.class });
-			String asrReturned = asrMethod.invoke(asrClass.newInstance(),new SpeechRecognitionRequestVO[] { request}).toString();
+			Method asrMethod = asrClass.getMethod("closeEngine");
+			String asrReturned = asrMethod.invoke(asrClass.newInstance()).toString();
 			String value=parseTranscription(convertStringToDocument(asrReturned));
 			res.setResponse(value);
 			return res;
