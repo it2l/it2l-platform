@@ -20,7 +20,6 @@ import com.italk2learn.vo.SpeechRecognitionResponseVO;
  * JLF: Handles requests for the application speech recognition.
  */
 @Controller
-@Scope("session")
 @RequestMapping("/speechRecognition")
 public class SpeechRecognitionController {
 	
@@ -70,7 +69,7 @@ public class SpeechRecognitionController {
 	 */
 	@RequestMapping(value = "/initEngine",method = RequestMethod.POST)
 	@ResponseBody
-	public Boolean initASREngine() {
+	public Boolean initASREngine(@RequestBody byte[] body) {
 		logger.info("JLF --- Speech Recognition Main Controller");
 		//user = (LdapUserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		request= new SpeechRecognitionRequestVO();
