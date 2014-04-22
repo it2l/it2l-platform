@@ -1,65 +1,68 @@
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.italk2learn.vo.SpeechRecognitionRequestVO;
 
 public class Italk2learn {
 	
-	private static final Logger LOGGER = Logger.getLogger(Italk2learn.class);
-	
 	//JLF: Send chunks of audio to Speech Recognition engine each 5 seconds
-    public native void speechrecognition(byte[] buf);
+    public native void sendNewAudioChunk(byte[] buf);
     //JLF: Open the listener and retrieves true if the operation was right. It is executed when the user is logged in the platform and change the exercise
-    public native boolean openASRListener();
+    public native boolean initSpeechRecognitionEngine();
     //JLF: Close the listener and retrieves the whole transcription. It is executed each time the exercise change to another
-    public native String closeASRListener();
+    public native String close();
+    //JLF Indicates if ASREngine is initialised or no
+    private boolean isInit=false;
+    
+	private static final Logger logger = LoggerFactory
+			.getLogger(Italk2learn.class);
 	
 	//JLF: Send chunks of audio to Speech Recognition engine
-	public void sendDataToSails(SpeechRecognitionRequestVO request) {
-		System.out.println("Sending data from Java!");
-		LOGGER.info("Sending data from Java!");
+	public void sendNewChunk(SpeechRecognitionRequestVO request) {
+		System.out.println("sendNewChunk() ---Sending data from Java!");
 		try {
-			this.speechrecognition(request.getData());
+			this.sendNewAudioChunk(request.getData());
 		} catch (Exception e) {
+			logger.error(e.toString());
 			System.err.println(e);
-			System.exit(1);
 		} 
 	}
 	
 	//JLF:Open the listener and retrieves true if the operation was right
-	public boolean openListener() {
-		System.out.println("Open Listener from Java!");
-		LOGGER.info("Open Listener from Java!");
+	public boolean initSpeechRecognition() {
+		System.out.println("initSpeechRecognition()---Open Listener from Java!");
 		boolean result=false;
 		try {
-			result=this.openASRListener();
-			System.out.println(result);
+			result=this.initSpeechRecognitionEngine();
+			System.out.println("initSpeechRecognition()---"+result);
+			isInit=result;
 			return result;
 		} catch (Exception e) {
+			logger.error(e.toString());
 			System.err.println(e);
-			System.exit(1);
 		} 
 		return result;
 	}
 	
 	//JLF:Close the listener and retrieves the whole transcription
-	public String closeListener() {
-		System.out.println("Close Listener from Java!");
-		LOGGER.info("Close Listener from Java!");
+	public String closeEngine() {
+		System.out.println("closeEngine()---Close Listener from Java!");
 		String result="";
 		try {
-			result=this.closeASRListener();
+			result=this.close();
 			System.out.println(result);
 			return result;
 		} catch (Exception e) {
+			logger.error(e.toString());
 			System.err.println(e);
-			System.exit(1);
 		} 
 		return result;
 	}
 	
 	// JLF: Retrieves data from ASRResult on real time
 	public String realTimeSpeech(String text) {
-	    System.out.println(text);
+		logger.info(text);
+		System.out.println(text);
 	    return text;
 	}
 	
@@ -67,8 +70,8 @@ public class Italk2learn {
 		try {
 			System.loadLibrary("iT2L");
 		} catch (Exception e) {
+			logger.error(e.toString());
 			System.err.println(e);
-			System.exit(1);
 		}
 	}
 

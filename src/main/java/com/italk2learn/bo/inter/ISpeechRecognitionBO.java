@@ -8,6 +8,10 @@ public interface ISpeechRecognitionBO {
 	
 	public SpeechRecognitionResponseVO getSpeechRecognition(SpeechRecognitionRequestVO request) throws ITalk2LearnException;
 	
-	public SpeechRecognitionResponseVO sendDataToSails(SpeechRecognitionRequestVO request) throws ITalk2LearnException;
+	public SpeechRecognitionResponseVO sendNewAudioChunk(SpeechRecognitionRequestVO request) throws ITalk2LearnException;
+	
+	public SpeechRecognitionResponseVO initASREngine(SpeechRecognitionRequestVO request) throws ITalk2LearnException;
+	
+	public SpeechRecognitionResponseVO closeASREngine(SpeechRecognitionRequestVO request) throws ITalk2LearnException;
 
 }

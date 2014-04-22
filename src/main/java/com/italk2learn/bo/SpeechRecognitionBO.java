@@ -6,6 +6,8 @@ import java.lang.reflect.Method;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.w3c.dom.Document;
@@ -22,6 +24,13 @@ import com.italk2learn.vo.SpeechRecognitionResponseVO;
 @Service("speechRecognitionBO")
 @Transactional(rollbackFor = { ITalk2LearnException.class, ITalk2LearnException.class })
 public class SpeechRecognitionBO implements ISpeechRecognitionBO {
+	
+	private static final Logger logger = LoggerFactory
+			.getLogger(SpeechRecognitionBO.class);
+	
+	private Class asrClass;
+	private Method asrMethod;
+	private boolean isInit=false;
 
 	/*
 	 * Calling directly ASREngine without JNI 
@@ -35,6 +44,7 @@ public class SpeechRecognitionBO implements ISpeechRecognitionBO {
 			return new SpeechRecognitionResponseVO("");
 		}
 		catch (Exception e){
+			logger.error(e.toString());
 			System.out.println(e);
 		}
 		return null;
@@ -42,20 +52,82 @@ public class SpeechRecognitionBO implements ISpeechRecognitionBO {
 	
 	/*
 	 * Calling ASREngine through JNI 
+	 * Only is possible call JNI in default java package for that reason I use reflection
+	 * Open a new connection with ASREngine 
+	 */
+	public SpeechRecognitionResponseVO initASREngine(SpeechRecognitionRequestVO request) throws ITalk2LearnException{
+		logger.debug("initASREngine()--- Init ASREngine");
+		SpeechRecognitionResponseVO res=new SpeechRecognitionResponseVO();
+		try {
+			if (isInit==false) {
+				asrClass = Class.forName("Italk2learn");
+				asrMethod = asrClass.getMethod("initSpeechRecognition");
+				isInit = (Boolean)asrMethod.invoke(asrClass.newInstance());
+				res.setOpen(isInit);
+				logger.debug("initASREngine()--- ASREngine initialised");
+			} else {
+				logger.debug("initASREngine()--- ASR Engine already initialised");
+				System.out.println("sendNewAudioChunk()--- ASR Engine already initialised");
+			}
+			return res;
+		} catch (Exception e) {
+			logger.error(e.toString());
+			System.err.println(e);
+		}
+		return res;
+	}
+	
+	
+	/*
+	 * Calling ASREngine through JNI 
+	 * Only is possible call JNI in default java package for that reason I use reflection
+	 * Close connection with ASREngine and retrieves the whole transcription 
+	 */
+	public SpeechRecognitionResponseVO closeASREngine(SpeechRecognitionRequestVO request) throws ITalk2LearnException{
+		logger.debug("closeASREngine()--- Closing ASREngine");
+		SpeechRecognitionResponseVO res=new SpeechRecognitionResponseVO();
+		try {
+			if (isInit==true) {
+				asrMethod = asrClass.getMethod("closeEngine");
+				String asrReturned = asrMethod.invoke(asrClass.newInstance()).toString();
+				String value=parseTranscription(convertStringToDocument(asrReturned));
+				res.setResponse(value);
+				isInit=false;
+				logger.debug("closeASREngine()--- ASREngine closed");
+			} else {
+				logger.debug("closeASREngine()--- ASR Engine not initialised");
+				System.out.println("closeEngine()--- ASR Engine not initialised");
+			}
+			return res;
+		} catch (Exception e) {
+			logger.error(e.toString());
+			System.err.println(e);
+		}
+		return res;
+	}
+	
+	/*
+	 * Calling ASREngine through JNI 
 	 * Only is possible call JNI in default java package for that reason I use reflection 
 	 */
-	public SpeechRecognitionResponseVO sendDataToSails(SpeechRecognitionRequestVO request) throws ITalk2LearnException{
+	public SpeechRecognitionResponseVO sendNewAudioChunk(SpeechRecognitionRequestVO request) throws ITalk2LearnException{
+		logger.debug("sendNewAudioChunk()--- Sending new audio chunk");
+		SpeechRecognitionResponseVO res=new SpeechRecognitionResponseVO();
 		try {
-			Class asrClass = Class.forName("Italk2learn");
-			Method asrMethod = asrClass.getMethod("sendDataToSails", new Class[] { SpeechRecognitionRequestVO.class });
-			String asrReturned = asrMethod.invoke(asrClass.newInstance(),new SpeechRecognitionRequestVO[] { request}).toString();
-			String value=parseTranscription(convertStringToDocument(asrReturned));
-			return new SpeechRecognitionResponseVO(value);
+			if (isInit==true) {
+				asrMethod = asrClass.getMethod("sendNewChunk", new Class[] { SpeechRecognitionRequestVO.class });
+				asrMethod.invoke(asrClass.newInstance(),new SpeechRecognitionRequestVO[] { request}).toString();
+				logger.debug("sendNewAudioChunk()--- Audio chunk sent");
+			} else {
+				logger.debug("sendNewAudioChunk()--- ASR Engine not initialised");
+				System.out.println("sendNewAudioChunk()--- ASR Engine not initialised");
+			}	
+			return res;
 		} catch (Exception e) {
+			logger.error(e.toString());
 			System.err.println(e);
-			System.exit(1);
 		}
-		return null;
+		return res;
 	}
 	
 	/*
@@ -87,6 +159,7 @@ public class SpeechRecognitionBO implements ISpeechRecognitionBO {
 
 		}
 		catch (Exception e){
+			logger.error(e.toString());
 			System.out.println(e);
 		}
 		return null;
@@ -100,7 +173,8 @@ public class SpeechRecognitionBO implements ISpeechRecognitionBO {
             builder = factory.newDocumentBuilder(); 
             Document doc = builder.parse( new InputSource( new StringReader( xmlStr ) ) );
             return doc;
-        } catch (Exception e) { 
+        } catch (Exception e) {
+        	logger.error(e.toString());
             e.printStackTrace(); 
         }
         return null;
