@@ -1,3 +1,6 @@
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.italk2learn.vo.SpeechRecognitionRequestVO;
 
 public class Italk2learn {
@@ -10,55 +13,56 @@ public class Italk2learn {
     public native String close();
     //JLF Indicates if ASREngine is initialised or no
     private boolean isInit=false;
+    
+	private static final Logger logger = LoggerFactory
+			.getLogger(Italk2learn.class);
 	
 	//JLF: Send chunks of audio to Speech Recognition engine
 	public void sendNewChunk(SpeechRecognitionRequestVO request) {
-		System.out.println("Sending data from Java!");
+		System.out.println("sendNewChunk() ---Sending data from Java!");
 		try {
 			this.sendNewAudioChunk(request.getData());
 		} catch (Exception e) {
+			logger.error(e.toString());
 			System.err.println(e);
-			System.exit(1);
 		} 
 	}
 	
 	//JLF:Open the listener and retrieves true if the operation was right
 	public boolean initSpeechRecognition() {
-		System.out.println("Open Listener from Java!");
+		System.out.println("initSpeechRecognition()---Open Listener from Java!");
 		boolean result=false;
 		try {
 			result=this.initSpeechRecognitionEngine();
-			System.out.println(result);
+			System.out.println("initSpeechRecognition()---"+result);
 			isInit=result;
 			return result;
 		} catch (Exception e) {
+			logger.error(e.toString());
 			System.err.println(e);
-			System.exit(1);
 		} 
 		return result;
 	}
 	
 	//JLF:Close the listener and retrieves the whole transcription
 	public String closeEngine() {
-		System.out.println("Close Listener from Java!");
+		System.out.println("closeEngine()---Close Listener from Java!");
 		String result="";
 		try {
-			//JLF: Close the engine in case of engine is opened
-			if (isInit==true){
-				result=this.close();
-			}
+			result=this.close();
 			System.out.println(result);
 			return result;
 		} catch (Exception e) {
+			logger.error(e.toString());
 			System.err.println(e);
-			System.exit(1);
 		} 
 		return result;
 	}
 	
 	// JLF: Retrieves data from ASRResult on real time
 	public String realTimeSpeech(String text) {
-	    System.out.println(text);
+		logger.info(text);
+		System.out.println(text);
 	    return text;
 	}
 	
@@ -66,8 +70,8 @@ public class Italk2learn {
 		try {
 			System.loadLibrary("iT2L");
 		} catch (Exception e) {
+			logger.error(e.toString());
 			System.err.println(e);
-			System.exit(1);
 		}
 	}
 

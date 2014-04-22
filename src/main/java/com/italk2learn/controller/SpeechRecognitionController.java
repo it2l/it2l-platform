@@ -20,6 +20,7 @@ import com.italk2learn.vo.SpeechRecognitionResponseVO;
  * JLF: Handles requests for the application speech recognition.
  */
 @Controller
+@Scope("session")
 @RequestMapping("/speechRecognition")
 public class SpeechRecognitionController {
 	
@@ -57,7 +58,7 @@ public class SpeechRecognitionController {
 		request.getHeaderVO().setLoginUser("tludmetal");
 		request.setData(body);
 		try {
-			response=((SpeechRecognitionResponseVO) getSpeechRecognitionService().getSpeechRecognition(request));
+			response=((SpeechRecognitionResponseVO) getSpeechRecognitionService().sendNewAudioChunk(request));
 		} catch (Exception e){
 			logger.error(e.toString());
 		}
