@@ -1,22 +1,16 @@
 $(document).ready(function() {
-	   $("#btn_next").click(function() {
-		   nextSequence();
-	   });
-	 });
+	nextSequence();
+});
 
 function nextSequence(){
     $.ajax({
         type: 'GET',
-        url: "nextsequence",
+        url: "sequence/",
         data: {
             
             },
         success: function(data){
-            $("#container").html(data);
-//            $("#container").attr({
-//                'title' : data,
-//                'href' : data.html
-//            });
+            $("#main").html(data);
         },
         error : function(jqXHR, status, error) {
            alert('Sorry!, there was a problem');

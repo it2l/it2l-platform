@@ -29,6 +29,8 @@
 		<put-attribute name="body" value="/woztest.html :: content" type="thymeleaf"/>
 	</definition>
 	
+	<definition name="exercise" template="/MainContainer.html" templateType="thymeleaf"/>
+	
 	<definition name="logoutSuccess" extends="standardLayout2">
 		<put-attribute name="body" value="/logoutSuccess.html :: content" type="thymeleaf"/>
 	</definition>
