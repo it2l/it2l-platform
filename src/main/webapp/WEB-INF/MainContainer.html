@@ -8,17 +8,95 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
 <title>Main Container of iTalk2learn</title>
 	<script type="text/javascript" src="/italk2learn/js/history/history.js"></script>
-	<script src='js/sequence.js'></script>
-	<script type="text/javascript" src="/js/jquery-1.9.1.js" th:src="@{/resources/js/jquery-1.9.1.js}"></script>
-    <script type="text/javascript" src="/js/swfobject.js" th:src="@{/resources/js/swfobject.js}"></script>
-    <script type="text/javascript" src="#" th:src="@{/resources/dojo/dojo.js}"></script>
-    <script type="text/javascript" src="#" th:src="@{/resources/spring/Spring.js}"></script>
-    <script type="text/javascript" src="#" th:src="@{/resources/spring/Spring-Dojo.js}"></script>
-    <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.js'></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.js'></script>
+    <script type="text/javascript" src="/js/swfobject.js" th:src="@{/resources/js/swfobject.js}"></script>
 </head>
 <body>
-	<div id="main"></div>
+	<table align="center">
+                    <tr align="center">
+                    	<td align="left">
+			               	<p align="right">
+			                         <input type="button" id="back" value="back"/>
+			                </p>
+	                    </td>
+                        <td align="center">
+                            <div id="mainContainer" align="center">
+                            </div>
+                        </td>
+                    	<td align="right">
+			                     <p align="right">
+			                         <input type="button" id="next" value="next"/>
+			                     </p>
+                       	 </td>
+                    </tr>
+                </table>
+	<script type="text/javascript">
+		<!--
+		$(document).ready(function() {
+			nextSequence();
+			$("#back").click(function() {
+				backExercise();
+			});
+			$("#next").click(function() {
+				nextExercise();
+			});
+		});
+
+		function nextSequence(){
+		    $.ajax({
+		        type: 'GET',
+		        url: "sequence/",
+		        data: {
+		            
+		            },
+		        success: function(data){
+		            $("#mainContainer").html(data);
+		        },
+		        error : function(jqXHR, status, error) {
+		           alert('Sorry!, there was a problem');
+		        },
+		    });
+		}
+
+		function backExercise(){
+			document.getElementById("mainContainer").innerHTML = ''
+		    $.ajax({
+		        type: 'GET',
+		        url: "sequence/backexercise",
+		        data: {
+		            
+		            },
+		        success: function(data){
+		            $("#mainContainer").html(data);
+		        },
+		        error : function(jqXHR, status, error) {
+		           alert('Sorry!, there was a problem');
+		        },
+		    });
+		}
+
+		function nextExercise(){
+			document.getElementById("mainContainer").innerHTML = '';
+		    $.ajax({
+		        type: 'GET',
+		        url: "sequence/nextexercise",
+		        data: {
+		            
+		            },
+		        success: function(data){
+		            $("#mainContainer").html(data);
+		        },
+		        error : function(jqXHR, status, error) {
+		           alert('Sorry!, there was a problem');
+		        },
+		    });
+		}
+
+
+		-->
+	</script>
 	<div id="speechRecognition" align="right">
 		<p>To view this page ensure that Adobe Flash Player version 11.1.0
 			or greater is installed.</p>
