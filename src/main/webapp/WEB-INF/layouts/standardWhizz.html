@@ -64,7 +64,6 @@
 
     <script type="text/javascript" src="/js/jquery-1.9.1.js" th:src="@{/resources/js/jquery-1.9.1.js}"></script>
     <script type="text/javascript" src="/js/swfobject.js" th:src="@{/resources/js/swfobject.js}"></script>
-    <script type="text/javascript" src="http://webplayer.unity3d.com/download_webplayer-3.x/3.0/uo/UnityObject.js"></script>
     <script type="text/javascript" src="#" th:src="@{/resources/dojo/dojo.js}"></script>
     <script type="text/javascript" src="#" th:src="@{/resources/spring/Spring.js}"></script>
     <script type="text/javascript" src="#" th:src="@{/resources/spring/Spring-Dojo.js}"></script>
@@ -152,6 +151,31 @@
     <div id="player"></div>
     <script type="text/javascript">
         <!--
+     // For version detection, set to min. required Flash Player version, or 0 (or 0.0.0), for no version detection. 
+        var swfVersionStr = "11.1.0";
+        // To use express install, set to playerProductInstall.swf, otherwise the empty string. 
+        var xiSwfUrlStr = "playerProductInstall.swf";
+        var flashvars = {
+        		flashvarID: "MA_GBR_0500AAx0100"
+        };
+        var params = {};
+        params.quality = "high";
+        params.bgcolor = "#ffffff";
+        params.allowscriptaccess = "sameDomain";
+        params.allowfullscreen = "true";
+        var attributes = {};
+        attributes.id = "iTalk2Learn";
+        attributes.name = "iTalk2Learn";
+        attributes.align = "middle";
+        swfobject.embedSWF(
+            "sequence/iTalk2Learn.swf", "flashContent", 
+            "1024", "768", 
+            swfVersionStr, xiSwfUrlStr, 
+            flashvars, params, attributes);
+        // JavaScript enabled so display the flashContent div in case it is not replaced with a swf object.
+        swfobject.createCSS("#flashContent", "display:block;text-align:left;");
+
+        
 			// Each time that the score or question change. Result (score=2/percentage=20/time=327868/help1=3/help2=0/help3=0)
 			function callJSInterface(value) {
 				//Shows an alert with the exercise's score
@@ -219,66 +243,5 @@
         	}
         -->
     </script>
-	<div id="speechRecognition" align="right">
-		<p>To view this page ensure that Adobe Flash Player version 11.1.0
-			or greater is installed.</p>
-		<script type="text/javascript">
-              var pageHost = ((document.location.protocol == "https:") ? "https://" : "http://");
-              document.write("<a href='http://www.adobe.com/go/getflashplayer'><img src='" + pageHost + "www.adobe.com/images/shared/download_buttons/get_flash_player.gif' alt='Get Adobe Flash player' /></a>");
-        </script>
-	</div>
-	<script type="text/javascript">
-          // For version detection, set to min. required Flash Player version, or 0 (or 0.0.0), for no version detection. 
-          var swfVersionStr = "11.1.0";
-          // To use express install, set to playerProductInstall.swf, otherwise the empty string. 
-          var xiSwfUrlStr = "playerProductInstall.swf";
-          var flashvars = {};
-          var params = {};
-          params.quality = "high";
-          params.bgcolor = "#ffffff";
-          params.allowscriptaccess = "sameDomain";
-          params.allowfullscreen = "true";
-          var attributes = {};
-          attributes.id = "Italk2learnSpeechRecognizer";
-          attributes.name = "Italk2learnSpeechRecognizer";
-          attributes.align = "middle";
-          swfobject.embedSWF(
-                    "Italk2learnSpeechRecognizer.swf", "speechRecognition",
-                    "250", "250",
-                    swfVersionStr, xiSwfUrlStr,
-                    flashvars, params, attributes);
-          // JavaScript enabled so display the flashContent div in case it is not replaced with a swf object.
-          swfobject.createCSS("#speechRecognition", "display:block;text-align:right;");
-    </script>
-	<noscript>
-		<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
-			width="250" height="250" id="Italk2learnSpeechRecognizer">
-			<param name="movie" value="Italk2learnSpeechRecognizer.swf" />
-			<param name="quality" value="high" />
-			<param name="bgcolor" value="#ffffff" />
-			<param name="allowScriptAccess" value="sameDomain" />
-			<param name="allowFullScreen" value="true" />
-			<!--[if !IE]>-->
-			<object type="application/x-shockwave-flash"
-				data="Italk2learnSpeechRecognizer.swf" width="250" height="250">
-				<param name="quality" value="high" />
-				<param name="bgcolor" value="#ffffff" />
-				<param name="allowScriptAccess" value="sameDomain" />
-				<param name="allowFullScreen" value="true" />
-				<!--<![endif]-->
-				<!--[if gte IE 6]>-->
-				<p>Either scripts and active content are not permitted to run or
-					Adobe Flash Player version 11.1.0 or greater is not installed.</p>
-				<!--<![endif]-->
-				<a href="http://www.adobe.com/go/getflashplayer"> <img
-					src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif"
-					alt="Get Adobe Flash Player" />
-				</a>
-				<!--[if !IE]>-->
-			</object>
-			<!--<![endif]-->
-		</object>
-	</noscript>
 </body>
-
 </html>

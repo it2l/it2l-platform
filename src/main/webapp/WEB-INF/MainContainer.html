@@ -8,10 +8,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
 <title>Main Container of iTalk2learn</title>
 	<script type="text/javascript" src="/italk2learn/js/history/history.js"></script>
+	<script type="text/javascript" src="http://webplayer.unity3d.com/download_webplayer-3.x/3.0/uo/UnityObject2.js"></script>
+	<script type="text/javascript" src="http://it2l.dcs.bbk.ac.uk/italk2learn/js/swfobject.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.js'></script>
-    <script type="text/javascript" src="/js/swfobject.js" th:src="@{/resources/js/swfobject.js}"></script>
 </head>
 <body>
 	<table align="center">
@@ -35,7 +36,7 @@
 	<script type="text/javascript">
 		<!--
 		$(document).ready(function() {
-			nextSequence();
+			initContainer();
 			$("#back").click(function() {
 				backExercise();
 			});
@@ -44,36 +45,48 @@
 			});
 		});
 
-		function nextSequence(){
+		function initContainer(){
+			//var ur="sequence/";
+			//$("#mainContainer").load(ur);
 		    $.ajax({
 		        type: 'GET',
 		        url: "sequence/",
 		        data: {
 		            
 		            },
-		        success: function(data){
-		            $("#mainContainer").html(data);
+		        success: function(data, textStatus, jqXHR) {
+		        	document.getElementById("mainContainer").innerHTML=jqXHR.responseText;
+		            var reponse = jQuery(jqXHR.responseText);
+		            var reponseScript = reponse.filter("script");
+		            jQuery.each(reponseScript, function(idx, val) { eval(val.text); } );
 		        },
 		        error : function(jqXHR, status, error) {
 		           alert('Sorry!, there was a problem');
 		        },
+		        complete : function(jqXHR, status) {
+		        }
 		    });
 		}
 
 		function backExercise(){
-			document.getElementById("mainContainer").innerHTML = ''
+			document.getElementById("mainContainer").innerHTML = '';
 		    $.ajax({
 		        type: 'GET',
 		        url: "sequence/backexercise",
 		        data: {
 		            
 		            },
-		        success: function(data){
-		            $("#mainContainer").html(data);
+		        success: function(data, textStatus, jqXHR){
+		        	document.getElementById("mainContainer").innerHTML=jqXHR.responseText;
+		            var reponse = jQuery(jqXHR.responseText);
+		            var reponseScript = reponse.filter("script");
+		            jQuery.each(reponseScript, function(idx, val) { eval(val.text); } );
 		        },
 		        error : function(jqXHR, status, error) {
 		           alert('Sorry!, there was a problem');
 		        },
+		        complete : function(jqXHR, status) {
+		        }
 		    });
 		}
 
@@ -85,12 +98,17 @@
 		        data: {
 		            
 		            },
-		        success: function(data){
-		            $("#mainContainer").html(data);
+		        success: function(data, textStatus, jqXHR){
+		        	document.getElementById("mainContainer").innerHTML=jqXHR.responseText;
+		            var reponse = jQuery(jqXHR.responseText);
+		            var reponseScript = reponse.filter("script");
+		            jQuery.each(reponseScript, function(idx, val) { eval(val.text); } );
 		        },
 		        error : function(jqXHR, status, error) {
 		           alert('Sorry!, there was a problem');
 		        },
+		        complete : function(jqXHR, status) {
+		        }
 		    });
 		}
 

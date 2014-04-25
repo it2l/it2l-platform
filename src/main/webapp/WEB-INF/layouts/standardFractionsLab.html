@@ -63,7 +63,7 @@
     <!-- END Browser History required section -->
 
     <script type="text/javascript" src="/js/swfobject.js" th:src="@{/resources/js/swfobject.js}"></script>
-    <script type="text/javascript" src="http://webplayer.unity3d.com/download_webplayer-3.x/3.0/uo/UnityObject.js"></script>
+    <script type="text/javascript" src="http://webplayer.unity3d.com/download_webplayer-3.x/3.0/uo/UnityObject2.js"></script>
     <script type='text/javascript' src='https://ssl-webplayer.unity3d.com/download_webplayer-3.x/3.0/uo/jquery.min.js'></script>
     <script type="text/javascript" src="#" th:src="@{/resources/dojo/dojo.js}"></script>
     <script type="text/javascript" src="#" th:src="@{/resources/spring/Spring.js}"></script>
@@ -151,169 +151,101 @@
     <div id="player"></div>
     <script type="text/javascript">
 		<!--
-			var unityObjectUrl = "http://webplayer.unity3d.com/download_webplayer-3.x/3.0/uo/UnityObject2.js";
-			if (document.location.protocol == 'https:')
-				unityObjectUrl = unityObjectUrl.replace("http://", "https://ssl-");
-			document.write('<script type="text\/javascript" src="' + unityObjectUrl + '"><\/script>');
-		-->
-	</script>
-	<script type="text/javascript">
-		<!--
+
 			var config = {
-				width: 800,
-				height: 600,
-				params: { enableDebugging:"0" }
+					width: 800,
+					height: 600,
+					params: { enableDebugging:"0" }
 
-			};
-			config.params["disableContextMenu"] = true;
-			var u = new UnityObject2(config);
+				};
+				config.params["disableContextMenu"] = true;
+				var u = new UnityObject2(config);
 
-			jQuery(function() {
+				jQuery(function() {
 
-				var $missingScreen = jQuery("#unityPlayer").find(".missing");
-				var $brokenScreen = jQuery("#unityPlayer").find(".broken");
-				$missingScreen.hide();
-				$brokenScreen.hide();
+					var $missingScreen = jQuery("#unityPlayer").find(".missing");
+					var $brokenScreen = jQuery("#unityPlayer").find(".broken");
+					$missingScreen.hide();
+					$brokenScreen.hide();
 
-                textToSpeech($('#task').text().substring(0,110));
+	                textToSpeech($('#task').text().substring(0,110));
 
-				u.observeProgress(function (progress) {
-					switch(progress.pluginStatus) {
-						case "broken":
-							$brokenScreen.find("a").click(function (e) {
-								e.stopPropagation();
-								e.preventDefault();
-								u.installPlugin();
-								return false;
-							});
-							$brokenScreen.show();
-						break;
-						case "missing":
-							$missingScreen.find("a").click(function (e) {
-								e.stopPropagation();
-								e.preventDefault();
-								u.installPlugin();
-								return false;
-							});
-							$missingScreen.show();
-						break;
-						case "installed":
-							$missingScreen.remove();
-						break;
-						case "first":
-						break;
-					}
+					u.observeProgress(function (progress) {
+						switch(progress.pluginStatus) {
+							case "broken":
+								$brokenScreen.find("a").click(function (e) {
+									e.stopPropagation();
+									e.preventDefault();
+									u.installPlugin();
+									return false;
+								});
+								$brokenScreen.show();
+							break;
+							case "missing":
+								$missingScreen.find("a").click(function (e) {
+									e.stopPropagation();
+									e.preventDefault();
+									u.installPlugin();
+									return false;
+								});
+								$missingScreen.show();
+							break;
+							case "installed":
+								$missingScreen.remove();
+							break;
+							case "first":
+							break;
+						}
+					});
+					u.initPlugin(jQuery("#unityPlayer")[0], "http://it2l.dcs.bbk.ac.uk/italk2learn/sequence/FractionsLab.unity3d");
 				});
-				u.initPlugin(jQuery("#unityPlayer")[0], "FractionsLab.unity3d");
-			});
 
-			function SendHighMessage(message)
-			{
-				var json = "{\"method\": \"HighFeedback\", \"parameters\": {\"message\": \"" + message +"\"}}";
-				u.getUnity().SendMessage("ExternalInterface", "SendEvent", json);
-			}
+				function SendHighMessage(message)
+				{
+					var json = "{\"method\": \"HighFeedback\", \"parameters\": {\"message\": \"" + message +"\"}}";
+					u.getUnity().SendMessage("ExternalInterface", "SendEvent", json);
+				}
 
-			function SendLowMessage(message)
-			{
-				var json = "{\"method\": \"LowFeedback\", \"parameters\": {\"message\": \"" + message +"\"}}";
-				u.getUnity().SendMessage("ExternalInterface", "SendEvent", json);
-			}
+				function SendLowMessage(message)
+				{
+					var json = "{\"method\": \"LowFeedback\", \"parameters\": {\"message\": \"" + message +"\"}}";
+					u.getUnity().SendMessage("ExternalInterface", "SendEvent", json);
+				}
 
-			function textToSpeech(message) {
-				play_sound("http://translate.google.com/translate_tts?ie=UTF-8&q="+encodeURIComponent(message)+"&tl=en_gb&total=1&idx=0prev=input");
-	        }
+				function textToSpeech(message) {
+					play_sound("http://translate.google.com/translate_tts?ie=UTF-8&q="+encodeURIComponent(message)+"&tl=en_gb&total=1&idx=0prev=input");
+		        }
 
-           function html5_audio(){
-        	    var a = document.createElement('audio');
-        	    return !!(a.canPlayType && a.canPlayType('audio/mpeg;').replace(/no/, ''));
-        	}
-        	 
-        	var play_html5_audio = false;
-        	if(html5_audio()) play_html5_audio = true;
-        	 
-        	function play_sound(url){
-        	    if(play_html5_audio){
-//         	    	var snd = new Audio(url);
-//         			snd.load();
-//         			snd.play();
-        	    	var sound = $("<embed id='sound' type='audio/mpeg' />");
-        	        sound.attr('src', url);
-        	        sound.attr('loop', false);
-        	        sound.attr('hidden', true);
-        	        sound.attr('autostart', true);
-        	        $('#player').append(sound);
-        	    }else{
-        	        $("#sound").remove();
-        	        var sound = $("<embed id='sound' type='audio/mpeg' />");
-        	        sound.attr('src', url);
-        	        sound.attr('loop', false);
-        	        sound.attr('hidden', true);
-        	        sound.attr('autostart', true);
-        	        $('body').append(sound);
-        	    }
-        	}
+	           function html5_audio(){
+	        	    var a = document.createElement('audio');
+	        	    return !!(a.canPlayType && a.canPlayType('audio/mpeg;').replace(/no/, ''));
+	        	}
+	        	 
+	        	var play_html5_audio = false;
+	        	if(html5_audio()) play_html5_audio = true;
+	        	 
+	        	function play_sound(url){
+	        	    if(play_html5_audio){
+//	         	    	var snd = new Audio(url);
+//	         			snd.load();
+//	         			snd.play();
+	        	    	var sound = $("<embed id='sound' type='audio/mpeg' />");
+	        	        sound.attr('src', url);
+	        	        sound.attr('loop', false);
+	        	        sound.attr('hidden', true);
+	        	        sound.attr('autostart', true);
+	        	        $('#player').append(sound);
+	        	    }else{
+	        	        $("#sound").remove();
+	        	        var sound = $("<embed id='sound' type='audio/mpeg' />");
+	        	        sound.attr('src', url);
+	        	        sound.attr('loop', false);
+	        	        sound.attr('hidden', true);
+	        	        sound.attr('autostart', true);
+	        	        $('body').append(sound);
+	        	    }
+	        	}
 		-->
 	</script>
-	<div id="speechRecognition" align="right">
-		<p>To view this page ensure that Adobe Flash Player version 11.1.0
-			or greater is installed.</p>
-		<script type="text/javascript">
-              var pageHost = ((document.location.protocol == "https:") ? "https://" : "http://");
-              document.write("<a href='http://www.adobe.com/go/getflashplayer'><img src='" + pageHost + "www.adobe.com/images/shared/download_buttons/get_flash_player.gif' alt='Get Adobe Flash player' /></a>");
-        </script>
-	</div>
-	<script type="text/javascript">
-          // For version detection, set to min. required Flash Player version, or 0 (or 0.0.0), for no version detection. 
-          var swfVersionStr = "11.1.0";
-          // To use express install, set to playerProductInstall.swf, otherwise the empty string. 
-          var xiSwfUrlStr = "playerProductInstall.swf";
-          var flashvars = {};
-          var params = {};
-          params.quality = "high";
-          params.bgcolor = "#ffffff";
-          params.allowscriptaccess = "sameDomain";
-          params.allowfullscreen = "true";
-          var attributes = {};
-          attributes.id = "Italk2learnSpeechRecognizer";
-          attributes.name = "Italk2learnSpeechRecognizer";
-          attributes.align = "middle";
-          swfobject.embedSWF(
-                    "Italk2learnSpeechRecognizer.swf", "speechRecognition",
-                    "250", "250",
-                    swfVersionStr, xiSwfUrlStr,
-                    flashvars, params, attributes);
-          // JavaScript enabled so display the flashContent div in case it is not replaced with a swf object.
-          swfobject.createCSS("#speechRecognition", "display:block;text-align:right;");
-    </script>
-	<noscript>
-		<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
-			width="250" height="250" id="Italk2learnSpeechRecognizer">
-			<param name="movie" value="Italk2learnSpeechRecognizer.swf" />
-			<param name="quality" value="high" />
-			<param name="bgcolor" value="#ffffff" />
-			<param name="allowScriptAccess" value="sameDomain" />
-			<param name="allowFullScreen" value="true" />
-			<!--[if !IE]>-->
-			<object type="application/x-shockwave-flash"
-				data="Italk2learnSpeechRecognizer.swf" width="250" height="250">
-				<param name="quality" value="high" />
-				<param name="bgcolor" value="#ffffff" />
-				<param name="allowScriptAccess" value="sameDomain" />
-				<param name="allowFullScreen" value="true" />
-				<!--<![endif]-->
-				<!--[if gte IE 6]>-->
-				<p>Either scripts and active content are not permitted to run or
-					Adobe Flash Player version 11.1.0 or greater is not installed.</p>
-				<!--<![endif]-->
-				<a href="http://www.adobe.com/go/getflashplayer"> <img
-					src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif"
-					alt="Get Adobe Flash Player" />
-				</a>
-				<!--[if !IE]>-->
-			</object>
-			<!--<![endif]-->
-		</object>
-	</noscript>
 </body>
-
 </html>
