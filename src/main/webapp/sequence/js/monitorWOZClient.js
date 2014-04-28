@@ -43,8 +43,6 @@ var Gab = {
             // populate pending_subscriber, the approve-jid span, and
             // open the dialog
             Gab.pending_subscriber = from;
-            $('#approve-jid').text(Strophe.getBareJidFromJid(from));
-            $('#approve_dialog').dialog('open');
         } else if (ptype !== 'error') {
             var contact = $('#roster-area li#' + jid_id + ' .roster-contact')
                 .removeClass("online")
@@ -66,9 +64,6 @@ var Gab = {
             Gab.insert_contact(li);
         }
 
-        // reset addressing for user since their presence changed
-        var jid_id = Gab.jid_to_id(from);
-        $('#chat-' + jid_id).data('jid', Strophe.getBareJidFromJid(from));
 
         return true;
     },
@@ -168,20 +163,6 @@ var Gab = {
         }
     }
 };
-
-$(document).ready(function() {
-	$.ajax({
-		dataType: 'String',
-		type: 'GET',
-		url: "getUser",
-		success: function (data) {
-			connectWOZ (data);
-		},
-		error: function (data) {
-			$(document).trigger('error');
-		}
-	});
-});
 
 function connectWOZ (user) {
 
