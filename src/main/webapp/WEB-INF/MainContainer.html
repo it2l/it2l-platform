@@ -58,8 +58,8 @@
 			}
 	</style>
 	<script type="text/javascript" src="/italk2learn/js/history/history.js"></script>
-	<script type="text/javascript" src="http://webplayer.unity3d.com/download_webplayer-3.x/3.0/uo/UnityObject2.js"></script>
-	<script type="text/javascript" src="http://it2l.dcs.bbk.ac.uk/italk2learn/js/swfobject.js"></script>
+	<script type="text/javascript" src="/js/swfobject.js" th:src="@{/resources/js/swfobject.js}"></script>
+    <script type="text/javascript" src="/js/unity2.js" th:src="@{/resources/js/unity2.js}"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.js'></script>
@@ -120,6 +120,25 @@
     </table>
 	<script type="text/javascript">
 		<!--
+		var unity;
+		var header=document.getElementsByTagName("head")[0];
+
+		function loadjscssfile(filename, filetype){
+			 if (filetype=="js"){ //if filename is a external JavaScript file
+			  var fileref=document.createElement('script')
+			  fileref.setAttribute("type","text/javascript")
+			  fileref.setAttribute("src", filename)
+			 }
+			 else if (filetype=="css"){ //if filename is an external CSS file
+			  var fileref=document.createElement("link")
+			  fileref.setAttribute("rel", "stylesheet")
+			  fileref.setAttribute("type", "text/css")
+			  fileref.setAttribute("href", filename)
+			 }
+			 if (typeof fileref!="undefined")
+			  document.getElementsByTagName("head")[0].appendChild(fileref)
+			}
+		
 		$(document).ready(function() {
 			initContainer();
 			$("#back").click(function() {
@@ -153,7 +172,11 @@
 		        	document.getElementById("mainContainer").innerHTML=jqXHR.responseText;
 		            var reponse = jQuery(jqXHR.responseText);
 		            var reponseScript = reponse.filter("script");
-		            jQuery.each(reponseScript, function(idx, val) { eval(val.text); } );
+		            jQuery.each(reponseScript, function(idx, val) { 
+		            	//header.appendChild(val);
+		            	loadjscssfile(val.src, "js");
+			            //eval(val.text);
+				    } );
 		        },
 		        error : function(jqXHR, status, error) {
 		           alert('Sorry!, there was a problem');
@@ -175,7 +198,11 @@
 		        	document.getElementById("mainContainer").innerHTML=jqXHR.responseText;
 		            var reponse = jQuery(jqXHR.responseText);
 		            var reponseScript = reponse.filter("script");
-		            jQuery.each(reponseScript, function(idx, val) { eval(val.text); } );
+		            jQuery.each(reponseScript, function(idx, val) { 
+		            	//header.appendChild(val);
+		            	loadjscssfile(val.src, "js");
+			            //eval(val.text);
+				    } );
 		        },
 		        error : function(jqXHR, status, error) {
 		           alert('Sorry!, there was a problem');
@@ -197,7 +224,11 @@
 		        	document.getElementById("mainContainer").innerHTML=jqXHR.responseText;
 		            var reponse = jQuery(jqXHR.responseText);
 		            var reponseScript = reponse.filter("script");
-		            jQuery.each(reponseScript, function(idx, val) { eval(val.text); } );
+		            jQuery.each(reponseScript, function(idx, val) { 
+		            	//header.appendChild(val);
+		            	loadjscssfile(val.src, "js");
+			            //eval(val.text);
+				    } );
 		        },
 		        error : function(jqXHR, status, error) {
 		           alert('Sorry!, there was a problem');
@@ -207,23 +238,11 @@
 		    });
 		}
 
-		function SendHighMessage(message)
-		{
-			var json = "{\"method\": \"HighFeedback\", \"parameters\": {\"message\": \"" + message +"\"}}";
-			u.getUnity().SendMessage("ExternalInterface", "SendEvent", json);
-		}
-
-		function SendLowMessage(message)
-		{
-			var json = "{\"method\": \"LowFeedback\", \"parameters\": {\"message\": \"" + message +"\"}}";
-			u.getUnity().SendMessage("ExternalInterface", "SendEvent", json);
-		}
-
 		function textToSpeech(message) {
 			play_sound("http://translate.google.com/translate_tts?ie=UTF-8&q="+encodeURIComponent(message)+"&tl=en_gb&total=1&idx=0prev=input");
         }
 
-       function html5_audio(){
+		function html5_audio(){
     	    var a = document.createElement('audio');
     	    return !!(a.canPlayType && a.canPlayType('audio/mpeg;').replace(/no/, ''));
     	}
@@ -252,6 +271,7 @@
     	        $('body').append(sound);
     	    }
     	}
+
 
 
 		-->
