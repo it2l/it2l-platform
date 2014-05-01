@@ -101,27 +101,25 @@
     </table>
 	
 	<table align="center">
-                    <tr align="center">
-                    	<td align="left">
-			               	<p align="right">
-			                    <input type="submit" id="back" value="back" sec:authorize="hasRole('ROLE_USER')" class="it2lbutton" />
-			                </p>
-	                    </td>
-                        <td align="center">
-                            <div id="mainContainer" align="center">
-                            </div>
-                        </td>
-                    	<td align="right">
-			                <p align="right">
-			                   <input type="submit" id="next" value="next" sec:authorize="hasRole('ROLE_USER')" class="it2lbutton" />
-			                </p>
-                       	 </td>
-                    </tr>
+         <tr align="center">
+           	<td align="left">
+		       	<p align="right">
+		            <input type="submit" id="back" value="back" sec:authorize="hasRole('ROLE_USER')" class="it2lbutton" />
+		        </p>
+	        </td>
+            <td align="center">
+                <div id="mainContainer" align="center" sec:authorize="hasRole('ROLE_USER')">
+                </div>
+            </td>
+           	<td align="right">
+		        <p align="right">
+		            <input type="submit" id="next" value="next" sec:authorize="hasRole('ROLE_USER')" class="it2lbutton" />
+		        </p>
+            </td>
+         </tr>
     </table>
 	<script type="text/javascript">
 		<!--
-		var unity;
-		var header=document.getElementsByTagName("head")[0];
 
 		function loadjscssfile(filename, filetype){
 			 if (filetype=="js"){ //if filename is a external JavaScript file
@@ -140,28 +138,26 @@
 			}
 		
 		$(document).ready(function() {
-			initContainer();
-			$("#back").click(function() {
-				backExercise();
-			});
-			$("#next").click(function() {
-				nextExercise();
 			});
 			$.ajax({
 				type: 'GET',
 				url: "sequence/getUser",
 				success: function (data) {
+					initContainer();
 					connectWOZ (data);
 				},
 				error: function (jqXHR, status, error) {
 					$(document).trigger('error');
 				}
 			});
+			$("#back").click(function() {
+				backExercise();
+			});
+			$("#next").click(function() {
+				nextExercise();
 		});
 
 		function initContainer(){
-			//var ur="sequence/";
-			//$("#mainContainer").load(ur);
 		    $.ajax({
 		        type: 'GET',
 		        url: "sequence/",
@@ -173,9 +169,7 @@
 		            var reponse = jQuery(jqXHR.responseText);
 		            var reponseScript = reponse.filter("script");
 		            jQuery.each(reponseScript, function(idx, val) { 
-		            	//header.appendChild(val);
 		            	loadjscssfile(val.src, "js");
-			            //eval(val.text);
 				    } );
 		        },
 		        error : function(jqXHR, status, error) {
@@ -199,9 +193,7 @@
 		            var reponse = jQuery(jqXHR.responseText);
 		            var reponseScript = reponse.filter("script");
 		            jQuery.each(reponseScript, function(idx, val) { 
-		            	//header.appendChild(val);
 		            	loadjscssfile(val.src, "js");
-			            //eval(val.text);
 				    } );
 		        },
 		        error : function(jqXHR, status, error) {
@@ -225,9 +217,7 @@
 		            var reponse = jQuery(jqXHR.responseText);
 		            var reponseScript = reponse.filter("script");
 		            jQuery.each(reponseScript, function(idx, val) { 
-		            	//header.appendChild(val);
 		            	loadjscssfile(val.src, "js");
-			            //eval(val.text);
 				    } );
 		        },
 		        error : function(jqXHR, status, error) {
@@ -272,11 +262,9 @@
     	    }
     	}
 
-
-
 		-->
 	</script>
-	<div id="speechRecognition" align="right">
+	<div id="speechRecognition" align="right" sec:authorize="hasRole('ROLE_USER')">
 		<p>To view this page ensure that Adobe Flash Player version 11.1.0
 			or greater is installed.</p>
 		<script type="text/javascript">

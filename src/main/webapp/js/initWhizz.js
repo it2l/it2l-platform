@@ -47,7 +47,7 @@
 				        type: 'POST',
 				        contentType : 'application/json; charset=utf-8',
 				        dataType : 'json',
-				        url: "storeWhizzData",
+				        url: "sequence/storeWhizzData",
 				        data: JSON.stringify(wh),
 				        success: function(data){
 				        	//alert('Change submitted!');
