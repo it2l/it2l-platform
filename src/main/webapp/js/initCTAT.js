@@ -36,3 +36,13 @@
                 flashvars, params, attributes);
             // JavaScript enabled so display the flashContent div in case it is not replaced with a swf object.
             swfobject.createCSS("#flashContent", "display:block;text-align:left;");
+            
+            function SendHighMessage(message)
+			{
+            	setTimeout(function(){alert(message)},5000);
+			}
+
+			function SendLowMessage(message)
+			{
+				setTimeout(function(){alert(message)},5000);
+			}

@@ -172,9 +172,12 @@ function connectWOZ (user) {
 
 	conn.connect(userWOZ+'@it2l-32', userWOZ, function (status) {
 		if (status === Strophe.Status.CONNECTED) {
+			initContainer();
             $(document).trigger('connected');
         } else if (status === Strophe.Status.DISCONNECTED) {
             $(document).trigger('disconnected');
+        } else if (status === Strophe.Status.AUTHFAIL) {
+        	initContainer();
         } else {
         	$('#connect').html("Status: "+status);
         }

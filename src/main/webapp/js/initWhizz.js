@@ -57,3 +57,13 @@
 				        },
 				    });
 			}
+			
+			function SendHighMessage(message)
+			{
+				setTimeout(function(){alert(message)},5000);			
+			}
+
+			function SendLowMessage(message)
+			{
+				setTimeout(function(){alert(message)},5000);
+			}

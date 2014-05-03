@@ -6,71 +6,32 @@
       lang="en">
 
 <head>
-
-    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-    <!-- This <head> section is only used for static prototyping purposes. At runtime, -->
-    <!-- Tiles will only use the body fragment defined with tiles:fragment="content",  --> 
-    <!-- as specified at the corresponding views.xml file.                             -->
-    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-
-    <title>Italk2learn: Spring MVC and Web Flow Reference Application</title>
+    <title>iTalk2Learn Intro</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    
-    <link rel="stylesheet" type="text/css" media="screen, projection" 
-          href="../styles/blueprint/screen.css" />
-    
-    <link rel="stylesheet" type="text/css" media="print" 
-          href="../styles/blueprint/print.css" />
-    
-    <!--[if lt IE 8]>
-        <link rel="stylesheet" type="text/css" media="screen, projection"
-              href="../styles/blueprint/ie.css" />
-    <![endif]-->
-    
-    <link rel="stylesheet" type="text/css" media="screen" 
-          href="../styles/booking.css" />
-
-    
-    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  -->
-    <!-- Some styles and scripts are served from spring-js-resources-{ver}.jar at -->
-    <!-- runtime. Therefore not available for static prototyping. See the         -->
-    <!-- layouts/standard.html template file for detail.                          -->
-    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  -->
-    
 </head>
-
-<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-<!-- START of the content to be included in the execution result.  -->
-<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-<!-- Only the markup inside this <body> would be required in this  -->
-<!-- template if no static prototyping was intended.               -->
-<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 <body tiles:fragment="content">
-
 <div>
     <h1>Welcome to Italk2learn</h1>
-    <p>
-        This sample demonstrates how to use Spring MVC and Spring Web Flow together with Thymeleaf and Tiles.
-    </p>
     <hr />
     <p>
-        Italk2learn platform in this sample include:
+        iTalk2Learn is a learning platform for children aged between 8 and 12 years old. It is an open source platform which integrates structured practice and exploratory, conceptually-oriented learning. It facilitates interaction in different modalities including speech, as well as multiple representations which can be manipulated and reasoned with when learning fractions.
+
+The platform combines different technologies, including speech recognition and speech production, with a range of learning systems, such as Whizz, Fractions Tutor and the exploratory learning environment Fractions Lab. The main aim is to define the interfaces for the different elements of the platform and their interplay. These elements include the learning content developed within the different learning systems; the intelligent components that will be developed in our project, including the recommender and the intelligent support; and the intuitive speech interaction features. Additionally, data storage of the relevant information is included in the platform. The overall goal is to provide a flexible and scalable infrastructure for the elements of the platform, which are being developed in such a way that those elements can be exchanged independently of each other and, eventually, be replaced by other elements in the future, providing a test bed for future technologies.
+
+Task-dependent and task-independent support:
+
+We are investigating how speech can be used in the learning platform to provide adaptive intelligent support within structured and exploratory activities. In particular, we are currently looking into how such support is able to respond to students' emotions, deduced from speech. Emotions play a significant role in students' learning behaviour. Positive emotions can enhance learning, while negative emotions can inhibit it. We are investigating how the intelligent support can transfer a negative emotion like frustration or boredom, into a positive one, such as enjoyment.
+
+Additionally, we are investigating how students can be supported in their reasoning through different representations when learning fractions. Our aim is to recommend the representation which is the most effective for a particular student as well as the demands of the task. For example, a student might have a particular misconception in solving a task. The support would detect this misconception and recommend a representation to the student that helps her or him to overcome the misconception. Additionally, if the student is unfamiliar with a particular representation, she or he could be supported in their reasoning when learning fractions. Here, properties of the representation could be explained. Once the representation becomes familiar, deeper knowledge about the problem domain could be gained.
     </p>
-    <ul>
-        <li>A sequence of whizz exercises with a shell container developed by whizz</li>
-        <li>A sequence of fraction tutor exercises</li>
-    </ul>
-    <p>You can go to the next exercise just only clicking "Next Exercise" Button</p>
-    <p>The exercise sequence is retrieved of the recommender system and it depends of the user that has been logged on Italk2learn Platform</p>
+    <p>You can go to the next exercise just only clicking "Next Exercise" Button.</p>
+    <p>The exercise sequence is retrieved of the recommender system and it depends of the user that has been logged on Italk2learn Platform.</p>
     <p>
-        <a href="/login.html" th:href="@{/login}">Start your Italk2learn experience</a>
+        <a href="https://github.com/it2l/it2l-platform/">Get source code</a>
+    </p>
+    <p>
+        <a href="/login.html" th:href="@{/login}">Start your iTalk2Learn experience</a>
     </p>
 </div>
-
-
 </body>
-<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-<!-- END of the content to be included in the execution result -->
-<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-
 </html>
