@@ -3,98 +3,36 @@
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:tiles="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org" lang="en">
-
 <head>
-
-<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-<!-- This <head> section is only used for static prototyping purposes. At runtime, -->
-<!-- Tiles will only use the body fragment defined with tiles:fragment="content",  -->
-<!-- as specified at the corresponding views.xml file.                             -->
-<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-
-<title>Spring Travel: Spring MVC and Web Flow Reference
-	Application</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-
-<link rel="stylesheet" type="text/css" media="screen, projection"
-	href="../styles/blueprint/screen.css" />
-
-<link rel="stylesheet" type="text/css" media="print"
-	href="../styles/blueprint/print.css" />
-
-<!--[if lt IE 8]>
-        <link rel="stylesheet" type="text/css" media="screen, projection"
-              href="../styles/blueprint/ie.css" />
-    <![endif]-->
-
-<link rel="stylesheet" type="text/css" media="screen"
-	href="../styles/booking.css" />
-
-
-<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  -->
-<!-- Some styles and scripts are served from spring-js-resources-{ver}.jar at -->
-<!-- runtime. Therefore not available for static prototyping. See the         -->
-<!-- layouts/standard.html template file for detail.                          -->
-<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  -->
-
+	<title>iTalk2Learn login page</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" media="screen, projection" href="/js/it2llogin.css" />
 </head>
 
-<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-<!-- START of the content to be included in the execution result.  -->
-<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-<!-- Only the markup inside this <body> would be required in this  -->
-<!-- template if no static prototyping was intended.               -->
-<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 <body tiles:fragment="content">
+	<div id="wrapper">
 
+	<form class="login-form" name="login-form" action="j_spring_security_check" method="post">
+		<div class="header">
+		<h1>iTalk2Learn Login</h1>
+		<span>Please sign in</span>
+		</div>
+	
+		<div class="content">
+		<input name="j_username" type="text" class="input username" placeholder="Username" id="j_username"/>
+		<div class="user-icon"></div>
+		<input name="j_password" type="password" class="input password" placeholder="Password" id="j_password"/>
+		<div class="pass-icon"></div>		
+		</div>
 
-<!-- 	<div class="span-5"> -->
-<!-- 		<p>Valid username/passwords are:</p> -->
-<!-- 		<ul> -->
-<!-- 			<li>jkeats/12345</li> -->
-<!-- 			<li>tludmetal/12345</li> -->
-<!-- 		</ul> -->
-<!-- 	</div> -->
+		<div class="footer">
+		<input type="submit" name="submit" value="Login" class="button" />
+		<input type="submit" name="submit" value="Register" class="register" />
+		</div>
+		<span th:text="${err}" style="color:red;"></span>
+	</form>
 
-	<div class="container">
-		<form class="form-signin" action="j_spring_security_check"
-			method="post">
-			<table>
-				<tr>
-					<td th:text="${err}" style="color:red;"/>
-				</tr>
-				<tr>
-					<td>
-						<h2 class="form-signin-heading">Please sign in</h2>
-					</td>
-				</tr>
-				<tr>
-					<td><label>User&nbsp;&nbsp;</label> <input type="text"
-						class="input-block-level" name="j_username" value=""
-						id="j_username" placeholder="Your User" required="required"
-						autofocus="autofocus" /></td>
-				</tr>
-				<tr>
-					<td><label>Pass&nbsp;&nbsp;</label> <input type="password"
-						class="input-block-level" name="j_password" value=""
-						id="j_password" placeholder="pass" required="required" /></td>
-				</tr>
-			
-			<tr align="right">
-					<td align="right">
-			<button class="btn btn-large btn-primary" type="submit" name="login">Sign
-				in</button>
-				</td>
-				</tr>
-				</table>
-		</form>
-	</div>
-	<!-- /container -->
-
-
+</div>
+<div class="gradient"></div>
 </body>
-<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-<!-- END of the content to be included in the execution result -->
-<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-
 </html>

@@ -8,119 +8,21 @@
 <head>
     <title>Italk2learn</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<style type="text/css">
-			.submit {
-				-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
-				-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
-				box-shadow:inset 0px 1px 0px 0px #ffffff;
-				background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
-				background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
-				filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
-				background-color:#ededed;
-				-webkit-border-top-left-radius:6px;
-				-moz-border-radius-topleft:6px;
-				border-top-left-radius:6px;
-				-webkit-border-top-right-radius:6px;
-				-moz-border-radius-topright:6px;
-				border-top-right-radius:6px;
-				-webkit-border-bottom-right-radius:6px;
-				-moz-border-radius-bottomright:6px;
-				border-bottom-right-radius:6px;
-				-webkit-border-bottom-left-radius:6px;
-				-moz-border-radius-bottomleft:6px;
-				border-bottom-left-radius:6px;
-				text-indent:0;
-				border:1px solid #dcdcdc;
-				display:inline-block;
-				color:#777777;
-				font-family:Comic Sans MS;
-				font-size:18px;
-				font-weight:bold;
-				font-style:normal;
-				height:50px;
-				line-height:50px;
-				width:100px;
-				text-decoration:none;
-				text-align:center;
-				text-shadow:1px 1px 0px #ffffff;
-			}
-			.submit:hover {
-				background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed) );
-				background:-moz-linear-gradient( center top, #dfdfdf 5%, #ededed 100% );
-				filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed');
-				background-color:#dfdfdf;
-			}.submit:active {
-				position:relative;
-				top:1px;
-			}
-			form {
-				margin-right:1cm;
-				margin-left:1cm;
-			}
-	</style>
-
     <script type="text/javascript" src="/italk2learn/js/history/history.js"></script>
     <!-- END Browser History required section -->
 
-    <script type="text/javascript" src="/js/jquery-1.9.1.js" th:src="@{/resources/js/jquery-1.9.1.js}"></script>
-    <script type="text/javascript" src="/js/swfobject.js" th:src="@{/resources/js/swfobject.js}"></script>
-    <script type="text/javascript" src="#" th:src="@{/resources/dojo/dojo.js}"></script>
-    <script type="text/javascript" src="#" th:src="@{/resources/spring/Spring.js}"></script>
-    <script type="text/javascript" src="#" th:src="@{/resources/spring/Spring-Dojo.js}"></script>
-    
-    <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.js'></script>
-    <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.js'></script>
-    <script src='js/scripts/strophe.js'></script>
-    <script src='js/scripts/flXHR.js'></script>
-    <script src='js/scripts/strophe.flxhr.js'></script>
-	<script src="http://www.google.com/jsapi" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="/js/initWhizz.js" th:src="@{/resources/js/initWhizz.js}"></script>
 
 </head>
 
 
 <body class="tundra" style="margin: 50; padding: 50">
     <table align="center">
-        <tr>
-            <td>
-                <table id="header" class="header">
-                    <tr align="left">
-                        <td id="topbar" align="left">
-                            <div sec:authorize="hasRole('ROLE_USER')" th:if="${#authentication}">
-                                <a href="#" th:href="@{/auth/logout}">Logout</a>
-                            </div>
-                            <div sec:authorize="hasRole('ROLE_ADMIN')">
-                                <a href="#" th:href="@{/monitorWOZ/}">Wizard</a>
-                            </div>
-							<div id="connect" style="color:red;">
-                            </div>
-                        </td>
-                        <td id="logo" align="left">
-                            <div>
-                                <a href="#" th:href="@{/}">
-                                    <img src="../../images/iLearnFraction_banner_05.jpg" th:src="@{/resources/images/iLearnFraction_banner_05.jpg}" alt="italk2learn" />
-                                </a>
-                            </div>
-                        </td>
-                        <td align="right">
-                            <!-- Space for speech Recognition Component -->
-                           
-                        </td>
-                    </tr>
-                </table>
 
-            </td>
-        </tr>
         <tr align="center">
             <td align="center">
                 <table align="center">
                     <tr align="center">
-                    	<td align="left">
-			               	<form action="#" th:object="${messageInfo}" th:action="@{/sequence/backexercise}" method="get" sec:authorize="hasRole('ROLE_USER')" align="left">
-			                    <p align="left">
-			                         <input type="submit" value="back" name="submit" class="submit" />
-			                    </p>
-			                </form>
-	                    </td>
                         <td align="center">
                             <div id="content" align="center">
                                 <div id="main" class="span-18 last" tiles:include="body" align="center">
@@ -136,112 +38,11 @@
                                 </div>
                             </div>
                         </td>
-                    	<td align="right">
-			                 <form action="#" th:object="${messageInfo}" th:action="@{/sequence/nextexercise}" method="get" sec:authorize="hasRole('ROLE_USER')" align="right">
-			                     <p align="right">
-			                         <input type="submit" value="next" name="submit" class="submit" />
-			                     </p>
-			                 </form>
-                       	 </td>
                     </tr>
                 </table>
             </td>
         </tr>
     </table>
     <div id="player"></div>
-    <script type="text/javascript">
-        <!--
-     // For version detection, set to min. required Flash Player version, or 0 (or 0.0.0), for no version detection. 
-        var swfVersionStr = "11.1.0";
-        // To use express install, set to playerProductInstall.swf, otherwise the empty string. 
-        var xiSwfUrlStr = "playerProductInstall.swf";
-        var flashvars = {
-        		flashvarID: "MA_GBR_0500AAx0100"
-        };
-        var params = {};
-        params.quality = "high";
-        params.bgcolor = "#ffffff";
-        params.allowscriptaccess = "sameDomain";
-        params.allowfullscreen = "true";
-        var attributes = {};
-        attributes.id = "iTalk2Learn";
-        attributes.name = "iTalk2Learn";
-        attributes.align = "middle";
-        swfobject.embedSWF(
-            "sequence/iTalk2Learn.swf", "flashContent", 
-            "1024", "768", 
-            swfVersionStr, xiSwfUrlStr, 
-            flashvars, params, attributes);
-        // JavaScript enabled so display the flashContent div in case it is not replaced with a swf object.
-        swfobject.createCSS("#flashContent", "display:block;text-align:left;");
-
-        
-			// Each time that the score or question change. Result (score=2/percentage=20/time=327868/help1=3/help2=0/help3=0)
-			function callJSInterface(value) {
-				//Shows an alert with the exercise's score
-				//alert(value);
-				//Array with the values
-				var res = value.split("/");
-				var score=res[0].split("=");
-				var percentage=res[1].split("=");
-				var time=res[2].split("=");
-				var help1=res[3].split("=");
-				var help2=res[4].split("=");
-				var help3=res[5].split("=");
-				var wh = {
-				       	 "score": score[1],
-				       	 "percentage" : percentage[1],
-				       	 "time" : time[1],
-				       	 "help1" : help1[1],
-				       	 "help2" : help2[1],
-				       	 "help3" : help3[1]
-				        };
-				    $.ajax({
-				        type: 'POST',
-				        contentType : 'application/json; charset=utf-8',
-				        dataType : 'json',
-				        url: "storeWhizzData",
-				        data: JSON.stringify(wh),
-				        success: function(data){
-				        	//alert('Change submitted!');
-				        },
-				        error : function(jqXHR, status, error) {
-				            //alert('Change doesnt submitted!');
-				        },
-				    });
-			}
-
-			function textToSpeech(message) {
-				play_sound("http://translate.google.com/translate_tts?ie=UTF-8&q="+encodeURIComponent(message)+"&tl=en_gb&total=1&idx=0prev=input");
-	        }
-
-           function html5_audio(){
-        	    var a = document.createElement('audio');
-        	    return !!(a.canPlayType && a.canPlayType('audio/mpeg;').replace(/no/, ''));
-        	}
-        	 
-        	var play_html5_audio = false;
-        	if(html5_audio()) play_html5_audio = true;
-        	 
-        	function play_sound(url){
-        	    if(play_html5_audio){
-        	    	var sound = $("<embed id='sound' type='audio/mpeg' />");
-        	        sound.attr('src', url);
-        	        sound.attr('loop', false);
-        	        sound.attr('hidden', true);
-        	        sound.attr('autostart', true);
-        	        $('#player').append(sound);
-        	    }else{
-        	        $("#sound").remove();
-        	        var sound = $("<embed id='sound' type='audio/mpeg' />");
-        	        sound.attr('src', url);
-        	        sound.attr('loop', false);
-        	        sound.attr('hidden', true);
-        	        sound.attr('autostart', true);
-        	        $('body').append(sound);
-        	    }
-        	}
-        -->
-    </script>
 </body>
 </html>

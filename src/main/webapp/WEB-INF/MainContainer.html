@@ -7,47 +7,231 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
 <title>Main Container of iTalk2learn</title>
+	<style type="text/css">
+	
+			html, body { height: 100%; }
+			body {
+			    margin: 0;
+			    padding: 0;
+			    height: 100%;
+				/* gradients - second red border, first red border, top white space, blue lines */
+			    background-image:  -webkit-linear-gradient(left, rgba(255,85,91, .2), rgba(255,85,91, .2)), -webkit-linear-gradient(left, rgba(255,85,91, .8), rgba(255,85,91, .8)), -webkit-linear-gradient(top, white 0px, white 69px, rgba(255,255,255,0) 70px), -webkit-repeating-linear-gradient(white 0px, white 18px, #A6FFED 19px, white 20px);
+			    background-image:  -moz-linear-gradient(left, rgba(255,85,91, .2), rgba(255,85,91, .2)), -moz-linear-gradient(left, rgba(255,85,91, .8), rgba(255,85,91, .8)), -moz-linear-gradient(top, white 0px, white 69px, rgba(255,255,255,0) 70px), -moz-repeating-linear-gradient(white 0px, white 18px, #A6FFED 19px, white 20px);
+			    background-image:  -ms-linear-gradient(left, rgba(255,85,91, .2), rgba(255,85,91, .2)), -ms-linear-gradient(left, rgba(255,85,91, .8), rgba(255,85,91, .8)), -ms-linear-gradient(top, white 0px, white 69px, rgba(255,255,255,0) 70px), -ms-repeating-linear-gradient(white 0px, white 18px, #A6FFED 19px, white 20px);
+			    background-image:  -o-linear-gradient(left, rgba(255,85,91, .2), rgba(255,85,91, .2)), -o-linear-gradient(left, rgba(255,85,91, .8), rgba(255,85,91, .8)), -o-linear-gradient(top, white 0px, white 69px, rgba(255,255,255,0) 70px), -o-repeating-linear-gradient(white 0px, white 18px, #A6FFED 19px, white 20px);
+			    background-image:  linear-gradient(left, rgba(255,85,91, .2), rgba(255,85,91, .2)), linear-gradient(left, rgba(255,85,91, .8), rgba(255,85,91, .8)), linear-gradient(top, white 0px, white 69px, rgba(255,255,255,0) 70px), repeating-linear-gradient(white 0px, white 18px, #A6FFED 19px, white 20px);
+			    background-size: 1px, 1px, auto, auto 20px;
+			    background-repeat: repeat-y, repeat-y, no-repeat, repeat;
+			    background-position: 90% 0px, 10% 0px, 0px 0px, 0px 0px;
+			}
+			
+			.paper {
+				margin: 0;
+			    display: block;
+			    font: 10pt Arial, sans-serif;    
+			    line-height: 20px;
+			    padding-top: 50px;
+			    padding-left: 10.5%;
+			    padding-right: 10.5%;
+			    text-align: justify;
+			}
+			.paper:first-line {
+			    font: 20pt Arial, sans-serif;
+			    line-height: 33px;
+			    vertical-align: baseline;
+			}
+			.paper:after {    
+			    content: '';
+			    display: block;
+			    width: 20px;
+			    height: 20px;
+			    border-radius: 10px;
+			    position: absolute;
+			    background: rgba(255,255,255,1);
+			    top: 40px;
+			    left: 2%;
+			    z-index: 10;
+			    -webkit-box-shadow: 
+			        inset 2px 2px 5px rgba(125,125,125,1),  
+			        2px 50.1em 5px rgba(255,255,255,1), 0px 50em rgba(125,125,125,.75),  
+			        2px 90.1em 5px rgba(255,255,255,1), 0px 90em rgba(125,125,125,.5),
+			        2px 130.1em 5px rgba(255,255,255,1), 0px 130em rgba(125,125,125,.25);
+			    -moz-box-shadow: 
+			        inset 2px 2px 5px rgba(125,125,125,1),  
+			        2px 50.1em 5px rgba(255,255,255,1), 0px 50em rgba(125,125,125,.75),  
+			        2px 90.1em 5px rgba(255,255,255,1), 0px 90em rgba(125,125,125,.5),
+			        2px 130.1em 5px rgba(255,255,255,1), 0px 130em rgba(125,125,125,.25);
+			    box-shadow: 
+			        inset 2px 2px 5px rgba(125,125,125,1),  
+			        2px 50.1em 5px rgba(255,255,255,1), 0px 50em rgba(125,125,125,.75),  
+			        2px 90.1em 5px rgba(255,255,255,1), 0px 90em rgba(125,125,125,.5),
+			        2px 130.1em 5px rgba(255,255,255,1), 0px 130em rgba(125,125,125,.25);
+			}
+			
+			.paper:focus {
+			    outline: none;
+			}
+	
+	
+			.it2lbutton {
+				-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+				-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+				box-shadow:inset 0px 1px 0px 0px #ffffff;
+				background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
+				background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
+				filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
+				background-color:#ededed;
+				-webkit-border-top-left-radius:6px;
+				-moz-border-radius-topleft:6px;
+				border-top-left-radius:6px;
+				-webkit-border-top-right-radius:6px;
+				-moz-border-radius-topright:6px;
+				border-top-right-radius:6px;
+				-webkit-border-bottom-right-radius:6px;
+				-moz-border-radius-bottomright:6px;
+				border-bottom-right-radius:6px;
+				-webkit-border-bottom-left-radius:6px;
+				-moz-border-radius-bottomleft:6px;
+				border-bottom-left-radius:6px;
+				text-indent:0;
+				border:1px solid #778899;
+				display:inline-block;
+				color:#777777;
+				font-family:Comic Sans MS;
+				font-size:18px;
+				font-weight:bold;
+				font-style:normal;
+				height:50px;
+				line-height:50px;
+				width:100px;
+				text-decoration:none;
+				text-align:center;
+				text-shadow:1px 1px 0px #ffffff;
+			}
+			.it2lbutton:hover {
+				background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed) );
+				background:-moz-linear-gradient( center top, #dfdfdf 5%, #ededed 100% );
+				filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed');
+				background-color:#dfdfdf;
+			}.it2lbutton:active {
+				position:relative;
+				top:1px;
+			}
+			form {
+				margin-right:1cm;
+				margin-left:1cm;
+			}
+			
+			.mainContainer {
+				border:1px solid #778899;
+			    background-color:#FFF5EE;
+				box-shadow: 10px 10px 5px #888888;
+			}
+	</style>
 	<script type="text/javascript" src="/italk2learn/js/history/history.js"></script>
-	<script type="text/javascript" src="http://webplayer.unity3d.com/download_webplayer-3.x/3.0/uo/UnityObject2.js"></script>
-	<script type="text/javascript" src="http://it2l.dcs.bbk.ac.uk/italk2learn/js/swfobject.js"></script>
+	<script type="text/javascript" src="/js/swfobject.js" th:src="@{/resources/js/swfobject.js}"></script>
+    <script type="text/javascript" src="/js/unity2.js" th:src="@{/resources/js/unity2.js}"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.js"></script>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.js'></script>
+    <script type="text/javascript" src='js/scripts/strophe.js'></script>
+    <script type="text/javascript" src='js/scripts/flXHR.js'></script>
+    <script type="text/javascript" src='js/scripts/strophe.flxhr.js'></script>
+	<script type="text/javascript" src="http://www.google.com/jsapi" charset="utf-8"></script>
+	<script type="text/javascript" src='sequence/js/monitorWOZClient.js'></script>
+	
+    <script type="text/javascript" src="#" th:src="@{/resources/dojo/dojo.js}"></script>
+    <script type="text/javascript" src="#" th:src="@{/resources/spring/Spring.js}"></script>
+    <script type="text/javascript" src="#" th:src="@{/resources/spring/Spring-Dojo.js}"></script>
 </head>
-<body>
-	<table align="center">
-                    <tr align="center">
-                    	<td align="left">
-			               	<p align="right">
-			                         <input type="button" id="back" value="back"/>
-			                </p>
-	                    </td>
-                        <td align="center">
-                            <div id="mainContainer" align="center">
+<body class="paper">
+	<table id="header" class="header">
+                    <tr align="left">
+                        <td id="topbar" align="left">
+                            <div sec:authorize="hasRole('ROLE_USER')" th:if="${#authentication}">
+                                <a href="#" th:href="@{/auth/logout}">Logout</a>
+                            </div>
+                            <div sec:authorize="hasRole('ROLE_ADMIN')">
+                                <a href="#" th:href="@{/monitorWOZ/}">Wizard</a>
+                            </div>
+							<div id="connect" style="color:red;">
                             </div>
                         </td>
-                    	<td align="right">
-			                     <p align="right">
-			                         <input type="button" id="next" value="next"/>
-			                     </p>
-                       	 </td>
+                        <td id="logo" align="left">
+                            <div>
+                                <a href="#" th:href="@{/}">
+                                    <img src="../../images/iLearnFraction_banner_05.jpg" th:src="@{/resources/images/iLearnFraction_banner_05.jpg}" alt="italk2learn" />
+                                </a>
+                            </div>
+                        </td>
+                        <td align="right">
+                            <!-- Space for speech Recognition Component -->
+                           
+                        </td>
                     </tr>
-                </table>
+    </table>
+	
+	<table align="center">
+         <tr align="center">
+           	<td align="left">
+		       	<p align="right">
+		            <input type="submit" id="back" value="back" sec:authorize="hasRole('ROLE_USER')" class="it2lbutton" />
+		        </p>
+	        </td>
+            <td align="center">
+                <div id="mainContainer" align="center" sec:authorize="hasRole('ROLE_USER')" class="mainContainer">
+                	<a>
+                        <img src="../../images/it2l-loading.gif" th:src="@{/resources/images/it2l-loading.gif}" alt="loading" />
+                    </a>
+                </div>
+            </td>
+           	<td align="right">
+		        <p align="right">
+		            <input type="submit" id="next" value="next" sec:authorize="hasRole('ROLE_USER')" class="it2lbutton" />
+		        </p>
+            </td>
+         </tr>
+    </table>
 	<script type="text/javascript">
 		<!--
+
+		function loadjscssfile(filename, filetype){
+			 if (filetype=="js"){ //if filename is a external JavaScript file
+			  var fileref=document.createElement('script')
+			  fileref.setAttribute("type","text/javascript")
+			  fileref.setAttribute("src", filename)
+			 }
+			 else if (filetype=="css"){ //if filename is an external CSS file
+			  var fileref=document.createElement("link")
+			  fileref.setAttribute("rel", "stylesheet")
+			  fileref.setAttribute("type", "text/css")
+			  fileref.setAttribute("href", filename)
+			 }
+			 if (typeof fileref!="undefined")
+			  document.getElementsByTagName("head")[0].appendChild(fileref)
+			}
+		
 		$(document).ready(function() {
-			initContainer();
+			});
+			$.ajax({
+				type: 'GET',
+				url: "sequence/getUser",
+				success: function (data) {
+					//JLF: Call connect WOZ. If it's connected or authfail initialises the container.
+					connectWOZ (data);
+				},
+				error: function (jqXHR, status, error) {
+					$(document).trigger('error');
+				}
+			});
 			$("#back").click(function() {
 				backExercise();
 			});
 			$("#next").click(function() {
 				nextExercise();
-			});
 		});
 
 		function initContainer(){
-			//var ur="sequence/";
-			//$("#mainContainer").load(ur);
 		    $.ajax({
 		        type: 'GET',
 		        url: "sequence/",
@@ -58,7 +242,9 @@
 		        	document.getElementById("mainContainer").innerHTML=jqXHR.responseText;
 		            var reponse = jQuery(jqXHR.responseText);
 		            var reponseScript = reponse.filter("script");
-		            jQuery.each(reponseScript, function(idx, val) { eval(val.text); } );
+		            jQuery.each(reponseScript, function(idx, val) { 
+		            	loadjscssfile(val.src, "js");
+				    } );
 		        },
 		        error : function(jqXHR, status, error) {
 		           alert('Sorry!, there was a problem');
@@ -80,7 +266,9 @@
 		        	document.getElementById("mainContainer").innerHTML=jqXHR.responseText;
 		            var reponse = jQuery(jqXHR.responseText);
 		            var reponseScript = reponse.filter("script");
-		            jQuery.each(reponseScript, function(idx, val) { eval(val.text); } );
+		            jQuery.each(reponseScript, function(idx, val) { 
+		            	loadjscssfile(val.src, "js");
+				    } );
 		        },
 		        error : function(jqXHR, status, error) {
 		           alert('Sorry!, there was a problem');
@@ -102,7 +290,9 @@
 		        	document.getElementById("mainContainer").innerHTML=jqXHR.responseText;
 		            var reponse = jQuery(jqXHR.responseText);
 		            var reponseScript = reponse.filter("script");
-		            jQuery.each(reponseScript, function(idx, val) { eval(val.text); } );
+		            jQuery.each(reponseScript, function(idx, val) { 
+		            	loadjscssfile(val.src, "js");
+				    } );
 		        },
 		        error : function(jqXHR, status, error) {
 		           alert('Sorry!, there was a problem');
@@ -112,10 +302,43 @@
 		    });
 		}
 
+		function textToSpeech(message) {
+			play_sound("http://translate.google.com/translate_tts?ie=UTF-8&q="+encodeURIComponent(message)+"&tl=en_gb&total=1&idx=0prev=input");
+        }
+
+		function html5_audio(){
+    	    var a = document.createElement('audio');
+    	    return !!(a.canPlayType && a.canPlayType('audio/mpeg;').replace(/no/, ''));
+    	}
+    	 
+    	var play_html5_audio = false;
+    	if(html5_audio()) play_html5_audio = true;
+    	 
+    	function play_sound(url){
+    	    if(play_html5_audio){
+//     	    	var snd = new Audio(url);
+//     			snd.load();
+//     			snd.play();
+    	    	var sound = $("<embed id='sound' type='audio/mpeg' />");
+    	        sound.attr('src', url);
+    	        sound.attr('loop', false);
+    	        sound.attr('hidden', true);
+    	        sound.attr('autostart', true);
+    	        $('#player').append(sound);
+    	    }else{
+    	        $("#sound").remove();
+    	        var sound = $("<embed id='sound' type='audio/mpeg' />");
+    	        sound.attr('src', url);
+    	        sound.attr('loop', false);
+    	        sound.attr('hidden', true);
+    	        sound.attr('autostart', true);
+    	        $('body').append(sound);
+    	    }
+    	}
 
 		-->
 	</script>
-	<div id="speechRecognition" align="right">
+	<div id="speechRecognition" align="right" sec:authorize="hasRole('ROLE_USER')">
 		<p>To view this page ensure that Adobe Flash Player version 11.1.0
 			or greater is installed.</p>
 		<script type="text/javascript">
