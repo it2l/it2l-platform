@@ -94,6 +94,7 @@ public class ExercisesSequenceController {
 	@ResponseBody
 	public String getUserConnected(Model model) {
 		logger.info("JLF --- ExercisesSequence.getUserConnected");
+		user = (LdapUserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		return user.getUsername();
 	}
 
