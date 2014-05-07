@@ -112,7 +112,7 @@ public class MainContainerController {
 	}
 	
 	/**
-	 * Store the information about student events
+	 * Get the task independent support emotions
 	 * 
 	 */
 	@RequestMapping(value = "/getTIEmotions",method = RequestMethod.GET)
@@ -130,7 +130,7 @@ public class MainContainerController {
 	}
 	
 	/**
-	 * Store the information about student events
+	 * Get the task independent support emotions
 	 * 
 	 */
 	@RequestMapping(value = "/getTIFeedback",method = RequestMethod.GET)
