@@ -1,7 +1,10 @@
 package com.italk2learn.bo;
 
+import java.io.File;
 import java.io.StringReader;
 import java.lang.reflect.Method;
+import java.net.URL;
+import java.net.URLClassLoader;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -28,6 +31,7 @@ public class SpeechRecognitionBO implements ISpeechRecognitionBO {
 	private static final Logger logger = LoggerFactory
 			.getLogger(SpeechRecognitionBO.class);
 	
+	private static String OS = System.getProperty("os.name").toLowerCase();
 	private Class asrClass;
 	private Method asrMethod;
 	private boolean isInit=false;
@@ -60,7 +64,13 @@ public class SpeechRecognitionBO implements ISpeechRecognitionBO {
 		SpeechRecognitionResponseVO res=new SpeechRecognitionResponseVO();
 		try {
 			if (isInit==false) {
-				asrClass = Class.forName("Italk2learn");
+				if (isUnix()){
+					File root = new File("/var/lib/tomcat7/webapps/italk2learn/WEB-INF/classes");
+					URLClassLoader classLoader = URLClassLoader.newInstance(new URL[] { root.toURI().toURL() });
+					asrClass = Class.forName("Italk2learnLinux",true, classLoader);
+				} else if (isWindows()) {
+					asrClass = Class.forName("Italk2learn");
+				}
 				asrMethod = asrClass.getMethod("initSpeechRecognition");
 				isInit = (Boolean)asrMethod.invoke(asrClass.newInstance());
 				res.setOpen(isInit);
@@ -72,7 +82,7 @@ public class SpeechRecognitionBO implements ISpeechRecognitionBO {
 			return res;
 		} catch (Exception e) {
 			logger.error(e.toString());
-			System.err.println(e);
+			//System.err.println(e);
 		}
 		return res;
 	}
@@ -101,7 +111,7 @@ public class SpeechRecognitionBO implements ISpeechRecognitionBO {
 			return res;
 		} catch (Exception e) {
 			logger.error(e.toString());
-			System.err.println(e);
+			//System.err.println(e);
 		}
 		return res;
 	}
@@ -125,7 +135,7 @@ public class SpeechRecognitionBO implements ISpeechRecognitionBO {
 			return res;
 		} catch (Exception e) {
 			logger.error(e.toString());
-			System.err.println(e);
+			//System.err.println(e);
 		}
 		return res;
 	}
@@ -160,7 +170,7 @@ public class SpeechRecognitionBO implements ISpeechRecognitionBO {
 		}
 		catch (Exception e){
 			logger.error(e.toString());
-			System.out.println(e);
+			//System.out.println(e);
 		}
 		return null;
 	}
@@ -189,6 +199,18 @@ public class SpeechRecognitionBO implements ISpeechRecognitionBO {
 			text.append(node.getNodeValue()+ " ");
 		}
 		return text.toString();
+	}
+	
+	public static boolean isWindows() {
+		 
+		return (OS.indexOf("win") >= 0);
+ 
+	}
+ 
+	public static boolean isUnix() {
+ 
+		return (OS.indexOf("nix") >= 0 || OS.indexOf("nux") >= 0 || OS.indexOf("aix") > 0 );
+ 
 	}
 
 }

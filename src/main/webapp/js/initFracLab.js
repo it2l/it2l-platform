@@ -46,6 +46,25 @@
 					u.initPlugin(jQuery("#unityPlayer")[0], "http://it2l.dcs.bbk.ac.uk/italk2learn/sequence/FractionsLab.unity3d");
 				});
 
+				function InitFractionsLab(data)
+				{
+					$.ajax({
+						type: 'GET',
+				        contentType : 'application/json; charset=utf-8',
+				        dataType : 'json',
+				        url: "setNewStudentInfo",
+				        success: function(data, textStatus, jqXHR){
+				        	//doSomething(data.Language,data.StundentInfo,data.TaskInfo)
+				        },
+				        error : function(jqXHR, status, error) {
+				           alert('Sorry!, there was a problem');
+				        },
+				        complete : function(jqXHR, status) {
+				        }
+				    });
+				}
+				
+				
 				function SendHighMessage(message)
 				{
 					var json = "{\"method\": \"HighFeedback\", \"parameters\": {\"message\": \"" + message +"\"}}";
@@ -56,4 +75,28 @@
 				{
 					var json = "{\"method\": \"LowFeedback\", \"parameters\": {\"message\": \"" + message +"\"}}";
 					u.getUnity().SendMessage("ExternalInterface", "SendEvent", json);
+				}
+				
+				function PlaySound(message)
+				{
+					textToSpeech(message);
+				}
+				
+				function SetNewStudentInfo(data)
+				{
+					$.ajax({
+						type: 'POST',
+				        contentType : 'application/json; charset=utf-8',
+				        dataType : 'json',
+				        url: "setNewStudentInfo",
+				        data: JSON.stringify(sub),
+				        success: function(data, textStatus, jqXHR){
+				        	//doSomething()
+				        },
+				        error : function(jqXHR, status, error) {
+				           alert('Sorry!, there was a problem');
+				        },
+				        complete : function(jqXHR, status) {
+				        }
+				    });
 				}

@@ -19,7 +19,8 @@
 	</bean>
 
 	<!-- Map paths directly to view names without controller processing. Use the view-name attribute if necessary: by convention the view name equals the path without the leading slash -->
-	<mvc:view-controller path="/" view-name="intro" />
+	<mvc:view-controller path="/" view-name="login" />
+	<mvc:view-controller path="/intro"/>
 	<mvc:view-controller path="/login" />
 	<mvc:view-controller path="/exercise" />
 	<mvc:view-controller path="/woztest" />

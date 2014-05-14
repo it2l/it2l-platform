@@ -14,25 +14,27 @@
 
 	<form class="login-form" name="login-form" action="j_spring_security_check" method="post">
 		<div class="header">
-		<h1>iTalk2Learn Login</h1>
-		<span>Please sign in</span>
+			<h1>iTalk2Learn Login</h1>
+			<span>Please sign in</span>
 		</div>
-	
 		<div class="content">
-		<input name="j_username" type="text" class="input username" placeholder="Username" id="j_username"/>
-		<div class="user-icon"></div>
-		<input name="j_password" type="password" class="input password" placeholder="Password" id="j_password"/>
-		<div class="pass-icon"></div>		
+			<input name="j_username" type="text" class="input username" placeholder="Username" id="j_username"/>
+			<div class="user-icon"></div>
+			<input name="j_password" type="password" class="input password" placeholder="Password" id="j_password"/>
+			<div class="pass-icon"></div>		
 		</div>
-
 		<div class="footer">
 		<input type="submit" name="submit" value="Login" class="button" />
 		<input type="submit" name="submit" value="Register" class="register" />
 		</div>
 		<span th:text="${err}" style="color:red;"></span>
 	</form>
-
-</div>
-<div class="gradient"></div>
+	</div>
+	<div>
+	    <p>
+        	<a href="/intro.html" th:href="@{/intro}">Info page</a>
+    	</p>
+	</div>
+	<div class="gradient"></div>
 </body>
 </html>

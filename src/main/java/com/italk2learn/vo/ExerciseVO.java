@@ -13,6 +13,7 @@ public class ExerciseVO extends ResponseVO {
 	private String exercise;
 	private String feedback;
 	private String view;
+	private String description;
 	
 	
 	public int getIdExercise() {
@@ -56,5 +57,11 @@ public class ExerciseVO extends ResponseVO {
 	}
 	public void setView(String view) {
 		this.view = view;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
 	}
 }

@@ -10,6 +10,8 @@ public interface IExerciseDAO {
 	
 	public List<Exercises> getSequenceExercises(int idUser) throws Exception;
 	
+	public Exercises getSpecificExercise(int idExercise) throws Exception;
+	
 	public ExerciseVO getNextExercise(int idUser, int idExercise) throws Exception;
 	
 	public ExerciseVO getBackExercise(int idUser, int idExercise) throws Exception;
@@ -19,5 +21,7 @@ public interface IExerciseDAO {
 	public void insertActualExercise(int idUser, int idView) throws ITalk2LearnException;
 	
 	public Exercises getFirstExercise(int idUser) throws Exception;
+	
+	public List<Exercises> getAllExercises() throws ITalk2LearnException;
 
 }

@@ -1,6 +1,6 @@
 package com.hibernate.dto;
 
-// Generated 29-Jan-2014 17:21:23 by Hibernate Tools 3.4.0.CR1
+// Generated 12-May-2014 12:59:52 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -21,6 +21,9 @@ public class Exercises implements java.io.Serializable {
 	private int idExercise;
 	private String exercise;
 	private String view;
+	private String description;
+	private Set<Ctatexercise> ctatexercises = new HashSet<Ctatexercise>(0);
+	private Set<Whizzexercise> whizzexercises = new HashSet<Whizzexercise>(0);
 	private Set<Sequence> sequences = new HashSet<Sequence>(0);
 
 	public Exercises() {
@@ -31,10 +34,14 @@ public class Exercises implements java.io.Serializable {
 	}
 
 	public Exercises(int idExercise, String exercise, String view,
-			Set<Sequence> sequences) {
+			String description, Set<Ctatexercise> ctatexercises,
+			Set<Whizzexercise> whizzexercises, Set<Sequence> sequences) {
 		this.idExercise = idExercise;
 		this.exercise = exercise;
 		this.view = view;
+		this.description = description;
+		this.ctatexercises = ctatexercises;
+		this.whizzexercises = whizzexercises;
 		this.sequences = sequences;
 	}
 
@@ -64,6 +71,33 @@ public class Exercises implements java.io.Serializable {
 
 	public void setView(String view) {
 		this.view = view;
+	}
+
+	@Column(name = "description", length = 100)
+	public String getDescription() {
+		return this.description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "exercises")
+	public Set<Ctatexercise> getCtatexercises() {
+		return this.ctatexercises;
+	}
+
+	public void setCtatexercises(Set<Ctatexercise> ctatexercises) {
+		this.ctatexercises = ctatexercises;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "exercises")
+	public Set<Whizzexercise> getWhizzexercises() {
+		return this.whizzexercises;
+	}
+
+	public void setWhizzexercises(Set<Whizzexercise> whizzexercises) {
+		this.whizzexercises = whizzexercises;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "exercises")

@@ -1,9 +1,6 @@
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.italk2learn.vo.SpeechRecognitionRequestVO;
 
-public class Italk2learn {
+public class Italk2learnLinux {
 	
 	//JLF: Send chunks of audio to Speech Recognition engine each 5 seconds
     public native void sendNewAudioChunk(byte[] buf);
@@ -14,8 +11,8 @@ public class Italk2learn {
     //JLF Indicates if ASREngine is initialised or no
     private boolean isInit=false;
     
-	private static final Logger logger = LoggerFactory
-			.getLogger(Italk2learn.class);
+//	private static final Logger logger = LoggerFactory
+//			.getLogger(Italk2learn.class);
 	
 	//JLF: Send chunks of audio to Speech Recognition engine
 	public void sendNewChunk(SpeechRecognitionRequestVO request) {
@@ -23,7 +20,7 @@ public class Italk2learn {
 		try {
 			this.sendNewAudioChunk(request.getData());
 		} catch (Exception e) {
-			logger.error(e.toString());
+//			logger.error(e.toString());
 			System.err.println(e);
 		} 
 	}
@@ -38,7 +35,7 @@ public class Italk2learn {
 			isInit=result;
 			return result;
 		} catch (Exception e) {
-			logger.error(e.toString());
+//			logger.error(e.toString());
 			System.err.println(e);
 		} 
 		return result;
@@ -53,7 +50,7 @@ public class Italk2learn {
 			System.out.println(result);
 			return result;
 		} catch (Exception e) {
-			logger.error(e.toString());
+//			logger.error(e.toString());
 			System.err.println(e);
 		} 
 		return result;
@@ -61,16 +58,18 @@ public class Italk2learn {
 	
 	// JLF: Retrieves data from ASRResult on real time
 	public String realTimeSpeech(String text) {
-		logger.info(text);
-		System.out.println("\nJava: "+text);
+//		logger.info(text);
+		System.out.println(text);
 	    return text;
 	}
 	
 	static {
 		try {
-			System.loadLibrary("iT2L");
+			//System.loadLibrary("iT2L");
+			//JLF: Loads the specific library, using absolute path
+			System.load("/usr/share/MMIndexer6.2/bin/libiT2L.so");
 		} catch (Exception e) {
-			logger.error(e.toString());
+//			logger.error(e.toString());
 			System.err.println(e);
 		}
 	}

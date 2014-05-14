@@ -52,6 +52,20 @@ public class ExerciseDAO extends HibernateDaoSupport implements IExerciseDAO {
 	}
 	
 	/**
+	 * @return Get a specific exercise of a given idExercise
+	 */
+	public Exercises getSpecificExercise(int idExercise) throws Exception {
+		try {
+			final Criteria criteria = getITalk2LearnSession().createCriteria(Exercises.class);
+			criteria.add(Restrictions.eq("idExercise", idExercise));
+			return (Exercises) criteria.uniqueResult();
+		} catch (Exception e){
+			e.printStackTrace();
+			throw new ITalk2LearnException(e);
+		}
+	}
+	
+	/**
 	 * @return list Get a exercise to create a sequence
 	 */
 	public ExerciseVO getNextExercise(int idUser, int idExercise) throws Exception {
@@ -158,6 +172,21 @@ public class ExerciseDAO extends HibernateDaoSupport implements IExerciseDAO {
 		try{
 			Exercises ex=(Exercises) session.load(Exercises.class, idExercise);
 			return ex;
+		} catch (Exception e){
+			e.printStackTrace();
+			throw new ITalk2LearnException(e);
+		}
+	}
+	
+	
+	/**
+	 * @return list Get all exercises stored in the database
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Exercises> getAllExercises() throws ITalk2LearnException {
+		try {
+			final Criteria criteria = getITalk2LearnSession().createCriteria(Exercises.class);
+			return (List<Exercises>) criteria.list();
 		} catch (Exception e){
 			e.printStackTrace();
 			throw new ITalk2LearnException(e);
