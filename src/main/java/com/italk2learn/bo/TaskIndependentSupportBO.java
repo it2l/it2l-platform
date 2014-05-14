@@ -2,7 +2,6 @@ package com.italk2learn.bo;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,7 +17,7 @@ public class TaskIndependentSupportBO implements ITaskIndependentSupportBO  {
 	private static final Logger logger = LoggerFactory
 			.getLogger(TaskIndependentSupportBO.class);
 
-	@Autowired
+	/*@Autowired*/
 	public TaskIndependentSupportBO() {
 		
 	}

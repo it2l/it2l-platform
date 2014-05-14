@@ -62,7 +62,7 @@ public class Italk2learn {
 	// JLF: Retrieves data from ASRResult on real time
 	public String realTimeSpeech(String text) {
 		logger.info(text);
-		System.out.println(text);
+		System.out.println("\nJava: "+text);
 	    return text;
 	}
 	

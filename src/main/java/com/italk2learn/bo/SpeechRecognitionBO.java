@@ -82,7 +82,7 @@ public class SpeechRecognitionBO implements ISpeechRecognitionBO {
 			return res;
 		} catch (Exception e) {
 			logger.error(e.toString());
-			System.err.println(e);
+			//System.err.println(e);
 		}
 		return res;
 	}
@@ -111,7 +111,7 @@ public class SpeechRecognitionBO implements ISpeechRecognitionBO {
 			return res;
 		} catch (Exception e) {
 			logger.error(e.toString());
-			System.err.println(e);
+			//System.err.println(e);
 		}
 		return res;
 	}
@@ -135,7 +135,7 @@ public class SpeechRecognitionBO implements ISpeechRecognitionBO {
 			return res;
 		} catch (Exception e) {
 			logger.error(e.toString());
-			System.err.println(e);
+			//System.err.println(e);
 		}
 		return res;
 	}
@@ -170,7 +170,7 @@ public class SpeechRecognitionBO implements ISpeechRecognitionBO {
 		}
 		catch (Exception e){
 			logger.error(e.toString());
-			System.out.println(e);
+			//System.out.println(e);
 		}
 		return null;
 	}

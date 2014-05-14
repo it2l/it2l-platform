@@ -173,11 +173,11 @@
 	
 	<table align="center">
          <tr align="center">
-           	<td align="left">
-		       	<p align="right">
-		            <input type="submit" id="back" value="back" sec:authorize="hasRole('ROLE_USER')" class="it2lbutton" />
-		        </p>
-	        </td>
+<!--            	<td align="left"> -->
+<!-- 		       	<p align="right"> -->
+<!-- 		            <input type="submit" id="back" value="back" sec:authorize="hasRole('ROLE_USER')" class="it2lbutton" /> -->
+<!-- 		        </p> -->
+<!-- 	        </td> -->
             <td align="center">
                 <div id="mainContainer" align="center" sec:authorize="hasRole('ROLE_USER')" class="mainContainer">
                 	<a>
@@ -212,7 +212,6 @@
 			}
 		
 		$(document).ready(function() {
-			});
 			$.ajax({
 				type: 'GET',
 				url: "sequence/getUser",
@@ -224,11 +223,15 @@
 					$(document).trigger('error');
 				}
 			});
-			$("#back").click(function() {
-				backExercise();
-			});
+// 			$("#back").click(function() {
+// 				backExercise();
+// 			});
 			$("#next").click(function() {
 				nextExercise();
+			});	
+			$("#submitEx").click(function() {
+				submitExercise();
+			});
 		});
 
 		function initContainer(){
@@ -302,6 +305,35 @@
 		    });
 		}
 
+
+		function submitExercise(){
+			document.getElementById("mainContainer").innerHTML = '';
+			$("#next").remove();
+			var sub = {
+		       	 "idExercise": $('#exList').val(), 
+		        };
+		    $.ajax({
+		        type: 'POST',
+		        contentType : 'application/json; charset=utf-8',
+		        url: "exercise/getSpecificExercise",
+		        data: JSON.stringify(sub),
+		        success: function(data, textStatus, jqXHR){
+		        	document.getElementById("mainContainer").innerHTML=jqXHR.responseText;
+		            var reponse = jQuery(jqXHR.responseText);
+		            var reponseScript = reponse.filter("script");
+		            jQuery.each(reponseScript, function(idx, val) { 
+		            	loadjscssfile(val.src, "js");
+				    } );
+		        },
+		        error : function(jqXHR, status, error) {
+		           alert('Sorry!, there was a problem');
+		        },
+//		        complete : function(jqXHR, status) {
+//		           alert('Done!');
+//		        }
+		    });
+		}
+
 		function textToSpeech(message) {
 			play_sound("http://translate.google.com/translate_tts?ie=UTF-8&q="+encodeURIComponent(message)+"&tl=en_gb&total=1&idx=0prev=input");
         }
@@ -312,7 +344,8 @@
     	}
     	 
     	var play_html5_audio = false;
-    	if(html5_audio()) play_html5_audio = true;
+    	if(html5_audio()) 
+        	play_html5_audio = true;
     	 
     	function play_sound(url){
     	    if(play_html5_audio){
@@ -398,5 +431,14 @@
 			<!--<![endif]-->
 		</object>
 	</noscript>
+	<div sec:authorize="hasRole('ROLE_ADMIN')">
+		<p>
+			Choose exercise
+	 	<select id="exList">
+    		 <option th:each="exercise : ${allExercises}" th:value="${exercise.idExercise}" th:text="${exercise.exercise}">Option</option>
+     	</select>
+     	<input id="submitEx" type="button" value="Submit" />		
+		</p>
+	</div>
 </body>
 </html>

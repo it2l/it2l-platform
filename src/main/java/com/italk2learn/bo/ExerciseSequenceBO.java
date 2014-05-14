@@ -29,7 +29,15 @@ public class ExerciseSequenceBO implements IExerciseSequenceBO  {
 	
     public ExerciseSequenceResponseVO findAllExercises(ExerciseSequenceRequestVO request) {
     	ExerciseSequenceResponseVO response= new ExerciseSequenceResponseVO();
-    	response.setResponse(this.exercisesRepository.findAll());
+		try {
+			response.setResponse(ExerciseAssembler.toExerciseVOs(getExerciseDAO().getAllExercises()));
+		} catch (ITalk2LearnException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     	return response;
     }
 
@@ -38,6 +46,19 @@ public class ExerciseSequenceBO implements IExerciseSequenceBO  {
 			
 			ExerciseSequenceResponseVO response= new ExerciseSequenceResponseVO();
 			response.setResponse(ExerciseAssembler.toExerciseVOs(getExerciseDAO().getSequenceExercises(request.getIdUser())));
+			return response;
+		}
+		catch (Exception e){
+			System.out.println(e);
+		}
+		return null;
+	}
+	
+	public ExerciseSequenceResponseVO getSpecificExercise(ExerciseSequenceRequestVO request) throws ITalk2LearnException{
+		try {
+			
+			ExerciseSequenceResponseVO response= new ExerciseSequenceResponseVO();
+			response.setExercise(ExerciseAssembler.toExerciseVOs(getExerciseDAO().getSpecificExercise(request.getIdExercise())));
 			return response;
 		}
 		catch (Exception e){
