@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <config>
-	<flashvarMoviePath>ex/</flashvarMoviePath>
-	<flashvarPath>pb/</flashvarPath>
+	<flashvarMoviePath>sequence/ex/</flashvarMoviePath>
+	<flashvarPath>sequence/pb/</flashvarPath>
 	<flashvarViewAll>0</flashvarViewAll>
 	<flashvarAssessment>0</flashvarAssessment>
 	<flashvarSkipText>1</flashvarSkipText>
