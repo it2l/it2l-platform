@@ -65,9 +65,9 @@ public class Italk2learnLinux {
 	
 	static {
 		try {
-			//System.loadLibrary("iT2L");
+			System.loadLibrary("iT2L");
 			//JLF: Loads the specific library, using absolute path
-			System.load("/usr/share/MMIndexer6.2/bin/libiT2L.so");
+			//System.load("/var/lib/tomcat7/shared/classes/libiT2L.so");
 		} catch (Exception e) {
 //			logger.error(e.toString());
 			System.err.println(e);
