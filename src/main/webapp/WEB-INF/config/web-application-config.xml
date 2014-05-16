@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jms="http://www.springframework.org/schema/jms"
+       xmlns:amq="http://activemq.apache.org/schema/core"
        xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:context="http://www.springframework.org/schema/context"
 	   xmlns:util="http://www.springframework.org/schema/util"
@@ -8,6 +10,8 @@
            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+           http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms-3.1.xsd
+           http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core-5.5.0.xsd
 		   http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd" >
 
 	<aop:aspectj-autoproxy />
@@ -29,6 +33,23 @@
 		</property>
 		<property name="ignoreUnresolvablePlaceholders" value="true" />
 	</bean>
+	
+	<!-- JMS Integration -->
+	<amq:topic id="eventTopic" name="topic.events" />
+
+    <amq:queue id="processingQueue" name="queue.process" />
+
+    <amq:connectionFactory id="connectionFactory" brokerURL="vm://localhost" />
+
+    <bean id="eventTopicTemplate" class="org.springframework.jms.core.JmsTemplate">
+        <property name="connectionFactory" ref="connectionFactory" />
+        <property name="defaultDestinationName" value="topic.events" />
+    </bean>
+
+    <jms:listener-container connection-factory="connectionFactory">
+        <jms:listener destination="queue.process" ref="messageQueueBO" method="doProcessing" />
+    </jms:listener-container>
+	<!-- Finish JMS Integration -->
 	
 <!-- 	<bean id="serverServiceExporter" class="org.springframework.remoting.jaxws.SimpleJaxWsServiceExporter"> -->
 <!-- 		<property name="baseAddress" value="http://localhost:9999/" /> -->
