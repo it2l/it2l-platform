@@ -55,5 +55,15 @@
 		<servlet-name>Spring MVC Dispatcher Servlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-
+	
+	<servlet>
+	    <servlet-name>amq</servlet-name>
+	    <servlet-class>org.apache.activemq.web.AjaxServlet</servlet-class>
+	    <load-on-startup>1</load-on-startup>
+	</servlet>
+	 
+	<servlet-mapping>
+	    <servlet-name>amq</servlet-name>
+	    <url-pattern>/amq/*</url-pattern>
+	</servlet-mapping>
 </web-app>

@@ -77,6 +77,12 @@
 					u.getUnity().SendMessage("ExternalInterface", "SendEvent", json);
 				}
 				
+				function SendMessageToSupport(message)
+				{
+					var json = "{\"method\": \"SendMessageToSupport\", \"parameters\": {\"message\": \"" + message +"\"}}";
+					u.getUnity().SendMessage("ExternalInterface", "SendEvent", json);
+				}
+				
 				function PlaySound(message)
 				{
 					textToSpeech(message);
