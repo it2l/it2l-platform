@@ -70,7 +70,7 @@
 	                    </tr>
 	                    <tr align="center">
                 			<td align="center">	
-	    		                <font face="Comic Sans MS"><h1 id="task" align="center">Before you continue performing the exercise you must click ON button in the speech recorder</h1></font>
+	    		                <font face="Comic Sans MS"><h1 id="task" align="center" th:text="#{initial.text}">Before you continue performing the exercise you must click ON button in the speech recorder</h1></font>
 							</td>
 	                    </tr>
 						<tr align="center">
@@ -92,6 +92,13 @@
     </table>
 	<script type="text/javascript">
 		<!--
+
+		function getParameterByName(name) {
+		    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+		    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+		        results = regex.exec(location.search);
+		    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+		}
 
 		function loadjscssfile(filename, filetype){
 			 if (filetype=="js"){ //if filename is a external JavaScript file
@@ -234,7 +241,14 @@
 		}
 
 		function textToSpeech(message) {
-			play_sound("http://translate.google.com/translate_tts?ie=UTF-8&q="+encodeURIComponent(message)+"&tl=en_gb&total=1&idx=0prev=input");
+			var l_lang=getParameterByName("locale");
+			if (l_lang=="" && navigator.userLanguage) // Explorer
+			  l_lang = navigator.userLanguage;
+			else if (l_lang=="" && navigator.language) // FF
+			  l_lang = navigator.language;
+			else if (l_lang=="")
+			  l_lang = "en";
+			play_sound("http://translate.google.com/translate_tts?ie=UTF-8&q="+encodeURIComponent(message)+"&tl="+l_lang+"&total=1&idx=0prev=input");
         }
 
 		function html5_audio(){
