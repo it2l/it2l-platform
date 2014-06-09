@@ -11,6 +11,11 @@
 			/WEB-INF/config/web-application-config.xml
 		</param-value>
 	</context-param>
+	
+	<context-param>
+        <param-name>org.apache.activemq.brokerURL</param-name>
+        <param-value>vm://localhost</param-value>
+    </context-param>
 
 	<!-- Loads the Spring web application context -->
 	<listener>

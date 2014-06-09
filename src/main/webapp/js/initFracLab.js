@@ -1,4 +1,15 @@
-			var config = {
+				$("#done").show();
+				$("#help").show();
+				$("#done").click(function() {
+					doneButtonPressed();
+				});
+				$("#next").click(function() {
+					arrowButtonPressed();
+				});
+				$("#help").click(function() {
+					helpButtonPressed();
+				});
+				var config = {
 					width: 800,
 					height: 600,
 					params: { enableDebugging:"0" }
@@ -83,10 +94,32 @@
 					u.getUnity().SendMessage("ExternalInterface", "SendEvent", json);
 				}
 				
-				function PlaySound(message)
+				function playSound(message)
 				{
 					textToSpeech(message);
 				}
+				
+				function doneButtonEnable(value){
+					if (value==true)
+						$("#done").removeAttr("disabled");
+					else	
+						$("#done").attr("disabled", "disabled");
+				}
+				
+				function arrowButtonEnable(value){
+					if (value==true)
+						$("#next").removeAttr("disabled");
+					else	
+						$("#next").attr("disabled", "disabled");
+				}
+				
+				function helpButtonEnable(value){
+					if (value==true)
+						$("#help").removeAttr("disabled");
+					else	
+						$("#help").attr("disabled", "disabled");
+				}
+				
 				
 				function SetNewStudentInfo(data)
 				{
@@ -106,3 +139,19 @@
 				        }
 				    });
 				}
+				
+				function doneButtonPressed(){
+					var json = "{\"method\": \"doneButtonPressed\"}";
+					u.getUnity().SendMessage("ExternalInterface", "SendEvent", json);
+				}
+				
+				function arrowButtonPressed(){
+					var json = "{\"method\": \"arrowButtonPressed\"}";
+					u.getUnity().SendMessage("ExternalInterface", "SendEvent", json);
+				}
+				
+				function helpButtonPressed(){
+					var json = "{\"method\": \"helpButtonPressed\"}";
+					u.getUnity().SendMessage("ExternalInterface", "SendEvent", json);
+				}
+
