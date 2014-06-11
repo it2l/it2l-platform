@@ -44,5 +44,6 @@
 
 			function SendLowMessage(message)
 			{
+				textToSpeech(message);
 				setTimeout(function(){alert(message)},5000);
 			}

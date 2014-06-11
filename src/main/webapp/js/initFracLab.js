@@ -1,5 +1,10 @@
+				var lowMessage;
 				$("#done").show();
 				$("#help").show();
+				$("#done").attr("disabled", "disabled");
+				$("#help").attr("disabled", "disabled");
+				$('#help').css("background-image", "url(/italk2learn/images/lightbulb_off.png)");
+				$('#help').css({ width: '128px', height: '128px'});
 				$("#done").click(function() {
 					doneButtonPressed();
 				});
@@ -84,8 +89,15 @@
 
 				function SendLowMessage(message)
 				{
-					var json = "{\"method\": \"LowFeedback\", \"parameters\": {\"message\": \"" + message +"\"}}";
-					u.getUnity().SendMessage("ExternalInterface", "SendEvent", json);
+					if (message.charAt(0)==='x'){
+						$('#help').css("background-image", "url(/italk2learn/images/lightbulb_off.png)");
+						helpButtonEnable(false);						
+					}
+					else {
+						$('#help').css("background-image", "url(/italk2learn/images/lightbulb_on.png)");
+						helpButtonEnable(true);
+						lowMessage=message;
+					}
 				}
 				
 				function SendMessageToSupport(message)
@@ -151,7 +163,11 @@
 				}
 				
 				function helpButtonPressed(){
-					var json = "{\"method\": \"helpButtonPressed\"}";
+					//JLF: Future implementation
+					//var json = "{\"method\": \"helpButtonPressed\"}";
+					//u.getUnity().SendMessage("ExternalInterface", "SendEvent", json);
+					textToSpeech(lowMessage);
+					var json = "{\"method\": \"LowFeedback\", \"parameters\": {\"message\": \"" + lowMessage +"\"}}";
 					u.getUnity().SendMessage("ExternalInterface", "SendEvent", json);
 				}
 
