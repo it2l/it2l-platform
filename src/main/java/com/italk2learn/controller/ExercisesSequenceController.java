@@ -19,11 +19,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.italk2learn.bo.inter.IExerciseSequenceBO;
+import com.italk2learn.bo.inter.IFractionsLabBO;
 import com.italk2learn.bo.inter.ILoginUserService;
 import com.italk2learn.bo.inter.IWhizzExerciseBO;
 import com.italk2learn.vo.ExerciseSequenceRequestVO;
 import com.italk2learn.vo.ExerciseSequenceResponseVO;
 import com.italk2learn.vo.ExerciseVO;
+import com.italk2learn.vo.FractionsLabRequestVO;
 import com.italk2learn.vo.HeaderVO;
 import com.italk2learn.vo.WhizzExerciseVO;
 import com.italk2learn.vo.WhizzRequestVO;
@@ -53,12 +55,16 @@ public class ExercisesSequenceController {
 	private IExerciseSequenceBO exerciseSequenceService;
 	private ILoginUserService loginUserService;
 	private IWhizzExerciseBO whizzExerciseBO;
+	private IFractionsLabBO fractionsLabBO;
+
 
     @Autowired
-    public ExercisesSequenceController(IExerciseSequenceBO exerciseSequence, ILoginUserService loginUserService, IWhizzExerciseBO whizzExerciseBO) {
+    public ExercisesSequenceController(IExerciseSequenceBO exerciseSequence, ILoginUserService loginUserService, IWhizzExerciseBO whizzExerciseBO, IFractionsLabBO fractionsLabBO) {
     	this.exerciseSequenceService = exerciseSequence;
     	this.loginUserService=loginUserService;
     	this.setWhizzExerciseBO(whizzExerciseBO);
+    	this.setFractionsLabBO(fractionsLabBO);
+
     }
 	
 	/**
@@ -108,8 +114,9 @@ public class ExercisesSequenceController {
 		ModelAndView modelAndView = new ModelAndView();
 		ExerciseSequenceRequestVO request= new ExerciseSequenceRequestVO();
 		try{
+			user = (LdapUserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			request.setHeaderVO(new HeaderVO());
-			request.getHeaderVO().setLoginUser(this.getUsername());
+			request.getHeaderVO().setLoginUser(user.getUsername());
 			request.setIdExercise(getLoginUserService().getIdExersiceUser(request.getHeaderVO()));
 			request.setIdUser(getLoginUserService().getIdUserInfo(request.getHeaderVO()));
 			ExerciseVO response=getExerciseSequenceService().getNextExercise(request).getExercise();
@@ -169,6 +176,25 @@ public class ExercisesSequenceController {
         	logger.error(ex.toString());
         }
 	}
+	
+	/**
+	 * JLF: Controller to store Whizz Data
+	 */
+	@RequestMapping(value = "/saveFLEvent", method = RequestMethod.POST)
+    public @ResponseBody void saveFractionsLabEvent(@RequestBody FractionsLabRequestVO flRequest, HttpServletRequest req){
+		logger.info("JLF --- saveFractionsLabEvent log"+"User: "+this.getUsername());
+		FractionsLabRequestVO request=new FractionsLabRequestVO();
+        try {
+        	request.setHeaderVO(new HeaderVO());
+			request.getHeaderVO().setLoginUser(this.getUsername());
+			request.setIdExercise(getLoginUserService().getIdExersiceUser(request.getHeaderVO()));
+			request.setIdUser(getLoginUserService().getIdUserInfo(request.getHeaderVO()));
+            request.setEvent(flRequest.getEvent());
+            getFractionsLabBO().saveEventFL(request);
+        } catch (Exception ex) {
+        	logger.error(ex.toString());
+        }
+	}
 
 	
 	public IExerciseSequenceBO getExerciseSequenceService() {
@@ -213,6 +239,14 @@ public class ExercisesSequenceController {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	public IFractionsLabBO getFractionsLabBO() {
+		return fractionsLabBO;
+	}
+
+	public void setFractionsLabBO(IFractionsLabBO fractionsLabBO) {
+		this.fractionsLabBO = fractionsLabBO;
 	}
 
 }

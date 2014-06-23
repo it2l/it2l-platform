@@ -83,11 +83,12 @@ var Gab = {
 				}
 				else if (body.charAt(0)==='l'){
 				   var s=body.substring(1,body.lenght);
-				   SendLowMessage(s);
+				   EnableHelpButton(s);
 				}
 				else if (body.charAt(0)==='s'){
 				   var s=body.substring(1,body.lenght);
 				   textToSpeech(s);
+				   SendLowMessage(s);
 				}
                 else if (body.charAt(0)!=''){ 
                    textToSpeech(body);

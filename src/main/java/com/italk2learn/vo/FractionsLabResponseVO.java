@@ -1,6 +1,6 @@
 package com.italk2learn.vo;
 
-public class FractionsLabResponse extends ResponseVO {
+public class FractionsLabResponseVO extends ResponseVO {
 
 	/**
 	 * 
@@ -10,6 +10,16 @@ public class FractionsLabResponse extends ResponseVO {
 	//JLF: StudentInfo and Language is on the header
 	
 	private String taskInfoPackage;
+	
+	private boolean response;
+
+	public boolean isResponse() {
+		return response;
+	}
+
+	public void setResponse(boolean response) {
+		this.response = response;
+	}
 
 
 	public String getTaskInfoPackage() {

@@ -60,8 +60,7 @@ html, body { height: 100%; }
 			.paper:focus {
 			    outline: none;
 			}
-	
-	
+			
 			.it2lbutton {
 				-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
 				-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
@@ -106,6 +105,13 @@ html, body { height: 100%; }
 				position:relative;
 				top:1px;
 			}
+			
+			.it2lbutton:disabled {
+			    background: #ededed;
+			    color: #dfdfdf;
+			    cursor: default;
+			}
+			
 			form {
 				margin-right:1cm;
 				margin-left:1cm;

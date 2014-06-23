@@ -23,6 +23,7 @@
 	<mvc:view-controller path="/intro"/>
 	<mvc:view-controller path="/login" />
 	<mvc:view-controller path="/exercise" />
+	<mvc:view-controller path="/soundexercise" />
 	<mvc:view-controller path="/woztest" />
 	<mvc:view-controller path="/logoutSuccess" />
 	<mvc:view-controller path="/audioRecorder"/>

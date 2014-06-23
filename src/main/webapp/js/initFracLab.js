@@ -1,10 +1,9 @@
 				var lowMessage;
 				$("#done").show();
 				$("#help").show();
-				$("#done").attr("disabled", "disabled");
-				$("#help").attr("disabled", "disabled");
-				$('#help').css("background-image", "url(/italk2learn/images/lightbulb_off.png)");
-				$('#help').css({ width: '128px', height: '128px'});
+				//$("#done").attr("disabled", "disabled");
+				helpButtonEnable(false);
+				$('#help').css({ width: '100px', height: '100px'});
 				$("#done").click(function() {
 					doneButtonPressed();
 				});
@@ -59,10 +58,34 @@
 							break;
 						}
 					});
-					u.initPlugin(jQuery("#unityPlayer")[0], "http://it2l.dcs.bbk.ac.uk/italk2learn/sequence/FractionsLab.unity3d");
-				});
+					var body=$('#task').text();
+					if (body.localeCompare("Make a fraction that equals 3/4 and has 12 as denominator.")==0){
+						doneButtonEnable(true);
+						arrowButtonEnable(false);
+						u.initPlugin(jQuery("#unityPlayer")[0], "/italk2learn/sequence/FractionsLab.unity3d?showStartPage=false&language="+getLocale()+"&idtask=EQUIValence1");
 
-				function InitFractionsLab(data)
+					}
+					else {
+						doneButtonEnable(false);
+						arrowButtonEnable(true);
+						u.initPlugin(jQuery("#unityPlayer")[0], "/italk2learn/sequence/FractionsLab.unity3d?showStartPage=false&language="+getLocale());
+					}
+				});
+				
+				
+				function getFLTaskID() {
+					$.ajax({
+						type: 'GET',
+						url: "sequence/getFLTask",
+						success: function (data) {
+							u.initPlugin(jQuery("#unityPlayer")[0], "/italk2learn/sequence/FractionsLab.unity3d?showStartPage=false&language="+getLocale()+"&idtask="+data);
+						},
+						error: function (jqXHR, status, error) {
+						}
+					});
+				}
+
+				function initFractionsLab(data)
 				{
 					$.ajax({
 						type: 'GET',
@@ -80,21 +103,45 @@
 				    });
 				}
 				
+				function saveEvent(event){
+					//alert(event);
+					var evt = {
+					       	 "event": event 
+					        };
+					$.ajax({
+						type: 'POST',
+				        contentType : 'application/json; charset=utf-8',
+				        dataType : 'json',
+				        url: "sequence/saveFLEvent",
+				        data: JSON.stringify(evt),
+				        success: function(data){
+				        	//alert('Change submitted!');
+				        },
+				        error : function(jqXHR, status, error) {
+				           //alert('Sorry!, there was a problem');
+				        },
+				    });
+				}
+				
 				
 				function SendHighMessage(message)
 				{
 					var json = "{\"method\": \"HighFeedback\", \"parameters\": {\"message\": \"" + message +"\"}}";
 					u.getUnity().SendMessage("ExternalInterface", "SendEvent", json);
 				}
-
+				
 				function SendLowMessage(message)
 				{
+					var json = "{\"method\": \"LowFeedback\", \"parameters\": {\"message\": \"" + message +"\"}}";
+					u.getUnity().SendMessage("ExternalInterface", "SendEvent", json);
+				}
+
+				function EnableHelpButton(message)
+				{
 					if (message.charAt(0)==='x'){
-						$('#help').css("background-image", "url(/italk2learn/images/lightbulb_off.png)");
 						helpButtonEnable(false);						
 					}
 					else {
-						$('#help').css("background-image", "url(/italk2learn/images/lightbulb_on.png)");
 						helpButtonEnable(true);
 						lowMessage=message;
 					}
@@ -112,24 +159,33 @@
 				}
 				
 				function doneButtonEnable(value){
-					if (value==true)
+					//alert(value);
+					if (value==true || value=="true" || value=="True")
 						$("#done").removeAttr("disabled");
 					else	
 						$("#done").attr("disabled", "disabled");
 				}
 				
 				function arrowButtonEnable(value){
-					if (value==true)
+					if (value==true || value=="true" || value=="True") {
+			        	document.getElementById("arrowimage").src="http://it2l.dcs.bbk.ac.uk/italk2learn/images/arrow-right.png";
 						$("#next").removeAttr("disabled");
-					else	
+					}	
+					else {
+						document.getElementById("arrowimage").src="http://it2l.dcs.bbk.ac.uk/italk2learn/images/arrow-right-disabled.png";
 						$("#next").attr("disabled", "disabled");
+					}	
 				}
 				
 				function helpButtonEnable(value){
-					if (value==true)
+					if (value==true || value=="true" || value=="True"){
 						$("#help").removeAttr("disabled");
-					else	
+						$('#help').css("background-image", "url(/italk2learn/images/lightbulb_on.png)");
+					}
+					else {
 						$("#help").attr("disabled", "disabled");
+						$('#help').css("background-image", "url(/italk2learn/images/lightbulb_off.png)");
+					}
 				}
 				
 				
@@ -153,21 +209,20 @@
 				}
 				
 				function doneButtonPressed(){
-					var json = "{\"method\": \"doneButtonPressed\"}";
-					u.getUnity().SendMessage("ExternalInterface", "SendEvent", json);
+                    var json = "{\"method\": \"PlatformEvent\", \"parameters\": {\"eventName\": \"*doneButtonPressed*\"}}";
+                    u.getUnity().SendMessage("ExternalInterface", "SendEvent", json);
 				}
 				
 				function arrowButtonPressed(){
-					var json = "{\"method\": \"arrowButtonPressed\"}";
-					u.getUnity().SendMessage("ExternalInterface", "SendEvent", json);
+					var json = "{\"method\": \"PlatformEvent\", \"parameters\": {\"eventName\": \"*arrowButtonPressed*\"}}";
+                    u.getUnity().SendMessage("ExternalInterface", "SendEvent", json);
 				}
 				
 				function helpButtonPressed(){
-					//JLF: Future implementation
-					//var json = "{\"method\": \"helpButtonPressed\"}";
-					//u.getUnity().SendMessage("ExternalInterface", "SendEvent", json);
 					textToSpeech(lowMessage);
-					var json = "{\"method\": \"LowFeedback\", \"parameters\": {\"message\": \"" + lowMessage +"\"}}";
-					u.getUnity().SendMessage("ExternalInterface", "SendEvent", json);
+					SendHighMessage(lowMessage);
+					helpButtonEnable(false);
+					var json = "{\"method\": \"PlatformEvent\", \"parameters\": {\"eventName\": \"*helpButtonPressed*\"}}";
+                    u.getUnity().SendMessage("ExternalInterface", "SendEvent", json);
 				}
-
+				

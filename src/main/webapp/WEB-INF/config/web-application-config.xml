@@ -102,6 +102,10 @@
 		<property name="sessionFactory" ref="italk2learnSessionFactory" />
 	</bean>
 	
+	<bean id="fractionsLabDAO" class="com.italk2learn.dao.FractionsLabDAO">
+		<property name="sessionFactory" ref="italk2learnSessionFactory" />
+	</bean>
+	
 	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
 	    <property name="messageConverters">
 	      <util:list id="beanList">

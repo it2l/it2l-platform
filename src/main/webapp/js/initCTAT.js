@@ -44,6 +44,10 @@
 
 			function SendLowMessage(message)
 			{
-				textToSpeech(message);
+				setTimeout(function(){alert(message)},5000);
+			}
+			
+			function EnableHelpButton(message)
+			{
 				setTimeout(function(){alert(message)},5000);
 			}

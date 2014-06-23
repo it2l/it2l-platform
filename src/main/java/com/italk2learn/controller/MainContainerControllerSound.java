@@ -24,25 +24,23 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.italk2learn.bo.inter.IExerciseSequenceBO;
-import com.italk2learn.bo.inter.ILoginUserService;
 import com.italk2learn.vo.ExerciseSequenceRequestVO;
 import com.italk2learn.vo.ExerciseVO;
 import com.italk2learn.vo.FractionsLabRequestVO;
 import com.italk2learn.vo.FractionsLabResponseVO;
 import com.italk2learn.vo.HeaderVO;
-import com.italk2learn.vo.WozVO;
 
 /**
  * Handles and retrieves the login or denied page depending on the URI template
  */
 @Controller
-@RequestMapping("/exercise")
-public class MainContainerController {
+@RequestMapping("/soundexercise")
+public class MainContainerControllerSound {
        
 	private LdapUserDetailsImpl user;
 	
 	private static final Logger logger = LoggerFactory
-			.getLogger(MainContainerController.class);
+			.getLogger(MainContainerControllerSound.class);
 	
 	/*Services*/
 	private IExerciseSequenceBO exerciseSequenceService;
@@ -59,7 +57,7 @@ public class MainContainerController {
 
 
 	@Autowired
-    public MainContainerController(IExerciseSequenceBO exerciseSequence) {
+    public MainContainerControllerSound(IExerciseSequenceBO exerciseSequence) {
     	this.exerciseSequenceService = exerciseSequence;
     }
 	
@@ -88,7 +86,7 @@ public class MainContainerController {
 		logger.info("JLF --- Main Container Init");
 		try {
 			user = (LdapUserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			return "exercise";
+			return "soundexercise";
 		} catch (Exception e){
 			logger.error(e.toString());
 			return "redirect:/login";

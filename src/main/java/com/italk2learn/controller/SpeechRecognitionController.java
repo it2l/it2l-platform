@@ -1,5 +1,7 @@
 package com.italk2learn.controller;
 
+import java.io.Serializable;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -24,8 +26,13 @@ import com.italk2learn.vo.SpeechRecognitionResponseVO;
 @Controller
 @Scope("session")
 @RequestMapping("/speechRecognition")
-public class SpeechRecognitionController {
+public class SpeechRecognitionController implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private static final Logger logger = LoggerFactory
 			.getLogger(SpeechRecognitionController.class);
 	

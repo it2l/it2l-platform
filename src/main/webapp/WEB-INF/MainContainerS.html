@@ -36,10 +36,10 @@
                             <div sec:authorize="hasRole('ROLE_ADMIN')">
                                 <a href="#" th:href="@{/monitorWOZ/}">Wizard</a>
                             </div>
-							<div id="connect" style="color:red;">
-                            </div>
                             <div sec:authorize="hasRole('ROLE_USER')">
-                                <a href="#" th:href="@{/soundexercise}">Sound</a>
+                                <a href="#" th:href="@{/exercise}">No sound</a>
+                            </div>
+							<div id="connect" style="color:red;">
                             </div>
                         </td>
                         <td id="logo" align="left">
@@ -226,7 +226,6 @@
 		function nextExercise(){
 			$("#done").hide();
 			$("#help").hide();
-			$("#next").hide();
 			document.getElementById("mainContainer").innerHTML = '';
 		    $.ajax({
 		        type: 'GET',
@@ -235,7 +234,6 @@
 		            
 		            },
 		        success: function(data, textStatus, jqXHR){
-		        	$("#next").show();
 		        	document.getElementById("mainContainer").innerHTML=jqXHR.responseText;
 		            var reponse = jQuery(jqXHR.responseText);
 		            var reponseScript = reponse.filter("script");
@@ -312,8 +310,26 @@
         	play_html5_audio = true;
     	 
     	function play_sound(url){
-
-        }
+    		document.getElementById("player").innerHTML = '';
+    	    if(play_html5_audio){
+    	    	//playS(url);
+    	    	var sound = $("<embed id='sound' type='audio/mpeg'/>");
+    	    	sound.attr('src', url);
+    	    	sound.attr('loop', false);
+    	    	sound.attr('hidden', true);
+    	    	sound.attr('autostart', true);
+    	    	sound.attr('class', 'hiddenPlayer');
+    	    	$('#player').append(sound);
+    	    } else {
+    	        $("#sound").remove();
+    	        var sound = $("<embed id='sound' type='audio/mpeg' />");
+    	        sound.attr('src', url);
+    	        sound.attr('loop', false);
+    	        sound.attr('hidden', true);
+    	        sound.attr('autostart', true);
+    	        $('body').append(sound);
+    	    }
+    	}
 
     	function playS(url){
 			var speechProductionPlayer=document.getElementById("speechProductionPlayer");
