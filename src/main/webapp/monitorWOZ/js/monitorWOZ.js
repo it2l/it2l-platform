@@ -14,6 +14,7 @@ var Woz = {
     },
 
 	on_message: function (message) {
+		Alert("ACK received");
 	    var full_jid = $(message).attr('from');
 	    var jid = Strophe.getBareJidFromJid(full_jid);
 	    var jid_id = Woz.jid_to_id(jid);
@@ -122,7 +123,7 @@ function connectWOZ (user) {
         
         $('.chat-input').live('keypress', function (ev) {
             var jid = $(this).parent().data('jid');
-
+            //JLF: If intro key is clicked
             if (ev.which === 13) {
                 ev.preventDefault();
                 var body = $(this).val();
@@ -194,6 +195,18 @@ function connectWOZ (user) {
         $(this).dialog('close');
         
 	};
+	
+function testConn(user) {
+	 var jid = user+'@it2l-32';
+	 var body = "SYN";
+     if (body != "") {			
+         var message = $msg({to: jid,
+                             "type": "chat"})
+             .c('body').t(body).up()
+             .c('active', {xmlns: "http://jabber.org/protocol/chatstates"});
+         Woz.connection.send(message);
+     }	
+}
 
 $(document).bind('connected', function () {
 	$('#connect').html("connected");

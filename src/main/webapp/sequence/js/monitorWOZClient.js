@@ -81,6 +81,17 @@ var Gab = {
 				   textToSpeech(s);
 				   SendHighMessage(s);
 				}
+				else if (body.localeCompare("SYN")==0){ 
+					var jid = 'woz@it2l-32';
+					 var body = "SYN+ACK";
+				     if (body != "") {			
+				         var message = $msg({to: jid,
+				                             "type": "chat"})
+				             .c('body').t(body).up()
+				             .c('active', {xmlns: "http://jabber.org/protocol/chatstates"});
+				         Gab.connection.send(message);
+				     }
+				}
 				else if (body.charAt(0)==='l'){
 				   var s=body.substring(1,body.lenght);
 				   EnableHelpButton(s);

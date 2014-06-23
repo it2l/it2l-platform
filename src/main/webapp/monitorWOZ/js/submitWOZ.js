@@ -5,6 +5,9 @@ $(document).ready(function() {
 	   $("#submitUser").click(function() {
 		   connectWOZ($('#usList').val());
 	   });
+	   $("#testConn").click(function() {
+		   testConn($('#usList').val());
+	   });
 	   
 	 });
 
