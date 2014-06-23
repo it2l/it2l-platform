@@ -27,8 +27,8 @@ import com.italk2learn.bo.inter.IExerciseSequenceBO;
 import com.italk2learn.bo.inter.ILoginUserService;
 import com.italk2learn.vo.ExerciseSequenceRequestVO;
 import com.italk2learn.vo.ExerciseVO;
-import com.italk2learn.vo.FractionsLabRequest;
-import com.italk2learn.vo.FractionsLabResponse;
+import com.italk2learn.vo.FractionsLabRequestVO;
+import com.italk2learn.vo.FractionsLabResponseVO;
 import com.italk2learn.vo.HeaderVO;
 import com.italk2learn.vo.WozVO;
 
@@ -102,9 +102,9 @@ public class MainContainerController {
 	 */
 	@RequestMapping(value = "/init",method = RequestMethod.GET)
 	@ResponseBody
-	public FractionsLabResponse initFractionsLab() {
+	public FractionsLabResponseVO initFractionsLab() {
 		logger.info("JLF --- Initialises FractionLab ");
-		FractionsLabResponse response= new FractionsLabResponse();
+		FractionsLabResponseVO response= new FractionsLabResponseVO();
 		try {
 			user = (LdapUserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			return response;
@@ -142,7 +142,7 @@ public class MainContainerController {
 	 * 
 	 */
 	@RequestMapping(value = "/setNewStudentInfo",method = RequestMethod.POST)
-	public void setNewStundentInfo(@Valid @ModelAttribute("studentInfo") FractionsLabRequest sInfo) {
+	public void setNewStundentInfo(@Valid @ModelAttribute("studentInfo") FractionsLabRequestVO sInfo) {
 		logger.info("JLF --- Initialises FractionLab ");
 		try {
 			user = (LdapUserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -156,7 +156,7 @@ public class MainContainerController {
 	 * 
 	 */
 	@RequestMapping(value = "/storeFeedbackInfo",method = RequestMethod.POST)
-	public void storeFeedbackInfo(@Valid @ModelAttribute("studentInfo") FractionsLabRequest sInfo) {
+	public void storeFeedbackInfo(@Valid @ModelAttribute("studentInfo") FractionsLabRequestVO sInfo) {
 		logger.info("JLF --- Initialises FractionLab ");
 		try {
 			user = (LdapUserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -170,7 +170,7 @@ public class MainContainerController {
 	 * 
 	 */
 	@RequestMapping(value = "/storeStudentEvents",method = RequestMethod.POST)
-	public void storeStudentEvents(@Valid @ModelAttribute("studentInfo") FractionsLabRequest sEvents) {
+	public void storeStudentEvents(@Valid @ModelAttribute("studentInfo") FractionsLabRequestVO sEvents) {
 		logger.info("JLF --- Initialises FractionLab ");
 		try {
 			user = (LdapUserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -185,9 +185,9 @@ public class MainContainerController {
 	 */
 	@RequestMapping(value = "/getTIEmotions",method = RequestMethod.GET)
 	@ResponseBody
-	public FractionsLabResponse getTIEmotions(@Valid @ModelAttribute("emotions") FractionsLabRequest emotions) {
+	public FractionsLabResponseVO getTIEmotions(@Valid @ModelAttribute("emotions") FractionsLabRequestVO emotions) {
 		logger.info("JLF --- Initialises FractionLab ");
-		FractionsLabResponse response= new FractionsLabResponse();
+		FractionsLabResponseVO response= new FractionsLabResponseVO();
 		try {
 			user = (LdapUserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			return response;
@@ -203,9 +203,9 @@ public class MainContainerController {
 	 */
 	@RequestMapping(value = "/getTIFeedback",method = RequestMethod.GET)
 	@ResponseBody
-	public FractionsLabResponse getTIFeedback(@Valid @ModelAttribute("feeback") FractionsLabRequest feedback) {
+	public FractionsLabResponseVO getTIFeedback(@Valid @ModelAttribute("feeback") FractionsLabRequestVO feedback) {
 		logger.info("JLF --- Initialises FractionLab ");
-		FractionsLabResponse response= new FractionsLabResponse();
+		FractionsLabResponseVO response= new FractionsLabResponseVO();
 		try {
 			user = (LdapUserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			return response;

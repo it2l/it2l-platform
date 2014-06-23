@@ -7,8 +7,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.italk2learn.bo.inter.ITaskIndependentSupportBO;
 import com.italk2learn.exception.ITalk2LearnException;
-import com.italk2learn.vo.FractionsLabRequest;
-import com.italk2learn.vo.FractionsLabResponse;
+import com.italk2learn.vo.FractionsLabRequestVO;
+import com.italk2learn.vo.FractionsLabResponseVO;
 
 @Service("taskIndependentSupportBO")
 @Transactional(rollbackFor = { ITalk2LearnException.class, ITalk2LearnException.class })
@@ -22,10 +22,10 @@ public class TaskIndependentSupportBO implements ITaskIndependentSupportBO  {
 		
 	}
 	
-	public FractionsLabResponse sendNextWords(FractionsLabRequest request) throws ITalk2LearnException{
+	public FractionsLabResponseVO sendNextWords(FractionsLabRequestVO request) throws ITalk2LearnException{
 		logger.info("sendNextWords()--- ");
 		try {
-			FractionsLabResponse response= new FractionsLabResponse();
+			FractionsLabResponseVO response= new FractionsLabResponseVO();
 			return response;
 		}
 		catch (Exception e){
@@ -34,10 +34,10 @@ public class TaskIndependentSupportBO implements ITaskIndependentSupportBO  {
 		return null;
 	}
 	
-	public FractionsLabResponse getStudentInfo(FractionsLabRequest request) throws ITalk2LearnException{
+	public FractionsLabResponseVO getStudentInfo(FractionsLabRequestVO request) throws ITalk2LearnException{
 		logger.info("getStudentInfo()---");
 		try {
-			FractionsLabResponse response= new FractionsLabResponse();
+			FractionsLabResponseVO response= new FractionsLabResponseVO();
 			return response;
 		}
 		catch (Exception e){

@@ -1,12 +1,12 @@
 package com.italk2learn.bo.inter;
 
 import com.italk2learn.exception.ITalk2LearnException;
-import com.italk2learn.vo.FractionsLabRequest;
-import com.italk2learn.vo.FractionsLabResponse;
+import com.italk2learn.vo.FractionsLabRequestVO;
+import com.italk2learn.vo.FractionsLabResponseVO;
 
 public interface ITaskIndependentSupportBO {
 	
-	public FractionsLabResponse sendNextWords(FractionsLabRequest request) throws ITalk2LearnException;
-	public FractionsLabResponse getStudentInfo(FractionsLabRequest request) throws ITalk2LearnException;
+	public FractionsLabResponseVO sendNextWords(FractionsLabRequestVO request) throws ITalk2LearnException;
+	public FractionsLabResponseVO getStudentInfo(FractionsLabRequestVO request) throws ITalk2LearnException;
 
 }

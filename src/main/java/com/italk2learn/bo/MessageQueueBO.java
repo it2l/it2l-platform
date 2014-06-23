@@ -1,7 +1,6 @@
 package com.italk2learn.bo;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +14,8 @@ public class MessageQueueBO implements IMessageQueueBO{
 	
 	private final JmsTemplate jms;
 	 
-    @Autowired public MessageQueueBO(@Qualifier("eventTopicTemplate") JmsTemplate eventTopicTemplate) {
+    @Autowired 
+    public MessageQueueBO(JmsTemplate eventTopicTemplate) {
         jms = eventTopicTemplate;
     }
  

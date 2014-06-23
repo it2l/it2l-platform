@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	  xmlns:th="http://www.thymeleaf.org" 
+	  xmlns:tiles="http://www.thymeleaf.org" 
+	  xmlns:sec="http://www.thymeleaf.org" 
+	  lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+<title>Main Container of iTalk2learn</title>
+	<link rel="stylesheet" type="text/css" media="screen, projection" href="/italk2learn/styles/it2lmainstyles.css" />
+	<link rel="stylesheet" type="text/css" media="screen, projection" href="/italk2learn/styles/languageswitcher.css" />
+	<script type="text/javascript" src="/italk2learn/js/history/history.js"></script>
+	<script type="text/javascript" src="/js/swfobject.js" th:src="@{/resources/js/swfobject.js}"></script>
+    <script type="text/javascript" src="/js/unity2.js" th:src="@{/resources/js/unity2.js}"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.js'></script>
+    <script type="text/javascript" src='js/languageswitcher.js'></script>
+    <script type="text/javascript" src='js/scripts/strophe.js'></script>
+    <script type="text/javascript" src='js/scripts/flXHR.js'></script>
+    <script type="text/javascript" src='js/scripts/strophe.flxhr.js'></script>
+	<script type="text/javascript" src="http://www.google.com/jsapi" charset="utf-8"></script>
+	<script type="text/javascript" src='sequence/js/monitorWOZClient.js'></script>
+	
+    <script type="text/javascript" src="#" th:src="@{/resources/dojo/dojo.js}"></script>
+    <script type="text/javascript" src="#" th:src="@{/resources/spring/Spring.js}"></script>
+    <script type="text/javascript" src="#" th:src="@{/resources/spring/Spring-Dojo.js}"></script>
+</head>
+<body class="paper">
+	<table id="header" class="header">
+                    <tr align="left">
+                        <td id="topbar" align="left">
+                            <div sec:authorize="hasRole('ROLE_USER')" th:if="${#authentication}">
+                                <a href="#" th:href="@{/auth/logout}">Logout</a>
+                            </div>
+                            <div sec:authorize="hasRole('ROLE_ADMIN')">
+                                <a href="#" th:href="@{/monitorWOZ/}">Wizard</a>
+                            </div>
+                            <div sec:authorize="hasRole('ROLE_USER')">
+                                <a href="#" th:href="@{/exercise}">No sound</a>
+                            </div>
+							<div id="connect" style="color:red;">
+                            </div>
+                        </td>
+                        <td id="logo" align="left">
+                            <div>
+                                <a href="#" th:href="@{/}">
+                                    <img src="../../images/iLearnFraction_banner_05.jpg" th:src="@{/resources/images/iLearnFraction_banner_05.jpg}" alt="italk2learn" />
+                                </a>
+                            </div>
+                        </td>
+                        <td align="right">
+                            <div id="country-select">
+	                            <form>
+								    <select id="country-options" name="country-options">
+								      <option selected="selected" title="?locale=en" value="uk">United Kingdom</option>
+								      <option title="?locale=de" value="de">Germany</option>
+								    </select>
+								    <input value="Select" type="submit" />
+								</form>
+							</div>
+                        </td>
+                    </tr>
+    </table>
+	<table align="center">
+         <tr align="center">
+<!--            	<td align="left"> -->
+<!-- 		       	<p align="right"> -->
+<!-- 		            <input type="submit" id="back" value="back" sec:authorize="hasRole('ROLE_USER')" class="it2lbutton" /> -->
+<!-- 		        </p> -->
+<!-- 	        </td> -->
+            <td align="center">
+                <div id="mainContainer" align="center" sec:authorize="hasRole('ROLE_USER')" class="mainContainer">
+                	<table>
+                		<tr align="center">
+                			<td align="center">
+			                	<a>
+			                        <img src="../../images/it2l-loading.gif" th:src="@{/resources/images/it2l-loading.gif}" alt="loading" />
+			                    </a>
+	                    	</td>
+	                    </tr>
+<!-- 	                    <tr align="center"> -->
+<!--                 			<td align="center">	 -->
+<!-- 	    		                <font face="Comic Sans MS"><h1 id="task" align="center" th:text="#{initial.text}">Before you continue performing the exercise you must click ON button in the speech recorder</h1></font> -->
+<!-- 							</td> -->
+<!-- 	                    </tr> -->
+<!-- 						<tr align="center"> -->
+<!--                 			<td align="center">						 -->
+<!-- 								<input type="submit" id="initContainer" value="Done" sec:authorize="hasRole('ROLE_USER')" class="it2lbutton" /> -->
+<!--                 			</td> -->
+<!--                 		</tr>	 -->
+                	</table>
+                </div>
+            </td>
+           	<td align="right">
+           		<table>
+           			<tr>
+           			    <td>
+				        	<p align="right">
+				            	<button type="submit" id="next" sec:authorize="hasRole('ROLE_USER')" class="it2lbutton">
+				            		<img id="arrowimage" src="../../images/arrow-right.png" th:src="@{/resources/images/arrow-right.png}" width="80" height="50"/>
+				            	</button>
+				        	</p>
+			        	</td>
+			        </tr>
+			        <tr>
+           			    <td>
+				        	<p align="right">
+				            	<input type="submit" id="done" sec:authorize="hasRole('ROLE_USER')" class="it2lbutton" value="Done"/>
+				        	</p>
+			        	</td>
+			        </tr>
+			        <tr>
+			        	<td>
+				        	<p align="right">
+			        			<input type="submit" id="help" sec:authorize="hasRole('ROLE_USER')" class="it2lbutton" value="Help"/>
+				        	</p>
+			        	</td>
+			        </tr>
+		        </table>
+            </td>
+         </tr>
+    </table>
+	<script type="text/javascript">
+		<!--
+
+		var userName;
+
+		function getParameterByName(name) {
+		    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+		    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+		        results = regex.exec(location.search);
+		    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+		}
+
+		function loadjscssfile(filename, filetype){
+			 if (filetype=="js"){ //if filename is a external JavaScript file
+			  var fileref=document.createElement('script')
+			  fileref.setAttribute("type","text/javascript")
+			  fileref.setAttribute("src", filename)
+			 }
+			 else if (filetype=="css"){ //if filename is an external CSS file
+			  var fileref=document.createElement("link")
+			  fileref.setAttribute("rel", "stylesheet")
+			  fileref.setAttribute("type", "text/css")
+			  fileref.setAttribute("href", filename)
+			 }
+			 if (typeof fileref!="undefined")
+			  document.getElementsByTagName("head")[0].appendChild(fileref)
+			}
+		
+		$(document).ready(function() {
+			$("#next").hide();
+			$("#done").hide();
+			$("#help").hide();
+			//$("#initContainer").click(function() {
+			$.ajax({
+				type: 'GET',
+				url: "sequence/getUser",
+				success: function (data) {
+					//JLF: Call connect WOZ. If it's connected or authfail initialises the container.
+					userName=data;
+					connectWOZ (data);
+				},
+				error: function (jqXHR, status, error) {
+					$(document).trigger('error');
+				}
+			});
+			//});
+			$("#next").click(function() {
+				nextExercise();
+			});	
+			$("#submitEx").click(function() {
+				submitExercise();
+			});
+		});
+
+		function initContainer(){
+			$("#next").show();
+		    $.ajax({
+		        type: 'GET',
+		        url: "sequence/",
+		        data: {
+		            
+		            },
+		        success: function(data, textStatus, jqXHR) {
+		        	document.getElementById("mainContainer").innerHTML=jqXHR.responseText;
+		            var reponse = jQuery(jqXHR.responseText);
+		            var reponseScript = reponse.filter("script");
+		            jQuery.each(reponseScript, function(idx, val) { 
+		            	loadjscssfile(val.src, "js");
+				    } );
+		        },
+		        error : function(jqXHR, status, error) {
+		           alert('Sorry!, there was a problem');
+		        },
+		        complete : function(jqXHR, status) {
+		        }
+		    });
+		}
+
+		function backExercise(){
+			document.getElementById("mainContainer").innerHTML = '';
+		    $.ajax({
+		        type: 'GET',
+		        url: "sequence/backexercise",
+		        data: {
+		            
+		            },
+		        success: function(data, textStatus, jqXHR){
+		        	document.getElementById("mainContainer").innerHTML=jqXHR.responseText;
+		            var reponse = jQuery(jqXHR.responseText);
+		            var reponseScript = reponse.filter("script");
+		            jQuery.each(reponseScript, function(idx, val) { 
+		            	loadjscssfile(val.src, "js");
+				    } );
+		        },
+		        error : function(jqXHR, status, error) {
+		           alert('Sorry!, there was a problem');
+		        },
+		        complete : function(jqXHR, status) {
+		        }
+		    });
+		}
+
+		function nextExercise(){
+			$("#done").hide();
+			$("#help").hide();
+			document.getElementById("mainContainer").innerHTML = '';
+		    $.ajax({
+		        type: 'GET',
+		        url: "sequence/nextexercise",
+		        data: {
+		            
+		            },
+		        success: function(data, textStatus, jqXHR){
+		        	document.getElementById("mainContainer").innerHTML=jqXHR.responseText;
+		            var reponse = jQuery(jqXHR.responseText);
+		            var reponseScript = reponse.filter("script");
+		            jQuery.each(reponseScript, function(idx, val) { 
+		            	loadjscssfile(val.src, "js");
+				    } );
+		        },
+		        error : function(jqXHR, status, error) {
+		           alert('Sorry!, there was a problem');
+		        },
+		        complete : function(jqXHR, status) {
+		        }
+		    });
+		}
+
+
+		function submitExercise(){
+			document.getElementById("mainContainer").innerHTML = '';
+			$("#next").remove();
+			var sub = {
+		       	 "idExercise": $('#exList').val(), 
+		        };
+		    $.ajax({
+		        type: 'POST',
+		        contentType : 'application/json; charset=utf-8',
+		        url: "exercise/getSpecificExercise",
+		        data: JSON.stringify(sub),
+		        success: function(data, textStatus, jqXHR){
+		        	document.getElementById("mainContainer").innerHTML=jqXHR.responseText;
+		            var reponse = jQuery(jqXHR.responseText);
+		            var reponseScript = reponse.filter("script");
+		            jQuery.each(reponseScript, function(idx, val) { 
+		            	loadjscssfile(val.src, "js");
+				    } );
+		        },
+		        error : function(jqXHR, status, error) {
+		           alert('Sorry!, there was a problem');
+		        },
+//		        complete : function(jqXHR, status) {
+//		           alert('Done!');
+//		        }
+		    });
+		}
+
+		function textToSpeech(message) {
+			var l_lang=getParameterByName("locale");
+			if (l_lang=="" && navigator.userLanguage) // Explorer
+			  l_lang = navigator.userLanguage;
+			else if (l_lang=="" && navigator.language) // FF
+			  l_lang = navigator.language;
+			else if (l_lang=="")
+			  l_lang = "en";
+			play_sound("http://translate.google.com/translate_tts?ie=UTF-8&q="+encodeURIComponent(message)+"&tl="+l_lang+"&total=1&idx=0prev=input");
+        }
+
+        function getLocale(){
+        	var l_lang=getParameterByName("locale");
+			if (l_lang=="" && navigator.userLanguage) // Explorer
+			  l_lang = navigator.userLanguage;
+			else if (l_lang=="" && navigator.language) // FF
+			  l_lang = navigator.language;
+			else if (l_lang=="")
+			  l_lang = "en";
+			return l_lang;
+        }
+
+		function html5_audio(){
+    	    var a = document.createElement('audio');
+    	    return !!(a.canPlayType && a.canPlayType('audio/mpeg;').replace(/no/, ''));
+    	}
+    	 
+    	var play_html5_audio = false;
+    	if(html5_audio()) 
+        	play_html5_audio = true;
+    	 
+    	function play_sound(url){
+    		document.getElementById("player").innerHTML = '';
+    	    if(play_html5_audio){
+    	    	//playS(url);
+    	    	var sound = $("<embed id='sound' type='audio/mpeg'/>");
+    	    	sound.attr('src', url);
+    	    	sound.attr('loop', false);
+    	    	sound.attr('hidden', true);
+    	    	sound.attr('autostart', true);
+    	    	sound.attr('class', 'hiddenPlayer');
+    	    	$('#player').append(sound);
+    	    } else {
+    	        $("#sound").remove();
+    	        var sound = $("<embed id='sound' type='audio/mpeg' />");
+    	        sound.attr('src', url);
+    	        sound.attr('loop', false);
+    	        sound.attr('hidden', true);
+    	        sound.attr('autostart', true);
+    	        $('body').append(sound);
+    	    }
+    	}
+
+    	function playS(url){
+			var speechProductionPlayer=document.getElementById("speechProductionPlayer");
+    	    speechProductionPlayer.src=url;
+        	speechProductionPlayer.load();
+    		speechProductionPlayer.play();
+		}
+
+		-->
+		
+	</script>
+	<div id="speechRecognition" align="right" sec:authorize="hasRole('ROLE_USER')">
+		<p>To view this page ensure that Adobe Flash Player version 11.1.0
+			or greater is installed.</p>
+		<script type="text/javascript">
+              var pageHost = ((document.location.protocol == "https:") ? "https://" : "http://");
+              document.write("<a href='http://www.adobe.com/go/getflashplayer'><img src='" + pageHost + "www.adobe.com/images/shared/download_buttons/get_flash_player.gif' alt='Get Adobe Flash player' /></a>");
+        </script>
+	</div>
+	<script type="text/javascript">
+
+		$.ajax({
+			type: 'GET',
+			url: "sequence/getUser",
+			success: function (data) {
+				loadFlashMovie(data);
+			},
+			error: function (jqXHR, status, error) {
+			}
+		});
+		function loadFlashMovie (us){
+		     // For version detection, set to min. required Flash Player version, or 0 (or 0.0.0), for no version detection. 
+		     var swfVersionStr = "11.1.0";
+		     // To use express install, set to playerProductInstall.swf, otherwise the empty string. 
+		     var xiSwfUrlStr = "playerProductInstall.swf";
+		     var flashvars = {
+		     	  user: us	
+		         };
+		     var params = {};
+		     params.quality = "high";
+		     params.bgcolor = "#ffffff";
+		     params.allowscriptaccess = "sameDomain";
+		     params.allowfullscreen = "true";
+		     var attributes = {};
+		     attributes.id = "It2lSpeechInterfaceMain";
+		     attributes.name = "It2lSpeechInterfaceMain";
+		     attributes.align = "middle";
+		     swfobject.embedSWF(
+		             "sequence/It2lSpeechInterfaceMain.swf", "speechRecognition",
+		             "250", "250",
+		             swfVersionStr, xiSwfUrlStr,
+		             flashvars, params, attributes);
+		     // JavaScript enabled so display the flashContent div in case it is not replaced with a swf object.
+		     swfobject.createCSS("#speechRecognition", "display:block;text-align:right;");
+		  }
+    </script>
+	<noscript>
+		<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+			width="250" height="250" id="Italk2learnSpeechRecognizer">
+			<param name="movie" value="sequence/It2lSpeechInterfaceMain.swf" />
+			<param name="quality" value="high" />
+			<param name="bgcolor" value="#ffffff" />
+			<param name="allowScriptAccess" value="sameDomain" />
+			<param name="allowFullScreen" value="true" />
+			<!--[if !IE]>-->
+			<object type="application/x-shockwave-flash"
+				data="sequence/It2lSpeechInterfaceMain.swf" width="250" height="250">
+				<param name="quality" value="high" />
+				<param name="bgcolor" value="#ffffff" />
+				<param name="allowScriptAccess" value="sameDomain" />
+				<param name="allowFullScreen" value="true" />
+				<!--<![endif]-->
+				<!--[if gte IE 6]>-->
+				<p>Either scripts and active content are not permitted to run or
+					Adobe Flash Player version 11.1.0 or greater is not installed.</p>
+				<!--<![endif]-->
+				<a href="http://www.adobe.com/go/getflashplayer"> <img
+					src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif"
+					alt="Get Adobe Flash Player" />
+				</a>
+				<!--[if !IE]>-->
+			</object>
+			<!--<![endif]-->
+		</object>
+	</noscript>
+	<div sec:authorize="hasRole('ROLE_ADMIN')">
+		<p>
+			Choose exercise
+	 	<select id="exList">
+    		 <option th:each="exercise : ${allExercises}" th:value="${exercise.idExercise}" th:text="${exercise.exercise}">Option</option>
+     	</select>
+     	<input id="submitEx" type="button" value="Submit" />		
+		</p>
+	</div>
+	<div id="player"></div>
+	<audio controls="controls" id="speechProductionPlayer" hidden="true"></audio>
+</body>
+</html>

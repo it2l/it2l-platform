@@ -85,6 +85,15 @@ public class MonitorWOZController {
     	var= new UserDetailsVO();
     	var.setUser("student5");
     	res.add(var);
+    	var= new UserDetailsVO();
+    	var.setUser("schuler1");
+    	res.add(var);
+    	var= new UserDetailsVO();
+    	var.setUser("schuler2");
+    	res.add(var);
+    	var= new UserDetailsVO();
+    	var.setUser("schuler3");
+    	res.add(var);
         return res;
     }
 	
