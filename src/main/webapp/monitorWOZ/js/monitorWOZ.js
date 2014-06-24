@@ -51,6 +51,17 @@ function connectWOZ (user, woz) {
 		        $(document).trigger('disconnected');
 		    }else {
 	        	$('#connect').html("Status: "+status);
+	        	if (status === Strophe.Status.DISCONNECTING) {
+		        	//JLF:Reconnect when it's not connected
+		            var conn = new Strophe.Connection(
+		            'http://it2l.dcs.bbk.ac.uk/http-bind/');
+		
+		        	conn.connect(userWOZ+'@it2l-32', userWOZ, function (status) {
+		        	    if (status === Strophe.Status.CONNECTED) {
+		        	        $(document).trigger('connected');
+		        	    } 
+		        	});
+	        	}
 	        }
 		});
 	
