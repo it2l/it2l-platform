@@ -1,6 +1,6 @@
 package com.hibernate.dto;
 
-// Generated 13-Nov-2013 10:47:44 by Hibernate Tools 3.4.0.CR1
+// Generated 24-Jun-2014 16:58:48 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,6 +22,9 @@ public class User implements java.io.Serializable {
 	private String user;
 	private Integer idView;
 	private Set<Sequence> sequences = new HashSet<Sequence>(0);
+	private Set<Flexercise> flexercises = new HashSet<Flexercise>(0);
+	private Set<Whizzexercise> whizzexercises = new HashSet<Whizzexercise>(0);
+	private Set<Ctatexercise> ctatexercises = new HashSet<Ctatexercise>(0);
 
 	public User() {
 	}
@@ -30,11 +33,16 @@ public class User implements java.io.Serializable {
 		this.idUser = idUser;
 	}
 
-	public User(int idUser, String user, Integer idView, Set<Sequence> sequences) {
+	public User(int idUser, String user, Integer idView,
+			Set<Sequence> sequences, Set<Flexercise> flexercises,
+			Set<Whizzexercise> whizzexercises, Set<Ctatexercise> ctatexercises) {
 		this.idUser = idUser;
 		this.user = user;
 		this.idView = idView;
 		this.sequences = sequences;
+		this.flexercises = flexercises;
+		this.whizzexercises = whizzexercises;
+		this.ctatexercises = ctatexercises;
 	}
 
 	@Id
@@ -72,6 +80,33 @@ public class User implements java.io.Serializable {
 
 	public void setSequences(Set<Sequence> sequences) {
 		this.sequences = sequences;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	public Set<Flexercise> getFlexercises() {
+		return this.flexercises;
+	}
+
+	public void setFlexercises(Set<Flexercise> flexercises) {
+		this.flexercises = flexercises;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	public Set<Whizzexercise> getWhizzexercises() {
+		return this.whizzexercises;
+	}
+
+	public void setWhizzexercises(Set<Whizzexercise> whizzexercises) {
+		this.whizzexercises = whizzexercises;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	public Set<Ctatexercise> getCtatexercises() {
+		return this.ctatexercises;
+	}
+
+	public void setCtatexercises(Set<Ctatexercise> ctatexercises) {
+		this.ctatexercises = ctatexercises;
 	}
 
 }

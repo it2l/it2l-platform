@@ -1,9 +1,21 @@
 $(document).ready(function() {
+	   $("#testConn").hide();	
 	   $("#submit").click(function() {
 		   submitWOZ();
 	   });
 	   $("#submitUser").click(function() {
-		   connectWOZ($('#usList').val());
+		   $("#testConn").hide();
+		   $.ajax({
+				type: 'GET',
+				url: "/italk2learn/sequence/getUser",
+				success: function (data) {
+					//JLF: Call connect WOZ. If it's connected or authfail initialises the container.
+					connectWOZ($('#usList').val(),data);
+				},
+				error: function (jqXHR, status, error) {
+					$(document).trigger('error');
+				}
+			});
 	   });
 	   $("#testConn").click(function() {
 		   testConn($('#usList').val());

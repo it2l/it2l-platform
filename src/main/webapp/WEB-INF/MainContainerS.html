@@ -176,7 +176,6 @@
 		});
 
 		function initContainer(){
-			$("#next").show();
 		    $.ajax({
 		        type: 'GET',
 		        url: "sequence/",
@@ -184,6 +183,7 @@
 		            
 		            },
 		        success: function(data, textStatus, jqXHR) {
+		        	$("#next").show();
 		        	document.getElementById("mainContainer").innerHTML=jqXHR.responseText;
 		            var reponse = jQuery(jqXHR.responseText);
 		            var reponseScript = reponse.filter("script");
@@ -226,6 +226,7 @@
 		function nextExercise(){
 			$("#done").hide();
 			$("#help").hide();
+			$("#next").hide();
 			document.getElementById("mainContainer").innerHTML = '';
 		    $.ajax({
 		        type: 'GET',
@@ -234,6 +235,7 @@
 		            
 		            },
 		        success: function(data, textStatus, jqXHR){
+		        	$("#next").show();
 		        	document.getElementById("mainContainer").innerHTML=jqXHR.responseText;
 		            var reponse = jQuery(jqXHR.responseText);
 		            var reponseScript = reponse.filter("script");
