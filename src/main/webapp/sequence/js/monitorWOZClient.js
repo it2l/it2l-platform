@@ -48,6 +48,19 @@ var Gab = {
 				         Gab.connection.send(message);
 				     }
 				}
+				else if (body.charAt(1)==='*'){
+					if (body.charAt(0)==='d'){
+						if (body.charAt(2)==='d')
+							doneButtonEnable(false);
+						else
+							arrowButtonEnable(false);
+					} else if (body.charAt(0)==='e'){
+						if (body.charAt(2)==='d')
+							doneButtonEnable(true);
+						else
+							arrowButtonEnable(true);
+					}
+				}
 				else if (body.charAt(0)==='l'){
 				   var s=body.substring(1,body.lenght);
 				   EnableHelpButton(s);

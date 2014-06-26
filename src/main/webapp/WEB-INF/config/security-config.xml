@@ -25,6 +25,10 @@
 				invalidate-session="true" 
 				logout-success-url="/login" 
 				logout-url="/auth/logout"/>
+		
+		<security:session-management invalid-session-url="/login">
+        	<security:concurrency-control expired-url="/login" />
+		</security:session-management>
 	
 	</security:http>
 	

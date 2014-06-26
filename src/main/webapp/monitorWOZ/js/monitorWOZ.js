@@ -31,7 +31,9 @@ var Woz = {
     },
 
 	on_message: function (message) {
-		alert("ACK received");
+		var sender=$(message).attr('from').split("/");
+		var student=sender[0].split("@");
+		alert("Connection to "+ student[0]+ " working");
 	    return true;
 	}
 };
@@ -46,6 +48,8 @@ function connectWOZ (user, woz) {
 		conn.connect(userWOZ+'@it2l-32', userWOZ, function (status) {
 		    if (status === Strophe.Status.CONNECTED) {
 		    	$("#testConn").show();
+		 	    $("#nextBHandler").show();
+			    $("#doneBHandler").show();
 		        $(document).trigger('connected');
 		    } else if (status === Strophe.Status.DISCONNECTED) {
 		        $(document).trigger('disconnected');
@@ -152,9 +156,9 @@ function connectWOZ (user, woz) {
         
 	};
 	
-function testConn(user) {
+function sendMessage(user, message) {
 	 var jid = user+'@it2l-32';
-	 var body = "SYN";
+	 var body = message;
      if (body != "") {			
          var message = $msg({to: jid,
                              "type": "chat"})

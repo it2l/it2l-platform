@@ -1,10 +1,14 @@
 $(document).ready(function() {
-	   $("#testConn").hide();	
+	   $("#testConn").hide();
+	   $("#nextBHandler").hide();
+	   $("#doneBHandler").hide();
 	   $("#submit").click(function() {
 		   submitWOZ();
 	   });
 	   $("#submitUser").click(function() {
 		   $("#testConn").hide();
+		   $("#nextBHandler").hide();
+		   $("#doneBHandler").hide();
 		   $.ajax({
 				type: 'GET',
 				url: "/italk2learn/sequence/getUser",
@@ -18,7 +22,30 @@ $(document).ready(function() {
 			});
 	   });
 	   $("#testConn").click(function() {
-		   testConn($('#usList').val());
+		   sendMessage($('#usList').val(),"SYN");
+	   });
+	   $("#nextBHandler").click(function() {
+		   if ($("#nextBHandler").attr('value').localeCompare("Disable Next")==0)
+		   {
+			   $("#nextBHandler").attr('value', 'Enable Next');
+			   sendMessage($('#usList').val(),"d*n");
+		   } 
+		   else{
+			   $("#nextBHandler").attr('value', 'Disable Next');
+			   sendMessage($('#usList').val(),"e*n");
+		   }
+	   });
+	   $("#doneBHandler").click(function() {
+		   if ($("#doneBHandler").attr('value').localeCompare("Disable Done")==0)
+		   {
+			   $("#doneBHandler").attr('value', 'Enable Done');
+			   sendMessage($('#usList').val(),"d*d");
+		   } 
+		   else{
+			   $("#doneBHandler").attr('value', 'Disable Done');
+			   sendMessage($('#usList').val(),"e*d");
+		   }
+		   
 	   });
 	   
 	 });

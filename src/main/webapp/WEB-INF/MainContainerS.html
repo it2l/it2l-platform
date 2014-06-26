@@ -34,7 +34,7 @@
                                 <a href="#" th:href="@{/auth/logout}">Logout</a>
                             </div>
                             <div sec:authorize="hasRole('ROLE_ADMIN')">
-                                <a href="#" th:href="@{/monitorWOZ/}">Wizard</a>
+                                <a href="#" th:href="@{/monitorWOZ}">Wizard</a>
                             </div>
                             <div sec:authorize="hasRole('ROLE_USER')">
                                 <a href="#" th:href="@{/exercise}">No sound</a>
