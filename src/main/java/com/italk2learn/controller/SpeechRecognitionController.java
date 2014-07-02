@@ -1,7 +1,5 @@
 package com.italk2learn.controller;
 
-import java.io.Serializable;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -12,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.italk2learn.bo.inter.ILoginUserService;
@@ -26,12 +25,8 @@ import com.italk2learn.vo.SpeechRecognitionResponseVO;
 @Controller
 @Scope("session")
 @RequestMapping("/speechRecognition")
-public class SpeechRecognitionController implements Serializable{
+public class SpeechRecognitionController{
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 
 	private static final Logger logger = LoggerFactory
 			.getLogger(SpeechRecognitionController.class);
@@ -79,7 +74,7 @@ public class SpeechRecognitionController implements Serializable{
 	 */
 	@RequestMapping(value = "/initEngine",method = RequestMethod.GET)
 	@ResponseBody
-	public Boolean initASREngine(@RequestBody String user, HttpServletRequest req) {
+	public Boolean initASREngine(@RequestParam(value = "user") String user, HttpServletRequest req) {
 		logger.info("JLF --- Speech Recognition Main Controller");
 		//user = (LdapUserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		request= new SpeechRecognitionRequestVO();

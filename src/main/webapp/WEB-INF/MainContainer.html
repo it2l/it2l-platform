@@ -126,6 +126,20 @@
 
 		var userName;
 
+		window.onunload=safeexit;
+
+		function safeexit(){
+			$.ajax({
+				type: 'GET',
+				url: "exercise/invalidate",
+				success: function (data) {
+					alert("invalidated");
+				},
+				error: function (jqXHR, status, error) {
+				}
+			});
+		} 
+
 		function getParameterByName(name) {
 		    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
 		    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),

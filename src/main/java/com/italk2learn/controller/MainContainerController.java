@@ -7,6 +7,7 @@ package com.italk2learn.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -24,13 +25,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.italk2learn.bo.inter.IExerciseSequenceBO;
-import com.italk2learn.bo.inter.ILoginUserService;
 import com.italk2learn.vo.ExerciseSequenceRequestVO;
 import com.italk2learn.vo.ExerciseVO;
 import com.italk2learn.vo.FractionsLabRequestVO;
 import com.italk2learn.vo.FractionsLabResponseVO;
 import com.italk2learn.vo.HeaderVO;
-import com.italk2learn.vo.WozVO;
 
 /**
  * Handles and retrieves the login or denied page depending on the URI template
@@ -93,6 +92,11 @@ public class MainContainerController {
 			logger.error(e.toString());
 			return "redirect:/login";
 		}
+	}
+	
+	@RequestMapping(value="/invalidate", method=RequestMethod.GET)
+	public void invalidate(HttpSession session, Model model) {
+		  session.invalidate();
 	}
 	
 	/**

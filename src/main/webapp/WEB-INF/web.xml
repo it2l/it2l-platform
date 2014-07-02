@@ -16,11 +16,16 @@
         <param-name>org.apache.activemq.brokerURL</param-name>
         <param-value>vm://localhost</param-value>
     </context-param>
-
+    
 	<!-- Loads the Spring web application context -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+	
+	<listener>
+		<listener-class>com.italk2learn.util.SessionCounterListener</listener-class>
+	</listener>
+	
 
 	<!-- Enables use of HTTP methods PUT and DELETE -->
 	<filter>
