@@ -129,15 +129,15 @@
 		window.onunload=safeexit;
 
 		function safeexit(){
-			$.ajax({
-				type: 'GET',
-				url: "exercise/invalidate",
-				success: function (data) {
-					alert("invalidated");
-				},
-				error: function (jqXHR, status, error) {
-				}
-			});
+// 			$.ajax({
+// 				type: 'GET',
+// 				url: "exercise/invalidate",
+// 				success: function (data) {
+// 					alert("invalidated");
+// 				},
+// 				error: function (jqXHR, status, error) {
+// 				}
+// 			});
 		} 
 
 		function getParameterByName(name) {
