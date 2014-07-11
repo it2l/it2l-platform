@@ -23,6 +23,13 @@
 	</listener>
 	
 	<listener>
+	    <listener-class>
+	      org.springframework.security.web.session.HttpSessionEventPublisher
+	    </listener-class>
+  	</listener>
+	
+	
+	<listener>
 		<listener-class>com.italk2learn.util.SessionCounterListener</listener-class>
 	</listener>
 	

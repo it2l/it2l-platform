@@ -27,7 +27,7 @@
 				logout-url="/auth/logout"/>
 		
 		<security:session-management invalid-session-url="/login">
-        	<security:concurrency-control expired-url="/login" />
+        	<security:concurrency-control max-sessions="1" error-if-maximum-exceeded="true" />
 		</security:session-management>
 	
 	</security:http>

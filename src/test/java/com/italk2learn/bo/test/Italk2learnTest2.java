@@ -82,5 +82,28 @@ public class Italk2learnTest2 {
 					ISpeechRecognitionBO speechRecognitionService) {
 				this.speechRecognitionService = speechRecognitionService;
 			}
+			
+			
+			@Test
+			@Transactional
+			public void getAverage() throws Exception{
+				LOGGER.info("TESTING getSpeechRecognition");
+				File f=new File("C:\\recordings\\events.txt");
+				long l=f.length();
+				System.out.println("the file is " + l + " bytes long");
+				
+				FileInputStream finp=new FileInputStream(f);
+				byte[] b=new byte[(int)l];
+				int i;
+				i=finp.read(b);
+				boolean testOk = false;
+				try {
+					testOk = true;
+				} catch (Exception e) {
+					e.printStackTrace();
+					LOGGER.error(e);
+				}
+				Assert.assertTrue(testOk);
+			}
 
 }

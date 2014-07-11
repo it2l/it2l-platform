@@ -1,6 +1,9 @@
 package com.italk2learn.util;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
@@ -23,6 +26,8 @@ public class SessionCounterListener implements HttpSessionListener {
 	  private static final Logger logger = LoggerFactory
 				.getLogger(SessionCounterListener.class);
 	  
+	  private List<String> users=new ArrayList<String>();
+	  
 	  private LdapUserDetailsImpl user;
 	 
 	  public static int getTotalActiveSession(){
@@ -33,10 +38,20 @@ public class SessionCounterListener implements HttpSessionListener {
 	  public void sessionCreated(HttpSessionEvent arg0) {
 		  try {
 			  	totalActiveSessions++;
-				//user = (LdapUserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			  	if (SecurityContextHolder.getContext().getAuthentication()!=null)
+			  		user = (LdapUserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+				for (int i=0; i<users.size();i++)
+					if (user!=null && users.get(i).equals(user.getUsername())){
+						arg0.getSession().invalidate();
+						return;
+					}
+				if (user!=null)
+					users.add(user.getUsername());
 				logger.info("sessionCreated - add one session into counter: "+totalActiveSessions);
 				System.out.println("sessionCreated - add one session into counter");
 		  } catch (Exception e){
+			   	if (SecurityContextHolder.getContext().getAuthentication()!=null)
+			  	user = (LdapUserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 				logger.error(e.toString());
 		  }
 	   }
@@ -45,10 +60,16 @@ public class SessionCounterListener implements HttpSessionListener {
 	  public void sessionDestroyed(HttpSessionEvent arg0) {
 		  try {
 				totalActiveSessions--;
-				user = (LdapUserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+				if (SecurityContextHolder.getContext().getAuthentication()!=null)
+					user = (LdapUserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+				for (int i=0; i<users.size();i++)
+					if (user!=null && users.get(i).equals(user.getUsername())){
+						users.remove(i);
+					}
 				//logger.info("sessionDestroyed - deduct one session from counter: "+totalActiveSessions+"\n User: "+user.getUsername());
 				System.out.println("sessionDestroyed - deduct one session from counter");
-				closeASRListener(arg0);
+				//JLF: Comment for testing
+				//closeASRListener(arg0);
 		  } catch (Exception e){
 				logger.error(e.toString());
 		  }
@@ -61,9 +82,11 @@ public class SessionCounterListener implements HttpSessionListener {
 		  ISpeechRecognitionBO closeListener = (ISpeechRecognitionBO) ctx.getBean("speechRecognitionBO");
 		  SpeechRecognitionRequestVO request= new SpeechRecognitionRequestVO();
 		  request.setHeaderVO(new HeaderVO());
-		  request.getHeaderVO().setLoginUser(user.getUsername());
 		  try {
-			  	closeListener.closeASREngine(request);
+			  	if (user!=null) {
+			  		request.getHeaderVO().setLoginUser(user.getUsername());
+			  		closeListener.closeASREngine(request);
+			  	}
 		  } catch (Exception e){
 				logger.error(e.toString());
 		  }
