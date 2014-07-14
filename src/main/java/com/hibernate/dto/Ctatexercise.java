@@ -1,6 +1,6 @@
 package com.hibernate.dto;
 
-// Generated 04-Feb-2014 16:01:44 by Hibernate Tools 3.4.0.CR1
+// Generated 14-Jul-2014 17:26:25 by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -31,9 +31,10 @@ public class Ctatexercise implements java.io.Serializable {
 	public Ctatexercise() {
 	}
 
-	public Ctatexercise(Exercises exercises, User user) {
+	public Ctatexercise(Exercises exercises, User user, Date date) {
 		this.exercises = exercises;
 		this.user = user;
+		this.date = date;
 	}
 
 	public Ctatexercise(Exercises exercises, User user, String loganswer,
@@ -84,8 +85,8 @@ public class Ctatexercise implements java.io.Serializable {
 		this.loganswer = loganswer;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "date", length = 10)
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "date", nullable = false, length = 19)
 	public Date getDate() {
 		return this.date;
 	}

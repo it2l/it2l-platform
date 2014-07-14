@@ -1,5 +1,7 @@
 package com.italk2learn.controller;
 
+import java.io.Serializable;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -36,7 +38,9 @@ import com.italk2learn.vo.WhizzRequestVO;
 @Controller
 @Scope("session")
 @RequestMapping("/sequence")
-public class ExercisesSequenceController {
+public class ExercisesSequenceController implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	
 	
 	private LdapUserDetailsImpl user;

@@ -1,6 +1,6 @@
 package com.hibernate.dto;
 
-// Generated 16-Jun-2014 10:34:35 by Hibernate Tools 3.4.0.CR1
+// Generated 14-Jul-2014 17:03:14 by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -31,9 +31,10 @@ public class Flexercise implements java.io.Serializable {
 	public Flexercise() {
 	}
 
-	public Flexercise(Exercises exercises, User user) {
+	public Flexercise(Exercises exercises, User user, Date date) {
 		this.exercises = exercises;
 		this.user = user;
+		this.date = date;
 	}
 
 	public Flexercise(Exercises exercises, User user, String event, Date date) {
@@ -74,7 +75,7 @@ public class Flexercise implements java.io.Serializable {
 		this.user = user;
 	}
 
-	@Column(name = "event", length = 100)
+	@Column(name = "event", length = 1000)
 	public String getEvent() {
 		return this.event;
 	}
@@ -83,8 +84,8 @@ public class Flexercise implements java.io.Serializable {
 		this.event = event;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "date", length = 10)
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "date", nullable = false, length = 19)
 	public Date getDate() {
 		return this.date;
 	}

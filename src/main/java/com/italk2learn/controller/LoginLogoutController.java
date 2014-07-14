@@ -39,10 +39,10 @@ public class LoginLogoutController {
 		 */
 		ModelAndView mod=new ModelAndView();
 		mod.setViewName("login");
-		String err="You have entered an invalid username or password!";
+		String err="You have entered invalid credentials or your user is already logged in the platform!";
 		if (error == true) {
 			// Assign an error message
-			model.put("err", "You have entered an invalid username or password!");
+			model.put("err", "You have entered invalid credentials or your user is already logged in the platform!");
 			model.addAttribute(err);
 		} else {
 			model.put("err", "");
