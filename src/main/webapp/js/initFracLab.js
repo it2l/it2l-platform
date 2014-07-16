@@ -62,7 +62,7 @@
 					if (body.localeCompare("Make a fraction that equals 3/4 and has 12 as denominator.")==0){
 						doneButtonEnable(true);
 						arrowButtonEnable(false);
-						u.initPlugin(jQuery("#unityPlayer")[0], "/italk2learn/sequence/FractionsLab.unity3d?showStartPage=false&language="+getLocale()+"&idtask=EQUIValence1");
+						u.initPlugin(jQuery("#unityPlayer")[0], "/italk2learn/sequence/FractionsLab.unity3d?showStartPage=false&language="+getLocale()+"&idtask=EQUIValence1"+userName);
 
 					}
 					else {
@@ -121,6 +121,11 @@
 				           //alert('Sorry!, there was a problem');
 				        },
 				    });
+				}
+				
+				function sendMessageToLightBulb(message){
+					helpButtonEnable(true);
+					lowMessage=message;
 				}
 				
 				
