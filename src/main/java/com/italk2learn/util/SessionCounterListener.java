@@ -38,20 +38,20 @@ public class SessionCounterListener implements HttpSessionListener {
 	  public void sessionCreated(HttpSessionEvent arg0) {
 		  try {
 			  	totalActiveSessions++;
-			  	if (SecurityContextHolder.getContext().getAuthentication()!=null)
-			  		user = (LdapUserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-				for (int i=0; i<users.size();i++)
-					if (user!=null && users.get(i).equals(user.getUsername())){
-						arg0.getSession().invalidate();
-						return;
-					}
-				if (user!=null)
-					users.add(user.getUsername());
+//			  	if (SecurityContextHolder.getContext().getAuthentication()!=null)
+//			  		user = (LdapUserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//				for (int i=0; i<users.size();i++)
+//					if (user!=null && users.get(i).equals(user.getUsername())){
+//						arg0.getSession().invalidate();
+//						return;
+//					}
+//				if (user!=null)
+//					users.add(user.getUsername());
 				logger.info("sessionCreated - add one session into counter: "+totalActiveSessions);
 				System.out.println("sessionCreated - add one session into counter");
 		  } catch (Exception e){
-			   	if (SecurityContextHolder.getContext().getAuthentication()!=null)
-			  	user = (LdapUserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//			   	if (SecurityContextHolder.getContext().getAuthentication()!=null)
+//			  	user = (LdapUserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 				logger.error(e.toString());
 		  }
 	   }
@@ -60,12 +60,12 @@ public class SessionCounterListener implements HttpSessionListener {
 	  public void sessionDestroyed(HttpSessionEvent arg0) {
 		  try {
 				totalActiveSessions--;
-				if (SecurityContextHolder.getContext().getAuthentication()!=null)
-					user = (LdapUserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-				for (int i=0; i<users.size();i++)
-					if (user!=null && users.get(i).equals(user.getUsername())){
-						users.remove(i);
-					}
+//				if (SecurityContextHolder.getContext().getAuthentication()!=null)
+//					user = (LdapUserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//				for (int i=0; i<users.size();i++)
+//					if (user!=null && users.get(i).equals(user.getUsername())){
+//						users.remove(i);
+//					}
 				//logger.info("sessionDestroyed - deduct one session from counter: "+totalActiveSessions+"\n User: "+user.getUsername());
 				System.out.println("sessionDestroyed - deduct one session from counter");
 				//JLF: Comment for testing

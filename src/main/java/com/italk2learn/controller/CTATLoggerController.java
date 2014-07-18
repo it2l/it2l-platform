@@ -15,9 +15,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.ldap.userdetails.LdapUserDetailsImpl;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.italk2learn.bo.inter.ICTATExerciseBO;
 import com.italk2learn.bo.inter.ILoginUserService;
@@ -36,6 +38,8 @@ public class CTATLoggerController {
 	private static final Logger logger = LoggerFactory
 			.getLogger(CTATLoggerController.class);
 
+	private boolean assesment=false;
+	private boolean result=false;
 	
 	/*Services*/
 	private ICTATExerciseBO exerciseCTATService;
@@ -51,74 +55,37 @@ public class CTATLoggerController {
 	 * Main method to get the log of CTAT exercises
 	 */
 	@RequestMapping(value = "/",method = RequestMethod.POST,  headers = "Accept=application/xml, application/json")
-	public String setLogCTAT(@RequestBody String body, HttpServletRequest req) {
+	public void setLogCTAT(@RequestBody String body, HttpServletRequest req) {
 		logger.info("JLF --- CTAT setLogCTAT log");
 		user = (LdapUserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		CTATRequestVO request=new CTATRequestVO();
-		StringWriter outStr = new StringWriter();
-        PrintWriter out = null;
-        ByteArrayOutputStream baos = null;
         try {
+        	if (body!=null){
+        		assesment=body.contains("TUTOR_ACTION+RESULT");
+        		if (assesment==true)
+        			result=body.contains("Correct");
+        	}
         	request.setHeaderVO(new HeaderVO());
 			request.getHeaderVO().setLoginUser(user.getUsername());
 			request.setIdExercise(getLoginUserService().getIdExersiceUser(request.getHeaderVO()));
 			request.setIdUser(getLoginUserService().getIdUserInfo(request.getHeaderVO()));
-        	ServletInputStream input=req.getInputStream();
-            out = new PrintWriter(outStr);
-            logger.info(req.getInputStream().toString());
-            baos = readContent(req);
             request.setLog(body);
             getExerciseCTATService().storageLog(request);
         } catch (Exception ex) {
         	logger.error(ex.toString());
-            return "";
         }
-        
-        try {
-//            if (logFileWriter == null)
-//                throw new IllegalStateException("logFileWriter is null");
-//            synchronized(this) {
-//                baos.writeTo(logFileWriter);
-//                logFileWriter.flush();  // or use logFileWriter.getChannel().force() ?
-//            }
-            out.write("status=success\n");  // mimic OLI StatusCodeLogServlet as of 2009/10/23
-        } catch (Exception ex) {
-        	logger.error(ex.toString());
-            //fmtErrorResp(out, ex, message);
-            //flushResponse(outStr, resp);  // sends response to client
-            return "";
-        }
-        //flushResponse(outStr, resp);  // sends response to client
-       
-        //sendContent(baos);            // forward to DataShop after replying
-		return "views/sequence";
 	}
 	
 	/**
-     * Read the entire content of the request into a buffer.
-     * @param req HTTP request from client
-     * @return result buffer with contents of request
-     * @throws IOException
-     */
-    private ByteArrayOutputStream readContent(ServletRequest req)
-            throws IOException{
-        int reqLength = req.getContentLength();
-        if (reqLength < 0)
-            reqLength = 2048;  // default initial size
-        ByteArrayOutputStream baos = new ByteArrayOutputStream(reqLength);
-        ServletInputStream rdr = req.getInputStream();
-        int c = rdr.read();
-        int i, n = 0;
-        for (i = 0; c >= 0; ++i) {
-            if (c > 0)
-                baos.write(c);
-            else
-                ++n;
-            c = rdr.read();
-        }
-        //reportNulls(i, n);
-        return baos;
-    }
+	 * JLF: Get user connected
+	 */
+	@RequestMapping(value = "/getResult",method = RequestMethod.GET)
+	@ResponseBody
+	public boolean getResult(Model model) {
+		logger.info("JLF --- CTATLoggerController.getResult");
+		user = (LdapUserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		return assesment;
+	}
 	
 	public ILoginUserService getLoginUserService() {
 		return loginUserService;
@@ -128,13 +95,9 @@ public class CTATLoggerController {
 		this.loginUserService = loginUserService;
 	}
 
-
-
 	public ICTATExerciseBO getExerciseCTATService() {
 		return exerciseCTATService;
 	}
-
-
 
 	public void setExerciseCTATService(ICTATExerciseBO exerciseCTATService) {
 		this.exerciseCTATService = exerciseCTATService;
