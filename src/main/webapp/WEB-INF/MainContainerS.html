@@ -30,6 +30,8 @@
 	<table id="header" class="header">
                     <tr align="left">
                         <td id="topbar" align="left">
+                       		<div id="user">
+                            </div>
                             <div sec:authorize="hasRole('ROLE_USER')" th:if="${#authentication}">
                                 <a href="#" th:href="@{/auth/logout}">Logout</a>
                             </div>
@@ -159,6 +161,7 @@
 				url: "sequence/getUser",
 				success: function (data) {
 					//JLF: Call connect WOZ. If it's connected or authfail initialises the container.
+					$('#user').html(data);
 					userName=data;
 					connectWOZ (data);
 				},

@@ -17,7 +17,7 @@
                         dataset_level_type2:"section",
                         problem_name:"CTAT_Example_Problem",
                         user_guid:"CTAT_Example_User",
-                        session_id:"CTAT_Example_Session2",
+                        session_id: userName + '_' + $("#flashContent").data("brd"),
                         source_id:"PACT_CTAT_FLASH",
                         DeliverUsingOLI:"false"
             };
