@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.italk2learn.ws.NextLesson;
 
@@ -20,8 +21,8 @@ public class ExerciseSequenceAIController {
 	private static final Logger log = LoggerFactory
 			.getLogger(ExerciseSequenceAIController.class);
 
-	@RequestMapping(value = "/nextExerciseAISequence")
-	public String getOrder(ModelMap model) {
+	@RequestMapping(value = "/nextExerciseAISequence", method = RequestMethod.GET)
+	public String getNextExercise(ModelMap model) {
 
 		int studentId=0;
 		int prevStudentScore=0;
@@ -33,7 +34,7 @@ public class ExerciseSequenceAIController {
 		} catch (Exception e) {
 			log.error(e.toString());
 		}
-		return "order";
+		return "redirect:/login";
 
 	}
 }
