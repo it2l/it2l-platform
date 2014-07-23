@@ -70,6 +70,16 @@
 <!-- 		<property name="baseAddress" value="http://localhost:9999/" /> -->
 <!-- 	</bean> -->
 
+	<bean id="nextLessonWebService"
+	    class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+	    <property name="serviceInterface" value="com.italk2learn.ws.NextLesson" />
+	    <property name="wsdlDocumentUrl"
+	        value="http://localhost:8080/sequencer/services/ITalk2LearnWS?wsdl" />
+	    <property name="namespaceUri" value="http://ITalk2Learn/ITalk2LearnWS" />
+	    <property name="serviceName" value="ITalk2LearnService" />
+	    <property name="portName" value="ITalk2LearnWS" />
+	</bean>
+
 	<bean id="counterService" class="com.italk2learn.util.SessionCounterListener" /> 
 
 	<!-- Aspects -->

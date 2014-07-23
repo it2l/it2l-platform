@@ -6,7 +6,7 @@
             var flashvars = {
                         question_file: $("#flashContent").data("brd"),
                         BehaviorRecorderMode:"AuthorTimeTutoring",
-                        remoteSocketURL: "it2l.dcs.bbk.ac.uk",
+                        remoteSocketURL: "localhost",
                         remoteSocketPort: "1502",
                         Logging: "ClientToLogServer",
                         log_service_url: "http://localhost:8080/italk2learn/ctatlogserver/",
@@ -58,11 +58,11 @@
             
             function arrowButtonEnable(value){
 				if (value==true || value=="true" || value=="True") {
-		        	document.getElementById("arrowimage").src="http://it2l.dcs.bbk.ac.uk/italk2learn/images/arrow-right.png";
+		        	document.getElementById("arrowimage").src="/italk2learn/images/arrow-right.png";
 					$("#next").removeAttr("disabled");
 				}	
 				else {
-					document.getElementById("arrowimage").src="http://it2l.dcs.bbk.ac.uk/italk2learn/images/arrow-right-disabled.png";
+					document.getElementById("arrowimage").src="/italk2learn/images/arrow-right-disabled.png";
 					$("#next").attr("disabled", "disabled");
 				}	
 			}
