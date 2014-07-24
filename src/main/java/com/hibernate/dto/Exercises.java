@@ -1,6 +1,6 @@
 package com.hibernate.dto;
 
-// Generated 24-Jun-2014 16:58:48 by Hibernate Tools 3.4.0.CR1
+// Generated 24-Jul-2014 16:25:40 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -23,6 +23,7 @@ public class Exercises implements java.io.Serializable {
 	private String view;
 	private String description;
 	private String flTask;
+	private String idSequencer;
 	private Set<Ctatexercise> ctatexercises = new HashSet<Ctatexercise>(0);
 	private Set<Whizzexercise> whizzexercises = new HashSet<Whizzexercise>(0);
 	private Set<Flexercise> flexercises = new HashSet<Flexercise>(0);
@@ -36,14 +37,15 @@ public class Exercises implements java.io.Serializable {
 	}
 
 	public Exercises(int idExercise, String exercise, String view,
-			String description, String flTask, Set<Ctatexercise> ctatexercises,
-			Set<Whizzexercise> whizzexercises, Set<Flexercise> flexercises,
-			Set<Sequence> sequences) {
+			String description, String flTask, String idSequencer,
+			Set<Ctatexercise> ctatexercises, Set<Whizzexercise> whizzexercises,
+			Set<Flexercise> flexercises, Set<Sequence> sequences) {
 		this.idExercise = idExercise;
 		this.exercise = exercise;
 		this.view = view;
 		this.description = description;
 		this.flTask = flTask;
+		this.idSequencer = idSequencer;
 		this.ctatexercises = ctatexercises;
 		this.whizzexercises = whizzexercises;
 		this.flexercises = flexercises;
@@ -94,6 +96,15 @@ public class Exercises implements java.io.Serializable {
 
 	public void setFlTask(String flTask) {
 		this.flTask = flTask;
+	}
+
+	@Column(name = "id_sequencer", length = 20)
+	public String getIdSequencer() {
+		return this.idSequencer;
+	}
+
+	public void setIdSequencer(String idSequencer) {
+		this.idSequencer = idSequencer;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "exercises")

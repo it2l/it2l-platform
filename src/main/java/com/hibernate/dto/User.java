@@ -1,6 +1,6 @@
 package com.hibernate.dto;
 
-// Generated 24-Jun-2014 16:58:48 by Hibernate Tools 3.4.0.CR1
+// Generated 24-Jul-2014 16:25:40 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -21,6 +21,7 @@ public class User implements java.io.Serializable {
 	private int idUser;
 	private String user;
 	private Integer idView;
+	private String sequencer;
 	private Set<Sequence> sequences = new HashSet<Sequence>(0);
 	private Set<Flexercise> flexercises = new HashSet<Flexercise>(0);
 	private Set<Whizzexercise> whizzexercises = new HashSet<Whizzexercise>(0);
@@ -33,12 +34,13 @@ public class User implements java.io.Serializable {
 		this.idUser = idUser;
 	}
 
-	public User(int idUser, String user, Integer idView,
+	public User(int idUser, String user, Integer idView, String sequencer,
 			Set<Sequence> sequences, Set<Flexercise> flexercises,
 			Set<Whizzexercise> whizzexercises, Set<Ctatexercise> ctatexercises) {
 		this.idUser = idUser;
 		this.user = user;
 		this.idView = idView;
+		this.sequencer = sequencer;
 		this.sequences = sequences;
 		this.flexercises = flexercises;
 		this.whizzexercises = whizzexercises;
@@ -71,6 +73,15 @@ public class User implements java.io.Serializable {
 
 	public void setIdView(Integer idView) {
 		this.idView = idView;
+	}
+
+	@Column(name = "sequencer", length = 2)
+	public String getSequencer() {
+		return this.sequencer;
+	}
+
+	public void setSequencer(String sequencer) {
+		this.sequencer = sequencer;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
