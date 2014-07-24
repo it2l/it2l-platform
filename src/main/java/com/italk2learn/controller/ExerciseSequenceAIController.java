@@ -48,7 +48,6 @@ public class ExerciseSequenceAIController {
 		try {
 			user = (LdapUserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			request= new ExerciseSequenceRequestVO();
-			request= new ExerciseSequenceRequestVO();
 			request.setHeaderVO(new HeaderVO());
 			request.getHeaderVO().setLoginUser(user.getUsername());
 			prevLessonId=getLoginUserService().getIdExersiceUser(request.getHeaderVO()).toString();
