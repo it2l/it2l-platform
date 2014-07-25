@@ -125,7 +125,7 @@ public class ExercisesSequenceController implements Serializable{
 			request.setIdUser(getLoginUserService().getIdUserInfo(request.getHeaderVO()));
 			ExerciseVO response=getExerciseSequenceService().getNextExercise(request).getExercise();
 			request.setIdExercise(response.getIdExercise());
-			getExerciseSequenceService().insertActualExercise(request);
+			getExerciseSequenceService().insertCurrentExercise(request);
 			modelAndView.setViewName(response.getView()+"/"+ response.getExercise());
 			modelAndView.addObject("messageInfo", response);
 			return modelAndView;
@@ -148,11 +148,9 @@ public class ExercisesSequenceController implements Serializable{
 			request.getHeaderVO().setLoginUser(this.getUsername());
 			request.setIdExercise(getLoginUserService().getIdExersiceUser(request.getHeaderVO()));
 			request.setIdUser(getLoginUserService().getIdUserInfo(request.getHeaderVO()));
-			//Obtenemos el ejercio actual de user
 			ExerciseVO response=getExerciseSequenceService().getBackExercise(request).getExercise();
 			request.setIdExercise(response.getIdExercise());
-			//Seteamos user con el nuevo ejercicio obtenido
-			getExerciseSequenceService().insertActualExercise(request);
+			getExerciseSequenceService().insertCurrentExercise(request);
 			modelAndView.setViewName(response.getView()+"/"+ response.getExercise());
 			modelAndView.addObject("messageInfo", response);
 			return modelAndView;
@@ -182,7 +180,7 @@ public class ExercisesSequenceController implements Serializable{
 	}
 	
 	/**
-	 * JLF: Controller to store Whizz Data
+	 * JLF: Controller to store a fractions lab event
 	 */
 	@RequestMapping(value = "/saveFLEvent", method = RequestMethod.POST)
     public @ResponseBody void saveFractionsLabEvent(@RequestBody FractionsLabRequestVO flRequest, HttpServletRequest req){

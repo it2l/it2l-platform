@@ -106,6 +106,10 @@
 		<property name="sessionFactory" ref="italk2learnSessionFactory" />
 	</bean>
 	
+	<bean id="sequenceDAO" class="com.italk2learn.dao.SequenceDAO">
+		<property name="sessionFactory" ref="italk2learnSessionFactory" />
+	</bean>
+	
 	<bean id="exerciseCTATDAO" class="com.italk2learn.dao.CTATExerciseDAO">
 		<property name="sessionFactory" ref="italk2learnSessionFactory" />
 	</bean>

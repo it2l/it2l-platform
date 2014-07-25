@@ -132,8 +132,32 @@ public class MonitorWOZController {
 			request.setIdUser(getLoginUserService().getIdUser(messageForm.getUser()));
 			request.setIdExercise(getLoginUserService().getSimpleIdExersiceUser(messageForm.getUser()));
 			request.setIdNextexercise(Integer.parseInt(messageForm.getIdNextexercise()));
-			//request.setFeedback(messageForm.getFeedback());
 			ExerciseSequenceResponseVO response=getExerciseSequenceService().insertNextIDExercise(request);
+			return "success";
+		}
+		catch (Exception e){
+			logger.error(e.toString());
+		}
+		return "error";
+		
+	}
+	
+	/**
+	 * JLF: Insert next exercise in a sequence of exercise by a given user
+	 */
+	@RequestMapping(value = "/insertSequenceByUser", method = RequestMethod.POST)
+    public @ResponseBody String insertSequenceByUser(@RequestBody WozVO messageForm, HttpServletRequest req){
+		logger.info("JLF --- insertNextExercise()");
+		ExerciseSequenceRequestVO request= new ExerciseSequenceRequestVO();
+		ModelAndView modelAndView=new ModelAndView();
+		modelAndView.setViewName("monitorWOZ");
+		try{
+			request.setHeaderVO(new HeaderVO());
+			request.getHeaderVO().setLoginUser(user.getUsername());
+			request.setIdUser(getLoginUserService().getIdUser(messageForm.getUser()));
+			request.setIdExercise(getLoginUserService().getSimpleIdExersiceUser(messageForm.getUser()));
+			request.setIdNextexercise(Integer.parseInt(messageForm.getIdNextexercise()));
+			ExerciseSequenceResponseVO response=getExerciseSequenceService().insertSequenceByUser(request);
 			return "success";
 		}
 		catch (Exception e){

@@ -19,8 +19,11 @@ public interface IExerciseSequenceBO {
 	
 	public ExerciseSequenceResponseVO insertNextIDExercise(ExerciseSequenceRequestVO request) throws ITalk2LearnException;
 	
-	public ExerciseSequenceResponseVO insertActualExercise(ExerciseSequenceRequestVO request) throws ITalk2LearnException;
+	public ExerciseSequenceResponseVO insertCurrentExercise(ExerciseSequenceRequestVO request) throws ITalk2LearnException;
 	
 	public ExerciseSequenceResponseVO getFirstExercise(ExerciseSequenceRequestVO request) throws ITalk2LearnException;
+	
+	public ExerciseSequenceResponseVO insertSequenceByUser(ExerciseSequenceRequestVO request) throws ITalk2LearnException;
+
 
 }
