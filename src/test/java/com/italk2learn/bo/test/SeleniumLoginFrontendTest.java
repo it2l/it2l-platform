@@ -29,7 +29,6 @@ public class SeleniumLoginFrontendTest {
         browser.findElement(By.id("j_password")).sendKeys("12345");
 
         browser.findElement(By.id("loginButton")).click();
-        browser.findElement(By.id("account")).click();
 
         assertEquals("Done", browser.findElement(By.id("done")).getAttribute("value"));
     }
