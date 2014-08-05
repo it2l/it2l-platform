@@ -1,6 +1,7 @@
 package com.italk2learn.controller;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.InputStream;
 
 import javax.servlet.http.HttpServletRequest;
@@ -56,8 +57,8 @@ public class SpeechRecognitionSphinxController{
 	 */
 	@RequestMapping(value = "/sendData",method = RequestMethod.POST)
 	@ResponseBody
-	public void getSpeechRecognition(@RequestBody byte[] body) {
-		logger.info("JLF --- Speech Recognition Main Controller--  getSpeechRecognition");
+	public void sendDataToRecogniser(@RequestBody byte[] body) {
+		logger.info("JLF --- Speech Recognition Main Controller--  sendDataToRecogniser");
 		request= new SpeechRecognitionRequestVO();
 		request.setHeaderVO(new HeaderVO());
 		request.getHeaderVO().setLoginUser(userLogin);
@@ -65,7 +66,10 @@ public class SpeechRecognitionSphinxController{
 		try {
 			InputStream myInputStream = new ByteArrayInputStream(body); 
 			recognizer.startRecognition(myInputStream);
+			
+			//recognizer.startRecognition(new File("speech.wav").toURI().toURL());
 			SpeechResult result = recognizer.getResult();
+			recognizer.stopRecognition();
 			while ((result = recognizer.getResult()) != null) {
 			    System.out.println(result.getHypothesis());
 			}
@@ -80,8 +84,8 @@ public class SpeechRecognitionSphinxController{
 	 */
 	@RequestMapping(value = "/initEngine",method = RequestMethod.GET)
 	@ResponseBody
-	public Boolean initASREngine(@RequestParam(value = "user") String user, HttpServletRequest req) {
-		logger.info("JLF --- Speech Recognition Main Controller---  initASREngine");
+	public Boolean initSphinxEngine(@RequestParam(value = "user") String user, HttpServletRequest req) {
+		logger.info("JLF --- Speech Recognition Controller---  initSphinxEngine");
 		request= new SpeechRecognitionRequestVO();
 		request.setHeaderVO(new HeaderVO());
 		userLogin=user;
@@ -106,8 +110,8 @@ public class SpeechRecognitionSphinxController{
 	 */
 	@RequestMapping(value = "/closeEngine",method = RequestMethod.POST)
 	@ResponseBody
-	public String closeASREngine(@RequestBody byte[] body) {
-		logger.info("JLF --- Speech Recognition Main Controller--- closeASREngine");
+	public String closeSphinxEngine(@RequestBody byte[] body) {
+		logger.info("JLF --- Speech Recognition Controller--- closeSphinxEngine");
 		request= new SpeechRecognitionRequestVO();
 		request.setHeaderVO(new HeaderVO());
 		request.getHeaderVO().setLoginUser(userLogin);
