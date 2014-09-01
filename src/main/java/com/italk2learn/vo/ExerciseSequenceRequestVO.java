@@ -12,6 +12,7 @@ public class ExerciseSequenceRequestVO extends RequestVO {
 	private int idNextexercise;
 	private String feedback;
 	private String user;
+	private String[] sequence;
 	
 	
 	public int getIdUser() {
@@ -43,6 +44,12 @@ public class ExerciseSequenceRequestVO extends RequestVO {
 	}
 	public void setFeedback(String feedback) {
 		this.feedback = feedback;
+	}
+	public String[] getSequence() {
+		return sequence;
+	}
+	public void setSequence(String[] sequence) {
+		this.sequence = sequence;
 	}
 
 }

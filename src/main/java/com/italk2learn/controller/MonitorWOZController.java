@@ -143,7 +143,7 @@ public class MonitorWOZController {
 	}
 	
 	/**
-	 * JLF: Insert next exercise in a sequence of exercise by a given user
+	 * JLF: Insert a sequence of id's by a given user
 	 */
 	@RequestMapping(value = "/insertSequenceByUser", method = RequestMethod.POST)
     public @ResponseBody String insertSequenceByUser(@RequestBody WozVO messageForm, HttpServletRequest req){
@@ -155,8 +155,7 @@ public class MonitorWOZController {
 			request.setHeaderVO(new HeaderVO());
 			request.getHeaderVO().setLoginUser(user.getUsername());
 			request.setIdUser(getLoginUserService().getIdUser(messageForm.getUser()));
-			request.setIdExercise(getLoginUserService().getSimpleIdExersiceUser(messageForm.getUser()));
-			request.setIdNextexercise(Integer.parseInt(messageForm.getIdNextexercise()));
+			request.setSequence(messageForm.getSequence());
 			ExerciseSequenceResponseVO response=getExerciseSequenceService().insertSequenceByUser(request);
 			return "success";
 		}

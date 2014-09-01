@@ -7,40 +7,67 @@
 <head>
 	<title>monitorWOZ</title>
 	<meta content="text/html;charset=ISO-8859-1" http-equiv="Content-Type" />
+	<style>
+		table, th, td {
+		    border: 1px solid black;
+		    border-collapse: collapse;
+		}
+		th, td {
+		    padding: 5px;
+		}
+	</style>
 </head>
 <body tiles:fragment="content" bgcolor="#ffffff">
 	<h1 align="center">Wizard of Oz-Monitor</h1>
-	<table align="left">
+	<table>
 		<tr align="left">
 			<td align="left">
-				<form th:object="${messageInfo}"
-					  sec:authorize="hasRole('ROLE_USER')">
-					<div>
-							<p>
-								Choose the user to connect: 
-							 	<select id="usList" th:field="*{exercise}">
-             						 <option th:each="user : ${allStudents}" th:value="${user.user}" th:text="${user.user}">Option</option>
-           					 	</select>		
-							</p>
-							<input id="submitUser" name="submitUser" type="button" value="Connect" />
-					</div>  
-					<div>
-						<p>
-							User <input id="user" name="user" type="text" th:value="*{user}" />
-						</p>
-						<div>
-							<p>
-								Write here the ID for the next activity (if you want to change the
-								current one)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<input id="exList" name="exList" type="text" th:value="*{idUser}" /> 
-<!-- 							 	<select id="exList" th:field="*{exercise}"> -->
-<!--              						 <option th:each="exercise : ${allExercises}" th:value="${exercise.idExercise}" th:text="${exercise.exercise}">Option</option> -->
-<!--            					 	</select>		 -->
-							</p>
-						</div>
-					</div>
-				</form>
-				<input id="submit" name="submit" type="button" value="Update" />
+				<table>
+					<tr>
+    					<th>Connect to WOZ</th>
+					</tr>
+					<tr>
+					 	<td>
+					 		<form th:object="${messageInfo}">
+								Choose an user 
+								<select id="usList" th:field="*{exercise}">
+	             				    <option th:each="user : ${allStudents}" th:value="${user.user}" th:text="${user.user}">Option</option>
+	           					</select>
+	           					</form>		
+						</td>
+						<td>
+							<input id="submitUser" name="submitUser" type="button" value="Connect" />						
+						</td>
+					</tr>  
+				</table>
+				<table>
+						<tr>
+    						<th>Choose a sequence for an user</th>
+						</tr>
+						<tr>
+						 	<td>
+								User 
+							</td>
+							<td>
+								<input id="user" name="user" type="text" th:value="*{user}" />
+							</td>	
+						</tr>
+						<tr>
+							<td>
+								Write id's separated by commas
+							</td>
+							<td>
+								<input id="exList" name="exList" type="text" th:value="*{idUser}" size="50"/>
+							</td>
+						</tr>
+						<tr>
+							<td>
+							</td>
+							<td align="right">
+								<input id="submit" name="submit" type="button" value="Submit" />
+							</td>
+						</tr>
+				</table>
 			</td>
 		</tr>
 		<tr align="left">

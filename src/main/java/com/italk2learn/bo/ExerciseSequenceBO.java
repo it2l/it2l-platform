@@ -1,6 +1,7 @@
 package com.italk2learn.bo;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -117,7 +118,9 @@ public class ExerciseSequenceBO implements IExerciseSequenceBO  {
 	
 	public ExerciseSequenceResponseVO insertSequenceByUser(ExerciseSequenceRequestVO request) throws ITalk2LearnException {
 		try {			
-			getSequenceDAO().insertSequenceByUser(request.getIdUser(), new ArrayList<String>());
+			List<String[]> ids = new ArrayList<String[]>();
+			ids.add(request.getSequence());
+			getSequenceDAO().insertSequenceByUser(request.getIdUser(), request.getSequence());
 			return new ExerciseSequenceResponseVO();
 		}
 		catch (Exception e){

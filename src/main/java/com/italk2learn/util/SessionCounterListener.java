@@ -60,8 +60,8 @@ public class SessionCounterListener implements HttpSessionListener {
 	  public void sessionDestroyed(HttpSessionEvent arg0) {
 		  try {
 				totalActiveSessions--;
-//				if (SecurityContextHolder.getContext().getAuthentication()!=null)
-//					user = (LdapUserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+				if (SecurityContextHolder.getContext().getAuthentication()!=null)
+					user = (LdapUserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 //				for (int i=0; i<users.size();i++)
 //					if (user!=null && users.get(i).equals(user.getUsername())){
 //						users.remove(i);
@@ -69,7 +69,7 @@ public class SessionCounterListener implements HttpSessionListener {
 				//logger.info("sessionDestroyed - deduct one session from counter: "+totalActiveSessions+"\n User: "+user.getUsername());
 				System.out.println("sessionDestroyed - deduct one session from counter");
 				//JLF: Comment for testing
-				//closeASRListener(arg0);
+				closeASRListener(arg0);
 		  } catch (Exception e){
 				logger.error(e.toString());
 		  }

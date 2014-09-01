@@ -52,14 +52,14 @@ $(document).ready(function() {
 
 function submitWOZ(){
 	var sub = {
-       	 "idNextexercise": $('#exList').val(), 
+       	 "sequence": $('#exList').val().replace(/\s+/g, '').split(","), 
     	 "user": $('#user').val() 	
         };
     $.ajax({
         type: 'POST',
         contentType : 'application/json; charset=utf-8',
         dataType : 'json',
-        url: "insertNextID",
+        url: "insertSequenceByUser",
         data: JSON.stringify(sub),
         success: function(data){
         	alert('Change submitted!');
