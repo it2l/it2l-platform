@@ -118,7 +118,7 @@
 				        	//alert('Change submitted!');
 				        },
 				        error : function(jqXHR, status, error) {
-				           //alert('Sorry!, there was a problem');
+				        	window.location.href = "/italk2learn/login";
 				        },
 				    });
 				}

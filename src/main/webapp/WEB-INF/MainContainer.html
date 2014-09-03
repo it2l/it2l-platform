@@ -123,23 +123,37 @@
             </td>
          </tr>
     </table>
+    <script>
+var myVar=setInterval(function(){myTimer()},1000);
+
+function myTimer() {
+    var d = new Date();
+    document.getElementById("demo").innerHTML = d.toLocaleTimeString();
+}
+</script>
+    
 	<script type="text/javascript">
 		<!--
 
 		var userName;
 
-		window.onunload=safeexit;
+		//var timer=setInterval(safeexit(),5000);
+		
+		//window.onunload=safeexit;
 
 		function safeexit(){
-// 			$.ajax({
-// 				type: 'GET',
-// 				url: "exercise/invalidate",
-// 				success: function (data) {
-// 					alert("invalidated");
-// 				},
-// 				error: function (jqXHR, status, error) {
-// 				}
-// 			});
+			$.ajax({
+		        type: 'GET',
+		        url: "sequence/getUser",
+		        success: function(data, textStatus, jqXHR){
+		        	
+		        },
+		        error : function(jqXHR, status, error) {
+		        	window.location.href = "/italk2learn/login";
+		        },
+		        complete : function(jqXHR, status) {
+		        }
+		    });
 		} 
 
 		function getParameterByName(name) {
@@ -259,6 +273,7 @@
 		            jQuery.each(reponseScript, function(idx, val) { 
 		            	loadjscssfile(val.src, "js");
 				    } );
+		            safeexit();
 		        },
 		        error : function(jqXHR, status, error) {
 		           alert('Sorry!, there was a problem');

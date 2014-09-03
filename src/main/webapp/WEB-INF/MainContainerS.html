@@ -128,6 +128,24 @@
 
 		var userName;
 
+		//var timer=setInterval(safeexit(),5000);
+		//window.onunload=safeexit;
+
+		function safeexit(){
+			$.ajax({
+		        type: 'GET',
+		        url: "sequence/getUser",
+		        success: function(data, textStatus, jqXHR){
+		        	
+		        },
+		        error : function(jqXHR, status, error) {
+		        	window.location.href = "/italk2learn/login";
+		        },
+		        complete : function(jqXHR, status) {
+		        }
+		    });
+		} 
+
 		function getParameterByName(name) {
 		    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
 		    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
@@ -245,6 +263,7 @@
 		            jQuery.each(reponseScript, function(idx, val) { 
 		            	loadjscssfile(val.src, "js");
 				    } );
+		            safeexit();
 		        },
 		        error : function(jqXHR, status, error) {
 		           alert('Sorry!, there was a problem');

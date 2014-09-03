@@ -62,7 +62,7 @@ public class SpeechRecognitionController{
 		request.getHeaderVO().setLoginUser("tludmetal");
 		request.setData(body);
 		try {
-			response=((SpeechRecognitionResponseVO) getSpeechRecognitionService().sendNewAudioChunk(request));
+			//response=((SpeechRecognitionResponseVO) getSpeechRecognitionService().sendNewAudioChunk(request));
 		} catch (Exception e){
 			logger.error(e.toString());
 		}
@@ -82,7 +82,7 @@ public class SpeechRecognitionController{
 		//request.getHeaderVO().setLoginUser(user.getUsername());
 		request.getHeaderVO().setLoginUser(user);
 		try {
-			response=((SpeechRecognitionResponseVO) getSpeechRecognitionService().initASREngine(request));
+			//response=((SpeechRecognitionResponseVO) getSpeechRecognitionService().initASREngine(request));
 			return response.isOpen();
 		} catch (Exception e){
 			logger.error(e.toString());
@@ -104,7 +104,7 @@ public class SpeechRecognitionController{
 		request.getHeaderVO().setLoginUser("tludmetal");
 		request.setData(body);
 		try {
-			response=((SpeechRecognitionResponseVO) getSpeechRecognitionService().closeASREngine(request));
+			//response=((SpeechRecognitionResponseVO) getSpeechRecognitionService().closeASREngine(request));
 			return response.getResponse();
 		} catch (Exception e){
 			logger.error(e.toString());

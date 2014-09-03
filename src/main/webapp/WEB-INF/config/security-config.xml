@@ -23,11 +23,12 @@
 		<!--JLF If login fails -->
 		<security:logout 
 				invalidate-session="true" 
-				logout-success-url="/login" 
+				logout-success-url="/login"
+				delete-cookies="JSESSIONID" 
 				logout-url="/auth/logout"/>
 		
-		<security:session-management invalid-session-url="/login">
-        	<security:concurrency-control max-sessions="1" error-if-maximum-exceeded="true" />
+		<security:session-management session-authentication-error-url="/login">
+        	<security:concurrency-control max-sessions="1" expired-url="/login"/>
 		</security:session-management>
 	
 	</security:http>

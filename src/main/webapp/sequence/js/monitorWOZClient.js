@@ -121,6 +121,8 @@ function connectWOZ (user) {
         } else {
         	$('#connect').html("Status: "+status);
         	if (status === Strophe.Status.DISCONNECTING) {
+        		//JLF:Go to login page when auth fail
+        		window.location.href = "/italk2learn/login";
 	        	//JLF:Reconnect when it's not connected
 	            var conn = new Strophe.Connection(
 	            'http://it2l.dcs.bbk.ac.uk/http-bind/');

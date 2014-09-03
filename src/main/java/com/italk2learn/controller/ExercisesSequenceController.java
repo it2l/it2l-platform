@@ -131,6 +131,7 @@ public class ExercisesSequenceController implements Serializable{
 			return modelAndView;
 		}
 		catch (Exception e){
+			modelAndView.setViewName("redirect:/login");
 			return new ModelAndView();
 		}
 	}
@@ -156,6 +157,7 @@ public class ExercisesSequenceController implements Serializable{
 			return modelAndView;
 		}
 		catch (Exception e){
+			modelAndView.setViewName("redirect:/login");
 			return new ModelAndView();
 		}
 	}
@@ -168,6 +170,7 @@ public class ExercisesSequenceController implements Serializable{
 		logger.info("JLF --- Whizz storeWhizzData log"+"User: "+this.getUsername());
 		WhizzRequestVO request=new WhizzRequestVO();
         try {
+        	user = (LdapUserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         	request.setHeaderVO(new HeaderVO());
 			request.getHeaderVO().setLoginUser(this.getUsername());
 			request.setIdExercise(getLoginUserService().getIdExersiceUser(request.getHeaderVO()));
@@ -180,6 +183,21 @@ public class ExercisesSequenceController implements Serializable{
 	}
 	
 	/**
+	 * If session is invalidated return to the login page
+	 */
+	@RequestMapping(value = "/redirectLogin",method = RequestMethod.GET)
+	public String redirectLogin() {
+		logger.info("JLF --- redirectLogin");
+		try {
+			user = (LdapUserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		} catch (Exception e){
+			logger.error(e.toString());
+			return "redirect:/login";
+		}
+		return null;
+	}
+	
+	/**
 	 * JLF: Controller to store a fractions lab event
 	 */
 	@RequestMapping(value = "/saveFLEvent", method = RequestMethod.POST)
@@ -187,6 +205,7 @@ public class ExercisesSequenceController implements Serializable{
 		logger.info("JLF --- saveFractionsLabEvent log"+"User: "+this.getUsername());
 		FractionsLabRequestVO request=new FractionsLabRequestVO();
         try {
+        	user = (LdapUserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         	request.setHeaderVO(new HeaderVO());
 			request.getHeaderVO().setLoginUser(this.getUsername());
 			request.setIdExercise(getLoginUserService().getIdExersiceUser(request.getHeaderVO()));
