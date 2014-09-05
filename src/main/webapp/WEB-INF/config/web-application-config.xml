@@ -65,6 +65,9 @@
     </mvc:interceptors>
     <!-- End Message internalisation -->
     
+	<!-- To consume RestFul services -->
+    <bean id="restTemplate" class="org.springframework.web.client.RestTemplate"/>
+    
 	
 <!-- 	<bean id="serverServiceExporter" class="org.springframework.remoting.jaxws.SimpleJaxWsServiceExporter"> -->
 <!-- 		<property name="baseAddress" value="http://localhost:9999/" /> -->

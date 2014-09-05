@@ -37,6 +37,8 @@ public class SpeechRecognitionController{
 	//Response petition
 	private SpeechRecognitionResponseVO response= new SpeechRecognitionResponseVO();
 	
+	private String username;
+	
 	
 	/*Services*/
 	private ISpeechRecognitionBO speechRecognitionService;
@@ -55,14 +57,12 @@ public class SpeechRecognitionController{
 	@ResponseBody
 	public void getSpeechRecognition(@RequestBody byte[] body) {
 		logger.info("JLF --- Speech Recognition Main Controller");
-		//user = (LdapUserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		request= new SpeechRecognitionRequestVO();
 		request.setHeaderVO(new HeaderVO());
-		//request.getHeaderVO().setLoginUser(user.getUsername());
-		request.getHeaderVO().setLoginUser("tludmetal");
+		request.getHeaderVO().setLoginUser(getUsername());
 		request.setData(body);
 		try {
-			//response=((SpeechRecognitionResponseVO) getSpeechRecognitionService().sendNewAudioChunk(request));
+			response=((SpeechRecognitionResponseVO) getSpeechRecognitionService().sendNewAudioChunk(request));
 		} catch (Exception e){
 			logger.error(e.toString());
 		}
@@ -76,13 +76,12 @@ public class SpeechRecognitionController{
 	@ResponseBody
 	public Boolean initASREngine(@RequestParam(value = "user") String user, HttpServletRequest req) {
 		logger.info("JLF --- Speech Recognition Main Controller");
-		//user = (LdapUserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		request= new SpeechRecognitionRequestVO();
 		request.setHeaderVO(new HeaderVO());
-		//request.getHeaderVO().setLoginUser(user.getUsername());
+		this.setUsername(user);
 		request.getHeaderVO().setLoginUser(user);
 		try {
-			//response=((SpeechRecognitionResponseVO) getSpeechRecognitionService().initASREngine(request));
+			response=((SpeechRecognitionResponseVO) getSpeechRecognitionService().initASREngine(request));
 			return response.isOpen();
 		} catch (Exception e){
 			logger.error(e.toString());
@@ -97,14 +96,12 @@ public class SpeechRecognitionController{
 	@ResponseBody
 	public String closeASREngine(@RequestBody byte[] body) {
 		logger.info("JLF --- Speech Recognition Main Controller");
-		//user = (LdapUserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		request= new SpeechRecognitionRequestVO();
 		request.setHeaderVO(new HeaderVO());
-		//request.getHeaderVO().setLoginUser(user.getUsername());
-		request.getHeaderVO().setLoginUser("tludmetal");
+		request.getHeaderVO().setLoginUser(getUsername());
 		request.setData(body);
 		try {
-			//response=((SpeechRecognitionResponseVO) getSpeechRecognitionService().closeASREngine(request));
+			response=((SpeechRecognitionResponseVO) getSpeechRecognitionService().closeASREngine(request));
 			return response.getResponse();
 		} catch (Exception e){
 			logger.error(e.toString());
@@ -127,6 +124,14 @@ public class SpeechRecognitionController{
 
 	public void setSpeechRecognitionService(ISpeechRecognitionBO speechRecognitionService) {
 		this.speechRecognitionService = speechRecognitionService;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 }
