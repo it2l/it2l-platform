@@ -12,10 +12,10 @@
 		</param-value>
 	</context-param>
 	
-	<context-param>
-        <param-name>org.apache.activemq.brokerURL</param-name>
-        <param-value>vm://localhost</param-value>
-    </context-param>
+<!-- 	<context-param> -->
+<!--         <param-name>org.apache.activemq.brokerURL</param-name> -->
+<!--         <param-value>vm://localhost</param-value> -->
+<!--     </context-param> -->
     
 	<!-- Loads the Spring web application context -->
 	<listener>
@@ -73,14 +73,14 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	
-	<servlet>
-	    <servlet-name>amq</servlet-name>
-	    <servlet-class>org.apache.activemq.web.AjaxServlet</servlet-class>
-	    <load-on-startup>1</load-on-startup>
-	</servlet>
+<!-- 	<servlet> -->
+<!-- 	    <servlet-name>amq</servlet-name> -->
+<!-- 	    <servlet-class>org.apache.activemq.web.AjaxServlet</servlet-class> -->
+<!-- 	    <load-on-startup>1</load-on-startup> -->
+<!-- 	</servlet> -->
 	 
-	<servlet-mapping>
-	    <servlet-name>amq</servlet-name>
-	    <url-pattern>/amq/*</url-pattern>
-	</servlet-mapping>
+<!-- 	<servlet-mapping> -->
+<!-- 	    <servlet-name>amq</servlet-name> -->
+<!-- 	    <url-pattern>/amq/*</url-pattern> -->
+<!-- 	</servlet-mapping> -->
 </web-app>
