@@ -24,50 +24,50 @@ import com.italk2learn.ws.NextLesson;
 @Controller
 public class ExerciseSequenceAIController {
 
-	@Autowired
-	private NextLesson sequenceClient;
-	
-	@Autowired
-	private ILoginUserService loginUserService;
-	
-	private LdapUserDetailsImpl user;
-	
-
-	private static final Logger log = LoggerFactory
-			.getLogger(ExerciseSequenceAIController.class);
-
-	@RequestMapping(value = "/nextExerciseAISequence", method = RequestMethod.GET)
-	public String getNextExercise(ModelMap model) {
-		ExerciseSequenceRequestVO request;
-		GregorianCalendar c = new GregorianCalendar();
-		c.setTime(new Date());
-		int studentId=6129436;
-		int prevStudentScore=1;
-		String prevLessonId="GB0600PAp0100";
-		String whizzLessonSuggestion="GB0600PAp0100";
-		try {
-			user = (LdapUserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			request= new ExerciseSequenceRequestVO();
-			request.setHeaderVO(new HeaderVO());
-			request.getHeaderVO().setLoginUser(user.getUsername());
-			prevLessonId=getLoginUserService().getIdExersiceUser(request.getHeaderVO()).toString();
-			studentId=getLoginUserService().getIdUserInfo(request.getHeaderVO());
-			XMLGregorianCalendar timestamp=DatatypeFactory.newInstance().newXMLGregorianCalendar(c);
-			return sequenceClient.nextLesson(studentId, prevStudentScore, prevLessonId, timestamp, whizzLessonSuggestion);
-		} catch (Exception e) {
-			log.error(e.toString());
-		}
-		return "redirect:/login";
-
-	}
-	
-	
-	public ILoginUserService getLoginUserService() {
-		return loginUserService;
-	}
-
-
-	public void setLoginUserService(ILoginUserService loginUserService) {
-		this.loginUserService = loginUserService;
-	}
+//	@Autowired
+//	private NextLesson sequenceClient;
+//	
+//	@Autowired
+//	private ILoginUserService loginUserService;
+//	
+//	private LdapUserDetailsImpl user;
+//	
+//
+//	private static final Logger log = LoggerFactory
+//			.getLogger(ExerciseSequenceAIController.class);
+//
+//	@RequestMapping(value = "/nextExerciseAISequence", method = RequestMethod.GET)
+//	public String getNextExercise(ModelMap model) {
+//		ExerciseSequenceRequestVO request;
+//		GregorianCalendar c = new GregorianCalendar();
+//		c.setTime(new Date());
+//		int studentId=6129436;
+//		int prevStudentScore=1;
+//		String prevLessonId="GB0600PAp0100";
+//		String whizzLessonSuggestion="GB0600PAp0100";
+//		try {
+//			user = (LdapUserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//			request= new ExerciseSequenceRequestVO();
+//			request.setHeaderVO(new HeaderVO());
+//			request.getHeaderVO().setLoginUser(user.getUsername());
+//			prevLessonId=getLoginUserService().getIdExersiceUser(request.getHeaderVO()).toString();
+//			studentId=getLoginUserService().getIdUserInfo(request.getHeaderVO());
+//			XMLGregorianCalendar timestamp=DatatypeFactory.newInstance().newXMLGregorianCalendar(c);
+//			return sequenceClient.nextLesson(studentId, prevStudentScore, prevLessonId, timestamp, whizzLessonSuggestion);
+//		} catch (Exception e) {
+//			log.error(e.toString());
+//		}
+//		return "redirect:/login";
+//
+//	}
+//	
+//	
+//	public ILoginUserService getLoginUserService() {
+//		return loginUserService;
+//	}
+//
+//
+//	public void setLoginUserService(ILoginUserService loginUserService) {
+//		this.loginUserService = loginUserService;
+//	}
 }

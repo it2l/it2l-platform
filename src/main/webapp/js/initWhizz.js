@@ -53,7 +53,7 @@
 				        	//alert('Change submitted!');
 				        },
 				        error : function(jqXHR, status, error) {
-				        	window.location.href = "/italk2learn/login";
+				        	//window.location.href = "/italk2learn/login";
 				        },
 				    });
 			}
