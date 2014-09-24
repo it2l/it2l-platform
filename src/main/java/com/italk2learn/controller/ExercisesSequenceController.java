@@ -1,5 +1,7 @@
 package com.italk2learn.controller;
 
+import java.io.Serializable;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -36,7 +38,9 @@ import com.italk2learn.vo.WhizzRequestVO;
 @Controller
 @Scope("session")
 @RequestMapping("/sequence")
-public class ExercisesSequenceController {
+public class ExercisesSequenceController implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	
 	
 	private LdapUserDetailsImpl user;
@@ -121,12 +125,13 @@ public class ExercisesSequenceController {
 			request.setIdUser(getLoginUserService().getIdUserInfo(request.getHeaderVO()));
 			ExerciseVO response=getExerciseSequenceService().getNextExercise(request).getExercise();
 			request.setIdExercise(response.getIdExercise());
-			getExerciseSequenceService().insertActualExercise(request);
+			getExerciseSequenceService().insertCurrentExercise(request);
 			modelAndView.setViewName(response.getView()+"/"+ response.getExercise());
 			modelAndView.addObject("messageInfo", response);
 			return modelAndView;
 		}
 		catch (Exception e){
+			modelAndView.setViewName("redirect:/login");
 			return new ModelAndView();
 		}
 	}
@@ -144,16 +149,15 @@ public class ExercisesSequenceController {
 			request.getHeaderVO().setLoginUser(this.getUsername());
 			request.setIdExercise(getLoginUserService().getIdExersiceUser(request.getHeaderVO()));
 			request.setIdUser(getLoginUserService().getIdUserInfo(request.getHeaderVO()));
-			//Obtenemos el ejercio actual de user
 			ExerciseVO response=getExerciseSequenceService().getBackExercise(request).getExercise();
 			request.setIdExercise(response.getIdExercise());
-			//Seteamos user con el nuevo ejercicio obtenido
-			getExerciseSequenceService().insertActualExercise(request);
+			getExerciseSequenceService().insertCurrentExercise(request);
 			modelAndView.setViewName(response.getView()+"/"+ response.getExercise());
 			modelAndView.addObject("messageInfo", response);
 			return modelAndView;
 		}
 		catch (Exception e){
+			modelAndView.setViewName("redirect:/login");
 			return new ModelAndView();
 		}
 	}
@@ -166,6 +170,7 @@ public class ExercisesSequenceController {
 		logger.info("JLF --- Whizz storeWhizzData log"+"User: "+this.getUsername());
 		WhizzRequestVO request=new WhizzRequestVO();
         try {
+        	user = (LdapUserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         	request.setHeaderVO(new HeaderVO());
 			request.getHeaderVO().setLoginUser(this.getUsername());
 			request.setIdExercise(getLoginUserService().getIdExersiceUser(request.getHeaderVO()));
@@ -178,13 +183,29 @@ public class ExercisesSequenceController {
 	}
 	
 	/**
-	 * JLF: Controller to store Whizz Data
+	 * If session is invalidated return to the login page
+	 */
+	@RequestMapping(value = "/redirectLogin",method = RequestMethod.GET)
+	public String redirectLogin() {
+		logger.info("JLF --- redirectLogin");
+		try {
+			user = (LdapUserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		} catch (Exception e){
+			logger.error(e.toString());
+			return "redirect:/login";
+		}
+		return null;
+	}
+	
+	/**
+	 * JLF: Controller to store a fractions lab event
 	 */
 	@RequestMapping(value = "/saveFLEvent", method = RequestMethod.POST)
     public @ResponseBody void saveFractionsLabEvent(@RequestBody FractionsLabRequestVO flRequest, HttpServletRequest req){
 		logger.info("JLF --- saveFractionsLabEvent log"+"User: "+this.getUsername());
 		FractionsLabRequestVO request=new FractionsLabRequestVO();
         try {
+        	user = (LdapUserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         	request.setHeaderVO(new HeaderVO());
 			request.getHeaderVO().setLoginUser(this.getUsername());
 			request.setIdExercise(getLoginUserService().getIdExersiceUser(request.getHeaderVO()));

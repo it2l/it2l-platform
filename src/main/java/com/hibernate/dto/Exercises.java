@@ -1,6 +1,6 @@
 package com.hibernate.dto;
 
-// Generated 12-May-2014 12:59:52 by Hibernate Tools 3.4.0.CR1
+// Generated 24-Jul-2014 16:25:40 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,8 +22,11 @@ public class Exercises implements java.io.Serializable {
 	private String exercise;
 	private String view;
 	private String description;
+	private String flTask;
+	private String idSequencer;
 	private Set<Ctatexercise> ctatexercises = new HashSet<Ctatexercise>(0);
 	private Set<Whizzexercise> whizzexercises = new HashSet<Whizzexercise>(0);
+	private Set<Flexercise> flexercises = new HashSet<Flexercise>(0);
 	private Set<Sequence> sequences = new HashSet<Sequence>(0);
 
 	public Exercises() {
@@ -34,14 +37,18 @@ public class Exercises implements java.io.Serializable {
 	}
 
 	public Exercises(int idExercise, String exercise, String view,
-			String description, Set<Ctatexercise> ctatexercises,
-			Set<Whizzexercise> whizzexercises, Set<Sequence> sequences) {
+			String description, String flTask, String idSequencer,
+			Set<Ctatexercise> ctatexercises, Set<Whizzexercise> whizzexercises,
+			Set<Flexercise> flexercises, Set<Sequence> sequences) {
 		this.idExercise = idExercise;
 		this.exercise = exercise;
 		this.view = view;
 		this.description = description;
+		this.flTask = flTask;
+		this.idSequencer = idSequencer;
 		this.ctatexercises = ctatexercises;
 		this.whizzexercises = whizzexercises;
+		this.flexercises = flexercises;
 		this.sequences = sequences;
 	}
 
@@ -82,6 +89,24 @@ public class Exercises implements java.io.Serializable {
 		this.description = description;
 	}
 
+	@Column(name = "fl_task", length = 20)
+	public String getFlTask() {
+		return this.flTask;
+	}
+
+	public void setFlTask(String flTask) {
+		this.flTask = flTask;
+	}
+
+	@Column(name = "id_sequencer", length = 20)
+	public String getIdSequencer() {
+		return this.idSequencer;
+	}
+
+	public void setIdSequencer(String idSequencer) {
+		this.idSequencer = idSequencer;
+	}
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "exercises")
 	public Set<Ctatexercise> getCtatexercises() {
 		return this.ctatexercises;
@@ -98,6 +123,15 @@ public class Exercises implements java.io.Serializable {
 
 	public void setWhizzexercises(Set<Whizzexercise> whizzexercises) {
 		this.whizzexercises = whizzexercises;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "exercises")
+	public Set<Flexercise> getFlexercises() {
+		return this.flexercises;
+	}
+
+	public void setFlexercises(Set<Flexercise> flexercises) {
+		this.flexercises = flexercises;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "exercises")

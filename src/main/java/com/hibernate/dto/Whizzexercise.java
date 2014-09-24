@@ -1,6 +1,6 @@
 package com.hibernate.dto;
 
-// Generated 31-Mar-2014 21:38:55 by Hibernate Tools 3.4.0.CR1
+// Generated 14-Jul-2014 17:26:25 by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -37,9 +37,10 @@ public class Whizzexercise implements java.io.Serializable {
 	public Whizzexercise() {
 	}
 
-	public Whizzexercise(Exercises exercises, User user) {
+	public Whizzexercise(Exercises exercises, User user, Date date) {
 		this.exercises = exercises;
 		this.user = user;
+		this.date = date;
 	}
 
 	public Whizzexercise(Exercises exercises, User user, Integer score,
@@ -151,8 +152,8 @@ public class Whizzexercise implements java.io.Serializable {
 		this.totalQuestions = totalQuestions;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "date", length = 10)
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "date", nullable = false, length = 19)
 	public Date getDate() {
 		return this.date;
 	}

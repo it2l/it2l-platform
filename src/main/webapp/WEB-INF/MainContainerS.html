@@ -30,11 +30,13 @@
 	<table id="header" class="header">
                     <tr align="left">
                         <td id="topbar" align="left">
+                       		<div id="user">
+                            </div>
                             <div sec:authorize="hasRole('ROLE_USER')" th:if="${#authentication}">
                                 <a href="#" th:href="@{/auth/logout}">Logout</a>
                             </div>
                             <div sec:authorize="hasRole('ROLE_ADMIN')">
-                                <a href="#" th:href="@{/monitorWOZ/}">Wizard</a>
+                                <a href="#" th:href="@{/monitorWOZ}">Wizard</a>
                             </div>
                             <div sec:authorize="hasRole('ROLE_USER')">
                                 <a href="#" th:href="@{/exercise}">No sound</a>
@@ -126,6 +128,24 @@
 
 		var userName;
 
+		//var timer=setInterval(safeexit(),5000);
+		//window.onunload=safeexit;
+
+		function safeexit(){
+			$.ajax({
+		        type: 'GET',
+		        url: "sequence/getUser",
+		        success: function(data, textStatus, jqXHR){
+		        	
+		        },
+		        error : function(jqXHR, status, error) {
+		        	window.location.href = "/italk2learn/login";
+		        },
+		        complete : function(jqXHR, status) {
+		        }
+		    });
+		} 
+
 		function getParameterByName(name) {
 		    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
 		    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
@@ -159,6 +179,7 @@
 				url: "sequence/getUser",
 				success: function (data) {
 					//JLF: Call connect WOZ. If it's connected or authfail initialises the container.
+					$('#user').html(data);
 					userName=data;
 					connectWOZ (data);
 				},
@@ -176,7 +197,6 @@
 		});
 
 		function initContainer(){
-			$("#next").show();
 		    $.ajax({
 		        type: 'GET',
 		        url: "sequence/",
@@ -184,6 +204,7 @@
 		            
 		            },
 		        success: function(data, textStatus, jqXHR) {
+		        	$("#next").show();
 		        	document.getElementById("mainContainer").innerHTML=jqXHR.responseText;
 		            var reponse = jQuery(jqXHR.responseText);
 		            var reponseScript = reponse.filter("script");
@@ -226,6 +247,7 @@
 		function nextExercise(){
 			$("#done").hide();
 			$("#help").hide();
+			$("#next").hide();
 			document.getElementById("mainContainer").innerHTML = '';
 		    $.ajax({
 		        type: 'GET',
@@ -234,12 +256,14 @@
 		            
 		            },
 		        success: function(data, textStatus, jqXHR){
+		        	$("#next").show();
 		        	document.getElementById("mainContainer").innerHTML=jqXHR.responseText;
 		            var reponse = jQuery(jqXHR.responseText);
 		            var reponseScript = reponse.filter("script");
 		            jQuery.each(reponseScript, function(idx, val) { 
 		            	loadjscssfile(val.src, "js");
 				    } );
+		            safeexit();
 		        },
 		        error : function(jqXHR, status, error) {
 		           alert('Sorry!, there was a problem');
@@ -253,6 +277,8 @@
 		function submitExercise(){
 			document.getElementById("mainContainer").innerHTML = '';
 			$("#next").remove();
+			$("#done").remove();
+			$("#help").remove();
 			var sub = {
 		       	 "idExercise": $('#exList').val(), 
 		        };

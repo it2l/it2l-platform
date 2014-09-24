@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,8 +25,8 @@ import com.italk2learn.vo.ExerciseSequenceRequestVO;
 import com.italk2learn.vo.ExerciseSequenceResponseVO;
 import com.italk2learn.vo.ExerciseVO;
 import com.italk2learn.vo.HeaderVO;
-import com.italk2learn.vo.WozVO;
 import com.italk2learn.vo.UserDetailsVO;
+import com.italk2learn.vo.WozVO;
 
 /**
  * Handles requests for the application exercise sequence.
@@ -55,11 +54,16 @@ public class MonitorWOZController {
     @ModelAttribute("allExercises")
     public List<ExerciseVO> populateExercises() {
     	logger.info("JLF --- MonitorWOZ.populateExercises");
-    	user = (LdapUserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    	ExerciseSequenceRequestVO request= new ExerciseSequenceRequestVO();
-    	request.setHeaderVO(new HeaderVO());
-		request.getHeaderVO().setLoginUser(user.getUsername());
-        return this.exerciseSequenceService.findAllExercises(request).getResponse();
+    	try {
+	    	user = (LdapUserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	    	ExerciseSequenceRequestVO request= new ExerciseSequenceRequestVO();
+	    	request.setHeaderVO(new HeaderVO());
+			request.getHeaderVO().setLoginUser(user.getUsername());
+	        return this.exerciseSequenceService.findAllExercises(request).getResponse();
+    	} catch (Exception e){
+			logger.error(e.toString());
+			return null;
+		}    
     }
     
     
@@ -100,12 +104,17 @@ public class MonitorWOZController {
 	/**
 	 * JLF: Get the main view
 	 */
-	@RequestMapping(value = "/",method = RequestMethod.GET)
+	@RequestMapping(value = "",method = RequestMethod.GET)
 	public String monitorWOZInit(Model model) {
 		logger.info("JLF --- MonitorWOZ.init");
-		user = (LdapUserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		model.addAttribute("messageInfo", new ExerciseVO());
-		return "monitorWOZ";
+		try {
+			user = (LdapUserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			model.addAttribute("messageInfo", new ExerciseVO());
+			return "monitorWOZ";
+		} catch (Exception e){
+			logger.error(e.toString());
+			return "redirect:/login";
+		}
 	}
 
 	/**
@@ -123,8 +132,31 @@ public class MonitorWOZController {
 			request.setIdUser(getLoginUserService().getIdUser(messageForm.getUser()));
 			request.setIdExercise(getLoginUserService().getSimpleIdExersiceUser(messageForm.getUser()));
 			request.setIdNextexercise(Integer.parseInt(messageForm.getIdNextexercise()));
-			//request.setFeedback(messageForm.getFeedback());
 			ExerciseSequenceResponseVO response=getExerciseSequenceService().insertNextIDExercise(request);
+			return "success";
+		}
+		catch (Exception e){
+			logger.error(e.toString());
+		}
+		return "error";
+		
+	}
+	
+	/**
+	 * JLF: Insert a sequence of id's by a given user
+	 */
+	@RequestMapping(value = "/insertSequenceByUser", method = RequestMethod.POST)
+    public @ResponseBody String insertSequenceByUser(@RequestBody WozVO messageForm, HttpServletRequest req){
+		logger.info("JLF --- insertNextExercise()");
+		ExerciseSequenceRequestVO request= new ExerciseSequenceRequestVO();
+		ModelAndView modelAndView=new ModelAndView();
+		modelAndView.setViewName("monitorWOZ");
+		try{
+			request.setHeaderVO(new HeaderVO());
+			request.getHeaderVO().setLoginUser(user.getUsername());
+			request.setIdUser(getLoginUserService().getIdUser(messageForm.getUser()));
+			request.setSequence(messageForm.getSequence());
+			ExerciseSequenceResponseVO response=getExerciseSequenceService().insertSequenceByUser(request);
 			return "success";
 		}
 		catch (Exception e){

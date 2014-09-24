@@ -62,7 +62,7 @@
 					if (body.localeCompare("Make a fraction that equals 3/4 and has 12 as denominator.")==0){
 						doneButtonEnable(true);
 						arrowButtonEnable(false);
-						u.initPlugin(jQuery("#unityPlayer")[0], "/italk2learn/sequence/FractionsLab.unity3d?showStartPage=false&language="+getLocale()+"&idtask=EQUIValence1");
+						u.initPlugin(jQuery("#unityPlayer")[0], "/italk2learn/sequence/FractionsLab.unity3d?showStartPage=false&language="+getLocale()+"&idtask=EQUIValence1"+userName);
 
 					}
 					else {
@@ -118,9 +118,14 @@
 				        	//alert('Change submitted!');
 				        },
 				        error : function(jqXHR, status, error) {
-				           //alert('Sorry!, there was a problem');
+				        	window.location.href = "/italk2learn/login";
 				        },
 				    });
+				}
+				
+				function sendMessageToLightBulb(message){
+					helpButtonEnable(true);
+					lowMessage=message;
 				}
 				
 				
@@ -168,11 +173,11 @@
 				
 				function arrowButtonEnable(value){
 					if (value==true || value=="true" || value=="True") {
-			        	document.getElementById("arrowimage").src="http://it2l.dcs.bbk.ac.uk/italk2learn/images/arrow-right.png";
+			        	document.getElementById("arrowimage").src="/italk2learn/images/arrow-right.png";
 						$("#next").removeAttr("disabled");
 					}	
 					else {
-						document.getElementById("arrowimage").src="http://it2l.dcs.bbk.ac.uk/italk2learn/images/arrow-right-disabled.png";
+						document.getElementById("arrowimage").src="/italk2learn/images/arrow-right-disabled.png";
 						$("#next").attr("disabled", "disabled");
 					}	
 				}

@@ -1,7 +1,5 @@
 package com.italk2learn.controller;
 
-import java.io.Serializable;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -12,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.italk2learn.bo.inter.ILoginUserService;
@@ -26,12 +25,8 @@ import com.italk2learn.vo.SpeechRecognitionResponseVO;
 @Controller
 @Scope("session")
 @RequestMapping("/speechRecognition")
-public class SpeechRecognitionController implements Serializable{
+public class SpeechRecognitionController{
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 
 	private static final Logger logger = LoggerFactory
 			.getLogger(SpeechRecognitionController.class);
@@ -41,6 +36,8 @@ public class SpeechRecognitionController implements Serializable{
     
 	//Response petition
 	private SpeechRecognitionResponseVO response= new SpeechRecognitionResponseVO();
+	
+	private String username;
 	
 	
 	/*Services*/
@@ -60,11 +57,9 @@ public class SpeechRecognitionController implements Serializable{
 	@ResponseBody
 	public void getSpeechRecognition(@RequestBody byte[] body) {
 		logger.info("JLF --- Speech Recognition Main Controller");
-		//user = (LdapUserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		request= new SpeechRecognitionRequestVO();
 		request.setHeaderVO(new HeaderVO());
-		//request.getHeaderVO().setLoginUser(user.getUsername());
-		request.getHeaderVO().setLoginUser("tludmetal");
+		request.getHeaderVO().setLoginUser(getUsername());
 		request.setData(body);
 		try {
 			response=((SpeechRecognitionResponseVO) getSpeechRecognitionService().sendNewAudioChunk(request));
@@ -79,12 +74,11 @@ public class SpeechRecognitionController implements Serializable{
 	 */
 	@RequestMapping(value = "/initEngine",method = RequestMethod.GET)
 	@ResponseBody
-	public Boolean initASREngine(@RequestBody String user, HttpServletRequest req) {
+	public Boolean initASREngine(@RequestParam(value = "user") String user, HttpServletRequest req) {
 		logger.info("JLF --- Speech Recognition Main Controller");
-		//user = (LdapUserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		request= new SpeechRecognitionRequestVO();
 		request.setHeaderVO(new HeaderVO());
-		//request.getHeaderVO().setLoginUser(user.getUsername());
+		this.setUsername(user);
 		request.getHeaderVO().setLoginUser(user);
 		try {
 			response=((SpeechRecognitionResponseVO) getSpeechRecognitionService().initASREngine(request));
@@ -102,11 +96,9 @@ public class SpeechRecognitionController implements Serializable{
 	@ResponseBody
 	public String closeASREngine(@RequestBody byte[] body) {
 		logger.info("JLF --- Speech Recognition Main Controller");
-		//user = (LdapUserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		request= new SpeechRecognitionRequestVO();
 		request.setHeaderVO(new HeaderVO());
-		//request.getHeaderVO().setLoginUser(user.getUsername());
-		request.getHeaderVO().setLoginUser("tludmetal");
+		request.getHeaderVO().setLoginUser(getUsername());
 		request.setData(body);
 		try {
 			response=((SpeechRecognitionResponseVO) getSpeechRecognitionService().closeASREngine(request));
@@ -132,6 +124,14 @@ public class SpeechRecognitionController implements Serializable{
 
 	public void setSpeechRecognitionService(ISpeechRecognitionBO speechRecognitionService) {
 		this.speechRecognitionService = speechRecognitionService;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 }

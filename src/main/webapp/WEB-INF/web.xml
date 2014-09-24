@@ -12,15 +12,27 @@
 		</param-value>
 	</context-param>
 	
-	<context-param>
-        <param-name>org.apache.activemq.brokerURL</param-name>
-        <param-value>vm://localhost</param-value>
-    </context-param>
-
+<!-- 	<context-param> -->
+<!--         <param-name>org.apache.activemq.brokerURL</param-name> -->
+<!--         <param-value>vm://localhost</param-value> -->
+<!--     </context-param> -->
+    
 	<!-- Loads the Spring web application context -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+	
+	<listener>
+	    <listener-class>
+	      org.springframework.security.web.session.HttpSessionEventPublisher
+	    </listener-class>
+  	</listener>
+	
+	
+	<listener>
+		<listener-class>com.italk2learn.util.SessionCounterListener</listener-class>
+	</listener>
+	
 
 	<!-- Enables use of HTTP methods PUT and DELETE -->
 	<filter>
@@ -61,14 +73,14 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	
-	<servlet>
-	    <servlet-name>amq</servlet-name>
-	    <servlet-class>org.apache.activemq.web.AjaxServlet</servlet-class>
-	    <load-on-startup>1</load-on-startup>
-	</servlet>
+<!-- 	<servlet> -->
+<!-- 	    <servlet-name>amq</servlet-name> -->
+<!-- 	    <servlet-class>org.apache.activemq.web.AjaxServlet</servlet-class> -->
+<!-- 	    <load-on-startup>1</load-on-startup> -->
+<!-- 	</servlet> -->
 	 
-	<servlet-mapping>
-	    <servlet-name>amq</servlet-name>
-	    <url-pattern>/amq/*</url-pattern>
-	</servlet-mapping>
+<!-- 	<servlet-mapping> -->
+<!-- 	    <servlet-name>amq</servlet-name> -->
+<!-- 	    <url-pattern>/amq/*</url-pattern> -->
+<!-- 	</servlet-mapping> -->
 </web-app>

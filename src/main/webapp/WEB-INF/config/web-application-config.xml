@@ -37,20 +37,20 @@
 	</bean>
 	
 	<!-- JMS Integration -->
-	<amq:topic id="eventTopic" name="topic.events" />
+<!-- 	<amq:topic id="eventTopic" name="topic.events" /> -->
 
-    <amq:queue id="processingQueue" name="queue.process" />
+<!--     <amq:queue id="processingQueue" name="queue.process" /> -->
 
-    <amq:connectionFactory id="connectionFactory" brokerURL="vm://localhost" />
+<!--     <amq:connectionFactory id="connectionFactory" brokerURL="vm://localhost" /> -->
 
-    <bean id="eventTopicTemplate" class="org.springframework.jms.core.JmsTemplate">
-        <property name="connectionFactory" ref="connectionFactory" />
-        <property name="defaultDestinationName" value="topic.events" />
-    </bean>
+<!--     <bean id="eventTopicTemplate" class="org.springframework.jms.core.JmsTemplate"> -->
+<!--         <property name="connectionFactory" ref="connectionFactory" /> -->
+<!--         <property name="defaultDestinationName" value="topic.events" /> -->
+<!--     </bean> -->
 
-    <jms:listener-container connection-factory="connectionFactory">
-        <jms:listener destination="queue.process" ref="messageQueueBO" method="doProcessing" />
-    </jms:listener-container>
+<!--     <jms:listener-container connection-factory="connectionFactory"> -->
+<!--         <jms:listener destination="queue.process" ref="messageQueueBO" method="doProcessing" /> -->
+<!--     </jms:listener-container> -->
 	<!-- End JMS Integration -->
 	
 	<!-- Message internalisation -->
@@ -65,10 +65,25 @@
     </mvc:interceptors>
     <!-- End Message internalisation -->
     
+	<!-- To consume RestFul services -->
+    <bean id="restTemplate" class="org.springframework.web.client.RestTemplate"/>
+    
 	
 <!-- 	<bean id="serverServiceExporter" class="org.springframework.remoting.jaxws.SimpleJaxWsServiceExporter"> -->
 <!-- 		<property name="baseAddress" value="http://localhost:9999/" /> -->
 <!-- 	</bean> -->
+
+<!-- 	<bean id="nextLessonWebService" -->
+<!-- 	    class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean"> -->
+<!-- 	    <property name="serviceInterface" value="com.italk2learn.ws.NextLesson" /> -->
+<!-- 	    <property name="wsdlDocumentUrl" -->
+<!-- 	        value="http://localhost:8080/sequencer/services/ITalk2LearnWS?wsdl" /> -->
+<!-- 	    <property name="namespaceUri" value="http://ITalk2Learn/ITalk2LearnWS" /> -->
+<!-- 	    <property name="serviceName" value="ITalk2LearnService" /> -->
+<!-- 	    <property name="portName" value="ITalk2LearnWS" /> -->
+<!-- 	</bean> -->
+
+	<bean id="counterService" class="com.italk2learn.util.SessionCounterListener" /> 
 
 	<!-- Aspects -->
 	<bean id="authentificationAspect" class="com.italk2learn.aspect.AuthentificationAdvice">
@@ -91,6 +106,10 @@
 	</bean>
 	
 	<bean id="exerciseDAO" class="com.italk2learn.dao.ExerciseDAO">
+		<property name="sessionFactory" ref="italk2learnSessionFactory" />
+	</bean>
+	
+	<bean id="sequenceDAO" class="com.italk2learn.dao.SequenceDAO">
 		<property name="sessionFactory" ref="italk2learnSessionFactory" />
 	</bean>
 	
