@@ -128,8 +128,21 @@
 
 		var userName;
 
-		//var timer=setInterval(safeexit(),5000);
-		//window.onunload=safeexit;
+		window.onbeforeunload = function(){
+			  $.ajax({
+			        type: 'POST',
+			        url: "speechRecognition/closeEngine",
+			        success: function(data, textStatus, jqXHR){
+			        	window.location.href = "/italk2learn/login";
+			        },
+			        error : function(jqXHR, status, error) {
+			        	window.location.href = "/italk2learn/login";
+			        },
+			        complete : function(jqXHR, status) {
+			        }
+			    });
+			  return "Do you want to leave?"
+			};
 
 		function safeexit(){
 			$.ajax({

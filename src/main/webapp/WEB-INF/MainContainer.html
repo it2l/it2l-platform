@@ -123,23 +123,43 @@
             </td>
          </tr>
     </table>
-    <script>
-var myVar=setInterval(function(){myTimer()},1000);
-
-function myTimer() {
-    var d = new Date();
-    document.getElementById("demo").innerHTML = d.toLocaleTimeString();
-}
-</script>
-    
 	<script type="text/javascript">
 		<!--
 
 		var userName;
 
+		window.onbeforeunload = function(){
+			  $.ajax({
+			        type: 'POST',
+			        url: "speechRecognition/closeEngine",
+			        success: function(data, textStatus, jqXHR){
+			        	window.location.href = "/italk2learn/login";
+			        },
+			        error : function(jqXHR, status, error) {
+			        	window.location.href = "/italk2learn/login";
+			        },
+			        complete : function(jqXHR, status) {
+			        }
+			    });
+			  return "Do you want to leave?"
+			};
+
 		//var timer=setInterval(safeexit(),5000);
 		
-		//window.onunload=safeexit;
+		$(window).unload(function(){
+			$.ajax({
+		        type: 'GET',
+		        url: "speechRecognition/closeEngine",
+		        success: function(data, textStatus, jqXHR){
+		        	
+		        },
+		        error : function(jqXHR, status, error) {
+		        	window.location.href = "/italk2learn/login";
+		        },
+		        complete : function(jqXHR, status) {
+		        }
+		    });
+		});
 
 		function safeexit(){
 			$.ajax({

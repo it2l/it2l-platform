@@ -565,7 +565,7 @@
 				<artifactId>tomcat-maven-plugin</artifactId>
 				<version>1.0-beta-1</version>
 				<configuration>
-					<url>http://193.61.29.166:8080/manager/text/</url>
+					<url>http://localhost:8080/manager/text/</url>
 					<server>mytomcat</server>
 					<path>/${project.build.finalName}</path>
 				</configuration>

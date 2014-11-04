@@ -39,6 +39,8 @@ public class SpeechRecognitionController{
 	
 	private String username;
 	
+	private byte[] audio=new byte[0];
+	
 	
 	/*Services*/
 	private ISpeechRecognitionBO speechRecognitionService;
@@ -51,7 +53,7 @@ public class SpeechRecognitionController{
     }
 	
 	/**
-	 * Main method to get a transcription of Sails Software
+	 * Main method to get a transcription of Sail Software
 	 */
 	@RequestMapping(value = "/sendData",method = RequestMethod.POST)
 	@ResponseBody
@@ -61,6 +63,7 @@ public class SpeechRecognitionController{
 		request.setHeaderVO(new HeaderVO());
 		request.getHeaderVO().setLoginUser(getUsername());
 		request.setData(body);
+		concatenateAudioStream(body);
 		try {
 			response=((SpeechRecognitionResponseVO) getSpeechRecognitionService().sendNewAudioChunk(request));
 		} catch (Exception e){
@@ -97,16 +100,33 @@ public class SpeechRecognitionController{
 	public String closeASREngine(@RequestBody byte[] body) {
 		logger.info("JLF --- Speech Recognition Main Controller");
 		request= new SpeechRecognitionRequestVO();
-		request.setHeaderVO(new HeaderVO());
-		request.getHeaderVO().setLoginUser(getUsername());
-		request.setData(body);
+		if (body==null)
+			body=new byte[0];
 		try {
+			request.setHeaderVO(new HeaderVO());
+			request.getHeaderVO().setLoginUser(getUsername());
+			request.getHeaderVO().setIdUser(getLoginUserService().getIdUserInfo(request.getHeaderVO()));
+			request.setData(body);
+			concatenateAudioStream(body);
+			request.setFinalByteArray(getAudio());
+			getSpeechRecognitionService().saveByteArray(request);
 			response=((SpeechRecognitionResponseVO) getSpeechRecognitionService().closeASREngine(request));
 			return response.getResponse();
 		} catch (Exception e){
 			logger.error(e.toString());
 		}
 		return response.getResponse();
+	}
+	
+	private void concatenateAudioStream(byte[] body){
+		//JLF:Copying byte array 
+		byte[] destination = new byte[body.length + getAudio().length];
+		// copy audio into start of destination (from pos 0, copy audio.length bytes)
+		System.arraycopy(getAudio(), 0, destination, 0, getAudio().length);
+		// copy body into end of destination (from pos audio.length, copy body.length bytes)
+		System.arraycopy(body, 0, destination, getAudio().length, body.length);
+    	//setAudio(Arrays.copyOfRange(destination, 0, destination.length));
+		this.audio=destination.clone();
 	}
 	
 	
@@ -132,6 +152,14 @@ public class SpeechRecognitionController{
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	public byte[] getAudio() {
+		return audio;
+	}
+
+	public void setAudio(byte[] audio) {
+		this.audio = audio;
 	}
 
 }

@@ -55,7 +55,6 @@ public class ExerciseSequenceBO implements IExerciseSequenceBO  {
 
 	public ExerciseSequenceResponseVO getExerciseSequence(ExerciseSequenceRequestVO request) throws ITalk2LearnException{
 		try {
-			
 			ExerciseSequenceResponseVO response= new ExerciseSequenceResponseVO();
 			response.setResponse(ExerciseAssembler.toExerciseVOs(getExerciseDAO().getSequenceExercises(request.getIdUser())));
 			return response;
@@ -68,7 +67,6 @@ public class ExerciseSequenceBO implements IExerciseSequenceBO  {
 	
 	public ExerciseSequenceResponseVO getSpecificExercise(ExerciseSequenceRequestVO request) throws ITalk2LearnException{
 		try {
-			
 			ExerciseSequenceResponseVO response= new ExerciseSequenceResponseVO();
 			response.setExercise(ExerciseAssembler.toExerciseVOs(getExerciseDAO().getSpecificExercise(request.getIdExercise())));
 			return response;
@@ -81,7 +79,6 @@ public class ExerciseSequenceBO implements IExerciseSequenceBO  {
 	
 	public ExerciseSequenceResponseVO getNextExercise(ExerciseSequenceRequestVO request) throws ITalk2LearnException{
 		try {
-			
 			ExerciseSequenceResponseVO response= new ExerciseSequenceResponseVO();
 			response.setExercise(getExerciseDAO().getNextExercise(request.getIdUser(), request.getIdExercise()));
 			return response;
@@ -94,7 +91,6 @@ public class ExerciseSequenceBO implements IExerciseSequenceBO  {
 	
 	public ExerciseSequenceResponseVO getBackExercise(ExerciseSequenceRequestVO request) throws ITalk2LearnException{
 		try {
-			
 			ExerciseSequenceResponseVO response= new ExerciseSequenceResponseVO();
 			response.setExercise(getExerciseDAO().getBackExercise(request.getIdUser(), request.getIdExercise()));
 			return response;
