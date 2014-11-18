@@ -63,7 +63,16 @@
 						doneButtonEnable(true);
 						arrowButtonEnable(false);
 						u.initPlugin(jQuery("#unityPlayer")[0], "/italk2learn/sequence/FractionsLab.unity3d?showStartPage=false&language="+getLocale()+"&idtask=EQUIValence1"+userName);
-
+					}
+					if (body.localeCompare("Make a fraction that equals 1/2 and has 4 as denominator.")==0){
+						doneButtonEnable(true);
+						arrowButtonEnable(false);
+						u.initPlugin(jQuery("#unityPlayer")[0], "/italk2learn/sequence/FractionsLab.unity3d?showStartPage=false&language="+getLocale()+"&idtask=EQUIValence2"+userName);
+					}
+					if (body.localeCompare("Use the same representations to show whether 1/3 is bigger or smaller than 1/5.")==0){
+						doneButtonEnable(true);
+						arrowButtonEnable(false);
+						u.initPlugin(jQuery("#unityPlayer")[0], "/italk2learn/sequence/FractionsLab.unity3d?showStartPage=false&language="+getLocale()+"&idtask=Comp1"+userName);
 					}
 					else {
 						doneButtonEnable(false);
@@ -125,7 +134,7 @@
 				
 				function sendMessageToLightBulb(message){
 					helpButtonEnable(true);
-					lowMessage=message;
+					lowMessage=lowMessage.concat(" ").concat(message);
 				}
 				
 				
@@ -148,7 +157,7 @@
 					}
 					else {
 						helpButtonEnable(true);
-						lowMessage=message;
+						lowMessage=lowMessage.concat(" ").concat(message);
 					}
 				}
 				
@@ -226,6 +235,7 @@
 				function helpButtonPressed(){
 					textToSpeech(lowMessage);
 					SendHighMessage(lowMessage);
+					lowMessage="";
 					helpButtonEnable(false);
 					var json = "{\"method\": \"PlatformEvent\", \"parameters\": {\"eventName\": \"*helpButtonPressed*\"}}";
                     u.getUnity().SendMessage("ExternalInterface", "SendEvent", json);

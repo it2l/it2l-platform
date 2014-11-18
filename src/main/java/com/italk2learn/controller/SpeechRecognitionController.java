@@ -85,6 +85,8 @@ public class SpeechRecognitionController{
 		request.getHeaderVO().setLoginUser(user);
 		try {
 			response=((SpeechRecognitionResponseVO) getSpeechRecognitionService().initASREngine(request));
+			//Send first chunk always
+			getSpeechRecognition(new byte[0]);
 			return response.isOpen();
 		} catch (Exception e){
 			logger.error(e.toString());

@@ -115,7 +115,7 @@
 			        <tr>
 			        	<td>
 				        	<p align="right">
-			        			<input type="submit" id="help" sec:authorize="hasRole('ROLE_USER')" class="it2lbutton" value="Help"/>
+			        			<input type="submit" id="help" sec:authorize="hasRole('ROLE_USER')" class="it2lbutton"/>
 				        	</p>
 			        	</td>
 			        </tr>
@@ -133,7 +133,7 @@
 			        type: 'POST',
 			        url: "speechRecognition/closeEngine",
 			        success: function(data, textStatus, jqXHR){
-			        	window.location.href = "/italk2learn/login";
+			        	//window.location.href = "/italk2learn/login";
 			        },
 			        error : function(jqXHR, status, error) {
 			        	window.location.href = "/italk2learn/login";
