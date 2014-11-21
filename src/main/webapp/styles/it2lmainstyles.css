@@ -1,20 +1,50 @@
-html, body { height: 100%; }
-			body {
-			    margin: 0;
-			    padding: 0;
-			    height: 100%;
-				/* gradients - second red border, first red border, top white space, blue lines */
-			    background-image:  -webkit-linear-gradient(left, rgba(255,85,91, .2), rgba(255,85,91, .2)), -webkit-linear-gradient(left, rgba(255,85,91, .8), rgba(255,85,91, .8)), -webkit-linear-gradient(top, white 0px, white 69px, rgba(255,255,255,0) 70px), -webkit-repeating-linear-gradient(white 0px, white 18px, #A6FFED 19px, white 20px);
-			    background-image:  -moz-linear-gradient(left, rgba(255,85,91, .2), rgba(255,85,91, .2)), -moz-linear-gradient(left, rgba(255,85,91, .8), rgba(255,85,91, .8)), -moz-linear-gradient(top, white 0px, white 69px, rgba(255,255,255,0) 70px), -moz-repeating-linear-gradient(white 0px, white 18px, #A6FFED 19px, white 20px);
-			    background-image:  -ms-linear-gradient(left, rgba(255,85,91, .2), rgba(255,85,91, .2)), -ms-linear-gradient(left, rgba(255,85,91, .8), rgba(255,85,91, .8)), -ms-linear-gradient(top, white 0px, white 69px, rgba(255,255,255,0) 70px), -ms-repeating-linear-gradient(white 0px, white 18px, #A6FFED 19px, white 20px);
-			    background-image:  -o-linear-gradient(left, rgba(255,85,91, .2), rgba(255,85,91, .2)), -o-linear-gradient(left, rgba(255,85,91, .8), rgba(255,85,91, .8)), -o-linear-gradient(top, white 0px, white 69px, rgba(255,255,255,0) 70px), -o-repeating-linear-gradient(white 0px, white 18px, #A6FFED 19px, white 20px);
-			    background-image:  linear-gradient(left, rgba(255,85,91, .2), rgba(255,85,91, .2)), linear-gradient(left, rgba(255,85,91, .8), rgba(255,85,91, .8)), linear-gradient(top, white 0px, white 69px, rgba(255,255,255,0) 70px), repeating-linear-gradient(white 0px, white 18px, #A6FFED 19px, white 20px);
-			    background-size: 1px, 1px, auto, auto 20px;
-			    background-repeat: repeat-y, repeat-y, no-repeat, repeat;
-			    background-position: 90% 0px, 10% 0px, 0px 0px, 0px 0px;
+
+			#wrapper_dark_gray
+			{	
+				background-color: #c8c8c8;
+				-webkit-border-radius: 20px;
+				-moz-border-radius: 20px;
+				border-radius: 20px;
+				color:#e74c3c;
+				/*width: 1080px;*/
+				width: inherit;
+				margin-left: 5px;
+				margin-right: 5px;
 			}
 			
-			.paper {
+			#wrapper_light_gray
+			{	
+				background-color: #eaebec;
+				-webkit-border-radius: 20px;
+				-moz-border-radius: 20px;
+				border-radius: 20px;
+				color: black;
+				/*width: 1060px;*/
+				width: inherit;
+				margin-top: 30px;
+				margin-left: 10px;
+				margin-right: 10px;
+
+			}
+			.back{
+				background-color: #0076a3;
+				letter-spacing: 0px;
+				font-family: Verdana, Geneva, sans-serif;
+				text-align: left;
+				text-decoration: none;
+			    }
+			    
+			 .background
+			    {	
+			    	width: intrinsic;           
+				width: -moz-max-content;   
+ 				width: -webkit-max-content; 
+			    	/*width: -moz-fit-content;*/
+			    	background-color: #fff;
+			    	height:1200px;
+			    }
+			
+			/*.paper {
 				margin: 0;
 			    display: block;
 			    font: 10pt Arial, sans-serif;    
@@ -59,9 +89,9 @@ html, body { height: 100%; }
 			
 			.paper:focus {
 			    outline: none;
-			}
+			}*/
 			
-			.it2lbutton {
+			/*.it2lbutton {
 				-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
 				-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
 				box-shadow:inset 0px 1px 0px 0px #ffffff;
@@ -110,7 +140,85 @@ html, body { height: 100%; }
 			    background: #ededed;
 			    color: #dfdfdf;
 			    cursor: default;
+			}*/
+			
+			
+			
+			.it2lbutton  {
+				display: block;
+			  	background-color: #f05a49;
+			  	border-color: #f05a49;
+			  	color: #ffffff;
+			  	text-decoration: none;
+			  	line-height: 45px;
+			  	padding: 0 8px;
+			  	padding-top: 2px;
+				padding-bottom: 2px;
+			  	border-radius: 30px;
+			  	border: 1px solid #f05a49;
+			  	border-left: 8px solid #f05a49;
+			  	border-right: 8px solid #f05a49;
+			  	border-top: 3px solid #f05a49;
+				border-bottom: 3px solid #f05a49;
+			  	font-weight: bold;
+				-webkit-box-shadow: inset -1px 10px 5px -6px rgba(255, 255, 255, 0.5);
+				-moz-box-shadow:    inset -1px 10px 5px -6px rgba(255, 255, 255, 0.5);
+				box-shadow:         inset -1px 10px 5px -6px rgba(255, 255, 255, 0.5);
+			  	line-height: 24px;
+			  	display: inline-block;
+			  	font-size: 15px;
+			  	letter-spacing: 0px;
+			  	-moz-box-sizing: border-box;
+			  	box-sizing: border-box;
+			  	outline: none;
 			}
+			.it2lbutton:hover {
+				
+			  	background-color: #ff9e50;
+			  	border-color: #ff9e50;
+			  	border: 1px solid #ff9e50;
+				border-left: 8px solid #ff9e50;
+				border-right: 8px solid #ff9e50;
+				border-top: 3px solid #ff9e50;
+				border-bottom: 3px solid #ff9e50;
+				outline: none;
+			  	text-decoration: none;
+			}
+			
+			.it2lbutton:active  {
+				background-color: #ff9e50;
+				border-color: #ff9e50;
+				border: 1px solid #ff9e50;
+				border-left: 8px solid #ff9e50;
+				border-right: 8px solid #ff9e50;
+				border-top: 3px solid #ff9e50;
+				border-bottom: 3px solid #ff9e50;
+				padding-top: 0px;
+				padding-bottom: 0px;
+				outline: none;
+				-webkit-box-shadow: inset 1px -1px 6px 1px rgba(255, 255, 255, 0.5);
+				-moz-box-shadow:    inset 1px -1px 6px 1px rgba(255, 255, 255, 0.5);
+				box-shadow:         inset 1px -1px 6px 1px rgba(255, 255, 255, 0.5);
+			  	text-decoration: none;
+			}
+			
+			.it2lbutton:disabled {
+			   	background-color: rgba(255, 157, 82, 0.7f);
+				border-color: rgba(255, 157, 82, 0.7f);
+				border: 1px solid rgba(255, 157, 82, 0.7f);
+				border-left: 8px solid rgba(255, 157, 82, 0.7f);
+				border-right: 8px solid rgba(255, 157, 82, 0.7f);
+				border-top: 3px solid rgba(255, 157, 82, 0.7f);
+				border-bottom: 3px solid rgba(255, 157, 82, 0.7f);
+			    	color: rgba(222, 222, 222, 0.7f);
+			    	cursor: default;
+			}
+			
+
+
+			
+			
+			
 			
 			form {
 				margin-right:1cm;
@@ -118,7 +226,7 @@ html, body { height: 100%; }
 			}
 			
 			.mainContainer {
-				border:1px solid #778899;
 			    background-color:#FFF5EE;
-				box-shadow: 10px 10px 5px #888888;
+			    width:815px;
+			    height:615px;
 			}

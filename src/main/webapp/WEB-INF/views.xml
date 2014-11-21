@@ -21,9 +21,11 @@
 		<put-attribute name="body" value="/monitorWOZ.html :: content" type="thymeleaf"/>
 	</definition>
 	
-	<definition name="login" extends="standardLayout2">
-		<put-attribute name="body" value="/login.html :: content" type="thymeleaf"/>
-	</definition>
+<!-- 	JLF:Old implementatio of login -->
+<!-- 	<definition name="login" extends="standardLayout2"> -->
+<!-- 		<put-attribute name="body" value="/login.html :: content" type="thymeleaf"/> -->
+<!-- 	</definition> -->
+	<definition name="login" template="/login.html" templateType="thymeleaf"/>
 	
 	<definition name="woztest" extends="standardLayout">
 		<put-attribute name="body" value="/woztest.html :: content" type="thymeleaf"/>

@@ -30,6 +30,9 @@
 					$brokenScreen.hide();
 
 	                textToSpeech($('#task').text().substring(0,110));
+	                
+	                $('#exercisePrompt').html($('#taskContainer').html());
+	                $('#taskContainer').remove();
 
 					u.observeProgress(function (progress) {
 						switch(progress.pluginStatus) {
