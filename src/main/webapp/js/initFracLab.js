@@ -137,7 +137,8 @@
 				
 				function sendMessageToLightBulb(message){
 					helpButtonEnable(true);
-					lowMessage=lowMessage.concat(" ").concat(message);
+					//lowMessage=lowMessage.concat(" ").concat(message);
+					lowMessage=message;
 				}
 				
 				
@@ -160,7 +161,8 @@
 					}
 					else {
 						helpButtonEnable(true);
-						lowMessage=lowMessage.concat(" ").concat(message);
+						//lowMessage=lowMessage.concat(" ").concat(message);
+						lowMessage=message;
 					}
 				}
 				
@@ -197,11 +199,13 @@
 				function helpButtonEnable(value){
 					if (value==true || value=="true" || value=="True"){
 						$("#help").removeAttr("disabled");
-						$('#help').css("background-image", "url(/italk2learn/images/lightbulb_on.png)");
+						//JLF:Something happens with this line and new styles
+						//$('#help').css("background-image", "url(/italk2learn/images/lightbulb_on.png)");
 					}
 					else {
 						$("#help").attr("disabled", "disabled");
-						$('#help').css("background-image", "url(/italk2learn/images/lightbulb_off.png)");
+						//JLF:Something happens with this line and new styles
+						//$('#help').css("background-image", "url(/italk2learn/images/lightbulb_off.png)");
 					}
 				}
 				
@@ -240,7 +244,7 @@
 					SendHighMessage(lowMessage);
 					lowMessage="";
 					helpButtonEnable(false);
-					var json = "{\"method\": \"PlatformEvent\", \"parameters\": {\"eventName\": \"*helpButtonPressed*\"}}";
+					var json = "{\"method\": \"PlatformEvent\", \"parameters\": {\"eventName\": \"*lightBulbPressed*\"}}";
                     u.getUnity().SendMessage("ExternalInterface", "SendEvent", json);
 				}
 				
