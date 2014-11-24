@@ -58,6 +58,15 @@
 				    });
 			}
 			
+			function arrowButtonEnable(value){
+				if (value==true || value=="true" || value=="True") {
+					$("#next").removeAttr("disabled");
+				}	
+				else {
+					$("#next").attr("disabled", "disabled");
+				}	
+			}
+			
 			function SendHighMessage(message)
 			{
 				setTimeout(function(){alert(message)},5000);			

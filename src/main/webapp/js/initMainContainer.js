@@ -1,4 +1,5 @@
 		var userName;
+		var sEnabled=false;
 
 		window.onbeforeunload = function(){
 			  $.ajax({
@@ -73,8 +74,11 @@
 		
 		$(document).ready(function() {
 			$("#next").hide();
-			$("#done").hide();
+			//$("#done").hide();
 			$("#help").hide();
+			$("#connectedON").hide();
+			$("#connectedOFF").hide();
+			soundButtonEnable(false);
 			//$("#initContainer").click(function() {
 			$.ajax({
 				type: 'GET',
@@ -95,6 +99,13 @@
 			});	
 			$("#submitEx").click(function() {
 				submitExercise();
+			});
+			$("#sButton").click(function() {
+				if (sEnabled==false){
+					soundButtonEnable(true);
+				} else{ 
+					soundButtonEnable(false);
+				}
 			});
 		});
 
@@ -148,7 +159,7 @@
 
 		function nextExercise(){
 			$('#exercisePrompt').html("");
-			$("#done").hide();
+			//$("#done").hide();
 			$("#help").hide();
 			$("#next").hide();
 			document.getElementById("mainContainer").innerHTML = '';
@@ -181,7 +192,7 @@
 			$('#exercisePrompt').html("");
 			document.getElementById("mainContainer").innerHTML = '';
 			$("#next").hide();
-			$("#done").hide();
+			//$("#done").hide();
 			$("#help").hide();
 			var sub = {
 		       	 "idExercise": $('#exList').val(), 
@@ -240,7 +251,40 @@
         	play_html5_audio = true;
     	 
     	function play_sound(url){
+    		if (sEnabled == true) {
+	    		document.getElementById("player").innerHTML = '';
+	    		playS(url);
+			    if(play_html5_audio){
+			    	//playS(url);
+			    	var sound = $("<embed id='sound' type='audio/mpeg'/>");
+			    	sound.attr('src', url);
+			    	sound.attr('loop', false);
+			    	sound.attr('hidden', true);
+			    	sound.attr('autostart', true);
+			    	sound.attr('class', 'hiddenPlayer');
+			    	$('#player').append(sound);
+			    } else {
+			        $("#sound").remove();
+			        var sound = $("<embed id='sound' type='audio/mpeg' />");
+			        sound.attr('src', url);
+			        sound.attr('loop', false);
+			        sound.attr('hidden', true);
+			        sound.attr('autostart', true);
+			        $('body').append(sound);
+			    }
+		    }
         }
+    	
+    	function soundButtonEnable(value){
+			if (value==true || value=="true" || value=="True"){
+				$("#sButton").css("background-image", "url(/italk2learn/images/bt_sound_on_dn.png)");
+				sEnabled=true;
+			}
+			else {
+				$("#sButton").css("background-image", "url(/italk2learn/images/bt_sound_off.png)");
+				sEnabled=false;
+			}
+		}
 
     	function playS(url){
 			var speechProductionPlayer=document.getElementById("speechProductionPlayer");

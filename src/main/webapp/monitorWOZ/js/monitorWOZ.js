@@ -49,7 +49,7 @@ function connectWOZ (user, woz) {
 		    if (status === Strophe.Status.CONNECTED) {
 		    	$("#testConn").show();
 		 	    $("#nextBHandler").show();
-			    $("#doneBHandler").show();
+			    //$("#doneBHandler").show();
 		        $(document).trigger('connected');
 		    } else if (status === Strophe.Status.DISCONNECTED) {
 		        $(document).trigger('disconnected');

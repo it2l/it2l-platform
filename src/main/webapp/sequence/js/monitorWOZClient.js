@@ -120,7 +120,7 @@ function connectWOZ (user) {
         } else if (status === Strophe.Status.AUTHFAIL) {
         	initContainer();
         } else {
-        	$('#connect').html("Status: "+status);
+        	//$('#connect').html("Status: "+status);
         	if (status === Strophe.Status.DISCONNECTING) {
         		//JLF:Go to login page when auth fail
         		window.location.href = "/italk2learn/login";
@@ -143,7 +143,8 @@ function connectWOZ (user) {
 
 
 $(document).bind('connected', function () {
-    $('#connect').html("connected");
+    //$('#connect').html("connected");
+    $("#connectedON").show();
     var iq = $iq({type: 'get'}).c('query', {xmlns: 'jabber:iq:roster'});
     Gab.connection.sendIQ(iq, Gab.on_roster);
 
@@ -152,8 +153,9 @@ $(document).bind('connected', function () {
 });
 
 $(document).bind('disconnected', function () {
-	$('#connect').html("disconnected");
-    Gab.connection = null;
+	//$('#connect').html("disconnected");
+	$("#connectedOFF").show();
+	Gab.connection = null;
     Gab.pending_subscriber = null;
 
     //JLF:Reconnect when it's not connected

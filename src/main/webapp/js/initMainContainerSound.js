@@ -73,7 +73,7 @@
 		
 		$(document).ready(function() {
 			$("#next").hide();
-			$("#done").hide();
+			//$("#done").hide();
 			$("#help").hide();
 			//$("#initContainer").click(function() {
 			$.ajax({
@@ -148,7 +148,7 @@
 
 		function nextExercise(){
 			$('#exercisePrompt').html("");
-			$("#done").hide();
+			//$("#done").hide();
 			$("#help").hide();
 			$("#next").hide();
 			document.getElementById("mainContainer").innerHTML = '';
@@ -181,7 +181,7 @@
 			$('#exercisePrompt').html("");
 			document.getElementById("mainContainer").innerHTML = '';
 			$("#next").hide();
-			$("#done").hide();
+			//$("#done").hide();
 			$("#help").hide();
 			var sub = {
 		       	 "idExercise": $('#exList').val(), 

@@ -60,11 +60,9 @@
             
             function arrowButtonEnable(value){
 				if (value==true || value=="true" || value=="True") {
-		        	document.getElementById("arrowimage").src="/italk2learn/images/arrow-right.png";
 					$("#next").removeAttr("disabled");
 				}	
 				else {
-					document.getElementById("arrowimage").src="/italk2learn/images/arrow-right-disabled.png";
 					$("#next").attr("disabled", "disabled");
 				}	
 			}

@@ -1,12 +1,12 @@
-				var lowMessage;
-				$("#done").show();
+				var lowMessage="";
+				var isEnabledLightBulb=false;
+				//$("#done").show();
 				$("#help").show();
 				//$("#done").attr("disabled", "disabled");
 				helpButtonEnable(false);
-				$('#help').css({ width: '100px', height: '100px'});
-				$("#done").click(function() {
-					doneButtonPressed();
-				});
+//				$("#done").click(function() {
+//					doneButtonPressed();
+//				});
 				$("#next").click(function() {
 					arrowButtonPressed();
 				});
@@ -63,22 +63,22 @@
 					});
 					var body=$('#task').text();
 					if (body.localeCompare("Make a fraction that equals 3/4 and has 12 as denominator.")==0){
-						doneButtonEnable(true);
+						//doneButtonEnable(true);
 						arrowButtonEnable(false);
 						u.initPlugin(jQuery("#unityPlayer")[0], "/italk2learn/sequence/FractionsLab.unity3d?showStartPage=false&language="+getLocale()+"&idtask=EQUIValence1"+userName);
 					}
 					if (body.localeCompare("Make a fraction that equals 1/2 and has 4 as denominator.")==0){
-						doneButtonEnable(true);
+						//doneButtonEnable(true);
 						arrowButtonEnable(false);
 						u.initPlugin(jQuery("#unityPlayer")[0], "/italk2learn/sequence/FractionsLab.unity3d?showStartPage=false&language="+getLocale()+"&idtask=EQUIValence2"+userName);
 					}
 					if (body.localeCompare("Use the same representations to show whether 1/3 is bigger or smaller than 1/5.")==0){
-						doneButtonEnable(true);
+						//doneButtonEnable(true);
 						arrowButtonEnable(false);
 						u.initPlugin(jQuery("#unityPlayer")[0], "/italk2learn/sequence/FractionsLab.unity3d?showStartPage=false&language="+getLocale()+"&idtask=Comp1"+userName);
 					}
 					else {
-						doneButtonEnable(false);
+						//doneButtonEnable(false);
 						arrowButtonEnable(true);
 						u.initPlugin(jQuery("#unityPlayer")[0], "/italk2learn/sequence/FractionsLab.unity3d?showStartPage=false&language="+getLocale());
 					}
@@ -138,7 +138,8 @@
 				function sendMessageToLightBulb(message){
 					helpButtonEnable(true);
 					//lowMessage=lowMessage.concat(" ").concat(message);
-					lowMessage=message;
+					var aux=lowMessage+" "+message;
+					lowMessage=aux;
 				}
 				
 				
@@ -161,8 +162,9 @@
 					}
 					else {
 						helpButtonEnable(true);
-						//lowMessage=lowMessage.concat(" ").concat(message);
-						lowMessage=message;
+						var aux=lowMessage+" "+message;
+						lowMessage=aux;
+						//lowMessage=message;
 					}
 				}
 				
@@ -177,21 +179,12 @@
 					textToSpeech(message);
 				}
 				
-				function doneButtonEnable(value){
-					//alert(value);
-					if (value==true || value=="true" || value=="True")
-						$("#done").removeAttr("disabled");
-					else	
-						$("#done").attr("disabled", "disabled");
-				}
 				
 				function arrowButtonEnable(value){
 					if (value==true || value=="true" || value=="True") {
-			        	document.getElementById("arrowimage").src="/italk2learn/images/arrow-right.png";
 						$("#next").removeAttr("disabled");
 					}	
 					else {
-						document.getElementById("arrowimage").src="/italk2learn/images/arrow-right-disabled.png";
 						$("#next").attr("disabled", "disabled");
 					}	
 				}
@@ -199,13 +192,11 @@
 				function helpButtonEnable(value){
 					if (value==true || value=="true" || value=="True"){
 						$("#help").removeAttr("disabled");
-						//JLF:Something happens with this line and new styles
-						//$('#help').css("background-image", "url(/italk2learn/images/lightbulb_on.png)");
+						isEnabledLightBulb=true;
 					}
 					else {
 						$("#help").attr("disabled", "disabled");
-						//JLF:Something happens with this line and new styles
-						//$('#help').css("background-image", "url(/italk2learn/images/lightbulb_off.png)");
+						isEnabledLightBulb=false;
 					}
 				}
 				
@@ -229,9 +220,8 @@
 				    });
 				}
 				
-				function doneButtonPressed(){
-                    var json = "{\"method\": \"PlatformEvent\", \"parameters\": {\"eventName\": \"*doneButtonPressed*\"}}";
-                    u.getUnity().SendMessage("ExternalInterface", "SendEvent", json);
+				function isHelpButtonEnable(){
+					return isEnabledLightBulb;
 				}
 				
 				function arrowButtonPressed(){
