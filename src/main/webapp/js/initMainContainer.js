@@ -1,5 +1,6 @@
 		var userName;
 		var sEnabled=false;
+		var aEnabled=true;
 
 		window.onbeforeunload = function(){
 			  $.ajax({
@@ -95,7 +96,8 @@
 			});
 			//});
 			$("#next").click(function() {
-				nextExercise();
+				if (aEnabled)
+					nextExercise();
 			});	
 			$("#submitEx").click(function() {
 				submitExercise();
@@ -277,11 +279,13 @@
     	
     	function soundButtonEnable(value){
 			if (value==true || value=="true" || value=="True"){
-				$("#sButton").css("background-image", "url(/italk2learn/images/bt_sound_on_dn.png)");
+				$("#sButton").removeClass("it2lSoundOffbutton");
+				$("#sButton").addClass("it2lSoundOnbutton");
 				sEnabled=true;
 			}
 			else {
-				$("#sButton").css("background-image", "url(/italk2learn/images/bt_sound_off.png)");
+				$("#sButton").removeClass("it2lSoundOnbutton");
+				$("#sButton").addClass("it2lSoundOffbutton");
 				sEnabled=false;
 			}
 		}

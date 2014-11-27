@@ -21,6 +21,7 @@
 	<script type="text/javascript" src="http://www.google.com/jsapi" charset="utf-8"></script>
 	<script type="text/javascript" src='sequence/js/monitorWOZClient.js'></script>
 	<script type="text/javascript" src="/js/initMainContainer.js" th:src="@{/resources/js/initMainContainer.js}"></script>
+	<script type="text/javascript" src="/js/initTIS.js" th:src="@{/resources/js/initTIS.js}"></script>
 
     <script type="text/javascript" src="#" th:src="@{/resources/dojo/dojo.js}"></script>
     <script type="text/javascript" src="#" th:src="@{/resources/spring/Spring.js}"></script>
@@ -49,7 +50,7 @@
 		               	<a href="#" th:href="@{/monitorWOZ}" class="it2lbutton"> Go to Woz <img style="vertical-align:middle" th:src="@{/resources/images/bt_arrow_right.png}" src="../../images/bt_arrow_right.png"></img> </a>
 					</div>
 		            <div style="display:inline; width:76%;">
-		            	<span style="display:inline; font-weight: bold;"> Welcome Student </span> <div id="user" style="font-weight: bold; display:inline;"> Name </div>
+		            	<span style="display:inline; font-weight: bold;"> Welcome </span> <div id="user" style="font-weight: bold; display:inline;"> Name </div>
 					</div>
 					<div sec:authorize="hasRole('ROLE_USER')" th:if="${#authentication}" style="display:inline; margin-right: 25px; float: right; width:12%">
 						<a href="#" th:href="@{/auth/logout}" style=" float: right; color:#e74c3c; font-weight:bold; font-size:13px;">Logout</a>
@@ -75,12 +76,12 @@
 											<tr>
 												<td style="width:50%; height:100%;">
 													<div style="display: inline-block; width:50px; height:50px; float:right; padding-top:2px;" sec:authorize="hasRole('ROLE_USER')">
-														<input type="submit" id="sButton" class="it2lSoundbutton" value=""/>
+														<input type="submit" id="sButton" class="it2lSoundOnbutton" value=""/>
 													</div>
 												</td>
 												<td style="width:50%; height:100%;">
-													<div style="display: inline-block; width:50px; height:50px; float:right; padding-top:2px;" sec:authorize="hasRole('ROLE_USER')">
-														<input type="submit" id="help" class="it2lHelpbutton" value=""/>
+													<div style="display: inline-block; width:50px; height:50px; float:right; padding-top:2px; float: left;" sec:authorize="hasRole('ROLE_USER')">
+														<input type="submit" id="help" class="it2lHelpbuttonON" value=""/>
 													</div>
 												</td>
 								        	</tr>
@@ -88,7 +89,7 @@
 								</td>
 								<td style="width: 33%;">
 										<div style="display=inline; float:right; padding-top:5px;">
-											<button type="submit" id="next" sec:authorize="hasRole('ROLE_USER')" class="it2lNextbutton"></button>
+											<button type="submit" id="next" sec:authorize="hasRole('ROLE_USER')" class="it2lNextbuttonON"></button>
 							    		</div>
 								</td>
 							 </tr>
@@ -207,6 +208,27 @@
 		</p>
 	</div>
 	<div id="player"></div>
+	<div id="testTIS">
+		<table>
+			<tr>
+				<th colspan="4"> <span align="center"> Test Task Independent Support</span> </th>
+			</tr>
+			<tr>
+				<td>
+					<input type="submit" id="butTIS1" value="emotion 1"/>
+				</td>
+				<td>
+					<input type="submit" id="butTIS2" value="emotion 2"/>
+				</td>
+				<td>
+					<input type="submit" id="butTIS3" value="emotion 3"/>
+				</td>
+				<td>
+					<input type="submit" id="butTIS4" value="emotion 4"/>
+				</td>
+			</tr>
+		</table>
+	</div>
 	<audio controls="controls" id="speechProductionPlayer" hidden="true"></audio>
 </div>
 </body>

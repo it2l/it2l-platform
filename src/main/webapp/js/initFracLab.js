@@ -1,12 +1,7 @@
 				var lowMessage="";
-				var isEnabledLightBulb=false;
-				//$("#done").show();
+				var isEnabledLightBulb=true;
 				$("#help").show();
-				//$("#done").attr("disabled", "disabled");
 				helpButtonEnable(false);
-//				$("#done").click(function() {
-//					doneButtonPressed();
-//				});
 				$("#next").click(function() {
 					arrowButtonPressed();
 				});
@@ -67,12 +62,12 @@
 						arrowButtonEnable(false);
 						u.initPlugin(jQuery("#unityPlayer")[0], "/italk2learn/sequence/FractionsLab.unity3d?showStartPage=false&language="+getLocale()+"&idtask=EQUIValence1"+userName);
 					}
-					if (body.localeCompare("Make a fraction that equals 1/2 and has 4 as denominator.")==0){
+					else if (body.localeCompare("Make a fraction that equals 1/2 and has 4 as denominator.")==0){
 						//doneButtonEnable(true);
 						arrowButtonEnable(false);
 						u.initPlugin(jQuery("#unityPlayer")[0], "/italk2learn/sequence/FractionsLab.unity3d?showStartPage=false&language="+getLocale()+"&idtask=EQUIValence2"+userName);
 					}
-					if (body.localeCompare("Use the same representations to show whether 1/3 is bigger or smaller than 1/5.")==0){
+					else if (body.localeCompare("Use the same representations to show whether 1/3 is bigger or smaller than 1/5.")==0){
 						//doneButtonEnable(true);
 						arrowButtonEnable(false);
 						u.initPlugin(jQuery("#unityPlayer")[0], "/italk2learn/sequence/FractionsLab.unity3d?showStartPage=false&language="+getLocale()+"&idtask=Comp1"+userName);
@@ -137,9 +132,9 @@
 				
 				function sendMessageToLightBulb(message){
 					helpButtonEnable(true);
-					//lowMessage=lowMessage.concat(" ").concat(message);
-					var aux=lowMessage+" "+message;
-					lowMessage=aux;
+//					var aux=lowMessage+" "+message;
+//					lowMessage=aux;
+					lowMessage=message;
 				}
 				
 				
@@ -162,9 +157,9 @@
 					}
 					else {
 						helpButtonEnable(true);
-						var aux=lowMessage+" "+message;
-						lowMessage=aux;
-						//lowMessage=message;
+//						var aux=lowMessage+" "+message;
+//						lowMessage=aux;
+						lowMessage=message;
 					}
 				}
 				
@@ -182,20 +177,32 @@
 				
 				function arrowButtonEnable(value){
 					if (value==true || value=="true" || value=="True") {
-						$("#next").removeAttr("disabled");
+						//$("#next").removeAttr("disabled");
+						$("#next").removeClass("it2lNextbuttonOFF");
+						$("#next").addClass("it2lNextbuttonON");
+						//$("#next").css("background-image", "url(/italk2learn/images/arrow-right.png)");
+						aEnabled=true;
 					}	
 					else {
-						$("#next").attr("disabled", "disabled");
+						//$("#next").attr("disabled", "disabled");
+						$("#next").removeClass("it2lNextbuttonON");
+						$("#next").addClass("it2lNextbuttonOFF");
+						//$("#next").css("background-image", "url(/italk2learn/images/arrow-right-disabled.png)");
+						aEnabled=false;
 					}	
 				}
 				
 				function helpButtonEnable(value){
 					if (value==true || value=="true" || value=="True"){
-						$("#help").removeAttr("disabled");
+						//$("#help").removeAttr("disabled");
+						$("#help").removeClass("it2lHelpbuttonOFF");
+						$("#help").addClass("it2lHelpbuttonON");
 						isEnabledLightBulb=true;
 					}
 					else {
-						$("#help").attr("disabled", "disabled");
+						//$("#help").attr("disabled", "disabled");
+						$("#help").removeClass("it2lHelpbuttonON");
+						$("#help").addClass("it2lHelpbuttonOFF");
 						isEnabledLightBulb=false;
 					}
 				}
@@ -225,16 +232,22 @@
 				}
 				
 				function arrowButtonPressed(){
-					var json = "{\"method\": \"PlatformEvent\", \"parameters\": {\"eventName\": \"*arrowButtonPressed*\"}}";
+                    var json = "{\"method\": \"PlatformEvent\", \"parameters\": {\"eventName\": \"*doneButtonPressed*\"}}";
                     u.getUnity().SendMessage("ExternalInterface", "SendEvent", json);
 				}
 				
 				function helpButtonPressed(){
-					textToSpeech(lowMessage);
-					SendHighMessage(lowMessage);
-					lowMessage="";
-					helpButtonEnable(false);
-					var json = "{\"method\": \"PlatformEvent\", \"parameters\": {\"eventName\": \"*lightBulbPressed*\"}}";
-                    u.getUnity().SendMessage("ExternalInterface", "SendEvent", json);
+					if (isEnabledLightBulb==true){
+						textToSpeech(lowMessage);
+						SendHighMessage(lowMessage);
+						//lowMessage="";
+						var json = "{\"method\": \"PlatformEvent\", \"parameters\": {\"eventName\": \"*lightBulbPressedON*\"}}";
+	                    u.getUnity().SendMessage("ExternalInterface", "SendEvent", json);
+	                    helpButtonEnable(false);
+					}
+					else {
+						var json = "{\"method\": \"PlatformEvent\", \"parameters\": {\"eventName\": \"*lightBulbPressedOFF*\"}}";
+	                    u.getUnity().SendMessage("ExternalInterface", "SendEvent", json);
+					}
 				}
 				
