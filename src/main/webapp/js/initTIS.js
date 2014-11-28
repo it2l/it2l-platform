@@ -19,7 +19,15 @@ function submitEmotion(option){
 		type: 'GET',
 		url: "/italk2learn/tis/testTIS?option="+option,
 		success: function (data) {
-			alert(data);
+			if (data.popUpWindow ==true) {
+				if (data.message.length>0) {
+					textToSpeech(data.message);
+					SendHighMessage(data.message);
+				}
+			}
+			else {
+				EnableHelpButton(data.message);
+			}
 		},
 		error: function (jqXHR, status, error) {
 			alert(error);

@@ -23,6 +23,7 @@ import com.italk2learn.vo.FractionsLabRequestVO;
 import com.italk2learn.vo.FractionsLabResponseVO;
 import com.italk2learn.vo.HeaderVO;
 import com.italk2learn.vo.TaskIndependentSupportRequestVO;
+import com.italk2learn.vo.TaskIndependentSupportResponseVO;
 
 /**
  * Handles and retrieves the login or denied page depending on the URI template
@@ -54,7 +55,7 @@ public class TaskIndependentSupportController {
 	 */
 	@RequestMapping(value = "/testTIS",method = RequestMethod.GET)
 	@ResponseBody
-	public String testTaskIndependentSupport(@RequestParam(value = "option") String op) {
+	public TaskIndependentSupportResponseVO testTaskIndependentSupport(@RequestParam(value = "option") String op) {
 		logger.info("JLF --- testTaskIndependentSupport()");
 		TaskIndependentSupportRequestVO request= new TaskIndependentSupportRequestVO();
 		try {
@@ -62,12 +63,12 @@ public class TaskIndependentSupportController {
 			request.setHeaderVO(new HeaderVO());
 			request.getHeaderVO().setLoginUser(user.getUsername());
 			request.setFile(Integer.parseInt(op));
-			getTisService().sendRealSpeechToSupport(request);
-			return "test";
+			TaskIndependentSupportResponseVO res= getTisService().sendRealSpeechToSupport(request);
+			return res;
 		} catch (Exception e){
 			logger.error(e.toString());
 		}
-		return "";
+		return null;
 	}
 	
 	/**

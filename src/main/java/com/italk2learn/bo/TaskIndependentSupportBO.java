@@ -21,6 +21,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.italk2learn.bo.inter.ITaskIndependentSupportBO;
 import com.italk2learn.exception.ITalk2LearnException;
+import com.italk2learn.tis.TISWrapper;
 import com.italk2learn.vo.HeaderVO;
 import com.italk2learn.vo.SpeechRecognitionRequestVO;
 import com.italk2learn.vo.SpeechRecognitionResponseVO;
@@ -84,17 +85,20 @@ public class TaskIndependentSupportBO implements ITaskIndependentSupportBO  {
 		System.out.println("Max amount of memory is: "+dataSize);
 		request.setHeaderVO(new HeaderVO());
 		request.getHeaderVO().setLoginUser("student1");
-		request.setInstance(1);
-		boolean testOk = false;
+		request.setInstance(12);
 		File f;
 		switch (req.getFile()) {
-			case 1: f=new File("complicated-example-mono.wav");
+			case 1: f=new File("hard-example-mono.wav");
+					req.setCheckMathKeywords(false);
 					break;
-			case 2: f=new File("hard-example-mono.wav");
+			case 2: f=new File("no-maths-vocab-example-01-mono.wav");
+					req.setCheckMathKeywords(true);
 					break;
-			case 3: f=new File("maths-example-mono.wav");
+			case 3: f=new File("maths-example-02-mono.wav");
+					req.setCheckMathKeywords(true);
 					break;
-			case 4: f=new File("no-maths-vocab-example-01-mono.wav");
+			case 4: f=new File("complicated-example-mono.wav");
+					req.setCheckMathKeywords(false);
 					break;		
 			default: f=new File("maths-example-02-mono.wav");
 					break;		
@@ -129,15 +133,15 @@ public class TaskIndependentSupportBO implements ITaskIndependentSupportBO  {
 		}
 		Map<String, String> vars = new HashMap<String, String>();
 		vars.put("user", "student1");
-		vars.put("instance", "1");
+		vars.put("instance", "12");
 		vars.put("server", "localhost");
 		vars.put("language", "en_ux");
 		vars.put("model", "base");
 		try {
 			//Call initEngineService of an available instance
-			Boolean isOpen=this.restTemplate.getForObject("http://193.61.29.166:8081/italk2learnsm/speechRecognition/initEngine?user={user}&instance={instance}&server={server}&language={language}&model={model}",Boolean.class, vars);
+			TISWrapper res= new TISWrapper();
+			Boolean isOpen=this.restTemplate.getForObject("http://193.61.29.166:8092/italk2learnsm/speechRecognition/initEngine?user={user}&instance={instance}&server={server}&language={language}&model={model}",Boolean.class, vars);
 			if (isOpen){
-				//an.sendSpeechOutputToSupport(liveResponse.getResponse());
 				Timer timer = new Timer();
 				//JLF:Send chunk each NUM_SECONDS
 				if (!oneChunk)
@@ -145,8 +149,8 @@ public class TaskIndependentSupportBO implements ITaskIndependentSupportBO  {
 				else {
 					System.out.println("Sent in one chunk");
 					request.setData(b);
-		    		liveResponse=restTemplate.postForObject("http://193.61.29.166:8081/italk2learnsm/speechRecognition/sendData", request, SpeechRecognitionResponseVO.class);
-		    		String response=restTemplate.getForObject("http://193.61.29.166:8081/italk2learnsm/speechRecognition/closeEngine?instance={instance}",String.class, "1");
+		    		liveResponse=restTemplate.postForObject("http://193.61.29.166:8092/italk2learnsm/speechRecognition/sendData", request, SpeechRecognitionResponseVO.class);
+		    		String response=restTemplate.getForObject("http://193.61.29.166:8092/italk2learnsm/speechRecognition/closeEngine?instance={instance}",String.class, "12");
 		    		if (response!=null){
 		    			List<String> words= new ArrayList<String>();
 		    			String[] auxWords=response.split(" ");	
@@ -154,16 +158,18 @@ public class TaskIndependentSupportBO implements ITaskIndependentSupportBO  {
 		    				System.out.println("word: "+aux);
 		    				words.add(aux);
 		    			}
-		    			//metododeBeate(words, boolean);
+		    			req.setWords(words);
+		    			res.sendSpeechOutputToSupport(req);
 		    			System.out.println("Output: "+response);
 		    			loop=false;
 		    		}
 				}
 			}
-			while (loop){
-				return resultado;
-			}
+			while (loop){ }
 			System.out.println("All jobs finished");
+			resultado.setPopUpWindow(res.getPopUpWindow());
+			resultado.setMessage(res.getMessage());
+			return resultado;
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.error(e.toString());
@@ -178,12 +184,12 @@ public class TaskIndependentSupportBO implements ITaskIndependentSupportBO  {
 		    		System.out.println("Sending chunk: " + aux);
 		    		System.out.println("the chunk is " + audioChunks.get(counter).length + " bytes long");
 		    		request.setData(audioChunks.get(counter));
-		    		liveResponse=restTemplate.postForObject("http://193.61.29.166:8081/italk2learnsm/speechRecognition/sendData", request, SpeechRecognitionResponseVO.class);
+		    		liveResponse=restTemplate.postForObject("http://193.61.29.166:8092/italk2learnsm/speechRecognition/sendData", request, SpeechRecognitionResponseVO.class);
 		    		//an.sendSpeechOutputToSupport(liveResponse.getResponse());
 		    		counter++;
 			    }
 		    	else {
-		    		String response=restTemplate.getForObject("http://193.61.29.166:8081/italk2learnsm/speechRecognition/closeEngine?instance={instance}",String.class, "1");
+		    		String response=restTemplate.getForObject("http://193.61.29.166:8092/italk2learnsm/speechRecognition/closeEngine?instance={instance}",String.class, "12");
 		    		if (response!=null){
 		    			System.out.println("Output: "+response);
 		    			Assert.assertTrue(true);
