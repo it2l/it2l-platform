@@ -88,16 +88,16 @@ public class TaskIndependentSupportBO implements ITaskIndependentSupportBO  {
 		request.setInstance(12);
 		File f;
 		switch (req.getFile()) {
-			case 1: f=new File("hard-example-mono.wav");
+			case 1: f=new File("complicated-example-mono.wav");
 					req.setCheckMathKeywords(false);
 					break;
 			case 2: f=new File("no-maths-vocab-example-01-mono.wav");
 					req.setCheckMathKeywords(true);
 					break;
-			case 3: f=new File("maths-example-02-mono.wav");
+			case 3: f=new File("maths-example-mono.wav");
 					req.setCheckMathKeywords(true);
 					break;
-			case 4: f=new File("complicated-example-mono.wav");
+			case 4: f=new File("hard-example-mono.wav");
 					req.setCheckMathKeywords(false);
 					break;		
 			default: f=new File("maths-example-02-mono.wav");

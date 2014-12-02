@@ -255,7 +255,7 @@
     	function play_sound(url){
     		if (sEnabled == true) {
 	    		document.getElementById("player").innerHTML = '';
-	    		playS(url);
+	    		//playS(url);
 			    if(play_html5_audio){
 			    	//playS(url);
 			    	var sound = $("<embed id='sound' type='audio/mpeg'/>");
@@ -295,4 +295,32 @@
     	    speechProductionPlayer.src=url;
         	speechProductionPlayer.load();
     		speechProductionPlayer.play();
+		}
+    	
+		function playS2(url){
+    	    sourceAudio.src=url;
+        	speechProductionPlayer.load();
+    		speechProductionPlayer.play();
+		}
+		
+		function playS3(url){
+			var audio = document.createElement("audio");
+			var source = document.createElement("source");
+			source.src = url;
+			audio.appendChild(source);                                
+			audio.play();
+		}
+		
+		function playS4(url){
+			var audio = new Audio();
+			audio.src = url;
+			audio.load();                                
+			audio.play();
+		}
+		
+        function playS5(url){
+			var audio = document.createElement("audio");
+			audio.src = url;
+			audio.load();				
+			audio.play();
 		}

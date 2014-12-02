@@ -58,22 +58,18 @@
 					});
 					var body=$('#task').text();
 					if (body.localeCompare("Make a fraction that equals 3/4 and has 12 as denominator.")==0){
-						//doneButtonEnable(true);
 						arrowButtonEnable(false);
 						u.initPlugin(jQuery("#unityPlayer")[0], "/italk2learn/sequence/FractionsLab.unity3d?showStartPage=false&language="+getLocale()+"&idtask=EQUIValence1"+userName);
 					}
 					else if (body.localeCompare("Make a fraction that equals 1/2 and has 4 as denominator.")==0){
-						//doneButtonEnable(true);
 						arrowButtonEnable(false);
 						u.initPlugin(jQuery("#unityPlayer")[0], "/italk2learn/sequence/FractionsLab.unity3d?showStartPage=false&language="+getLocale()+"&idtask=EQUIValence2"+userName);
 					}
 					else if (body.localeCompare("Use the same representations to show whether 1/3 is bigger or smaller than 1/5.")==0){
-						//doneButtonEnable(true);
 						arrowButtonEnable(false);
 						u.initPlugin(jQuery("#unityPlayer")[0], "/italk2learn/sequence/FractionsLab.unity3d?showStartPage=false&language="+getLocale()+"&idtask=Comp1"+userName);
 					}
 					else {
-						//doneButtonEnable(false);
 						arrowButtonEnable(true);
 						u.initPlugin(jQuery("#unityPlayer")[0], "/italk2learn/sequence/FractionsLab.unity3d?showStartPage=false&language="+getLocale());
 					}

@@ -1,4 +1,5 @@
 var userWOZ;
+var conn;
 var Gab = {
     connection: null,
 
@@ -45,18 +46,20 @@ var Gab = {
 				                             "type": "chat"})
 				             .c('body').t(body).up()
 				             .c('active', {xmlns: "http://jabber.org/protocol/chatstates"});
+				         if (Gab.connection==null)
+				        	 Gab.connection=conn;
 				         Gab.connection.send(message);
 				     }
 				}
 				else if (body.charAt(1)==='*'){
 					if (body.charAt(0)==='d'){
-						if (body.charAt(2)==='d')
-							doneButtonEnable(false);
+						if (body.charAt(2)==='d'){}
+							//doneButtonEnable(false);
 						else
 							arrowButtonEnable(false);
 					} else if (body.charAt(0)==='e'){
-						if (body.charAt(2)==='d')
-							doneButtonEnable(true);
+						if (body.charAt(2)==='d'){}
+							//doneButtonEnable(true);
 						else
 							arrowButtonEnable(true);
 					}
@@ -107,7 +110,7 @@ var Gab = {
 function connectWOZ (user) {
 
 	userWOZ=user;
-	var conn = new Strophe.Connection(
+	conn = new Strophe.Connection(
         'http://it2l.dcs.bbk.ac.uk/http-bind/');
 
 	//conn.connect(userWOZ+'@it2l.dcs.bbk.ac.uk', userWOZ, function (status) {

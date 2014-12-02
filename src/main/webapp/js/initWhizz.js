@@ -69,15 +69,15 @@
 			
 			function SendHighMessage(message)
 			{
-				setTimeout(function(){alert(message)},5000);			
+				setTimeout(function(){alert(message)},1000);			
 			}
 
 			function SendLowMessage(message)
 			{
-				setTimeout(function(){alert(message)},5000);
+				setTimeout(function(){alert(message)},1000);
 			}
 			
 			function EnableHelpButton(message)
 			{
-				setTimeout(function(){alert(message)},5000);
+				setTimeout(function(){alert(message)},1000);
 			}
