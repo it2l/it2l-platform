@@ -21,7 +21,7 @@
 	<script type="text/javascript" src="http://www.google.com/jsapi" charset="utf-8"></script>
 	<script type="text/javascript" src='sequence/js/monitorWOZClient.js'></script>
 	<script type="text/javascript" src="/js/initMainContainer.js" th:src="@{/resources/js/initMainContainer.js}"></script>
-	<script type="text/javascript" src="/js/initTIS.js" th:src="@{/resources/js/initTIS.js}"></script>
+<!-- 	<script type="text/javascript" src="/js/initTIS.js" th:src="@{/resources/js/initTIS.js}"></script> -->
 
     <script type="text/javascript" src="#" th:src="@{/resources/dojo/dojo.js}"></script>
     <script type="text/javascript" src="#" th:src="@{/resources/spring/Spring.js}"></script>
@@ -47,11 +47,11 @@
             <td align="center">
 	            <div id="wrapper_dark_gray" style="padding-bottom:30px; min-height: 995px; padding-top:20px;">
 		            <div style="display:inline; margin-left: 10px; float: left; width:130px;" sec:authorize="hasRole('ROLE_ADMIN')">
-		               	<a href="#" th:href="@{/monitorWOZ}" class="it2lbutton"> Go to Woz <img style="vertical-align:middle" th:src="@{/resources/images/bt_arrow_right.png}" src="../../images/bt_arrow_right.png"></img> </a>
+		               	<a href="#" th:href="@{/monitorWOZ}" class="it2lbutton" th:text="#{gotowoz}"> Go to Woz <img style="vertical-align:middle" th:src="@{/resources/images/bt_arrow_right.png}" src="../../images/bt_arrow_right.png"></img> </a>
 					</div>
 					<div style=" width: 12%; display: inline; float: left; margin-left: 25px;" sec:authorize="hasRole('ROLE_USER')">&nbsp;</div>
 		            <div style="display:inline; width:76%;">
-		            	<span style="display:inline; font-weight: bold;"> Welcome </span> <div id="user" style="font-weight: bold; display:inline;"> Name </div>
+		            	<span style="display:inline; font-weight: bold;" th:text="#{welcome}"> Welcome </span> <div id="user" style="font-weight: bold; display:inline;"> Name </div>
 					</div>
 					<div sec:authorize="hasRole('ROLE_USER')" th:if="${#authentication}" style="display:inline; margin-right: 25px; float: right; width:12%">
 						<a href="#" th:href="@{/auth/logout}" style=" float: right; color:#e74c3c; font-weight:bold; font-size:13px;">Logout</a>
@@ -63,11 +63,11 @@
 									<div id="connect" style="color:#E74C3C; font-size:10px;">
 										<div id="connectedON">
 											<img style="vertical-align:middle; padding-left:5px; padding-top:4px; margin-bottom:2px;" th:src="@{/resources/images/bt_connected_on.png}" src="/italk2learn/images/bt_connected_on.PNG"></img>
-											<span style="padding-left:12px; font-weight:bold;">CONNECTED</span>
+											<span style="padding-left:12px; font-weight:bold;" th:text="#{connected}">CONNECTED</span>
 										</div>
 										<div id="connectedOFF">
 											<img style="vertical-align:middle; padding-left:5px; padding-top:4px; margin-bottom:2px;"  th:src="@{/resources/images/bt_connected_off.png}" src="/italk2learn/images/bt_connected_off.png"></img>
-			                				<span style="padding-left:5px; font-weight:bold;">DISCONNECTED</span>
+			                				<span style="padding-left:5px; font-weight:bold;" th:text="#{disconnected}">DISCONNECTED</span>
 										</div>		
 			                		</div>
 								</td>
@@ -117,7 +117,7 @@
 						</table>
 	            </div>
 				<!--  END light -->
-	            	<div style="display: initial; color: #0076a3; font-weight:bold;"> Voice recording </div>
+	            	<div style="display: initial; color: #0076a3; font-weight:bold;" th:text="#{voicerecording}"> Voice recording </div>
 		            <div style="padding-top: 8px; padding-right:150px; display: inline-block;">
 		            	<div id="speechRecognition" align="center" sec:authorize="hasRole('ROLE_USER')" style="padding-top:30px;">
 							<p style="display: inline; ">To view this page ensure that Adobe Flash Player version 11.1.0 or greater is installed.</p>
@@ -208,53 +208,53 @@
 		</p>
 	</div>
 	<div id="player"></div>
-	<div id="testTIS">
-		<table>
-			<tr>
-				<th colspan="4"> <span align="center">Task-Independent-Support Test </span> </th>
-			</tr>
-			<tr>
-				<td>
-					<input type="submit" id="butTIS1" value="emotion 1"/>
-				</td>
-				<td>
-					<input type="submit" id="butTIS2" value="no maths"/>
-				</td>
-				<td>
-					<input type="submit" id="butTIS3" value="maths vocab"/>
-				</td>
-				<td>
-					<input type="submit" id="butTIS4" value="emotion 2"/>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<audio controls="controls">
-					  <source src="complicated-example-mono.wav" type="audio/wav"/>
-						Your browser does not support the audio element.
-					</audio>
-				</td>
-				<td>
-					<audio controls="controls">
-					  <source src="no-maths-vocab-example-01-mono.wav" type="audio/wav"/>
-						Your browser does not support the audio element.
-					</audio>
-				</td>
-				<td>
-					<audio controls="controls">
-					  <source src="maths-example-mono.wav" type="audio/wav"/>
-						Your browser does not support the audio element.
-					</audio>
-				</td>
-				<td>
-					<audio controls="controls">
-					  <source src="hard-example-mono.wav" type="audio/wav"/>
-						Your browser does not support the audio element.
-					</audio>
-				</td>
-			</tr>
-		</table>
-	</div>
+<!-- 	<div id="testTIS"> -->
+<!-- 		<table> -->
+<!-- 			<tr> -->
+<!-- 				<th colspan="4"> <span align="center">Task-Independent-Support Test </span> </th> -->
+<!-- 			</tr> -->
+<!-- 			<tr> -->
+<!-- 				<td> -->
+<!-- 					<input type="submit" id="butTIS1" value="emotion 1"/> -->
+<!-- 				</td> -->
+<!-- 				<td> -->
+<!-- 					<input type="submit" id="butTIS2" value="no maths"/> -->
+<!-- 				</td> -->
+<!-- 				<td> -->
+<!-- 					<input type="submit" id="butTIS3" value="maths vocab"/> -->
+<!-- 				</td> -->
+<!-- 				<td> -->
+<!-- 					<input type="submit" id="butTIS4" value="emotion 2"/> -->
+<!-- 				</td> -->
+<!-- 			</tr> -->
+<!-- 			<tr> -->
+<!-- 				<td> -->
+<!-- 					<audio controls="controls"> -->
+<!-- 					  <source src="complicated-example-mono.wav" type="audio/wav"/> -->
+<!-- 						Your browser does not support the audio element. -->
+<!-- 					</audio> -->
+<!-- 				</td> -->
+<!-- 				<td> -->
+<!-- 					<audio controls="controls"> -->
+<!-- 					  <source src="no-maths-vocab-example-01-mono.wav" type="audio/wav"/> -->
+<!-- 						Your browser does not support the audio element. -->
+<!-- 					</audio> -->
+<!-- 				</td> -->
+<!-- 				<td> -->
+<!-- 					<audio controls="controls"> -->
+<!-- 					  <source src="maths-example-mono.wav" type="audio/wav"/> -->
+<!-- 						Your browser does not support the audio element. -->
+<!-- 					</audio> -->
+<!-- 				</td> -->
+<!-- 				<td> -->
+<!-- 					<audio controls="controls"> -->
+<!-- 					  <source src="hard-example-mono.wav" type="audio/wav"/> -->
+<!-- 						Your browser does not support the audio element. -->
+<!-- 					</audio> -->
+<!-- 				</td> -->
+<!-- 			</tr> -->
+<!-- 		</table> -->
+<!-- 	</div> -->
 	<audio controls="controls" id="speechProductionPlayer" hidden="true"></audio>
 
 </div>

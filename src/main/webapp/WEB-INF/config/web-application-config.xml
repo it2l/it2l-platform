@@ -36,22 +36,6 @@
 		<property name="ignoreUnresolvablePlaceholders" value="true" />
 	</bean>
 	
-	<!-- JMS Integration -->
-<!-- 	<amq:topic id="eventTopic" name="topic.events" /> -->
-
-<!--     <amq:queue id="processingQueue" name="queue.process" /> -->
-
-<!--     <amq:connectionFactory id="connectionFactory" brokerURL="vm://localhost" /> -->
-
-<!--     <bean id="eventTopicTemplate" class="org.springframework.jms.core.JmsTemplate"> -->
-<!--         <property name="connectionFactory" ref="connectionFactory" /> -->
-<!--         <property name="defaultDestinationName" value="topic.events" /> -->
-<!--     </bean> -->
-
-<!--     <jms:listener-container connection-factory="connectionFactory"> -->
-<!--         <jms:listener destination="queue.process" ref="messageQueueBO" method="doProcessing" /> -->
-<!--     </jms:listener-container> -->
-	<!-- End JMS Integration -->
 	
 	<!-- Message internalisation -->
     <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">

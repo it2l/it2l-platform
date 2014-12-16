@@ -42,6 +42,7 @@ public class ExercisesSequenceController implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
+	 private static String _RANDOMTEST = "testr";
 	
 	private LdapUserDetailsImpl user;
 	
@@ -122,18 +123,47 @@ public class ExercisesSequenceController implements Serializable{
 			request.setHeaderVO(new HeaderVO());
 			request.getHeaderVO().setLoginUser(user.getUsername());
 			request.setIdExercise(getLoginUserService().getIdExersiceUser(request.getHeaderVO()));
-			request.setIdUser(getLoginUserService().getIdUserInfo(request.getHeaderVO()));
-			ExerciseVO response=getExerciseSequenceService().getNextExercise(request).getExercise();
-			request.setIdExercise(response.getIdExercise());
-			getExerciseSequenceService().insertCurrentExercise(request);
-			modelAndView.setViewName(response.getView()+"/"+ response.getExercise());
-			modelAndView.addObject("messageInfo", response);
-			return modelAndView;
+			if (user.getUsername().startsWith(_RANDOMTEST)){
+				request.setIdExercise(getRandomExercise(user.getUsername()));
+				ExerciseVO response=getExerciseSequenceService().getSpecificExercise(request).getExercise();
+				request.setIdExercise(response.getIdExercise());
+				modelAndView.setViewName(response.getView()+"/"+ response.getExercise());
+				return modelAndView;
+			}
+			else{
+				request.setIdUser(getLoginUserService().getIdUserInfo(request.getHeaderVO()));
+				ExerciseVO response=getExerciseSequenceService().getNextExercise(request).getExercise();
+				request.setIdExercise(response.getIdExercise());
+				getExerciseSequenceService().insertCurrentExercise(request);
+				modelAndView.setViewName(response.getView()+"/"+ response.getExercise());
+				modelAndView.addObject("messageInfo", response);
+				return modelAndView;
+			}
 		}
 		catch (Exception e){
 			modelAndView.setViewName("redirect:/login");
 			return new ModelAndView();
 		}
+	}
+	
+	private int getRandomExercise(String user){
+		if (user.startsWith("testrw")){ //Random whizz
+			return randomWithRange(4,8);
+		} else if (user.startsWith("testrft")){ //Random fractions tutor
+			return randomWithRange(13,28);
+		} else if (user.startsWith("testrflai")){ //Ramdon fractions lab with AI
+			return randomWithRange(94,95);
+		} else if (user.startsWith("testrfl")){ //Ramdon fractions lab
+				return randomWithRange(56,60);
+		} else{ //Normal ramdon
+			return randomWithRange(1,95);
+		}
+	}
+	
+	int randomWithRange(int min, int max)
+	{
+	   int range = (max - min) + 1;     
+	   return (int)(Math.random() * range) + min;
 	}
 	
 	/**

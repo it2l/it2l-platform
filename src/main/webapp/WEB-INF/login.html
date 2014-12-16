@@ -44,18 +44,18 @@
                             <td align="center">
                                 <div id="wrapper_dark_gray" style="height: 634px; width: 1080px;  padding-top:20px;">
                                     <div style=" display:inline; width: 100%">
-                                        <span style="display:inline; font-size: 18px;"> Welcome to <b style="display: inline; font-weight:bold;">iLearnFractions </b>
+                                        <span style="display:inline; font-size: 18px;" th:text="#{welcometo}"> Welcome to <b style="display: inline; font-weight:bold;">iLearnFractions </b>
                                         </span>
                                     </div>
                                     <div id="wrapper_light_gray" style="height: 150px; width: 1060px; margin-top: 30px;">
                                       <form name="login-form" action="j_spring_security_check" method="post" style="width:100%;">
-											   <span style="padding: 30px 50px 10px 80px; margin-left:0px; display:inherit; text-align:left;line-height:30px; font-size:17px; font-weight:bold; color:#0076a3;">
+											   <span style="padding: 30px 50px 10px 80px; margin-left:0px; display:inherit; text-align:left;line-height:30px; font-size:17px; font-weight:bold; color:#0076a3;" th:text="#{pleasesignin}">
 														Please sign in:<br/>
 														</span>
 											   <table>
 												 <tr style="display: inline-flex;">
 												   <td style="padding-left:0px;">
-												   <span style="color: #0076a3;">Username</span>
+												   <span style="color: #0076a3;" th:text="#{username}">Username</span>
 												   </td>
 												   <td style="margin-right:55px;"> <input name="j_username" type="text" style="
 															-webkit-border-radius: 30px;
@@ -69,7 +69,7 @@
 															-moz-box-shadow: 0 2px 4px #bbb inset;
 															-webkit-box-shadow: 0 2px 4px #BBB inset;
 															box-shadow: 0 2px 4px #BBB inset;"/></td>
-												   <td ><span style="color: #0076a3;">Password</span></td>
+												   <td ><span style="color: #0076a3;" th:text="#{password}">Password</span></td>
 												   <td style="padding-right:20px;"><input name="j_password" type="password" style="
 															-webkit-border-radius: 30px;
 															-moz-border-radius: 30px;
