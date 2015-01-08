@@ -4,6 +4,7 @@
 package com.italk2learn.controller;
 
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -13,6 +14,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.ldap.userdetails.LdapUserDetailsImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -69,6 +71,28 @@ public class TaskIndependentSupportController {
 			logger.error(e.toString());
 		}
 		return null;
+	}
+	
+	/**
+	 * JLF: Controller to call TIS from TDS
+	 */
+	@RequestMapping(value = "/callTIS", method = RequestMethod.POST)
+	@ResponseBody
+	public void callTIDfromTDS(@RequestBody TaskIndependentSupportRequestVO tisRequest){
+		user = (LdapUserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		logger.info("JLF --- callTIDfromTDS log"+"User: "+user.getUsername());
+		TaskIndependentSupportRequestVO request= new TaskIndependentSupportRequestVO();
+        try {
+        	request.setHeaderVO(new HeaderVO());
+			request.getHeaderVO().setLoginUser(user.getUsername());
+			request.setCurrentFeedbackType(tisRequest.getCurrentFeedbackType());
+			request.setFeedbackText(tisRequest.getFeedbackText());
+			request.setPreviousFeedbackType(tisRequest.getPreviousFeedbackType());
+			request.setFollowed(tisRequest.getFollowed());
+			getTisService().callTISfromTID(request);
+        } catch (Exception ex) {
+        	logger.error(ex.toString());
+        }
 	}
 	
 	/**

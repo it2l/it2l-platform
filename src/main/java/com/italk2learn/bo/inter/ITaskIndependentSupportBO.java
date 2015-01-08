@@ -8,6 +8,7 @@ public interface ITaskIndependentSupportBO {
 	
 	public TaskIndependentSupportResponseVO sendNextWords(TaskIndependentSupportRequestVO request) throws ITalk2LearnException;
 	public TaskIndependentSupportResponseVO getStudentInfo(TaskIndependentSupportRequestVO request) throws ITalk2LearnException;
+	public TaskIndependentSupportResponseVO callTISfromTID(TaskIndependentSupportRequestVO request) throws ITalk2LearnException;
 	public TaskIndependentSupportResponseVO sendRealSpeechToSupport(TaskIndependentSupportRequestVO req) throws Exception;
 
 }

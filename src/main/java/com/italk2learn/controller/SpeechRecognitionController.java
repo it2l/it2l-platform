@@ -14,8 +14,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.italk2learn.bo.inter.ILoginUserService;
+import com.italk2learn.bo.inter.IPerceiveDifficultyTaskBO;
 import com.italk2learn.bo.inter.ISpeechRecognitionBO;
 import com.italk2learn.vo.HeaderVO;
+import com.italk2learn.vo.PTDRequestVO;
+import com.italk2learn.vo.PTDResponseVO;
 import com.italk2learn.vo.SpeechRecognitionRequestVO;
 import com.italk2learn.vo.SpeechRecognitionResponseVO;
 
@@ -44,11 +47,13 @@ public class SpeechRecognitionController{
 	
 	/*Services*/
 	private ISpeechRecognitionBO speechRecognitionService;
+	private IPerceiveDifficultyTaskBO perceiveDifficultyTaskService;
 	private ILoginUserService loginUserService;
 
     @Autowired
-    public SpeechRecognitionController(ISpeechRecognitionBO speechRecognition, ILoginUserService loginUserService) {
+    public SpeechRecognitionController(ISpeechRecognitionBO speechRecognition,IPerceiveDifficultyTaskBO perceiveDifficultyTask, ILoginUserService loginUserService) {
     	this.setSpeechRecognitionService(speechRecognition);
+    	this.perceiveDifficultyTaskService=perceiveDifficultyTask;
     	this.loginUserService=loginUserService;
     }
 	
@@ -120,6 +125,28 @@ public class SpeechRecognitionController{
 		return response.getResponse();
 	}
 	
+	/**
+	 * Method to get the perceive difficulty task at the end of each task
+	 */
+	@RequestMapping(value = "/callPTD",method = RequestMethod.POST)
+	@ResponseBody
+	public int callPTD(@RequestBody byte[] body) {
+		logger.info("JLF --- Get PTD from Audio based difficulty classifier");
+		PTDRequestVO req= new PTDRequestVO();
+		PTDResponseVO res= new PTDResponseVO();
+		try {
+			req.setHeaderVO(new HeaderVO());
+			req.getHeaderVO().setLoginUser(getUsername());
+			req.getHeaderVO().setIdUser(getLoginUserService().getIdUserInfo(request.getHeaderVO()));
+			req.setAudioByteArray(getAudio());
+			res=getPerceiveDifficultyTaskService().callPTD(req);
+			return res.getPTD();
+		} catch (Exception e){
+			logger.error(e.toString());
+		}
+		return res.getPTD();
+	}
+	
 	private void concatenateAudioStream(byte[] body){
 		//JLF:Copying byte array 
 		byte[] destination = new byte[body.length + getAudio().length];
@@ -162,6 +189,15 @@ public class SpeechRecognitionController{
 
 	public void setAudio(byte[] audio) {
 		this.audio = audio;
+	}
+
+	public IPerceiveDifficultyTaskBO getPerceiveDifficultyTaskService() {
+		return perceiveDifficultyTaskService;
+	}
+
+	public void setPerceiveDifficultyTaskService(
+			IPerceiveDifficultyTaskBO perceiveDifficultyTaskService) {
+		this.perceiveDifficultyTaskService = perceiveDifficultyTaskService;
 	}
 
 }

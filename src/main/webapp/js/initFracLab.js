@@ -126,10 +126,31 @@
 				    });
 				}
 				
+				function sendMessageToTIS(feedbackText, currentFeedbackType, previousFeedbackType, followed){
+					var evt = {
+					       	 "feedbackText": feedbackText,
+					       	 "currentFeedbackType": currentFeedbackType,
+					       	 "previousFeedbackType": previousFeedbackType,
+					       	 "followed": followed.toLowerCase()
+					        };
+					$.ajax({
+						type: 'POST',
+				        contentType : 'application/json; charset=utf-8',
+				        dataType : 'json',
+				        url: "tis/callTIS",
+				        data: JSON.stringify(evt),
+				        success: function(data){
+				        	alert('sendMessageToTIS successfully called!');
+				        },
+				        error : function(jqXHR, status, error) {
+				        	//window.location.href = "/italk2learn/login";
+				        },
+				    });
+					
+				}
+				
 				function sendMessageToLightBulb(message){
 					helpButtonEnable(true);
-//					var aux=lowMessage+" "+message;
-//					lowMessage=aux;
 					lowMessage=message;
 				}
 				
@@ -153,8 +174,6 @@
 					}
 					else {
 						helpButtonEnable(true);
-//						var aux=lowMessage+" "+message;
-//						lowMessage=aux;
 						lowMessage=message;
 					}
 				}
@@ -173,30 +192,24 @@
 				
 				function arrowButtonEnable(value){
 					if (value==true || value=="true" || value=="True") {
-						//$("#next").removeAttr("disabled");
 						$("#next").removeClass("it2lNextbuttonOFF");
 						$("#next").addClass("it2lNextbuttonON");
-						//$("#next").css("background-image", "url(/italk2learn/images/arrow-right.png)");
 						aEnabled=true;
 					}	
 					else {
-						//$("#next").attr("disabled", "disabled");
 						$("#next").removeClass("it2lNextbuttonON");
 						$("#next").addClass("it2lNextbuttonOFF");
-						//$("#next").css("background-image", "url(/italk2learn/images/arrow-right-disabled.png)");
 						aEnabled=false;
 					}	
 				}
 				
 				function helpButtonEnable(value){
 					if (value==true || value=="true" || value=="True"){
-						//$("#help").removeAttr("disabled");
 						$("#help").removeClass("it2lHelpbuttonOFF");
 						$("#help").addClass("it2lHelpbuttonON");
 						isEnabledLightBulb=true;
 					}
 					else {
-						//$("#help").attr("disabled", "disabled");
 						$("#help").removeClass("it2lHelpbuttonON");
 						$("#help").addClass("it2lHelpbuttonOFF");
 						isEnabledLightBulb=false;

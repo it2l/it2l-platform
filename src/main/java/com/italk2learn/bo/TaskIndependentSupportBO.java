@@ -79,6 +79,20 @@ public class TaskIndependentSupportBO implements ITaskIndependentSupportBO  {
 		return null;
 	}
 	
+	public TaskIndependentSupportResponseVO callTISfromTID(TaskIndependentSupportRequestVO request) throws ITalk2LearnException{
+		logger.info("callTISfromTID()---");
+		TISWrapper res= new TISWrapper();
+		TaskIndependentSupportResponseVO response= new TaskIndependentSupportResponseVO();
+		try {
+			res.sendTDStoTIS(request.getFeedbackText(), request.getCurrentFeedbackType(), request.getPreviousFeedbackType(), request.getFollowed());
+			return response;
+		}
+		catch (Exception e){
+			System.out.println(e);
+		}
+		return null;
+	}
+	
 	public TaskIndependentSupportResponseVO sendRealSpeechToSupport(TaskIndependentSupportRequestVO req) throws Exception{
 		TaskIndependentSupportResponseVO resultado=new TaskIndependentSupportResponseVO();
 		final int dataSize = (int) (Runtime.getRuntime().maxMemory());

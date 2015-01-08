@@ -187,6 +187,18 @@
 		        complete : function(jqXHR, status) {
 		        }
 		    });
+		    $.ajax({
+				type: 'POST',
+		        contentType : 'application/json; charset=utf-8',
+		        dataType : 'json',
+		        url: "speechRecognition/callPTD",
+		        success: function(data){
+		        	alert('PTD successfully called');
+		        },
+		        error : function(jqXHR, status, error) {
+
+		        },
+		    });
 		}
 
 
