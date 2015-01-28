@@ -1,6 +1,8 @@
 package com.italk2learn.controller;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -19,6 +21,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import MFSeq.DBManagment;
+import MFSeq.Sequencer;
 
 import com.italk2learn.bo.inter.IExerciseSequenceBO;
 import com.italk2learn.bo.inter.IFractionsLabBO;
@@ -69,7 +74,6 @@ public class ExercisesSequenceController implements Serializable{
     	this.loginUserService=loginUserService;
     	this.setWhizzExerciseBO(whizzExerciseBO);
     	this.setFractionsLabBO(fractionsLabBO);
-
     }
 	
 	/**
@@ -108,6 +112,25 @@ public class ExercisesSequenceController implements Serializable{
 		user = (LdapUserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		return user.getUsername();
 	}
+	
+	/**
+	 * JLF: Get user connected
+	 */
+	@RequestMapping(value = "/getCondition",method = RequestMethod.GET, produces="text/plain")
+	@ResponseBody
+	public Integer getCondition(Model model) {
+		logger.info("JLF --- ExercisesSequence.getCondition");
+		ExerciseSequenceRequestVO request= new ExerciseSequenceRequestVO();
+		request.setHeaderVO(new HeaderVO());
+		request.getHeaderVO().setLoginUser(user.getUsername());
+		try{
+			return getLoginUserService().getCondition(request.getHeaderVO());
+		}
+		catch (Exception e){
+			logger.error(e.toString());
+		}
+		return null;
+	}
 
 	
 	/**
@@ -130,14 +153,14 @@ public class ExercisesSequenceController implements Serializable{
 				modelAndView.setViewName(response.getView()+"/"+ response.getExercise());
 				return modelAndView;
 			}
-			else{
-				request.setIdUser(getLoginUserService().getIdUserInfo(request.getHeaderVO()));
-				ExerciseVO response=getExerciseSequenceService().getNextExercise(request).getExercise();
-				request.setIdExercise(response.getIdExercise());
-				getExerciseSequenceService().insertCurrentExercise(request);
-				modelAndView.setViewName(response.getView()+"/"+ response.getExercise());
-				modelAndView.addObject("messageInfo", response);
-				return modelAndView;
+			else {
+				switch (getLoginUserService().getCondition(request.getHeaderVO())) {
+					case 1:	return getStateMachineSequencerExercise(request);
+					case 2:	return getStateMachineSequencerExercise(request);
+					case 3:	return getStateMachineSequencerExercise(request);
+					case 4:	return getVygotskyPolicySequencerExercise(request);
+					default: return getStateMachineSequencerExercise(request);
+				}
 			}
 		}
 		catch (Exception e){
@@ -146,6 +169,54 @@ public class ExercisesSequenceController implements Serializable{
 		}
 	}
 	
+	private ModelAndView getStateMachineSequencerExercise(ExerciseSequenceRequestVO request){
+		
+		ModelAndView modelAndView = new ModelAndView();
+		try{
+			request.setIdUser(getLoginUserService().getIdUserInfo(request.getHeaderVO()));
+			ExerciseVO response=getExerciseSequenceService().getNextExercise(request).getExercise();
+			request.setIdExercise(response.getIdExercise());
+			getExerciseSequenceService().insertCurrentExercise(request);
+			modelAndView.setViewName(response.getView()+"/"+ response.getExercise());
+			modelAndView.addObject("messageInfo", response);
+			return modelAndView;
+		}
+		catch (Exception e){
+			modelAndView.setViewName("redirect:/login");
+			return new ModelAndView();
+		}
+	}
+	
+	private ModelAndView getVygotskyPolicySequencerExercise(ExerciseSequenceRequestVO request){
+		ModelAndView modelAndView = new ModelAndView();
+		DBManagment manag = new DBManagment();
+//		GregorianCalendar c = new GregorianCalendar();
+//		c.setTime(new Date());
+		Date date= new Date();
+		Timestamp timestamp= new Timestamp(date.getTime());
+		//JLF: Hardcoded
+		int studentId = 22516;
+		int prevStudentScore = 95;
+		String prevLessonId = "GB0875AAx0100";
+		String whizzLessonSuggestion = "GB0900CAx0200";
+		//JLF: End Hardcoded
+		try {
+			prevLessonId = getLoginUserService().getIdExersiceSequenceUser(request.getHeaderVO()).toString();
+			studentId = getLoginUserService().getIdUserInfo(request.getHeaderVO());
+			String ID= Sequencer.next(studentId, prevLessonId, prevStudentScore, timestamp, whizzLessonSuggestion);
+			request.setIdUser(getLoginUserService().getIdUserInfo(request.getHeaderVO()));
+			request.setIdVPSExercise(ID);
+			getExerciseSequenceService().insertCurrentVPSExercise(request);
+			ExerciseVO response=getExerciseSequenceService().getWholeViewFromIDSequencer(request).getExercise();
+			modelAndView.setViewName(response.getView()+"/"+ response.getExercise());
+			return modelAndView;
+		}
+		catch (Exception e){
+			modelAndView.setViewName("redirect:/login");
+			return new ModelAndView();
+		}
+		
+	}
 	private int getRandomExercise(String user){
 		if (user.startsWith("testrw")){ //Random whizz
 			return randomWithRange(4,8);

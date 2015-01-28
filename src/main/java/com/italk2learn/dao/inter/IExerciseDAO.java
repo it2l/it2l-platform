@@ -14,13 +14,19 @@ public interface IExerciseDAO {
 	
 	public ExerciseVO getNextExercise(int idUser, int idExercise) throws Exception;
 	
+	public ExerciseVO getWholeViewFromIDSequencer(int idUser, String idSequencer) throws Exception;
+	
 	public ExerciseVO getBackExercise(int idUser, int idExercise) throws Exception;
 	
 	public void setNextExercise(int idUser, int idExercise, int idNextexercise, String feedback) throws Exception;
 	
 	public void insertCurrentExercise(int idUser, int idView) throws ITalk2LearnException;
 	
+	public void insertCurrentVPSExercise(int idUser, String idSequencerView) throws ITalk2LearnException;
+	
 	public Exercises getFirstExercise(int idUser) throws Exception;
+	
+	public Exercises getIDSequencer(int idExercise) throws ITalk2LearnException;
 	
 	public List<Exercises> getAllExercises() throws ITalk2LearnException;
 

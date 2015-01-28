@@ -10,6 +10,7 @@ public class ExerciseSequenceRequestVO extends RequestVO {
 	private int idUser;
 	private int idExercise;
 	private int idNextexercise;
+	private String idVPSExercise;
 	private String feedback;
 	private String user;
 	private String[] sequence;
@@ -50,6 +51,12 @@ public class ExerciseSequenceRequestVO extends RequestVO {
 	}
 	public void setSequence(String[] sequence) {
 		this.sequence = sequence;
+	}
+	public String getIdVPSExercise() {
+		return idVPSExercise;
+	}
+	public void setIdVPSExercise(String idVPSExercise) {
+		this.idVPSExercise = idVPSExercise;
 	}
 
 }

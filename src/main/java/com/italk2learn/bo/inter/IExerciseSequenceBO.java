@@ -15,11 +15,15 @@ public interface IExerciseSequenceBO {
 	
 	public ExerciseSequenceResponseVO getNextExercise(ExerciseSequenceRequestVO request) throws ITalk2LearnException;
 	
+	public ExerciseSequenceResponseVO getWholeViewFromIDSequencer(ExerciseSequenceRequestVO request) throws ITalk2LearnException;
+	
 	public ExerciseSequenceResponseVO getBackExercise(ExerciseSequenceRequestVO request) throws ITalk2LearnException;
 	
 	public ExerciseSequenceResponseVO insertNextIDExercise(ExerciseSequenceRequestVO request) throws ITalk2LearnException;
 	
 	public ExerciseSequenceResponseVO insertCurrentExercise(ExerciseSequenceRequestVO request) throws ITalk2LearnException;
+	
+	public ExerciseSequenceResponseVO insertCurrentVPSExercise(ExerciseSequenceRequestVO request) throws ITalk2LearnException;
 	
 	public ExerciseSequenceResponseVO getFirstExercise(ExerciseSequenceRequestVO request) throws ITalk2LearnException;
 	

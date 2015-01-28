@@ -89,6 +89,30 @@ public class ExerciseSequenceBO implements IExerciseSequenceBO  {
 		return null;
 	}
 	
+	public ExerciseSequenceResponseVO getWholeViewFromIDSequencer(ExerciseSequenceRequestVO request) throws ITalk2LearnException{
+		try {
+			ExerciseSequenceResponseVO response= new ExerciseSequenceResponseVO();
+			response.setExercise(getExerciseDAO().getWholeViewFromIDSequencer(request.getIdUser(), request.getIdVPSExercise()));
+			return response;
+		}
+		catch (Exception e){
+			logger.error(e.toString());
+		}
+		return null;
+	}
+	
+	public ExerciseSequenceResponseVO getIDSequencer(ExerciseSequenceRequestVO request) throws ITalk2LearnException{
+		try {
+			ExerciseSequenceResponseVO response= new ExerciseSequenceResponseVO();
+			response.setIdSequencer(getExerciseDAO().getIDSequencer(request.getIdExercise()).getIdSequencer());
+			return response;
+		}
+		catch (Exception e){
+			logger.error(e.toString());
+		}
+		return null;
+	}
+	
 	public ExerciseSequenceResponseVO getBackExercise(ExerciseSequenceRequestVO request) throws ITalk2LearnException{
 		try {
 			ExerciseSequenceResponseVO response= new ExerciseSequenceResponseVO();
@@ -136,7 +160,18 @@ public class ExerciseSequenceBO implements IExerciseSequenceBO  {
 			logger.error(e.toString());
 		}
 		return null;
-		
+	}
+	
+	public ExerciseSequenceResponseVO insertCurrentVPSExercise(ExerciseSequenceRequestVO request) throws ITalk2LearnException{
+		try {
+			ExerciseSequenceResponseVO response= new ExerciseSequenceResponseVO();
+			getExerciseDAO().insertCurrentVPSExercise(request.getIdUser(), request.getIdVPSExercise());
+			return response;
+		}
+		catch (Exception e){
+			logger.error(e.toString());
+		}
+		return null;
 	}
 	
 	public ExerciseSequenceResponseVO getFirstExercise(ExerciseSequenceRequestVO request) throws ITalk2LearnException{
