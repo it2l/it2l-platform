@@ -192,6 +192,18 @@ public class ExerciseDAO extends HibernateDaoSupport implements IExerciseDAO {
 		}
 	}
 	
+	public void insertLastScore(int idUser, int lastScore) throws ITalk2LearnException {
+		final Session session = this.getITalk2LearnSession();
+		try{
+			User us=(User) session.load(User.class, idUser);
+			us.setLastScore(lastScore);
+			session.saveOrUpdate(us);
+		}catch (Exception e){
+			e.printStackTrace();
+			throw new ITalk2LearnException(e);
+		}
+	}
+	
 	public void insertCurrentVPSExercise(int idUser, String idSequencerView) throws ITalk2LearnException {
 		final Session session = this.getITalk2LearnSession();
 		try{

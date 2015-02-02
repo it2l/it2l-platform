@@ -17,6 +17,7 @@ import com.italk2learn.repositories.ExercisesRepository;
 import com.italk2learn.util.ExerciseAssembler;
 import com.italk2learn.vo.ExerciseSequenceRequestVO;
 import com.italk2learn.vo.ExerciseSequenceResponseVO;
+import com.italk2learn.vo.WhizzRequestVO;
 
 @Service("exerciseSequenceBO")
 @Transactional(rollbackFor = { ITalk2LearnException.class, ITalk2LearnException.class })
@@ -166,6 +167,18 @@ public class ExerciseSequenceBO implements IExerciseSequenceBO  {
 		try {
 			ExerciseSequenceResponseVO response= new ExerciseSequenceResponseVO();
 			getExerciseDAO().insertCurrentVPSExercise(request.getIdUser(), request.getIdVPSExercise());
+			return response;
+		}
+		catch (Exception e){
+			logger.error(e.toString());
+		}
+		return null;
+	}
+	
+	public ExerciseSequenceResponseVO insertLastScore(WhizzRequestVO request) throws ITalk2LearnException{
+		try {
+			ExerciseSequenceResponseVO response= new ExerciseSequenceResponseVO();
+			getExerciseDAO().insertLastScore(request.getIdUser(), Integer.parseInt(request.getWhizz().getScore()));
 			return response;
 		}
 		catch (Exception e){

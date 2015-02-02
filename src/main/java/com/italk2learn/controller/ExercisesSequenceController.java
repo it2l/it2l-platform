@@ -189,21 +189,22 @@ public class ExercisesSequenceController implements Serializable{
 	
 	private ModelAndView getVygotskyPolicySequencerExercise(ExerciseSequenceRequestVO request){
 		ModelAndView modelAndView = new ModelAndView();
-		DBManagment manag = new DBManagment();
-//		GregorianCalendar c = new GregorianCalendar();
-//		c.setTime(new Date());
+//		DBManagment manag = new DBManagment();
 		Date date= new Date();
 		Timestamp timestamp= new Timestamp(date.getTime());
-		//JLF: Hardcoded
-		int studentId = 22516;
-		int prevStudentScore = 95;
-		String prevLessonId = "GB0875AAx0100";
+		int studentId; //22516;
+		int prevStudentScore;//95;
+		String prevLessonId;//"GB0875AAx0100";
 		String whizzLessonSuggestion = "GB0900CAx0200";
-		//JLF: End Hardcoded
 		try {
 			prevLessonId = getLoginUserService().getIdExersiceSequenceUser(request.getHeaderVO()).toString();
 			studentId = getLoginUserService().getIdUserInfo(request.getHeaderVO());
+			prevStudentScore=getLoginUserService().getLastScoreSequenceUser(request.getHeaderVO());
 			String ID= Sequencer.next(studentId, prevLessonId, prevStudentScore, timestamp, whizzLessonSuggestion);
+			if (ID==null || ID.equals("")){
+				modelAndView.setViewName("redirect:/login");
+				return new ModelAndView();
+			}
 			request.setIdUser(getLoginUserService().getIdUserInfo(request.getHeaderVO()));
 			request.setIdVPSExercise(ID);
 			getExerciseSequenceService().insertCurrentVPSExercise(request);
@@ -278,6 +279,7 @@ public class ExercisesSequenceController implements Serializable{
 			request.setIdUser(getLoginUserService().getIdUserInfo(request.getHeaderVO()));
             request.setWhizz(exercise);
             getWhizzExerciseBO().storeWhizzInfo(request);
+            getExerciseSequenceService().insertLastScore(request);
         } catch (Exception ex) {
         	logger.error(ex.toString());
         }

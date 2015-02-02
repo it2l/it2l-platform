@@ -4,6 +4,7 @@ import com.italk2learn.exception.ITalk2LearnException;
 import com.italk2learn.vo.ExerciseSequenceRequestVO;
 import com.italk2learn.vo.ExerciseSequenceResponseVO;
 import com.italk2learn.vo.ExerciseVO;
+import com.italk2learn.vo.WhizzRequestVO;
 
 public interface IExerciseSequenceBO {
 	
@@ -24,6 +25,8 @@ public interface IExerciseSequenceBO {
 	public ExerciseSequenceResponseVO insertCurrentExercise(ExerciseSequenceRequestVO request) throws ITalk2LearnException;
 	
 	public ExerciseSequenceResponseVO insertCurrentVPSExercise(ExerciseSequenceRequestVO request) throws ITalk2LearnException;
+	
+	public ExerciseSequenceResponseVO insertLastScore(WhizzRequestVO request) throws ITalk2LearnException;
 	
 	public ExerciseSequenceResponseVO getFirstExercise(ExerciseSequenceRequestVO request) throws ITalk2LearnException;
 	

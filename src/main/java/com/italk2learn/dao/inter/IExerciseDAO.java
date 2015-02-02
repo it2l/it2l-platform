@@ -24,6 +24,8 @@ public interface IExerciseDAO {
 	
 	public void insertCurrentVPSExercise(int idUser, String idSequencerView) throws ITalk2LearnException;
 	
+	public void insertLastScore(int idUser, int lastScore) throws ITalk2LearnException;
+	
 	public Exercises getFirstExercise(int idUser) throws Exception;
 	
 	public Exercises getIDSequencer(int idExercise) throws ITalk2LearnException;

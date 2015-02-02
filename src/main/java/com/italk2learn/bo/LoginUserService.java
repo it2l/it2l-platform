@@ -84,6 +84,17 @@ public class LoginUserService implements ILoginUserService {
 		return null;
 	}
 	
+	//	JLF: Get lastScore from Whizz
+	public int getLastScoreSequenceUser(HeaderVO header)
+			throws ITalk2LearnException {
+		try {
+			return loginUserDAO.getIdUserInfo(header.getLoginUser()).getLastScore();
+		} catch (Exception nfe) {
+			logger.error(nfe.toString());
+		}
+		return 0;
+	}
+	
 	public Integer getCondition(HeaderVO header)
 			throws ITalk2LearnException {
 		try {

@@ -13,6 +13,7 @@ public interface ILoginUserService {
 	public Integer getIdUserInfo(HeaderVO header) throws ITalk2LearnException ;
 	public Integer getIdExersiceUser(HeaderVO header) throws ITalk2LearnException;
 	public String getIdExersiceSequenceUser(HeaderVO header) throws ITalk2LearnException;
+	public int getLastScoreSequenceUser(HeaderVO header) throws ITalk2LearnException;
 	public Integer getCondition(HeaderVO header) throws ITalk2LearnException;
 	public Integer getSimpleIdExersiceUser(String user) throws ITalk2LearnException;
 	public Integer getIdUser(String user) throws ITalk2LearnException;
