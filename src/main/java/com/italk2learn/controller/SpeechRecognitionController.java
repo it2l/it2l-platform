@@ -140,6 +140,7 @@ public class SpeechRecognitionController{
 			req.getHeaderVO().setIdUser(getLoginUserService().getIdUserInfo(request.getHeaderVO()));
 			req.setAudioByteArray(getAudio());
 			res=getPerceiveDifficultyTaskService().callPTD(req);
+			System.out.println("Emotion: "+res.getPTD());
 			return res.getPTD();
 		} catch (Exception e){
 			logger.error(e.toString());

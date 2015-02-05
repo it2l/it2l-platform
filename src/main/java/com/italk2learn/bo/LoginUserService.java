@@ -98,7 +98,7 @@ public class LoginUserService implements ILoginUserService {
 	public Integer getCondition(HeaderVO header)
 			throws ITalk2LearnException {
 		try {
-			return loginUserDAO.getIdUserInfo(header.getLoginUser()).getCondition();
+			return loginUserDAO.getIdUserInfo(header.getLoginUser()).getCond();
 		} catch (Exception nfe) {
 			logger.error(nfe.toString());
 		}
