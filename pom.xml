@@ -390,6 +390,27 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.platform.main</groupId>
+			<artifactId>it2l-task-independent-support</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.platform.main</groupId>
+			<artifactId>it2l-perceive-difficulty-task</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.platform.main</groupId>
+			<artifactId>it2l-sequencer</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
         <!-- runtime -->
 		<!-- activemq -->
 <!--         <dependency> -->
@@ -565,7 +586,7 @@
 				<artifactId>tomcat-maven-plugin</artifactId>
 				<version>1.0-beta-1</version>
 				<configuration>
-					<url>http://193.61.29.166:8080/manager/text/</url>
+					<url>http://localhost:8080/manager/text/</url>
 					<server>mytomcat</server>
 					<path>/${project.build.finalName}</path>
 				</configuration>

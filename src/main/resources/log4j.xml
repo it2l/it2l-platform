@@ -71,7 +71,6 @@
 	<category name="com.italk2learn" additivity="false">
 		<priority value="DEBUG" />
 		<appender-ref ref="italk2learnLog" />
-		<appender-ref ref="email" />
 	</category>
 	
 	<!-- Root Logger -->

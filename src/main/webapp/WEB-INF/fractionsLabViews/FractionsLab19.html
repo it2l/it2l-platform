@@ -1,0 +1,30 @@
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:tiles="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org"
+      lang="en">	  
+ 	<head>
+		<meta name="google" value="notranslate"/> 
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<title>Unity Web Player | WebPlayer</title>
+	</head>
+	<body tiles:fragment="content">
+        <table id="taskContainer">
+        	<tr>
+        		<td>
+        			<span style="font-size:17px; color: #0076a3; " id="task" align="center" th:text="#{fraclab.task19}"> </span>
+				</td>
+			</tr>
+		</table>
+		<div class="content">
+			<div id="unityPlayer">
+				<div class="missing">
+					<a href="http://unity3d.com/webplayer/" title="Unity Web Player. Install now!">
+						<img alt="Unity Web Player. Install now!" src="http://webplayer.unity3d.com/installation/getunity.png" width="193" height="63" />
+					</a>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

@@ -105,6 +105,32 @@ public class ExerciseDAO extends HibernateDaoSupport implements IExerciseDAO {
 		}
 	}
 	
+	public ExerciseVO getWholeViewFromIDSequencer(int idUser, String idSequencer) throws Exception {
+		try {
+			final Criteria seqCriteria = getITalk2LearnSession().createCriteria(Sequence.class);
+			seqCriteria.setMaxResults(1);
+			seqCriteria.createCriteria("user", "u");
+			seqCriteria.createCriteria("exercises", "e");
+			seqCriteria.add(Restrictions.eq("u.idUser", idUser));
+			seqCriteria.add(Restrictions.eq("e.idSequencer", idSequencer));
+			seqCriteria.setResultTransformer(Criteria.ROOT_ENTITY);
+			Sequence resultSeq =(Sequence)seqCriteria.uniqueResult();
+	
+			final Criteria exCriteria = getITalk2LearnSession().createCriteria(Exercises.class);
+			exCriteria.setMaxResults(1);
+			exCriteria.createCriteria("sequences.user", "u");
+			exCriteria.createCriteria("sequences", "s");
+			exCriteria.add(Restrictions.eq("u.idUser", idUser));
+			exCriteria.add(Restrictions.eq("idExercise", resultSeq.getExercises().getIdExercise()));
+			exCriteria.setResultTransformer(Criteria.ROOT_ENTITY);
+			Exercises resultEx =(Exercises)exCriteria.uniqueResult();
+			return ExerciseAssembler.toExerciseFeedbackVOs(resultEx, resultSeq.getFeedback());
+		} catch (Exception e){
+			e.printStackTrace();
+			throw new ITalk2LearnException(e);
+		}
+	}
+	
 	public ExerciseVO getBackExercise(int idUser, int idExercise) throws Exception {
 		try {
 			final Criteria seqCriteria = getITalk2LearnSession().createCriteria(Sequence.class);
@@ -165,9 +191,44 @@ public class ExerciseDAO extends HibernateDaoSupport implements IExerciseDAO {
 			throw new ITalk2LearnException(e);
 		}
 	}
+	
+	public void insertLastScore(int idUser, int lastScore) throws ITalk2LearnException {
+		final Session session = this.getITalk2LearnSession();
+		try{
+			User us=(User) session.load(User.class, idUser);
+			us.setLastScore(lastScore);
+			session.saveOrUpdate(us);
+		}catch (Exception e){
+			e.printStackTrace();
+			throw new ITalk2LearnException(e);
+		}
+	}
+	
+	public void insertCurrentVPSExercise(int idUser, String idSequencerView) throws ITalk2LearnException {
+		final Session session = this.getITalk2LearnSession();
+		try{
+			User us=(User) session.load(User.class, idUser);
+			us.setIdSequencerView(idSequencerView);
+			session.saveOrUpdate(us);
+		}catch (Exception e){
+			e.printStackTrace();
+			throw new ITalk2LearnException(e);
+		}
+	}
 
 	
 	public Exercises getFirstExercise(int idExercise) throws ITalk2LearnException {
+		final Session session = this.getITalk2LearnSession();
+		try{
+			Exercises ex=(Exercises) session.load(Exercises.class, idExercise);
+			return ex;
+		} catch (Exception e){
+			e.printStackTrace();
+			throw new ITalk2LearnException(e);
+		}
+	}
+	
+	public Exercises getIDSequencer(int idExercise) throws ITalk2LearnException {
 		final Session session = this.getITalk2LearnSession();
 		try{
 			Exercises ex=(Exercises) session.load(Exercises.class, idExercise);

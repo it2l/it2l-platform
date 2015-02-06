@@ -48,7 +48,7 @@ public class LoginUserService implements ILoginUserService {
 		try {
 			return loginUserDAO.getLoginUserInfo(header);
 		} catch (Exception nfe) {
-			System.out.println(nfe);
+			logger.error(nfe.toString());
 		}
 		return false;
 	}
@@ -58,7 +58,7 @@ public class LoginUserService implements ILoginUserService {
 		try {
 			return loginUserDAO.getIdUserInfo(header.getLoginUser()).getIdUser();
 		} catch (Exception nfe) {
-			System.out.println(nfe);
+			logger.error(nfe.toString());
 		}
 		return null;
 	}
@@ -68,7 +68,39 @@ public class LoginUserService implements ILoginUserService {
 		try {
 			return loginUserDAO.getIdUserInfo(header.getLoginUser()).getIdView();
 		} catch (Exception nfe) {
-			System.out.println(nfe);
+			logger.error(nfe.toString());
+		}
+		return null;
+	}
+	
+	//	JLF: Get idSequence for Whizz
+	public String getIdExersiceSequenceUser(HeaderVO header)
+			throws ITalk2LearnException {
+		try {
+			return loginUserDAO.getIdUserInfo(header.getLoginUser()).getIdSequencerView();
+		} catch (Exception nfe) {
+			logger.error(nfe.toString());
+		}
+		return null;
+	}
+	
+	//	JLF: Get lastScore from Whizz
+	public int getLastScoreSequenceUser(HeaderVO header)
+			throws ITalk2LearnException {
+		try {
+			return loginUserDAO.getIdUserInfo(header.getLoginUser()).getLastScore();
+		} catch (Exception nfe) {
+			logger.error(nfe.toString());
+		}
+		return 0;
+	}
+	
+	public Integer getCondition(HeaderVO header)
+			throws ITalk2LearnException {
+		try {
+			return loginUserDAO.getIdUserInfo(header.getLoginUser()).getCond();
+		} catch (Exception nfe) {
+			logger.error(nfe.toString());
 		}
 		return null;
 	}
@@ -78,7 +110,7 @@ public class LoginUserService implements ILoginUserService {
 		try {
 			return loginUserDAO.getIdUserInfo(user).getIdUser();
 		} catch (Exception nfe) {
-			System.out.println(nfe);
+			logger.error(nfe.toString());
 		}
 		return null;
 	}
@@ -88,7 +120,7 @@ public class LoginUserService implements ILoginUserService {
 		try {
 			return loginUserDAO.getIdUserInfo(user).getIdView();
 		} catch (Exception nfe) {
-			System.out.println(nfe);
+			logger.error(nfe.toString());
 		}
 		return null;
 	}
@@ -98,7 +130,7 @@ public class LoginUserService implements ILoginUserService {
 		try {
 			loginUserDAO.setUserData(messageForm);
 		} catch (Exception nfe) {
-			System.out.println(nfe);
+			logger.error(nfe.toString());
 		}
 	}
 
@@ -107,7 +139,7 @@ public class LoginUserService implements ILoginUserService {
 		try {
 			return UserDetailsAssembler.toUserDetailsVOs(loginUserDAO.getUserData());
 		} catch (Exception nfe) {
-			System.out.println(nfe);
+			logger.error(nfe.toString());
 		}
 		return null;
 	}

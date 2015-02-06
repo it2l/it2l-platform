@@ -15,6 +15,8 @@ public class ExerciseSequenceResponseVO extends ResponseVO{
 	
 	private int numExercises;
 	
+	private String idSequencer;
+	
 
 	public List<ExerciseVO> getResponse() {
 		return response;
@@ -38,6 +40,14 @@ public class ExerciseSequenceResponseVO extends ResponseVO{
 
 	public void setExercise(ExerciseVO exercise) {
 		this.exercise = exercise;
+	}
+
+	public String getIdSequencer() {
+		return idSequencer;
+	}
+
+	public void setIdSequencer(String idSequencer) {
+		this.idSequencer = idSequencer;
 	}
 
 }

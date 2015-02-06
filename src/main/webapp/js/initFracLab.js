@@ -1,12 +1,7 @@
-				var lowMessage;
-				$("#done").show();
+				var lowMessage="";
+				var isEnabledLightBulb=true;
 				$("#help").show();
-				//$("#done").attr("disabled", "disabled");
 				helpButtonEnable(false);
-				$('#help').css({ width: '100px', height: '100px'});
-				$("#done").click(function() {
-					doneButtonPressed();
-				});
 				$("#next").click(function() {
 					arrowButtonPressed();
 				});
@@ -30,6 +25,9 @@
 					$brokenScreen.hide();
 
 	                textToSpeech($('#task').text().substring(0,110));
+	                
+	                $('#exercisePrompt').html($('#taskContainer').html());
+	                $('#taskContainer').remove();
 
 					u.observeProgress(function (progress) {
 						switch(progress.pluginStatus) {
@@ -60,13 +58,18 @@
 					});
 					var body=$('#task').text();
 					if (body.localeCompare("Make a fraction that equals 3/4 and has 12 as denominator.")==0){
-						doneButtonEnable(true);
 						arrowButtonEnable(false);
 						u.initPlugin(jQuery("#unityPlayer")[0], "/italk2learn/sequence/FractionsLab.unity3d?showStartPage=false&language="+getLocale()+"&idtask=EQUIValence1"+userName);
-
+					}
+					else if (body.localeCompare("Make a fraction that equals 1/2 and has 4 as denominator.")==0){
+						arrowButtonEnable(false);
+						u.initPlugin(jQuery("#unityPlayer")[0], "/italk2learn/sequence/FractionsLab.unity3d?showStartPage=false&language="+getLocale()+"&idtask=EQUIValence2"+userName);
+					}
+					else if (body.localeCompare("Use the same representations to show whether 1/3 is bigger or smaller than 1/5.")==0){
+						arrowButtonEnable(false);
+						u.initPlugin(jQuery("#unityPlayer")[0], "/italk2learn/sequence/FractionsLab.unity3d?showStartPage=false&language="+getLocale()+"&idtask=Comp1"+userName);
 					}
 					else {
-						doneButtonEnable(false);
 						arrowButtonEnable(true);
 						u.initPlugin(jQuery("#unityPlayer")[0], "/italk2learn/sequence/FractionsLab.unity3d?showStartPage=false&language="+getLocale());
 					}
@@ -123,6 +126,29 @@
 				    });
 				}
 				
+				function sendMessageToTIS(feedbackText, currentFeedbackType, previousFeedbackType, followed){
+					var evt = {
+					       	 "feedbackText": feedbackText,
+					       	 "currentFeedbackType": currentFeedbackType,
+					       	 "previousFeedbackType": previousFeedbackType,
+					       	 "followed": followed.toLowerCase()
+					        };
+					$.ajax({
+						type: 'POST',
+				        contentType : 'application/json; charset=utf-8',
+				        dataType : 'json',
+				        url: "tis/callTIS",
+				        data: JSON.stringify(evt),
+				        success: function(data){
+				        	alert('sendMessageToTIS successfully called!');
+				        },
+				        error : function(jqXHR, status, error) {
+				        	//window.location.href = "/italk2learn/login";
+				        },
+				    });
+					
+				}
+				
 				function sendMessageToLightBulb(message){
 					helpButtonEnable(true);
 					lowMessage=message;
@@ -163,33 +189,30 @@
 					textToSpeech(message);
 				}
 				
-				function doneButtonEnable(value){
-					//alert(value);
-					if (value==true || value=="true" || value=="True")
-						$("#done").removeAttr("disabled");
-					else	
-						$("#done").attr("disabled", "disabled");
-				}
 				
 				function arrowButtonEnable(value){
 					if (value==true || value=="true" || value=="True") {
-			        	document.getElementById("arrowimage").src="/italk2learn/images/arrow-right.png";
-						$("#next").removeAttr("disabled");
+						$("#next").removeClass("it2lNextbuttonOFF");
+						$("#next").addClass("it2lNextbuttonON");
+						aEnabled=true;
 					}	
 					else {
-						document.getElementById("arrowimage").src="/italk2learn/images/arrow-right-disabled.png";
-						$("#next").attr("disabled", "disabled");
+						$("#next").removeClass("it2lNextbuttonON");
+						$("#next").addClass("it2lNextbuttonOFF");
+						aEnabled=false;
 					}	
 				}
 				
 				function helpButtonEnable(value){
 					if (value==true || value=="true" || value=="True"){
-						$("#help").removeAttr("disabled");
-						$('#help').css("background-image", "url(/italk2learn/images/lightbulb_on.png)");
+						$("#help").removeClass("it2lHelpbuttonOFF");
+						$("#help").addClass("it2lHelpbuttonON");
+						isEnabledLightBulb=true;
 					}
 					else {
-						$("#help").attr("disabled", "disabled");
-						$('#help').css("background-image", "url(/italk2learn/images/lightbulb_off.png)");
+						$("#help").removeClass("it2lHelpbuttonON");
+						$("#help").addClass("it2lHelpbuttonOFF");
+						isEnabledLightBulb=false;
 					}
 				}
 				
@@ -213,21 +236,27 @@
 				    });
 				}
 				
-				function doneButtonPressed(){
+				function isHelpButtonEnable(){
+					return isEnabledLightBulb;
+				}
+				
+				function arrowButtonPressed(){
                     var json = "{\"method\": \"PlatformEvent\", \"parameters\": {\"eventName\": \"*doneButtonPressed*\"}}";
                     u.getUnity().SendMessage("ExternalInterface", "SendEvent", json);
 				}
 				
-				function arrowButtonPressed(){
-					var json = "{\"method\": \"PlatformEvent\", \"parameters\": {\"eventName\": \"*arrowButtonPressed*\"}}";
-                    u.getUnity().SendMessage("ExternalInterface", "SendEvent", json);
-				}
-				
 				function helpButtonPressed(){
-					textToSpeech(lowMessage);
-					SendHighMessage(lowMessage);
-					helpButtonEnable(false);
-					var json = "{\"method\": \"PlatformEvent\", \"parameters\": {\"eventName\": \"*helpButtonPressed*\"}}";
-                    u.getUnity().SendMessage("ExternalInterface", "SendEvent", json);
+					if (isEnabledLightBulb==true){
+						textToSpeech(lowMessage);
+						SendHighMessage(lowMessage);
+						//lowMessage="";
+						var json = "{\"method\": \"PlatformEvent\", \"parameters\": {\"eventName\": \"*lightBulbPressedON*\"}}";
+	                    u.getUnity().SendMessage("ExternalInterface", "SendEvent", json);
+	                    helpButtonEnable(false);
+					}
+					else {
+						var json = "{\"method\": \"PlatformEvent\", \"parameters\": {\"eventName\": \"*lightBulbPressedOFF*\"}}";
+	                    u.getUnity().SendMessage("ExternalInterface", "SendEvent", json);
+					}
 				}
 				

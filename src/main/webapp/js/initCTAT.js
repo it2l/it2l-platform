@@ -34,7 +34,7 @@
             attributes.align = "middle";
             swfobject.embedSWF(
             	"sequence/"+$("#flashContent").data("title")+".swf", "flashContent", 
-                "1024", "768", 
+                "800", "600", 
                 swfVersionStr, xiSwfUrlStr, 
                 flashvars, params, attributes);
             // JavaScript enabled so display the flashContent div in case it is not replaced with a swf object.
@@ -60,11 +60,9 @@
             
             function arrowButtonEnable(value){
 				if (value==true || value=="true" || value=="True") {
-		        	document.getElementById("arrowimage").src="/italk2learn/images/arrow-right.png";
 					$("#next").removeAttr("disabled");
 				}	
 				else {
-					document.getElementById("arrowimage").src="/italk2learn/images/arrow-right-disabled.png";
 					$("#next").attr("disabled", "disabled");
 				}	
 			}

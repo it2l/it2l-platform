@@ -14,6 +14,7 @@ public class ExerciseVO extends ResponseVO {
 	private String feedback;
 	private String view;
 	private String description;
+	private String idSequencer;
 	
 	
 	public int getIdExercise() {
@@ -63,5 +64,11 @@ public class ExerciseVO extends ResponseVO {
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	public String getIdSequencer() {
+		return idSequencer;
+	}
+	public void setIdSequencer(String idSequencer) {
+		this.idSequencer = idSequencer;
 	}
 }

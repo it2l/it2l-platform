@@ -1,372 +1,150 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" 
-	  xmlns:th="http://www.thymeleaf.org" 
-	  xmlns:tiles="http://www.thymeleaf.org" 
-	  xmlns:sec="http://www.thymeleaf.org" 
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:tiles="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org"
 	  lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
 <title>Main Container of iTalk2learn</title>
+	<!--<link rel="stylesheet" type="text/css" media="screen, projection" href="../styles/it2lmainstyles.css" />-->
 	<link rel="stylesheet" type="text/css" media="screen, projection" href="/italk2learn/styles/it2lmainstyles.css" />
-	<link rel="stylesheet" type="text/css" media="screen, projection" href="/italk2learn/styles/languageswitcher.css" />
 	<script type="text/javascript" src="/italk2learn/js/history/history.js"></script>
 	<script type="text/javascript" src="/js/swfobject.js" th:src="@{/resources/js/swfobject.js}"></script>
     <script type="text/javascript" src="/js/unity2.js" th:src="@{/resources/js/unity2.js}"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.js'></script>
-    <script type="text/javascript" src='js/languageswitcher.js'></script>
     <script type="text/javascript" src='js/scripts/strophe.js'></script>
     <script type="text/javascript" src='js/scripts/flXHR.js'></script>
     <script type="text/javascript" src='js/scripts/strophe.flxhr.js'></script>
 	<script type="text/javascript" src="http://www.google.com/jsapi" charset="utf-8"></script>
 	<script type="text/javascript" src='sequence/js/monitorWOZClient.js'></script>
-	
+	<script type="text/javascript" src="/js/initMainContainer.js" th:src="@{/resources/js/initMainContainer.js}"></script>
+<!-- 	<script type="text/javascript" src="/js/initTIS.js" th:src="@{/resources/js/initTIS.js}"></script> -->
+
     <script type="text/javascript" src="#" th:src="@{/resources/dojo/dojo.js}"></script>
     <script type="text/javascript" src="#" th:src="@{/resources/spring/Spring.js}"></script>
     <script type="text/javascript" src="#" th:src="@{/resources/spring/Spring-Dojo.js}"></script>
 </head>
-<body class="paper">
-	<table id="header" class="header">
-                    <tr align="left">
-                        <td id="topbar" align="left">
-                        	<div id="user">
-                            </div>
-                            <div sec:authorize="hasRole('ROLE_USER')" th:if="${#authentication}">
-                                <a href="#" th:href="@{/auth/logout}">Logout</a>
-                            </div>
-                            <div sec:authorize="hasRole('ROLE_ADMIN')">
-                                <a href="#" th:href="@{/monitorWOZ}">Wizard</a>
-                            </div>
-							<div id="connect" style="color:red;">
-                            </div>
-                            <div sec:authorize="hasRole('ROLE_USER')">
-                                <a href="#" th:href="@{/soundexercise}">Sound</a>
-                            </div>
-                        </td>
-                        <td id="logo" align="left">
-                            <div>
-                                <a href="#" th:href="@{/}">
-                                    <img src="../../images/iLearnFraction_banner_05.jpg" th:src="@{/resources/images/iLearnFraction_banner_05.jpg}" alt="italk2learn" />
-                                </a>
-                            </div>
-                        </td>
-                        <td align="right">
-                            <div id="country-select">
-	                            <form>
-								    <select id="country-options" name="country-options">
-								      <option selected="selected" title="?locale=en" value="uk">United Kingdom</option>
-								      <option title="?locale=de" value="de">Germany</option>
-								    </select>
-								    <input value="Select" type="submit" />
-								</form>
-							</div>
-                        </td>
-                    </tr>
-    </table>
-	<table align="center">
-         <tr align="center">
-<!--            	<td align="left"> -->
-<!-- 		       	<p align="right"> -->
-<!-- 		            <input type="submit" id="back" value="back" sec:authorize="hasRole('ROLE_USER')" class="it2lbutton" /> -->
-<!-- 		        </p> -->
-<!-- 	        </td> -->
-            <td align="center">
-                <div id="mainContainer" align="center" sec:authorize="hasRole('ROLE_USER')" class="mainContainer">
-                	<table>
-                		<tr align="center">
-                			<td align="center">
-			                	<a>
-			                        <img src="../../images/it2l-loading.gif" th:src="@{/resources/images/it2l-loading.gif}" alt="loading" />
-			                    </a>
-	                    	</td>
-	                    </tr>
-<!-- 	                    <tr align="center"> -->
-<!--                 			<td align="center">	 -->
-<!-- 	    		                <font face="Comic Sans MS"><h1 id="task" align="center" th:text="#{initial.text}">Before you continue performing the exercise you must click ON button in the speech recorder</h1></font> -->
-<!-- 							</td> -->
-<!-- 	                    </tr> -->
-<!-- 						<tr align="center"> -->
-<!--                 			<td align="center">						 -->
-<!-- 								<input type="submit" id="initContainer" value="Done" sec:authorize="hasRole('ROLE_USER')" class="it2lbutton" /> -->
-<!--                 			</td> -->
-<!--                 		</tr>	 -->
-                	</table>
+<body class="back" style="margin-top:0px; height:inherit; margin-bottom:0px;">
+<div class="background" style="margin-left: auto;margin-right: auto; height:initial;">
+	<table id="header" class="header" align="center">
+           <tr align="left">
+             <td id="topbar" align="left">
+             </td>
+             <td id="logo" align="left">
+                <div>
+                  <a href="#" th:href="@{/}">
+                    <img src="../../images/iLearnFraction_banner_05.jpg" th:src="@{/resources/images/iLearnFraction_banner_05.jpg}" alt="italk2learn" />
+                  </a>
                 </div>
-            </td>
-           	<td align="right">
-           		<table>
-           			<tr>
-           			    <td>
-				        	<p align="right">
-				            	<button type="submit" id="next" sec:authorize="hasRole('ROLE_USER')" class="it2lbutton">
-				            		<img id="arrowimage" src="../../images/arrow-right.png" th:src="@{/resources/images/arrow-right.png}" width="80" height="50"/>
-				            	</button>
-				        	</p>
-			        	</td>
-			        </tr>
-			        <tr>
-           			    <td>
-				        	<p align="right">
-				            	<input type="submit" id="done" sec:authorize="hasRole('ROLE_USER')" class="it2lbutton" value="Done"/>
-				        	</p>
-			        	</td>
-			        </tr>
-			        <tr>
-			        	<td>
-				        	<p align="right">
-			        			<input type="submit" id="help" sec:authorize="hasRole('ROLE_USER')" class="it2lbutton" value="Help"/>
-				        	</p>
-			        	</td>
-			        </tr>
-		        </table>
-            </td>
-         </tr>
+             </td>
+             <td style="vertical-align:top">
+             	<div id="flags">
+				    <a href="?locale=en" style="text-decoration: none">
+				        <img alt="en" title="English" src="../../images/UK.png" th:src="@{/resources/images/UK.png}"/>
+				    </a>
+				    <a href="?locale=de" style="text-decoration: none">
+				        <img alt="de" title="German" src="../../images/GE.png" th:src="@{/resources/images/GE.png}"/>
+				    </a>
+				    <a href="?locale=es" style="text-decoration: none">
+				        <img alt="fr" title="Spanish" src="../../images/ES.png" th:src="@{/resources/images/ES.png}"/>
+				    </a>
+				</div>
+             </td>
+          </tr>
     </table>
-    <script>
-var myVar=setInterval(function(){myTimer()},1000);
-
-function myTimer() {
-    var d = new Date();
-    document.getElementById("demo").innerHTML = d.toLocaleTimeString();
-}
-</script>
-    
-	<script type="text/javascript">
-		<!--
-
-		var userName;
-
-		//var timer=setInterval(safeexit(),5000);
+	<table align="center" style="width:800px;">
+         <tr align="center">
+            <td align="center">
+	            <div id="wrapper_dark_gray" style="padding-bottom:30px; min-height: 995px; padding-top:20px;">
+		            <div style="display:inline; margin-left: 10px; float: left; width:130px;" sec:authorize="hasRole('ROLE_ADMIN')">
+		               	<a href="#" th:href="@{/monitorWOZ}" class="it2lbutton" th:text="#{gotowoz}"> Go to Woz <img style="vertical-align:middle" th:src="@{/resources/images/bt_arrow_right.png}" src="../../images/bt_arrow_right.png"></img> </a>
+					</div>
+					<div style=" width: 12%; display: inline; float: left; margin-left: 25px;" sec:authorize="hasRole('ROLE_USER')">&nbsp;</div>
+		            <div style="display:inline; width:76%;">
+		            	<span style="display:inline; font-weight: bold;" th:text="#{welcome}"> Welcome </span> <div id="user" style="font-weight: bold; display:inline;"> Name </div>
+					</div>
+					<div sec:authorize="hasRole('ROLE_USER')" th:if="${#authentication}" style="display:inline; margin-right: 25px; float: right; width:12%">
+						<a href="#" th:href="@{/auth/logout}" style=" float: right; color:#e74c3c; font-weight:bold; font-size:13px;">Logout</a>
+					</div>
+					<div id="wrapper_light_gray" style="padding-bottom:30px; min-height: 780px; margin-top: 30px;">
+						 <table style="width:100%;">
+							 <tr>
+								<td style="width: 33%;">
+									<div id="connect" style="color:#E74C3C; font-size:10px;">
+										<div id="connectedON">
+											<img style="vertical-align:middle; padding-left:5px; padding-top:4px; margin-bottom:2px;" th:src="@{/resources/images/bt_connected_on.png}" src="/italk2learn/images/bt_connected_on.PNG"></img>
+											<span style="padding-left:12px; font-weight:bold;" th:text="#{connected}">CONNECTED</span>
+										</div>
+										<div id="connectedOFF">
+											<img style="vertical-align:middle; padding-left:5px; padding-top:4px; margin-bottom:2px;"  th:src="@{/resources/images/bt_connected_off.png}" src="/italk2learn/images/bt_connected_off.png"></img>
+			                				<span style="padding-left:5px; font-weight:bold;" th:text="#{disconnected}">DISCONNECTED</span>
+										</div>		
+			                		</div>
+								</td>
+								<td style="width: 33%;">
+										<table style="width:100%; height:100%;">
+											<tr>
+												<td style="width:50%; height:100%;">
+													<div style="display: inline-block; width:50px; height:50px; float:right; padding-top:2px;" sec:authorize="hasRole('ROLE_USER')">
+														<input type="submit" id="sButton" class="it2lSoundOnbutton" value=""/>
+													</div>
+												</td>
+												<td style="width:50%; height:100%;">
+													<div style="display: inline-block; width:50px; height:50px; float:right; padding-top:2px; float: left;" sec:authorize="hasRole('ROLE_USER')">
+														<input type="submit" id="help" class="it2lHelpbuttonON" value=""/>
+													</div>
+												</td>
+								        	</tr>
+								        </table>
+								</td>
+								<td style="width: 33%;">
+										<div style="display=inline; float:right; padding-top:5px; padding-right:5px;">
+											<button type="submit" id="next" sec:authorize="hasRole('ROLE_USER')" class="it2lNextbuttonON"></button>
+							    		</div>
+								</td>
+							 </tr>
+						 </table>
 		
-		//window.onunload=safeexit;
-
-		function safeexit(){
-			$.ajax({
-		        type: 'GET',
-		        url: "sequence/getUser",
-		        success: function(data, textStatus, jqXHR){
-		        	
-		        },
-		        error : function(jqXHR, status, error) {
-		        	window.location.href = "/italk2learn/login";
-		        },
-		        complete : function(jqXHR, status) {
-		        }
-		    });
-		} 
-
-		function getParameterByName(name) {
-		    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-		    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-		        results = regex.exec(location.search);
-		    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-		}
-
-		function loadjscssfile(filename, filetype){
-			 if (filetype=="js"){ //if filename is a external JavaScript file
-			  var fileref=document.createElement('script')
-			  fileref.setAttribute("type","text/javascript")
-			  fileref.setAttribute("src", filename)
-			 }
-			 else if (filetype=="css"){ //if filename is an external CSS file
-			  var fileref=document.createElement("link")
-			  fileref.setAttribute("rel", "stylesheet")
-			  fileref.setAttribute("type", "text/css")
-			  fileref.setAttribute("href", filename)
-			 }
-			 if (typeof fileref!="undefined")
-			  document.getElementsByTagName("head")[0].appendChild(fileref)
-			}
-		
-		$(document).ready(function() {
-			$("#next").hide();
-			$("#done").hide();
-			$("#help").hide();
-			//$("#initContainer").click(function() {
-			$.ajax({
-				type: 'GET',
-				url: "sequence/getUser",
-				success: function (data) {
-					//JLF: Call connect WOZ. If it's connected or authfail initialises the container.
-					$('#user').html(data);
-					userName=data;
-					connectWOZ (data);
-				},
-				error: function (jqXHR, status, error) {
-					$(document).trigger('error');
-				}
-			});
-			//});
-			$("#next").click(function() {
-				nextExercise();
-			});	
-			$("#submitEx").click(function() {
-				submitExercise();
-			});
-		});
-
-		function initContainer(){
-		    $.ajax({
-		        type: 'GET',
-		        url: "sequence/",
-		        data: {
-		            
-		            },
-		        success: function(data, textStatus, jqXHR) {
-		        	$("#next").show();
-		        	document.getElementById("mainContainer").innerHTML=jqXHR.responseText;
-		            var reponse = jQuery(jqXHR.responseText);
-		            var reponseScript = reponse.filter("script");
-		            jQuery.each(reponseScript, function(idx, val) { 
-		            	loadjscssfile(val.src, "js");
-				    } );
-		        },
-		        error : function(jqXHR, status, error) {
-		           alert('Sorry!, there was a problem');
-		        },
-		        complete : function(jqXHR, status) {
-		        }
-		    });
-		}
-
-		function backExercise(){
-			document.getElementById("mainContainer").innerHTML = '';
-		    $.ajax({
-		        type: 'GET',
-		        url: "sequence/backexercise",
-		        data: {
-		            
-		            },
-		        success: function(data, textStatus, jqXHR){
-		        	document.getElementById("mainContainer").innerHTML=jqXHR.responseText;
-		            var reponse = jQuery(jqXHR.responseText);
-		            var reponseScript = reponse.filter("script");
-		            jQuery.each(reponseScript, function(idx, val) { 
-		            	loadjscssfile(val.src, "js");
-				    } );
-		        },
-		        error : function(jqXHR, status, error) {
-		           alert('Sorry!, there was a problem');
-		        },
-		        complete : function(jqXHR, status) {
-		        }
-		    });
-		}
-
-		function nextExercise(){
-			$("#done").hide();
-			$("#help").hide();
-			$("#next").hide();
-			document.getElementById("mainContainer").innerHTML = '';
-		    $.ajax({
-		        type: 'GET',
-		        url: "sequence/nextexercise",
-		        data: {
-		            
-		            },
-		        success: function(data, textStatus, jqXHR){
-		        	$("#next").show();
-		        	document.getElementById("mainContainer").innerHTML=jqXHR.responseText;
-		            var reponse = jQuery(jqXHR.responseText);
-		            var reponseScript = reponse.filter("script");
-		            jQuery.each(reponseScript, function(idx, val) { 
-		            	loadjscssfile(val.src, "js");
-				    } );
-		            safeexit();
-		        },
-		        error : function(jqXHR, status, error) {
-		           alert('Sorry!, there was a problem');
-		        },
-		        complete : function(jqXHR, status) {
-		        }
-		    });
-		}
-
-
-		function submitExercise(){
-			document.getElementById("mainContainer").innerHTML = '';
-			$("#next").remove();
-			$("#done").remove();
-			$("#help").remove();
-			var sub = {
-		       	 "idExercise": $('#exList').val(), 
-		        };
-		    $.ajax({
-		        type: 'POST',
-		        contentType : 'application/json; charset=utf-8',
-		        url: "exercise/getSpecificExercise",
-		        data: JSON.stringify(sub),
-		        success: function(data, textStatus, jqXHR){
-		        	document.getElementById("mainContainer").innerHTML=jqXHR.responseText;
-		            var reponse = jQuery(jqXHR.responseText);
-		            var reponseScript = reponse.filter("script");
-		            jQuery.each(reponseScript, function(idx, val) { 
-		            	loadjscssfile(val.src, "js");
-				    } );
-		        },
-		        error : function(jqXHR, status, error) {
-		           alert('Sorry!, there was a problem');
-		        },
-//		        complete : function(jqXHR, status) {
-//		           alert('Done!');
-//		        }
-		    });
-		}
-
-		function textToSpeech(message) {
-			var l_lang=getParameterByName("locale");
-			if (l_lang=="" && navigator.userLanguage) // Explorer
-			  l_lang = navigator.userLanguage;
-			else if (l_lang=="" && navigator.language) // FF
-			  l_lang = navigator.language;
-			else if (l_lang=="")
-			  l_lang = "en";
-			play_sound("http://translate.google.com/translate_tts?ie=UTF-8&q="+encodeURIComponent(message)+"&tl="+l_lang+"&total=1&idx=0prev=input");
-        }
-
-        function getLocale(){
-        	var l_lang=getParameterByName("locale");
-			if (l_lang=="" && navigator.userLanguage) // Explorer
-			  l_lang = navigator.userLanguage;
-			else if (l_lang=="" && navigator.language) // FF
-			  l_lang = navigator.language;
-			else if (l_lang=="")
-			  l_lang = "en";
-			return l_lang;
-        }
-
-		function html5_audio(){
-    	    var a = document.createElement('audio');
-    	    return !!(a.canPlayType && a.canPlayType('audio/mpeg;').replace(/no/, ''));
-    	}
-    	 
-    	var play_html5_audio = false;
-    	if(html5_audio()) 
-        	play_html5_audio = true;
-    	 
-    	function play_sound(url){
-
-        }
-
-    	function playS(url){
-			var speechProductionPlayer=document.getElementById("speechProductionPlayer");
-    	    speechProductionPlayer.src=url;
-        	speechProductionPlayer.load();
-    		speechProductionPlayer.play();
-		}
-
-		-->
-		
-	</script>
-	<div id="speechRecognition" align="right" sec:authorize="hasRole('ROLE_USER')">
-		<p>To view this page ensure that Adobe Flash Player version 11.1.0
-			or greater is installed.</p>
-		<script type="text/javascript">
-              var pageHost = ((document.location.protocol == "https:") ? "https://" : "http://");
-              document.write("<a href='http://www.adobe.com/go/getflashplayer'><img src='" + pageHost + "www.adobe.com/images/shared/download_buttons/get_flash_player.gif' alt='Get Adobe Flash player' /></a>");
-        </script>
-	</div>
+						 <table style="style=background-color: #fcf3ed;margin-left: 5px;margin-right: 5px;">
+							  <tr>
+							    <th colspan="3" id="exercisePrompt" style=" padding-left: 6px;text-align: left;"> </th>
+							  </tr>
+							  <tr>
+				                  <td style="min-width:800px;">
+				                		<div id="mainContainer" align="center" sec:authorize="hasRole('ROLE_USER')" class="mainContainer">
+				                			<table>
+				                				<tr align="center">
+				                					<td align="center">
+							                			<a>
+							                        		<img src="../../images/it2l-loading.gif" th:src="@{/resources/images/it2l-loading.gif}" alt="loading" />
+							                    		</a>
+					                    			</td>
+					                   			 </tr>
+				                		   </table>
+				                		</div>
+				                  </td>
+							  </tr>
+						</table>
+	            </div>
+				<!--  END light -->
+	            	<div style="display: initial; color: #0076a3; font-weight:bold;" th:text="#{voicerecording}"> Voice recording </div>
+		            <div style="padding-top: 8px; padding-right:150px; display: inline-block;">
+		            	<div id="speechRecognition" align="center" sec:authorize="hasRole('ROLE_USER')" style="padding-top:30px;">
+							<p style="display: inline; ">To view this page ensure that Adobe Flash Player version 11.1.0 or greater is installed.</p>
+							<script type="text/javascript">
+					              var pageHost = ((document.location.protocol == "https:") ? "https://" : "http://");
+					              document.write("<a href='http://www.adobe.com/go/getflashplayer' ><img src='" + pageHost + "www.adobe.com/images/shared/download_buttons/get_flash_player.gif' alt='Get Adobe Flash player' /></a>");
+					        </script>
+						</div>
+					</div>
+	            </div>
+	            <!--  END dark -->
+            </td>
+          </tr>
+    </table>
 	<script type="text/javascript">
 
 		$.ajax({
@@ -379,12 +157,12 @@ function myTimer() {
 			}
 		});
 		function loadFlashMovie (us){
-		     // For version detection, set to min. required Flash Player version, or 0 (or 0.0.0), for no version detection. 
+		     // For version detection, set to min. required Flash Player version, or 0 (or 0.0.0), for no version detection.
 		     var swfVersionStr = "11.1.0";
-		     // To use express install, set to playerProductInstall.swf, otherwise the empty string. 
+		     // To use express install, set to playerProductInstall.swf, otherwise the empty string.
 		     var xiSwfUrlStr = "playerProductInstall.swf";
 		     var flashvars = {
-		     	  user: us	
+		     	  user: us
 		         };
 		     var params = {};
 		     params.quality = "high";
@@ -397,7 +175,7 @@ function myTimer() {
 		     attributes.align = "middle";
 		     swfobject.embedSWF(
 		             "sequence/It2lSpeechInterfaceMain.swf", "speechRecognition",
-		             "250", "250",
+		             "350", "150",
 		             swfVersionStr, xiSwfUrlStr,
 		             flashvars, params, attributes);
 		     // JavaScript enabled so display the flashContent div in case it is not replaced with a swf object.
@@ -439,10 +217,59 @@ function myTimer() {
 	 	<select id="exList">
     		 <option th:each="exercise : ${allExercises}" th:value="${exercise.idExercise}" th:text="${exercise.exercise}">Option</option>
      	</select>
-     	<input id="submitEx" type="button" value="Submit" />		
+     	<input id="submitEx" type="button" value="Submit" />
 		</p>
 	</div>
 	<div id="player"></div>
+<!-- 	<div id="testTIS"> -->
+<!-- 		<table> -->
+<!-- 			<tr> -->
+<!-- 				<th colspan="4"> <span align="center">Task-Independent-Support Test </span> </th> -->
+<!-- 			</tr> -->
+<!-- 			<tr> -->
+<!-- 				<td> -->
+<!-- 					<input type="submit" id="butTIS1" value="emotion 1"/> -->
+<!-- 				</td> -->
+<!-- 				<td> -->
+<!-- 					<input type="submit" id="butTIS2" value="no maths"/> -->
+<!-- 				</td> -->
+<!-- 				<td> -->
+<!-- 					<input type="submit" id="butTIS3" value="maths vocab"/> -->
+<!-- 				</td> -->
+<!-- 				<td> -->
+<!-- 					<input type="submit" id="butTIS4" value="emotion 2"/> -->
+<!-- 				</td> -->
+<!-- 			</tr> -->
+<!-- 			<tr> -->
+<!-- 				<td> -->
+<!-- 					<audio controls="controls"> -->
+<!-- 					  <source src="complicated-example-mono.wav" type="audio/wav"/> -->
+<!-- 						Your browser does not support the audio element. -->
+<!-- 					</audio> -->
+<!-- 				</td> -->
+<!-- 				<td> -->
+<!-- 					<audio controls="controls"> -->
+<!-- 					  <source src="no-maths-vocab-example-01-mono.wav" type="audio/wav"/> -->
+<!-- 						Your browser does not support the audio element. -->
+<!-- 					</audio> -->
+<!-- 				</td> -->
+<!-- 				<td> -->
+<!-- 					<audio controls="controls"> -->
+<!-- 					  <source src="maths-example-mono.wav" type="audio/wav"/> -->
+<!-- 						Your browser does not support the audio element. -->
+<!-- 					</audio> -->
+<!-- 				</td> -->
+<!-- 				<td> -->
+<!-- 					<audio controls="controls"> -->
+<!-- 					  <source src="hard-example-mono.wav" type="audio/wav"/> -->
+<!-- 						Your browser does not support the audio element. -->
+<!-- 					</audio> -->
+<!-- 				</td> -->
+<!-- 			</tr> -->
+<!-- 		</table> -->
+<!-- 	</div> -->
 	<audio controls="controls" id="speechProductionPlayer" hidden="true"></audio>
+
+</div>
 </body>
 </html>

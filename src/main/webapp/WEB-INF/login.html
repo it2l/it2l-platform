@@ -1,40 +1,102 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org"
-	xmlns:tiles="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org" lang="en">
-<head>
-	<title>iTalk2Learn login page</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-</head>
 
-<body tiles:fragment="content">
-	<div id="wrapper">
 
-	<form class="login-form" name="login-form" action="j_spring_security_check" method="post">
-		<div class="header">
-			<h1>iTalk2Learn Login</h1>
-<!-- 			<span th:text="#{test.login}">Test null</span> -->
-			<span>Please sign in</span>
-		</div>
-		<div class="content">
-			<input name="j_username" type="text" class="input username" placeholder="Username" id="j_username"/>
-			<div class="user-icon"></div>
-			<input name="j_password" type="password" class="input password" placeholder="Password" id="j_password"/>
-			<div class="pass-icon"></div>		
-		</div>
-		<div class="footer">
-			<input type="submit" name="submit" value="Login" class="button" id="loginButton"/>
-			<input type="submit" name="submit" value="Register" class="register" />
-		</div>
-		<span th:text="${err}" style="color:red;"></span>
-	</form>
-	</div>
-	<div>
-	    <p>
-        	<a href="/intro.html" th:href="@{/intro}">About iTalk2Learn</a>
-    	</p>
-	</div>
-	<div class="gradient"></div>
-</body>
-</html>
+    <!DOCTYPE html>
+    <html lang="en" xmlns:sec="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+        <head>
+            <meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type"></meta>
+            <link href="/italk2learn/styles/it2lmainstyles.css" media="screen, projection" type="text/css" rel="stylesheet"></link>
+            <link href="../styles/it2lmainstyles.css" media="screen, projection" type="text/css" rel="stylesheet"></link>
+            <link href="/italk2learn/styles/languageswitcher.css" media="screen, projection" type="text/css" rel="stylesheet"></link>
+            <script src="/italk2learn/js/history/history.js" type="text/javascript"></script>
+            <script th:src="@{/resources/js/swfobject.js}" src="/js/swfobject.js" type="text/javascript"></script>
+            <script th:src="@{/resources/js/unity2.js}" src="/js/unity2.js" type="text/javascript"></script>
+            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.js"></script>
+            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+            <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.js"></script>
+            <script src="js/languageswitcher.js" type="text/javascript"></script>
+            <script src="js/scripts/strophe.js" type="text/javascript"></script>
+            <script src="js/scripts/flXHR.js" type="text/javascript"></script>
+            <script src="js/scripts/strophe.flxhr.js" type="text/javascript"></script>
+            <script charset="utf-8" src="http://www.google.com/jsapi" type="text/javascript"></script>
+            <script src="sequence/js/monitorWOZClient.js" type="text/javascript"></script>
+            <script th:src="@{/resources/dojo/dojo.js}" src="#" type="text/javascript"></script>
+            <script th:src="@{/resources/spring/Spring.js}" src="#" type="text/javascript"></script>
+            <script th:src="@{/resources/spring/Spring-Dojo.js}" src="#" type="text/javascript"></script>
+        </head>
+    	<body class="back" style="margin-top: 0px; margin-bottom: 0px; height: 100%;">
+                <div class="background" style="margin-left: auto;margin-right: auto;  margin-top: 0px; margin-bottom: 0px; max-width:1120px;">.
+                <table align="center">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div>
+                                    <a th:href="@{/}" href="#">
+                                        <img alt="italk2learn" th:src="@{/resources/images/iLearnFraction_banner_05.jpg}" src="../images/iLearnFraction_banner_05.jpg"></img>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table align="center">
+                    <tbody>
+                        <tr align="center">
+                            <td align="center">
+                                <div id="wrapper_dark_gray" style="height: 634px; width: 1080px;  padding-top:20px;">
+                                    <div style=" display:inline; width: 100%">
+                                        <span style="display:inline; font-size: 18px;" th:text="#{welcometo}"> Welcome to <b style="display: inline; font-weight:bold;">iLearnFractions </b>
+                                        </span>
+                                    </div>
+                                    <div id="wrapper_light_gray" style="height: 150px; width: 1060px; margin-top: 30px;">
+                                      <form name="login-form" action="j_spring_security_check" method="post" style="width:100%;">
+											   <span style="padding: 30px 50px 10px 80px; margin-left:0px; display:inherit; text-align:left;line-height:30px; font-size:17px; font-weight:bold; color:#0076a3;" th:text="#{pleasesignin}">
+														Please sign in:<br/>
+														</span>
+											   <table>
+												 <tr style="display: inline-flex;">
+												   <td style="padding-left:0px;">
+												   <span style="color: #0076a3;" th:text="#{username}">Username</span>
+												   </td>
+												   <td style="margin-right:55px;"> <input name="j_username" type="text" style="
+															-webkit-border-radius: 30px;
+															-moz-border-radius: 30px;
+															border-radius: 30px;
+															outline:0;
+															height:25px;
+															width: 225px;
+															padding-left:10px;
+															padding-right:10px;
+															-moz-box-shadow: 0 2px 4px #bbb inset;
+															-webkit-box-shadow: 0 2px 4px #BBB inset;
+															box-shadow: 0 2px 4px #BBB inset;"/></td>
+												   <td ><span style="color: #0076a3;" th:text="#{password}">Password</span></td>
+												   <td style="padding-right:20px;"><input name="j_password" type="password" style="
+															-webkit-border-radius: 30px;
+															-moz-border-radius: 30px;
+															border-radius: 30px;
+															outline:0;
+															height:25px;
+															width: 225px;
+															padding-left:10px;
+															padding-right:10px;
+															-moz-box-shadow: 0 2px 4px #bbb inset;
+															-webkit-box-shadow: 0 2px 4px #BBB inset;
+															box-shadow: 0 2px 4px #BBB inset;"/></td>
+												   <td>
+														<input type="submit" name="submit" value="LOGIN" class="it2lbutton" id="loginButton"/>
+
+												   </td>
+												 </tr>
+											   </table>
+											   <span th:text="${err}" style="color:red; font-size:14px; margin-left:100px"> </span>
+											   </form>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </body>
+    </html>
+

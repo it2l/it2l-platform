@@ -16,7 +16,7 @@
         attributes.align = "middle";
         swfobject.embedSWF(
             "sequence/iTalk2Learn.swf", "flashContent", 
-            "1024", "768", 
+            "800", "600", 
             swfVersionStr, xiSwfUrlStr, 
             flashvars, params, attributes);
         // JavaScript enabled so display the flashContent div in case it is not replaced with a swf object.
@@ -58,17 +58,26 @@
 				    });
 			}
 			
+			function arrowButtonEnable(value){
+				if (value==true || value=="true" || value=="True") {
+					$("#next").removeAttr("disabled");
+				}	
+				else {
+					$("#next").attr("disabled", "disabled");
+				}	
+			}
+			
 			function SendHighMessage(message)
 			{
-				setTimeout(function(){alert(message)},5000);			
+				setTimeout(function(){alert(message)},1000);			
 			}
 
 			function SendLowMessage(message)
 			{
-				setTimeout(function(){alert(message)},5000);
+				setTimeout(function(){alert(message)},1000);
 			}
 			
 			function EnableHelpButton(message)
 			{
-				setTimeout(function(){alert(message)},5000);
+				setTimeout(function(){alert(message)},1000);
 			}
